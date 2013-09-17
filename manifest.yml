@@ -1,0 +1,14 @@
+---
+applications:
+- name: fomento
+  memory: 1G
+  instances: 1
+  host: fomento
+  domain: cfapps.io
+  path: target/partners-0.1.war
+  services:
+    cleardb-10bb7:
+      label: cleardb
+      provider: cleardb
+      version: n/a
+      plan: spark
