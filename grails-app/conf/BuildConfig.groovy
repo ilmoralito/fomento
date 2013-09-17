@@ -55,6 +55,7 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
         compile ':cache:1.0.1'
         compile ":spring-security-core:1.2.7.3"
+        compile ":webxml:1.4.1"
         compile ":twitter-bootstrap:3.0.0"
     }
 }
