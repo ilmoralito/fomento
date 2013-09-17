@@ -16,15 +16,19 @@
 			<g:passwordField name="password" class="form-control" placeholder="Clave"/>
 		</div>
 
-		<g:submitButton name="send" value="Iniciar sesion" class="btn btn-default"/>
-
-		<div class="checkbox">
-			<label>
-		    	<input type="checkbox" value="">
-		    	<g:checkBox name="${rememberMeParameter}" checked="${hasCookie}"/>
-		    	Recuerdame
-		  	</label>
+		<div class="row">
+			<div class="col-md-3">
+				<g:submitButton name="send" value="Iniciar sesion" class="btn btn-default"/>
+			</div>
+			<div class="col-md-3">
+				<div class="checkbox">
+					<label>
+				    	<g:checkBox name="${rememberMeParameter}" checked="${hasCookie}"/> Recuerdame
+				  	</label>
+				</div>
+			</div>
 		</div>
+
 	</g:form>
 </body>
 </html>
