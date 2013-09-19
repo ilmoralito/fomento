@@ -7,21 +7,22 @@
 	<r:layoutResources/>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	  <div class="container">
-	  	<div class="navbar-header">
-	  	  <a class="navbar-brand" href="#">Brand</a>
+	<nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+		  	<div class="navbar-header">
+		  	  <a class="navbar-brand" href="#">Fomento</a>
+		  	</div>
+	  		<div class="pull-right">
+	  	  		<ul class="nav navbar-nav">
+	  	  			<li><g:link controller="partner">Socios</g:link></li>
+	  	    		<li><g:link controller="#" action="">Perfil</g:link></li>
+	  	    		<li><g:link controller="logout">Salir</g:link></li>
+	  	  		</ul>
+	  		</div>
 	  	</div>
-	  	<div class="collapse navbar-collapse navbar-ex1-collapse">
-	  	  <ul class="nav navbar-nav">
-	  	    <li class="active"><a href="#">Link</a></li>
-	  	    <li><a href="#">Link</a></li>
-	  	  </ul>
-	  	</div>
-	  </div>
 	</nav>
 
-	<div class="container main">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<g:layoutBody/>

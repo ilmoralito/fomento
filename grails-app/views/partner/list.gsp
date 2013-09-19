@@ -5,6 +5,36 @@
 	<r:require modules="bootstrap, app"/>
 </head>
 <body>
-	<h1>hola mundo</h1>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="pull-right">
+				<div class="btn-group">
+					<g:link action="create" class="btn btn-default">Crear socio</g:link>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<g:if test="${partners}">
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<g:each in="${partners}" var="partner">
+					<tr>
+						<td>${partner.fullName}</td>
+						<td><g:link action="delete" params="[id:partner.id]"><span class=".glyphicon .glyphicon-trash"></span></g:link></td>
+					</tr>
+				</g:each>
+			</tbody>
+		</table>
+	</g:if>
+	<g:else>
+		<p><br>Nada que mostrar</p>
+	</g:else>
 </body>
 </html>
