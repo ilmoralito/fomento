@@ -7,6 +7,20 @@
 	<r:layoutResources/>
 </head>
 <body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	  <div class="container">
+	  	<div class="navbar-header">
+	  	  <a class="navbar-brand" href="#">Brand</a>
+	  	</div>
+	  	<div class="collapse navbar-collapse navbar-ex1-collapse">
+	  	  <ul class="nav navbar-nav">
+	  	    <li class="active"><a href="#">Link</a></li>
+	  	    <li><a href="#">Link</a></li>
+	  	  </ul>
+	  	</div>
+	  </div>
+	</nav>
+
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-12">
