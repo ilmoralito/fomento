@@ -1,4 +1,5 @@
 package org.fomento
+import grails.plugins.springsecurity.Secured
 
 class PartnerController {
 
@@ -7,6 +8,7 @@ class PartnerController {
 		"list":"GET"
 	]
 
+	@Secured(['ROLE_ADMIN'])
     def list() {
     	[partners:Partner.list()]
     }
