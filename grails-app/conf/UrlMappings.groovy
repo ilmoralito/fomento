@@ -12,6 +12,7 @@ class UrlMappings {
 		"/logout"(controller:"logout", action:"index")
 
 		"500"(view:'/error')
+		"404"(view:"/404")
 
 		//partners
 		"/partners"(controller:"partner", action:"list")
