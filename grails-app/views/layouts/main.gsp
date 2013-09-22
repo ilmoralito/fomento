@@ -14,6 +14,9 @@
 		  	</div>
 	  		<div class="pull-right">
 	  	  		<ul class="nav navbar-nav">
+	  	  			<sec:ifAllGranted roles="ROLE_ADMIN">
+	  	  				<li><g:link controller="user">Usuarios</g:link></li>
+	  	  			</sec:ifAllGranted>
 	  	  			<li><g:link controller="partner">Socios</g:link></li>
 	  	    		<li><g:link controller="#" action="">Perfil</g:link></li>
 	  	    		<li><g:link controller="logout">Salir</g:link></li>
