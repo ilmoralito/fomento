@@ -26,8 +26,8 @@
 			<tbody>
 				<g:each in="${partners}" var="partner">
 					<tr>
-						<td>${partner.fullName}</td>
-						<td><g:link action="delete" params="[id:partner.id]"><span class=".glyphicon .glyphicon-trash"></span></g:link></td>
+						<td><g:link action="show" id="${partner.id}">${partner.fullName}</g:link></td>
+						<td style="width:1px;"><g:link action="delete" id="${partner.id}"><span class="glyphicon glyphicon-trash"></span></g:link></td>
 					</tr>
 				</g:each>
 			</tbody>
