@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<g:layoutBody/>
-				<g:if test="${flash.message}"><strong>${flash.message}</strong></g:if>
+				<g:if test="${flash.message}"><br><strong>${flash.message}</strong></g:if>
 			</div>
 		</div>
 	</div>
