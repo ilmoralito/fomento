@@ -1,7 +1,7 @@
 package org.fomento
 import grails.plugins.springsecurity.Secured
 
-@Secured(['ROLE_ADMIN'])
+@Secured(["ROLE_ADMIN","ROLE_USER"])
 class PartnerController {
 
 	static defaultAction = "list"

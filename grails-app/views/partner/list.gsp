@@ -19,7 +19,13 @@
 				<g:each in="${partners}" var="partner">
 					<tr>
 						<td><g:link action="show" id="${partner.id}">${partner.fullName}</g:link></td>
-						<td style="width:1px;"><g:link action="delete" id="${partner.id}"><span class="glyphicon glyphicon-trash"></span></g:link></td>
+						<td style="width:1px;">
+							<sec:ifAllGranted roles="ROLE_ADMIN">
+								<g:link action="delete" id="${partner.id}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</g:link>
+							</sec:ifAllGranted>
+						</td>
 					</tr>
 				</g:each>
 			</tbody>
