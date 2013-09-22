@@ -28,7 +28,7 @@ class BootStrap {
 
                 def johnDoe = Partner.findByIdentificationCard("291-200280-0001W") ?: new Partner(
                     fullName:"John Doe",
-                    numberOfEmployee:125,
+                    numberOfEmployee:126,
                     identificationCard:"291-200280-0001W",
                     department:"Taller",
                     salary:17000
