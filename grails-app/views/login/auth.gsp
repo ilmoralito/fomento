@@ -5,18 +5,18 @@
 	<r:require modules="bootstrap, app"/>
 </head>
 <body>
-	<g:form controller="login" autocomplete="off">
+	<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 		<div class="form-group">
-			<label for='username' class="sr-only">Nombre de usuario | email</label>
-			<g:textField name="j_username" class="form-control" placeholder="Nombre de usuario o email" autofocus="true"/>
+			<label for='username' class="sr-only"><g:message code="springSecurity.login.username.label"/>:</label>
+			<input type='text' class='text_ form-control' name='j_username' id='username' autofocus="true" placeholder="Nombre de usuario o email"/>
 		</div>
 
 		<div class="form-group">
-			<label for='password' class="sr-only">Clave</label>
-			<g:passwordField name="password" class="form-control" placeholder="Clave"/>
+			<label for='password' class="sr-only"><g:message code="springSecurity.login.password.label"/>:</label>
+			<input type='password' class='text_ form-control' name='j_password' id='password' placeholder="Clave"/>
 		</div>
 
-		<g:submitButton name="send" value="Iniciar sesion" class="btn btn-default"/>
-	</g:form>
+		<input type='submit' id="submit" class="btn btn-default" value='Iniciar sesion'/>
+	</form>
 </body>
 </html>
