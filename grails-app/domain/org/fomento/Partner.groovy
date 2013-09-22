@@ -8,6 +8,7 @@ class Partner {
     String department
     BigDecimal salary
     boolean status
+    Affiliation affiliation
 
 	Date dateCreated
 	Date lastUpdated

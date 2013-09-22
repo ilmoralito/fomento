@@ -23,13 +23,13 @@ class BootStrap {
                 }
 
                 //partners
-                def juanPerez = Partner.findByIdentificationCard("291-290180-0001W") ?: new Partner(
+                def juanPerez = new Partner(
                     fullName:"Juan Perez",
                     numberOfEmployee:125,
                     identificationCard:"291-290180-0001W",
                     department:"Molino",
                     salary:15000
-                ).save()
+                )
 
                 def johnDoe = Partner.findByIdentificationCard("291-200280-0001W") ?: new Partner(
                     fullName:"John Doe",
