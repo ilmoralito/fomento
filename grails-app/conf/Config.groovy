@@ -94,3 +94,4 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'org.fomento.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'org.fomento.UserRole'
 grails.plugins.springsecurity.authority.className = 'org.fomento.Role'
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = "/partner"
