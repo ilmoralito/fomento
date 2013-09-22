@@ -8,7 +8,8 @@ class PartnerController {
 	static allowedMethods = [
 		"list":"GET",
 		"create":["GET","POST"],
-        "delete":["GET","POST"]
+        "delete":["GET","POST"],
+        "show":"GET"
 	]
 
     def list() {
@@ -45,6 +46,35 @@ class PartnerController {
             flash.message = "Socio eliminado correctamente"
             redirect action:"list"
         }
+    }
+
+    def show(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        [partner:partner]
+    }
+
+    @Secured("ROLE_ADMIN")
+    def update(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        partner.properties = params
+
+        if (!partner.save()) {
+            render view:"show", model:[partner:partner, id:id]
+            return false
+        }
+
+        flash.message = "Registro actualizado correctamente"
+        redirect action:"show", params:[id:id]
     }
 
 }
