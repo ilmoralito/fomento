@@ -15,7 +15,7 @@ class Partner {
     static constraints = {
         fullName blank:false
         numberOfEmployee blank:false, min:1
-        identificationCard blank:false, unique:true, matches:"\\d{2}\\-\\d{7}"
+        identificationCard blank:false, unique:true
         department blank:false
         salary blank:false, min:1000.0
     }
