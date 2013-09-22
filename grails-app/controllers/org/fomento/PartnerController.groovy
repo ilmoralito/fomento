@@ -7,7 +7,8 @@ class PartnerController {
 	static defaultAction = "list"
 	static allowedMethods = [
 		"list":"GET",
-		"create":["GET","POST"]
+		"create":["GET","POST"],
+        "delete":["GET","POST"]
 	]
 
     def list() {
@@ -26,6 +27,24 @@ class PartnerController {
     	} else {
     		[partner:new Partner(params)]
     	}
+    }
+
+    @Secured("ROLE_ADMIN")
+    def delete(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        if (request.method == "GET") {
+            return [partner:partner]
+        } else {
+            partner.delete()
+
+            flash.message = "Socio eliminado correctamente"
+            redirect action:"list"
+        }
     }
 
 }
