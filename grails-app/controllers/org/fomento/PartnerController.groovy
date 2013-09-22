@@ -16,7 +16,13 @@ class PartnerController {
 
     def create() {
     	if (request.method == "POST") {
-    		
+    		def partner = new Partner(params)
+
+    		if (!partner.save()) {
+    			return [partner:partner]
+    		}
+
+    		flash.message = "Socio creado exitosamente"
     	} else {
     		[partner:new Partner(params)]
     	}
