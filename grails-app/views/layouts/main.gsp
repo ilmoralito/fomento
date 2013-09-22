@@ -10,7 +10,7 @@
 	<nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 		  	<div class="navbar-header">
-		  	  <a class="navbar-brand" href="#">Fomento</a>
+		  	  <g:link class="navbar-brand" uri="/">Fomento</g:link>
 		  	</div>
 	  		<div class="pull-right">
 	  	  		<ul class="nav navbar-nav">
