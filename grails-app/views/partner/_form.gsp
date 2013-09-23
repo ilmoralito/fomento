@@ -46,7 +46,7 @@
 
 		<div class="form-group">
 			<label for="affiliation.enrollmentDate">Fecha de afiliacion</label>
-			<g:textField name="affiliation.enrollmentDate" value="${partner?.affiliation?.enrollmentDate}" class="form-control"/>
+			<g:textField name="affiliation.enrollmentDate" id="enrollmentDate" value="${partner?.affiliation?.enrollmentDate}" class="form-control"/>
 		</div>
 	</div>
 </div>
