@@ -22,22 +22,35 @@ class BootStrap {
                     UserRole.create user, userRole, true
                 }
 
+                //affiliation
+                def a1 = new Affiliation(
+                    fee:450,
+                    typeOfPayment:"Catorcena",
+                    factoryFee:205,
+                    enrollmentDate:new Date() - 250
+                )
+
+                if (a1.validate()) {
+                    a1.errors.allErrors.each {
+                        print it.defaultMessage
+                    }
+                }
+
                 //partners
                 def juanPerez = new Partner(
                     fullName:"Juan Perez",
                     numberOfEmployee:125,
                     identificationCard:"291-290180-0001W",
                     department:"Molino",
-                    salary:15000
+                    salary:15000,
+                    affiliation:a1
                 )
 
-                def johnDoe = Partner.findByIdentificationCard("291-200280-0001W") ?: new Partner(
-                    fullName:"John Doe",
-                    numberOfEmployee:126,
-                    identificationCard:"291-200280-0001W",
-                    department:"Taller",
-                    salary:17000
-                ).save()
+                if (!juanPerez.save()) {
+                    juanPerez.errors.allErrors.each {
+                        print it.defaultMessage
+                    }
+                }
 
     		break
     		case "production":
