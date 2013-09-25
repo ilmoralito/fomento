@@ -11,8 +11,8 @@ class BootStrap {
     	switch(GrailsUtil.environment) {
     		case "development":
                 //users
-                def admin = User.findByUsername("me") ?: new User(username:"me", password:"123", enabled:true).save()
-                def user = User.findByUsername("ich") ?: new User(username:"ich", password:"123", enabled:true).save()
+                def admin = User.findByUsername("me") ?: new User(username:"me@gmail.com", password:"123", enabled:true).save()
+                def user = User.findByUsername("ich") ?: new User(username:"ich@gmail.com", password:"123", enabled:true).save()
 
                 if (!admin.authorities.contains(adminRole)) {
                     UserRole.create admin, adminRole, true

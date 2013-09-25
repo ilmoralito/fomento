@@ -6,27 +6,35 @@
 </head>
 <body>
 	
-	<div class="col-md-4">
-		Datos Generales
-	</div>
-	<div class="col-md-8">
+	
+	<div class="col-md-12">
 		
 		<ul class="nav nav-tabs">
-		  <li class="${activepersonal}"><a href="#profile" data-toggle="tab">${message(code:'org.fomento.personaldata')}</a></li>
+		  <li class="${activegeneral}"><a href="#generaldata" data-toggle="tab">${message(code:'org.fomento.generaldata')}</a></li>
 		  <li class="${activepassword}"><a href="#password" data-toggle="tab">${message(code:'org.fomento.changepass')}</a></li>
 		</ul>
  
-	  <diAv class="tab-content">
-	    <div id="profile" class="tab-pane ${activepersonal}">
+	  <div class="tab-content">
+	    <div id="generaldata" class="tab-pane ${activegeneral}">
 	      <br>
-	     	<div class="col-md-6">
-	     		<g:render template="frpersonaldata"/>
-	      </div>
+	     	<div>
+		     	<div class="col-md-5">
+		     		<g:render template="frgeneraldata"/>
+		     	</div>
+		     	<div class="col-md-7">
+		     		<g:if test="${er=="ok"}">
+		     			<g:render template="men-error"/>
+		     		</g:if>
+		     		<g:if test="${men=="ok"}">
+		     			<g:render template="men-success"/>
+		     		</g:if>
+		     	</div>
+	        </div>
 	    </div>
 
 	    <div id="password" class="tab-pane ${activepassword}">
 	      <br>
-	      <div class="col-md-6">
+	      <div class="col-md-5">
 	        <g:render template="frchangepass"/>  
 	      </div>
 	    </div>
