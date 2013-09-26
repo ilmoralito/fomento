@@ -8,6 +8,13 @@ class BootStrap {
         def adminRole = Role.findByAuthority("ROLE_ADMIN") ?: new Role(authority:"ROLE_ADMIN").save()
         def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority:"ROLE_USER").save()
 
+        //configuration setting or getting fee
+        if (!Configuration.list()) {
+            new Configuration(fee:205.21).save()
+            new Configuration(fee:300).save()
+            new Configuration(fee:400).save()
+        }
+
     	switch(GrailsUtil.environment) {
     		case "development":
                 //users
