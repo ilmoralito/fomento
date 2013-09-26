@@ -18,7 +18,24 @@ class PartnerController {
 
     def create() {
     	if (request.method == "POST") {
-    		def partner = new Partner(params)
+            //affiliation
+            def ed = (!params?.affiliation?.enrollmentDate) ? new Date() : new Date().parse("yyyy-MM-dd", params?.affiliation?.enrollmentDate)
+
+            def affiliation = new Affiliation(
+                fee: params?.affiliation?.fee,
+                typeOfPayment: params?.affiliation?.typeOfPayment,
+                factoryFee: params?.affiliation?.factoryFee,
+                enrollmentDate: ed
+            )
+
+            def partner = new Partner(
+                fullName: params?.fullName,
+                numberOfEmployee: params?.numberOfEmployee,
+                identificationCard: params?.identificationCard,
+                department: params?.department,
+                salary: params?.salary,
+                affiliation: affiliation
+            )
 
     		if (!partner.save()) {
     			return [partner:partner]
