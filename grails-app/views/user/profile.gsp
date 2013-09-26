@@ -34,8 +34,20 @@
 
 	    <div id="password" class="tab-pane ${activepassword}">
 	      <br>
-	      <div class="col-md-5">
-	        <g:render template="frchangepass"/>  
+	      <div>
+	      	
+	      	<div class="col-md-5">
+	      		<g:render template="frchangepass"/> 
+	      	</div>
+	      	<div class="col-md-7">
+		     	<g:if test="${er=="ok"}">
+		     		<g:render template="men-error"/>
+		     	</g:if>
+		     	<g:if test="${men=="ok"}">
+		     		<g:render template="men-success"/>
+		     	</g:if>
+		    </div>
+	         
 	      </div>
 	    </div>
 	  </div>
