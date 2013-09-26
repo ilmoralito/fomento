@@ -33,6 +33,7 @@ class Partner {
 
     static mapping = {
         version false
+        sort dateCreated: "desc"
     }
 
     String toString() {
