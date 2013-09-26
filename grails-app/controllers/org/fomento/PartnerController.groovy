@@ -4,6 +4,8 @@ import grails.plugins.springsecurity.Secured
 @Secured(["ROLE_ADMIN","ROLE_USER"])
 class PartnerController {
 
+    def configurationService
+
 	static defaultAction = "list"
 	static allowedMethods = [
 		"list":"GET",
@@ -18,13 +20,12 @@ class PartnerController {
 
     def create() {
     	if (request.method == "POST") {
-            //affiliation
             def ed = (!params?.affiliation?.enrollmentDate) ? new Date() : new Date().parse("yyyy-MM-dd", params?.affiliation?.enrollmentDate)
 
             def affiliation = new Affiliation(
                 fee: params?.affiliation?.fee,
                 typeOfPayment: params?.affiliation?.typeOfPayment,
-                factoryFee: params?.affiliation?.factoryFee,
+                factoryFee: configurationService.loadFactoryFee(),
                 enrollmentDate: ed
             )
 

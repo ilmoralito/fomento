@@ -34,7 +34,6 @@
 
 	<div class="col-md-6">
 		<h4>Datos de afiliacion</h4>
-		<g:hiddenField name="affiliation.factoryFee" value="${fees.min()}"/>
 
 		<div class="form-group">
 			<label for="affiliation.fee">Cuota</label>

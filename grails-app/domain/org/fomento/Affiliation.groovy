@@ -21,14 +21,10 @@ class Affiliation {
         }
     }
 
-    static namedQueries = {
-
-    }
-
     static belongsTo = [partner:Partner]
 
     static mapping = {
-        version:false
+        version false
     }
 
     String toString() {

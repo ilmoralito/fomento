@@ -3,6 +3,8 @@ import grails.util.GrailsUtil
 
 class BootStrap {
 
+    def configurationService
+
     def init = { servletContext ->
         //roles
         def adminRole = Role.findByAuthority("ROLE_ADMIN") ?: new Role(authority:"ROLE_ADMIN").save()
@@ -33,15 +35,11 @@ class BootStrap {
                 def a1 = new Affiliation(
                     fee:450,
                     typeOfPayment:"Catorcena",
-                    factoryFee:205,
+                    factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 250
                 )
 
-                if (a1.validate()) {
-                    a1.errors.allErrors.each {
-                        print it.defaultMessage
-                    }
-                }
+                a1.save()
 
                 //partners
                 def juanPerez = new Partner(
@@ -55,10 +53,9 @@ class BootStrap {
 
                 if (!juanPerez.save()) {
                     juanPerez.errors.allErrors.each {
-                        print it.defaultMessage
+                        print it
                     }
                 }
-
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()
