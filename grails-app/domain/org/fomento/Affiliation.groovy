@@ -6,6 +6,7 @@ class Affiliation {
     String typeOfPayment
     BigDecimal factoryFee
     Date enrollmentDate
+    BigDecimal capitalization = 0.00
 
 	Date dateCreated
 	Date lastUpdated
@@ -19,6 +20,7 @@ class Affiliation {
 
             enrollmentDate <= today
         }
+        capitalization min:0.00
     }
 
     static belongsTo = [partner:Partner]

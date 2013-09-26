@@ -36,7 +36,8 @@ class BootStrap {
                     fee:450,
                     typeOfPayment:"Catorcena",
                     factoryFee: configurationService.loadFactoryFee(),
-                    enrollmentDate:new Date() - 250
+                    enrollmentDate:new Date() - 250,
+                    capitalization:2500.00
                 )
 
                 a1.save()

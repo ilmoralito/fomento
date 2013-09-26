@@ -26,7 +26,8 @@ class PartnerController {
                 fee: params?.affiliation?.fee,
                 typeOfPayment: params?.affiliation?.typeOfPayment,
                 factoryFee: configurationService.loadFactoryFee(),
-                enrollmentDate: ed
+                enrollmentDate: ed,
+                capitalization: (params?.affiliation?.capitalization) ?: 0
             )
 
             def partner = new Partner(
