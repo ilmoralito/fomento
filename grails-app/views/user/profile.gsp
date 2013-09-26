@@ -22,10 +22,10 @@
 		     		<g:render template="frgeneraldata"/>
 		     	</div>
 		     	<div class="col-md-7">
-		     		<g:if test="${er=="ok"}">
+		     		<g:if test="${er1=="ok"}">
 		     			<g:render template="men-error"/>
 		     		</g:if>
-		     		<g:if test="${men=="ok"}">
+		     		<g:if test="${men1=="ok"}">
 		     			<g:render template="men-success"/>
 		     		</g:if>
 		     	</div>
@@ -40,10 +40,10 @@
 	      		<g:render template="frchangepass"/> 
 	      	</div>
 	      	<div class="col-md-7">
-		     	<g:if test="${er=="ok"}">
+		     	<g:if test="${er2=="ok"}">
 		     		<g:render template="men-error"/>
 		     	</g:if>
-		     	<g:if test="${men=="ok"}">
+		     	<g:if test="${men2=="ok"}">
 		     		<g:render template="men-success"/>
 		     	</g:if>
 		    </div>
