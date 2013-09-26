@@ -58,15 +58,11 @@ class changepasswordCommand {
     String password
     String confirmpassword
 
-    
-	
-   	static constraints = {
+    static constraints = {
    		importFrom User
    		def session = RCH.requestAttributes.session
-            currentpassword blank:false, validator:{currentpass, user  ->
-            	print currentpass.encodeAsSHA1()
-            	print session?.us?.password
-            	currentpass.encodeAsBase64()== session?.us?.password
+            currentpassword blank:false, validator:{currentpass ->
+            	currentpass== session?.us?.password
             }
 
 
