@@ -14,7 +14,6 @@
 				<tr>
 					<th>Cuota</th>
 					<th>Fecha de cuota</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,13 +21,6 @@
 					<tr>
 						<td>${fee}</td>
 						<td>${fee.paymentDate.format("yyyy-MM-dd")}</td>
-						<td style="width:1px;">
-							<sec:ifAllGranted roles="ROLE_ADMIN">
-								<g:link action="delete" id="${fee.id}">
-									<span class="glyphicon glyphicon-trash"></span>
-								</g:link>
-							</sec:ifAllGranted>
-						</td>
 					</tr>
 				</g:each>
 			</tbody>
