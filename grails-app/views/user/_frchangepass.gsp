@@ -1,4 +1,4 @@
-<g:form controller= "user" action="profile">
+<g:form controller= "user" action="updatePassword">
   <g:hiddenField name="flag" value="passwordchange"/>
   <div class="form-group">
     <g:passwordField class="form-control" name="currentpassword" placeholder="${message(code:'org.fomento.currentpassword')}"/>

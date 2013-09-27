@@ -1,4 +1,4 @@
-<g:form controller= "user" action="profile">
+<g:form controller= "user" action="updateGeneralData">
     <g:hiddenField name="flag" value="generaldata"/>
    	<div class="form-group">
    		<label for="username">Correo electronico</label>
@@ -6,7 +6,7 @@
     </div>
      <div class="form-group">
      	<label for="fullname">Nombres y Apellidos</label>
-     	<g:textField type="text" class="form-control" name="fullname" autofocus="true" value="${userInstance?.fullname}" placeholder="${message(code:'org.fomento.fullname')}"/>
+     	<g:textField type="text" class="form-control" name="fullName" autofocus="true" value="${userInstance?.fullName}" placeholder="${message(code:'org.fomento.fullname')}"/>
      </div>
 <g:submitButton name="btnregistration" value="${message(code:'org.fomento.confirmchange')}"class="btn btn-default pull-right"/>
 </g:form>

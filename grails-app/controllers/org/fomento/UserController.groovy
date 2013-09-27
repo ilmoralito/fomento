@@ -5,16 +5,28 @@ import org.springframework.web.context.request.RequestContextHolder as RCH
 class UserController{
 	def springSecurityService
 
-	static defaultAction = "actionName"
+	static defaultAction = "profile"
 	static allowedMethods = [
-	"profile":["GET", "POST"]]
+	"profile":["GET", "POST"],
+	"delete":["GET", "POST"]]
 
-    def actionName() {
-
-    }
 
     def create(){
     	[userInstance:new User(params)]
+    }
+
+    def delete(){
+    	def userInstance = User.get(params.id)
+    	if (!userInstance) {
+            response.sendError 404
+        }
+        if (request.post) {
+        	userInstance.delete()
+        	flash.message="El usuario ha sido borrado"
+        	redirect(action:"list")
+        }else{
+        	[userInstance:userInstance]
+        }
     }
 
     def save(){
@@ -32,41 +44,39 @@ class UserController{
     	[userInstance:User.list()]
     }
 
-    def profile(changepasswordCommand cmd){
+    def updateGeneralData(){
+    	def user = springSecurityService.currentUser
+    	user.properties['username','fullName']=params
+    	if (user.save(flush:true)) {
+    		def mess=message(code:'org.fomento.mensuccess')
+    		render(view:"profile", model:[userInstance:user, activegeneral:"active", activepassword:"", men1:"ok", mess:mess])
+    	}else{
+    		render(view:"profile", model:[userInstance:user, activegeneral:"active", activepassword:"", er1:"ok"])
+    	}
+    }
+
+    def updatePassword(changepasswordCommand cmd){
     	def user = springSecurityService.currentUser
     	session.us = user.password
-    	if (request.post) {
-    		switch(params.flag) {
-    			case 'generaldata':
-    				user.properties['username']=params
-    				if (!params.fullname.isEmpty()){ user.properties['fullname']=params	}
-    				if (user.save(flush:true)) {
-    					def varmen=message(code:'org.fomento.mensuccess')
-    					render(view:"profile", model:[userInstance:user, activegeneral:"active", activepassword:"", men1:"ok", varmen:varmen])
-    				}else{
-    					render(view:"profile", model:[userInstance:user, activegeneral:"active", activepassword:"", er1:"ok"])
-    				}
-    			break
-    			case 'passwordchange':
-    				if (cmd.hasErrors()) {
-                        render(view:"profile", model:[userInstance:session.user, cmd:cmd, activepassword:"active", activegeneral:"", er2:"ok"])
-                        return false
-                    }
+    	if (cmd.hasErrors()) {
+            render(view:"profile", model:[userInstance:session.user, cmd:cmd, activepassword:"active", activegeneral:"", er2:"ok"])
+            return false
+        }
 
-                    def userInstance = cmd.updatePassword()
+        def userInstance = cmd.updatePassword()
 		            	
-                    if (userInstance.save(flush:true)) {
-                        session.user = userInstance
-                        flash.message= message(code:'ni.com.cookbook.passwordchanged')
-                        render(view:"profile", model:[userInstance:userInstance,activepassword:"active", activegeneral:"", men2:"ok"])
-                    }else{
-                        flash.message="errors"
-                    }   
-					break  
-    		}
-    	}else{
-    		[userInstance:user,activegeneral:"active"]
-    	}
+        if (userInstance.save(flush:true)) {
+            session.user = userInstance
+            flash.message= message(code:'ni.com.cookbook.passwordchanged')
+            render(view:"profile", model:[userInstance:userInstance,activepassword:"active", activegeneral:"", men2:"ok"])
+        }else{
+            flash.message="errors"
+        }   
+    }
+
+    def profile(){
+    	def user = springSecurityService.currentUser
+    	[userInstance:user,activegeneral:"active"]
     }
 
 }
