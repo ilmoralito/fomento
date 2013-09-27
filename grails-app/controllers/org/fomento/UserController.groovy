@@ -13,6 +13,25 @@ class UserController{
 
     }
 
+    def create(){
+    	[userInstance:new User(params)]
+    }
+
+    def save(){
+    	def userInstance = new User(params)
+    	if (!userInstance.save(flush:true)) {
+    		flash.message=message("errores men")
+    		render(view:"create", model:[userInstance:userInstance])
+    		return false
+    	}
+
+    	redirect(action:"list")
+    }
+
+    def list(){
+    	[userInstance:User.list()]
+    }
+
     def profile(changepasswordCommand cmd){
     	def user = springSecurityService.currentUser
     	session.us = user.password
