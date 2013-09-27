@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>	
+	<r:require modules="bootstrap, app, datepicker"/>	
 </head>
 <body>
 	<g:render template="tool-bar"/>
@@ -36,12 +36,12 @@
 		        </div>
 		        <div class="col-md-2">
 		        	<sec:ifAllGranted roles="ROLE_ADMIN">
-						<g:link action="delete" id="${us.id}">
+						<g:link controller="user" action="delete" id="${us.id}" title="${message(code:'org.fomento.delete')}" class="tooledit" data-placement="bottom">
 							<span class="glyphicon glyphicon-trash"></span>
 						</g:link>
-					</sec:ifAllGranted>
+					</sec:ifAllGranted> 
 					<sec:ifAllGranted roles="ROLE_ADMIN">
-						<g:link action="edit" id="${us.id}">
+						<g:link controller="user" action="edit" id="${us.id}" title="${message(code:'org.fomento.edit')}" class="tooledit" data-placement="bottom">
 							<span class="glyphicon glyphicon-wrench"></span>
 						</g:link>
 					</sec:ifAllGranted>
@@ -49,5 +49,9 @@
 		    </div>
 		</g:each>
     </div>
+
+    <a href="#" id="x" data-toggle="tooltip" title="first tooltip">Hover over me</a>
+
+
 </body>
 </html>

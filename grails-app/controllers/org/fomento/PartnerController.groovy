@@ -61,7 +61,6 @@ class PartnerController {
             return [partner:partner]
         } else {
             partner.delete()
-
             flash.message = "Socio eliminado correctamente"
             redirect action:"list"
         }
