@@ -57,6 +57,12 @@ class BootStrap {
                         print it
                     }
                 }
+
+                //fees
+                def fee1 = new Fee(fee:205.21, paymentDate:new Date() + 1)
+                def fee2 = new Fee(fee:205.21, paymentDate:new Date() + 25)
+                juanPerez.addToFees(fee1)
+                juanPerez.addToFees(fee2)
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()

@@ -31,6 +31,9 @@ class Partner {
         }
     }
 
+    List fees
+    static hasMany = [fees:Fee]
+
     static mapping = {
         version false
         sort dateCreated: "desc"
