@@ -85,7 +85,16 @@ class PartnerController {
             response.sendError 404
         }
 
-        partner.properties = params
+        partner.fullName = params?.fullName
+        partner.numberOfEmployee = params.int("numberOfEmployee")
+        partner.identificationCard = params?.identificationCard
+        partner.department = params?.department
+        partner.salary = params.double("salary")
+        partner.affiliation.fee = params.double("affiliation.fee")
+        partner.affiliation.typeOfPayment = params?.affiliation?.typeOfPayment
+        partner.affiliation.factoryFee = configurationService.loadFactoryFee()
+        partner.affiliation.enrollmentDate = parseDate(params?.affiliation?.enrollmentDate)
+        partner.affiliation.capitalization = (params.double("affiliation.capitalization")) ?: 0
 
         if (!partner.save()) {
             render view:"show", model:[partner:partner, id:id]
@@ -94,6 +103,10 @@ class PartnerController {
 
         flash.message = "Registro actualizado correctamente"
         redirect action:"show", params:[id:id]
+    }
+
+    private parseDate(date) {
+        return (!date) ? new Date() : new Date().parse("yyyy-MM-dd", date)
     }
 
 }
