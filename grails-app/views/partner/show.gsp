@@ -6,6 +6,7 @@
 </head>
 <body>
 	<g:render template="toolbar"/>
+	<g:render template="/layouts/navbar"/>
 
 	<g:hasErrors bean="${partner}">
 		<g:renderErrors bean="${partner}"/>

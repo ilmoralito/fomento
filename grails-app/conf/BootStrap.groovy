@@ -3,10 +3,19 @@ import grails.util.GrailsUtil
 
 class BootStrap {
 
+    def configurationService
+
     def init = { servletContext ->
         //roles
         def adminRole = Role.findByAuthority("ROLE_ADMIN") ?: new Role(authority:"ROLE_ADMIN").save()
         def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority:"ROLE_USER").save()
+
+        //configuration setting or getting fee
+        if (!Configuration.list()) {
+            new Configuration(fee:205.21).save()
+            new Configuration(fee:300).save()
+            new Configuration(fee:400).save()
+        }
 
     	switch(GrailsUtil.environment) {
     		case "development":
@@ -26,15 +35,12 @@ class BootStrap {
                 def a1 = new Affiliation(
                     fee:450,
                     typeOfPayment:"Catorcena",
-                    factoryFee:205,
-                    enrollmentDate:new Date() - 250
+                    factoryFee: configurationService.loadFactoryFee(),
+                    enrollmentDate:new Date() - 250,
+                    capitalization:2500.00
                 )
 
-                if (a1.validate()) {
-                    a1.errors.allErrors.each {
-                        print it.defaultMessage
-                    }
-                }
+                a1.save()
 
                 //partners
                 def juanPerez = new Partner(
@@ -48,10 +54,15 @@ class BootStrap {
 
                 if (!juanPerez.save()) {
                     juanPerez.errors.allErrors.each {
-                        print it.defaultMessage
+                        print it
                     }
                 }
 
+                //fees
+                def fee1 = new Fee(fee:205.21, paymentDate:new Date() + 1)
+                def fee2 = new Fee(fee:205.21, paymentDate:new Date() + 25)
+                juanPerez.addToFees(fee1)
+                juanPerez.addToFees(fee2)
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()

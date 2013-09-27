@@ -6,6 +6,7 @@ class Affiliation {
     String typeOfPayment
     BigDecimal factoryFee
     Date enrollmentDate
+    BigDecimal capitalization = 0.00
 
 	Date dateCreated
 	Date lastUpdated
@@ -19,16 +20,13 @@ class Affiliation {
 
             enrollmentDate <= today
         }
-    }
-
-    static namedQueries = {
-
+        capitalization min:0.00
     }
 
     static belongsTo = [partner:Partner]
 
     static mapping = {
-        version:false
+        version false
     }
 
     String toString() {

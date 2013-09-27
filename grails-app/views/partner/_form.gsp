@@ -1,5 +1,6 @@
 <g:set var="departments" value="${grailsApplication.config.org.fomento.departments}"/>
 <g:set var="typesOfPayment" value="${(partner?.affiliation?.constraints?.typeOfPayment?.inList) ?: ['Catorcena', 'Fin de mes', 'Bono']}"/>
+<g:set var="fees" value="${org.fomento.Configuration.list().fee}"/>
 
 <div class="row">
 	<div class="col-md-6">
@@ -36,7 +37,7 @@
 
 		<div class="form-group">
 			<label for="affiliation.fee">Cuota</label>
-			<g:textField name="affiliation.fee" class="form-control" value="${partner?.affiliation?.fee}"/>
+			<g:select name="affiliation.fee" from="${fees}" class="form-control" value="${partner?.affiliation?.fee}"/>
 		</div>
 
 		<div class="form-group">
@@ -46,7 +47,12 @@
 
 		<div class="form-group">
 			<label for="affiliation.enrollmentDate">Fecha de afiliacion</label>
-			<g:textField name="affiliation.enrollmentDate" id="enrollmentDate" value="${partner?.affiliation?.enrollmentDate}" class="form-control"/>
+			<g:textField name="affiliation.enrollmentDate" id="enrollmentDate" value="${partner?.affiliation?.enrollmentDate?.format('yyyy-MM-dd')}" class="form-control"/>
+		</div>
+
+		<div class="form-group">
+			<label for="affiliation.capitalization">Capitalizacion inicial</label>
+			<g:textField name="affiliation.capitalization" id="affiliation.capitalization" value="${partner?.affiliation?.capitalization}" class="form-control"/>
 		</div>
 	</div>
 </div>

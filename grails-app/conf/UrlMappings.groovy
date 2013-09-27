@@ -19,5 +19,8 @@ class UrlMappings {
 
 		//users
 		"/users"(controller:"user", action:"list")
+
+		//fees
+		"/fee/$id"(controller:"fee", action:"list")
 	}
 }

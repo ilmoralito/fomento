@@ -11,7 +11,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th></th>
+					<th>${partners.size()} Socio${partners.size() > 1 ? 's' : ''} </th>
 					<th></th>
 				</tr>
 			</thead>

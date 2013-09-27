@@ -4,6 +4,8 @@ import grails.plugins.springsecurity.Secured
 @Secured(["ROLE_ADMIN","ROLE_USER"])
 class PartnerController {
 
+    def configurationService
+
 	static defaultAction = "list"
 	static allowedMethods = [
 		"list":"GET",
@@ -18,7 +20,24 @@ class PartnerController {
 
     def create() {
     	if (request.method == "POST") {
-    		def partner = new Partner(params)
+            def ed = (!params?.affiliation?.enrollmentDate) ? new Date() : new Date().parse("yyyy-MM-dd", params?.affiliation?.enrollmentDate)
+
+            def affiliation = new Affiliation(
+                fee: params?.affiliation?.fee,
+                typeOfPayment: params?.affiliation?.typeOfPayment,
+                factoryFee: configurationService.loadFactoryFee(),
+                enrollmentDate: ed,
+                capitalization: (params?.affiliation?.capitalization) ?: 0
+            )
+
+            def partner = new Partner(
+                fullName: params?.fullName,
+                numberOfEmployee: params?.numberOfEmployee,
+                identificationCard: params?.identificationCard,
+                department: params?.department,
+                salary: params?.salary,
+                affiliation: affiliation
+            )
 
     		if (!partner.save()) {
     			return [partner:partner]
@@ -66,7 +85,16 @@ class PartnerController {
             response.sendError 404
         }
 
-        partner.properties = params
+        partner.fullName = params?.fullName
+        partner.numberOfEmployee = params.int("numberOfEmployee")
+        partner.identificationCard = params?.identificationCard
+        partner.department = params?.department
+        partner.salary = params.double("salary")
+        partner.affiliation.fee = params.double("affiliation.fee")
+        partner.affiliation.typeOfPayment = params?.affiliation?.typeOfPayment
+        partner.affiliation.factoryFee = configurationService.loadFactoryFee()
+        partner.affiliation.enrollmentDate = parseDate(params?.affiliation?.enrollmentDate)
+        partner.affiliation.capitalization = (params.double("affiliation.capitalization")) ?: 0
 
         if (!partner.save()) {
             render view:"show", model:[partner:partner, id:id]
@@ -75,6 +103,10 @@ class PartnerController {
 
         flash.message = "Registro actualizado correctamente"
         redirect action:"show", params:[id:id]
+    }
+
+    private parseDate(date) {
+        return (!date) ? new Date() : new Date().parse("yyyy-MM-dd", date)
     }
 
 }
