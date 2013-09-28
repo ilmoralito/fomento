@@ -3,6 +3,8 @@ package org.fomento
 class Fee {
 
     BigDecimal fee
+    BigDecimal factoryFee
+    BigDecimal total
     Date paymentDate
 
 	Date dateCreated

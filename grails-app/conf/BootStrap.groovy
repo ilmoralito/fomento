@@ -59,8 +59,20 @@ class BootStrap {
                 }
 
                 //fees
-                def fee1 = new Fee(fee:205.21, paymentDate:new Date() + 1)
-                def fee2 = new Fee(fee:205.21, paymentDate:new Date() + 25)
+                def fee1 = new Fee(
+                    fee:juanPerez.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:juanPerez.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() + 1
+                )
+
+                def fee2 = new Fee(
+                    fee:juanPerez.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:juanPerez.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() + 1
+                )
+
                 juanPerez.addToFees(fee1)
                 juanPerez.addToFees(fee2)
     		break
