@@ -13,16 +13,26 @@
 			<thead>
 				<tr>
 					<th>Cuota</th>
+					<th>Cuota de empresa</th>
 					<th>Fecha de cuota</th>
+					<th>Total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<g:each in="${fees}" var="fee">
 					<tr>
 						<td>${fee}</td>
+						<td>${fee.factoryFee}</td>
 						<td>${fee.paymentDate.format("yyyy-MM-dd")}</td>
+						<td style="width:1px;">${fee.total}</td>
 					</tr>
 				</g:each>
+				<tr>
+					<td><strong>TOTAL</strong></td>
+					<td></td>
+					<td></td>
+					<td>${total}</td>
+				</tr>
 			</tbody>
 		</table>
 	</g:if>

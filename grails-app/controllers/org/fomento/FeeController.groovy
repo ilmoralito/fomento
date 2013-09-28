@@ -2,6 +2,8 @@ package org.fomento
 
 class FeeController {
 
+    def feeService
+
 	static defaultAction = "list"
 	static allowedMethods = [
 		"list":"GET"
@@ -14,7 +16,7 @@ class FeeController {
     		response.sendError 404
     	}
 
-    	[fees:Fee.findAllByPartner(partner)]
+    	[fees:Fee.findAllByPartner(partner), total:feeService.calcTotal(partner.fees)]
     }
 
 }
