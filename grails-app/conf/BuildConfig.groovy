@@ -60,5 +60,6 @@ grails.project.dependency.resolution = {
         compile ":webxml:1.4.1"
         compile ":twitter-bootstrap:3.0.0"
         compile ':cloud-foundry:1.2.3'
+        compile ":searchable:0.6.4"
     }
 }
