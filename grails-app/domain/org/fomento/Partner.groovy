@@ -2,6 +2,8 @@ package org.fomento
 
 class Partner {
 
+    static searchable = true
+
     String fullName
     Integer numberOfEmployee
     String identificationCard
