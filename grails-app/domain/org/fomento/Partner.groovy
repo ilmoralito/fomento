@@ -31,6 +31,13 @@ class Partner {
         byDepartment { department ->
             eq "department", department
         }
+
+        fromTo {from, to ->
+            affiliation {
+                ge "enrollmentDate", from.clearTime()
+                le "enrollmentDate", to.clearTime()
+            }
+        }
     }
 
     List fees

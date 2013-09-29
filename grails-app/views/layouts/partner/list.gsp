@@ -19,12 +19,12 @@
 			<g:form action="list">
 				<div class="form-group">
 					<label class="sr-only" for="from">Desde</label>
-					<g:textField name="from" class="form-control" placeholder="Desde..."/>
+					<g:textField name="from" class="form-control" value="${params?.from}" placeholder="Desde..."/>
 				</div>
 
 				<div class="form-group">
 					<label class="sr-only" for="to">Hasta</label>
-					<g:textField name="to" class="form-control" placeholder="Hasta..."/>
+					<g:textField name="to" class="form-control" value="${params?.to}" placeholder="Hasta..."/>
 				</div>
 
 				<g:submitButton name="send" value="Buscar" class="btn btn-default"/>

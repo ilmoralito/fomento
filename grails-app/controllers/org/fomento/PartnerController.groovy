@@ -21,6 +21,12 @@ class PartnerController {
         if (request.method == "GET") {
     	   return [partners:Partner.list()]
         } else {
+            //search by enrollment date property in Affiliation domain class
+            if (params?.from && params?.to) {
+                return [partners:Partner.fromTo(parseDate(params.from), parseDate(params.to)).list()]
+            }
+
+            //search by patern domain class properties
             if (!params?.query?.trim()) {
                 return [:]
             } else {
