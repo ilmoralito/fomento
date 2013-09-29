@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, list, effect"/>
 </head>
 <body>
 	<g:render template="toolbar"/>

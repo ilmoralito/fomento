@@ -8,6 +8,7 @@
 				    	<input type="text" value="${params?.query}" class="form-control" name="query" id="query" placeholder="Nombre, numero empleado">
 				  	</div>
 					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+					<button id="apply-effect" class="btn btn-default" data-effect="st-effect-1"><span class="glyphicon glyphicon-calendar"></span></button>
 					<g:link controller="partner" action="create" class="btn btn-default">Crear socio</g:link>
 				</g:form>
 			</g:if>

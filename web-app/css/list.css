@@ -1,0 +1,7 @@
+/*setted padding-top to 49px to remove 21px error*/
+body { padding-top: 49px; }
+
+/*to complete 70px default padding-top in all views*/
+.list-main {
+	padding-top: 21px;
+}
