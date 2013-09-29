@@ -16,6 +16,8 @@ modules = {
     }
 
     effect {
+        dependsOn "datepicker"
+
     	resource url:"js/classie.js"
     	resource url:"js/sidebarEffects.js"
     	resource url:"css/component.css"
