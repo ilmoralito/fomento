@@ -1,21 +1,36 @@
 package org.fomento
+
 import grails.plugins.springsecurity.Secured
+import org.compass.core.engine.SearchEngineQueryParseException
 
 @Secured(["ROLE_ADMIN","ROLE_USER"])
 class PartnerController {
 
     def configurationService
+    def searchableService
 
 	static defaultAction = "list"
 	static allowedMethods = [
-		"list":"GET",
+		"list":["GET","POST"],
 		"create":["GET","POST"],
         "delete":["GET","POST"],
         "show":"GET"
 	]
 
     def list() {
-    	[partners:Partner.list()]
+        if (request.method == "GET") {
+    	   return [partners:Partner.list()]
+        } else {
+            if (!params?.query?.trim()) {
+                return [:]
+            } else {
+                try {
+                    return [partners: searchableService.search(params.query, params).results]
+                } catch(SearchEngineQueryParseException ex) {
+                    return [parseException: true]
+                }
+            }
+        }
     }
 
     def create() {
