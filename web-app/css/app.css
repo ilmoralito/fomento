@@ -6,10 +6,8 @@ hr{ margin:0; }
 .two1{ background: #E5E3E3;}
 .usercont{ margin-top: 10px;}
 .defaultclss{
-	height:25px;
-	line-height: 25px;
 	padding-left:5px;
-	margin-top: 1px;
+	margin-top: 2px;
 	border-bottom: 1px dotted black;
 }
 .cab{background: #222222; 
