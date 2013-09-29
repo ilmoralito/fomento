@@ -1,4 +1,4 @@
 $(document).ready(function(){
-	$('#tooldelete').tooltip();
+	$('.tooldelete').tooltip();
 	$('.tooledit').tooltip();
 });

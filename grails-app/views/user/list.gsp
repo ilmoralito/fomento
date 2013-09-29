@@ -35,12 +35,12 @@
 			</div>
 			<div>
 		        <sec:ifAllGranted roles="ROLE_ADMIN">
-					<g:link controller="user" action="delete" id="${us.id}" title="${message(code:'org.fomento.delete')}" class="tooledit clsize" data-placement="bottom">
+					<g:link controller="user" action="delete" id="${us.id}" title="${message(code:'org.fomento.delete')}" class="tooledit clsize" data-placement="top">
 						<span class="glyphicon glyphicon-trash"></span>
 					</g:link>
 				</sec:ifAllGranted> 
 				<sec:ifAllGranted roles="ROLE_ADMIN">
-					<g:link controller="user" action="edit" id="${us.id}" title="${message(code:'org.fomento.edit')}" class="tooledit clsize" data-placement="bottom">
+					<g:link controller="user" action="edit" id="${us.id}" title="${message(code:'org.fomento.edit')}" class="tooledit clsize" data-placement="top">
 						<span class="glyphicon glyphicon-wrench"></span>
 					</g:link>
 				</sec:ifAllGranted>
