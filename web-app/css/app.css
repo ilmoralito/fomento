@@ -1,18 +1,14 @@
 body { padding-top: 70px; }
 .bordersty{	background: #fff; }
-
 hr{ margin:0; }
-.one1{ background: #F2F2F2;}
-.two1{ background: #E5E3E3;}
-.usercont{ margin-top: 10px;}
+.clsize{font-size: 25px; color: #222222;}
 .defaultclss{
 	padding-left:5px;
 	margin-top: 2px;
-	border-bottom: 1px dotted black;
+	border-bottom: 1px dotted #222222;
 }
-.cab{background: #222222; 
-	color:#fff;
+.cab{
+	text-align: center;
+	color:#222222;
 	margin-bottom: 1px;
-	border-top-right-radius: 5px;
-	border-top-left-radius: 5px;
 }
