@@ -14,8 +14,18 @@
 	<div id="st-container" class="st-container">
 		<!--sidebar-->
 		<nav class="st-menu st-effect-1" id="menu-1">
+			<!--Search by partner properties-->
+			<h2><span class="glyphicon glyphicon-search"></span></h2>
+			<g:form action="list" class="form-inline" role="form">
+				<div class="form-group">
+					<label class="sr-only" for="query">Consulta</label>
+			    	<input type="text" value="${params?.query}" class="form-control" name="query" id="query" placeholder="Nombre, numero empleado">
+			  	</div>
+				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+			</g:form>
+
+			<!--search by partner enrollment date-->
 			<h2><span class="glyphicon glyphicon-calendar"></span></h2>
-			<!--search by dates form-->
 			<g:form action="list">
 				<div class="form-group">
 					<label class="sr-only" for="from">Desde</label>
@@ -26,7 +36,6 @@
 					<label class="sr-only" for="to">Hasta</label>
 					<g:textField name="to" class="form-control" value="${params?.to}" placeholder="Hasta..."/>
 				</div>
-
 				<g:submitButton name="send" value="Buscar" class="btn btn-default"/>
 			</g:form>
 		</nav>
