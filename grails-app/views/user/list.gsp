@@ -11,6 +11,9 @@
 	<div class="col-md-12">
 	<g:each in="${userInstance}" var="us" status="i">
 		<div class="row defaultclss">
+			<div class="col-md-1 usnum">
+				<h2>${i+1}</h2>
+			</div>
 			<div class="col-md-3">
 				<div><strong>email:</strong></div>
 				<div><strong>Nombres y Apellidos:</strong></div>

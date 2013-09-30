@@ -79,6 +79,56 @@ class UserController{
     	[userInstance:user,activegeneral:"active"]
     }
 
+    def edit(){
+        def userRole
+        def userInstance = User.get(params.id)
+        def role = UserRole.get(userInstance.id, 1)
+        if (!role) {
+             role = UserRole.get(userInstance.id, 2)
+             if (!role) {
+                userRole = "NO_ROLE"
+             }else{
+                userRole = "ROLE_USER"
+             }
+         }else{
+                userRole = "ROLE_ADMIN" 
+         }
+        [userInstance:userInstance, userRole:userRole]
+    }
+
+    def update(){
+        def userInstance = User.get(params.id)
+        if (!params.password.isEmpty()) {
+            userInstance.properties['password']=params
+        }
+        userInstance.properties['username','fullName']= params
+        if (userInstance.save(flush:true)) {
+            def mess=message(code:'org.fomento.mensuccess')
+            render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess])
+        }else{
+            render(view:"edit", model:[userInstance:userInstance, er:"ok"])
+            return false
+        }
+    }
+
+    def enabledaccount(){
+        def userInstance = User.get(params.id)
+        if (params.enabled=='on') {
+            if (params.ena=='true') {
+                userInstance.properties['enabled']=true
+                render(view:"edit", model:[userInstance:userInstance])
+            }else{
+               userInstance.properties['enabled']= false
+               render(view:"edit", model:[userInstance:userInstance])
+            }
+        }
+    }
+
+    def assignrole(){ 
+       def userInstance = User.get(params.id)
+       def role = Role.findByAuthority("ROLE_USER") 
+    }
+
 }
 
 
