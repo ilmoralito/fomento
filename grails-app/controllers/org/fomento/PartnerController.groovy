@@ -14,7 +14,9 @@ class PartnerController {
 		"list":["GET","POST"],
 		"create":["GET","POST"],
         "delete":["GET","POST"],
-        "show":"GET"
+        "show":"GET",
+        "update":"POST",
+        "changeStatus":["GET","POST"]
 	]
 
     def list() {
@@ -124,6 +126,25 @@ class PartnerController {
 
         flash.message = "Registro actualizado correctamente"
         redirect action:"show", params:[id:id]
+    }
+
+    @Secured("ROLE_ADMIN")
+    def changeStatus(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        if (request.method == "POST") {
+            partner.status = (partner.status) ? false : true
+
+            if (!partner.save()) {
+                return [partner:partner]
+            }
+        }
+
+        [partner:partner]
     }
 
     private parseDate(date) {
