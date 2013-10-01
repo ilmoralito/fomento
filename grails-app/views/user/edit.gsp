@@ -12,6 +12,7 @@
 	<div class="col-md-4">
 		<g:form controller= "user" action="update">	
 			<g:hiddenField name="id" value="${userInstance.id}"/>
+			<g:hiddenField name="userRole" value="${userRole}"/>
 		   	<div class="form-group">
 		   		<label for="username">Correo electronico</label>
 		        <g:textField type="text" class="form-control" name="username" autofocus="true" value="${userInstance?.username}"/>
@@ -33,14 +34,13 @@
 	   	<h4>Privilegios</h4>
 	   	<div class="col-md-12">
 		   	<g:form controller="user"  action="enabledaccount">
+		   		<g:hiddenField name="userRole" value="${userRole}"/>
 		   		<g:hiddenField name="id" value="${userInstance.id}"/>
 			   	<label class="checkbox">
 					<g:if test="${userInstance.enabled==true}">
-					    <g:hiddenField name="ena" value="false"/>
-						<g:checkBox name="enabled"/><g:message code="org.fomento.disaccount"/>
+					    <g:checkBox name="disable"/><g:message code="org.fomento.disaccount"/>
 					</g:if>
 					<g:else>
-					    <g:hiddenField name="ena" value="true"/>
 					    <g:checkBox name="enabled"/><g:message code="org.fomento.enableaccount"/>
 					</g:else>
 				</label>
@@ -49,9 +49,10 @@
 		</div>
 		
 		<div class="col-md-12">
-			<g:form controller="user" action="assignrole">
-				<g:hiddenField name="id" value="${userInstance.id}"/>
-				<g:if test="${userRole=="NO_ROLE"}">
+			<g:if test="${userRole=="NO_ROLE"}">
+				<g:form controller="user" action="assignrole">
+					<g:hiddenField name="userRole" value="${userRole}"/>
+					<g:hiddenField name="id" value="${userInstance.id}"/>
 					<h4>Asignar Rol</h4>
 						<div>
 							<label class="radio">
@@ -65,25 +66,39 @@
 								<g:message code="org.fomento.admin"/>
 							</label>
 						</div>
-				</g:if>
-				<g:if test="${userRole=="ROLE_ADMIN"}">
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnassignrole')}"class="btn btn-default btn-sm"/>
+				</g:form>
+			</g:if>
+			
+			<g:if test="${userRole=="ROLE_ADMIN"}">
+				<g:form controller="user" action="changerole">
+					<g:hiddenField name="userRole" value="${userRole}"/>
+					<g:hiddenField name="id" value="${userInstance.id}"/>
 					<label class="checkbox">
 						<g:checkBox name="roleuser"/>
 						<g:message code="org.fomento.roleuser"/>
 					</label>
-				</g:if>
-				<g:if test="${userRole=="ROLE_USER"}">
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnchangerole')}"class="btn btn-default btn-sm"/>
+				</g:form>
+			</g:if>
+			<g:if test="${userRole=="ROLE_USER"}">
+				<g:form controller="user" action="changerole">
+					<g:hiddenField name="userRole" value="${userRole}"/>
+					<g:hiddenField name="id" value="${userInstance.id}"/>
 					<label class="checkbox">
 						<g:checkBox name="roleadmin"/>
 						<g:message code="org.fomento.roleadmin"/>
 					</label>
-				</g:if>
-				<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdaterole')}"class="btn btn-default btn-sm"/>
-			</g:form>
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnchangerole')}"class="btn btn-default btn-sm"/>
+				</g:form>
+			</g:if>
+				
+			
 			
 		</div>
 	</div>
 	<div class="col-md-4">
+	<br>
 		<g:if test="${er=="ok"}">
 		     <g:render template="men-error"/>
 		</g:if>

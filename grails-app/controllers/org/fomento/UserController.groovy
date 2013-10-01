@@ -104,29 +104,75 @@ class UserController{
         userInstance.properties['username','fullName']= params
         if (userInstance.save(flush:true)) {
             def mess=message(code:'org.fomento.mensuccess')
-            render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess])
+           render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:params.userRole])
         }else{
-            render(view:"edit", model:[userInstance:userInstance, er:"ok"])
-            return false
+           render(view: "edit", model:[userInstance:userInstance, er:"ok", userRole:params.userRole])
         }
     }
 
     def enabledaccount(){
+        def mess
         def userInstance = User.get(params.id)
         if (params.enabled=='on') {
-            if (params.ena=='true') {
-                userInstance.properties['enabled']=true
-                render(view:"edit", model:[userInstance:userInstance])
-            }else{
-               userInstance.properties['enabled']= false
-               render(view:"edit", model:[userInstance:userInstance])
-            }
+            userInstance.properties['enabled']=true
+            mess=message(code:'org.fomento.menEnableAccount')
+            render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: params.userRole])
+        }else if (params.disable=='on') {
+            mess=message(code:'org.fomento.menDisableAccount')
+            userInstance.properties['enabled']=false
+            render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: params.userRole])
+        }else{
+            render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
         }
     }
 
     def assignrole(){ 
        def userInstance = User.get(params.id)
-       def role = Role.findByAuthority("ROLE_USER") 
+       def role, newRole, mess
+       if (params.role=="admin") {
+           role = Role.get(1)
+           newRole = UserRole.create(userInstance, role, true)
+           mess = message(code:'org.fomento.assignedAdminRole')
+           render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:"ROLE_ADMIN"])
+       }else{
+           role = Role.get(2)
+           newRole = UserRole.create(userInstance, role, true)
+           mess = message(code:'org.fomento.assignedUserRole')
+           render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:"ROLE_USER"])
+        }
+       
+    }
+
+    def changerole(){
+        def userInstance = User.get(params.id)
+        def role, role2, mess
+       if (params.roleadmin=='on') {
+            role = Role.get(2)
+            role2 = Role.get(1)
+            def removeUser = UserRole.findByUserAndRole(userInstance, role)
+            if (!removeUser) {
+                render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+            }else{
+                removeUser.delete(flush:true)
+                def newRole = UserRole.create(userInstance, role2, true)
+                mess=message(code:'org.fomento.menrolchange')
+                render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_ADMIN"])
+            }
+       }else if(params.roleuser=="on"){
+            role = Role.get(1)
+            role2 = Role.get(2)
+            def removeUser = UserRole.findByUserAndRole(userInstance, role)  
+            if (!removeUser) {
+                render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+            }else{
+                removeUser.delete(flush:true) 
+                def newRole = UserRole.create(userInstance, role2, true)
+                mess=message(code:'org.fomento.menrolchange')
+                render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_USER"])  
+            }
+       }else{
+            render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+       }
     }
 
 }

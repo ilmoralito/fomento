@@ -5,7 +5,7 @@
     </div>
      <div class="form-group">
      	<label for="fullname">Nombres y Apellidos</label>
-     	<g:textField type="text" class="form-control" name="fullName" autofocus="true" value="${userInstance?.fullName}" placeholder="${message(code:'org.fomento.fullname')}"/>
+     	<g:textField type="text" class="form-control" name="fullName" value="${userInstance?.fullName}" placeholder="${message(code:'org.fomento.fullname')}"/>
      </div>
 <g:submitButton name="btnregistration" value="${message(code:'org.fomento.confirmchange')}"class="btn btn-default pull-right"/>
 </g:form>
