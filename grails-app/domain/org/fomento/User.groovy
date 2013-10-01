@@ -1,10 +1,12 @@
 package org.fomento
+import grails.plugins.springsecurity.Secured
 
 class User {
 
 	transient springSecurityService
 
 	String username
+	String fullName
 	String password
 	boolean enabled
 	boolean accountExpired
@@ -12,8 +14,9 @@ class User {
 	boolean passwordExpired
 
 	static constraints = {
-		username blank: false, unique: true
+		username blank: false, unique: true, email:true
 		password blank: false
+		fullName blank: false, nullable:true, maxSize:70
 	}
 
 	static mapping = {
