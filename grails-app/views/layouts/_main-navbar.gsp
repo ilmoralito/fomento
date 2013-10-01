@@ -6,11 +6,11 @@
   		<div class="pull-right">
   	  		<ul class="nav navbar-nav">
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
-  	  			    <li class="${(controllerName == 'user' ? 'active' : '')}">
+  	  			    <li class="${(controllerName == 'user' && actionName != 'profile') ? 'active' : ''}">
                         <g:link controller="user" action="list">Administrar</g:link>
                     </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${(controllerName == 'partner' ? 'active' : '')}">
+  	  			<li class="${(controllerName == 'partner') ? 'active' : ''}">
                     <g:link controller="partner">Socios</g:link>
                 </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">
