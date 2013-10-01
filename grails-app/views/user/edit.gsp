@@ -97,7 +97,7 @@
 			
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-5">
 	<br>
 		<g:if test="${er=="ok"}">
 		     <g:render template="men-error"/>

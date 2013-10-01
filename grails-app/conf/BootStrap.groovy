@@ -1,4 +1,4 @@
- import org.fomento.*
+import org.fomento.*
 import grails.util.GrailsUtil
 
 class BootStrap {
@@ -20,8 +20,8 @@ class BootStrap {
     	switch(GrailsUtil.environment) {
     		case "development":
                 //users
-                def admin = User.findByUsername("me@gmail.com") ?: new User(username:"me@gmail.com", password:"123", enabled:true).save()
-                def user = User.findByUsername("ich@gmail.com") ?: new User(username:"ich@gmail.com", password:"123", enabled:true).save()
+                def admin = User.findByUsername("me@gmail.com") ?: new User(username:"me@gmail.com", fullName:"Julian Perez", password:"123", enabled:true).save()
+                def user = User.findByUsername("ich@gmail.com") ?: new User(username:"ich@gmail.com", fullName:"Jose Perez", password:"123", enabled:true).save()
 
                 if (!admin.authorities.contains(adminRole)) {
                     UserRole.create admin, adminRole, true
