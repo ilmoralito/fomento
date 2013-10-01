@@ -28,6 +28,11 @@ class PartnerController {
                 return [partners:Partner.fromTo(parseDate(params.from), parseDate(params.to)).list()]
             }
 
+            //filter by partner status
+            if (params?.status) {
+                return [partners:Partner.findAllByStatus((params.status == "Activo") ? true : false)]
+            }
+
             //search by patern domain class properties
             if (!params?.query?.trim()) {
                 return [:]

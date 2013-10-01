@@ -38,6 +38,16 @@
 				</div>
 				<g:submitButton name="send" value="Buscar" class="btn btn-default"/>
 			</g:form>
+
+			<!--filter by partner domain class properies-->
+			<h2><span class="glyphicon glyphicon-filter"></span></h2>
+			<g:form action="list" class="form-inline" role="form">
+				<div class="form-group">
+					<label class="sr-only" for="status">Estado</label>
+					<g:select name="status" from="${['Activo', 'Desactivado']}" value="${params?.status}" class="form-control"/>
+				</div>
+				<g:submitButton name="send" value="Filtrar" class="btn btn-default"/>
+			</g:form>
 		</nav>
 
 		<div class="st-pusher">
