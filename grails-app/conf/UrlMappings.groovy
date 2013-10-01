@@ -16,6 +16,7 @@ class UrlMappings {
 
 		//partners
 		"/partners"(controller:"partner", action:"list")
+		"/partner/$id"(controller:"partner", action:"show")
 		"/partner/status/$id?"(controller:"partner", action:"changeStatus")
 
 		//users
