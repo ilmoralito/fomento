@@ -57,21 +57,31 @@ class UserController{
 
     def updatePassword(changepasswordCommand cmd){
     	def user = springSecurityService.currentUser
-    	session.us = user.password
-    	if (cmd.hasErrors()) {
-            render(view:"profile", model:[userInstance:session.user, cmd:cmd, activepassword:"active", activegeneral:"", er2:"ok"])
+        def pass = springSecurityService.encodePassword(params.currentpassword)
+        session.user = user
+        
+        if (pass!=user.password) {
+            def mess = message(code:'org.fomento.errorCurrentPassword')
+            render(view:"profile",
+            model:[userInstance:session.user, activepassword:"active", activegeneral:"", er2:"ok", mess:mess])
             return false
-        }
-
-        def userInstance = cmd.updatePassword()
-		            	
-        if (userInstance.save(flush:true)) {
-            session.user = userInstance
-            flash.message= message(code:'ni.com.cookbook.passwordchanged')
-            render(view:"profile", model:[userInstance:userInstance,activepassword:"active", activegeneral:"", men2:"ok"])
         }else{
-            flash.message="errors"
-        }   
+            if (cmd.hasErrors()) {
+                render(view:"profile", model:[userInstance:session.user, cmd:cmd, activepassword:"active", activegeneral:"", er2:"ok"])
+                return false
+            }
+
+            def userInstance = cmd.updatePassword()
+                            
+            if (userInstance.save(flush:true)) {
+                session.user = userInstance
+                def mess= message(code:'ni.com.cookbook.passwordchanged')
+                render(view:"profile", model:[userInstance:userInstance,activepassword:"active", activegeneral:"", men2:"ok", mess:mess])
+            }else{
+                flash.message="Errores"
+            }  
+        }
+    	 
     }
 
     def profile(){
@@ -180,29 +190,21 @@ class UserController{
 
 class changepasswordCommand {
 	
-	String currentpassword
-    String password
+	String password
     String confirmpassword
 
     static constraints = {
     	importFrom User
-    	def session = RCH.requestAttributes.session
-
-            currentpassword blank:false, validator:{currentpass, user ->
-            	currentpass == session?.us
-            }
-
+    	
         confirmpassword blank:false, validator: {confirmpass, user ->
             confirmpass == user.password
         }
     
     } 
 
-    
-
     User updatePassword() {
         def session = RCH.requestAttributes.session
-        def user = User.findByUsername(session?.us?.username)
+        def user = User.findByUsername(session?.user?.username)
 
         if (user) {
             user.properties["password"] = password
