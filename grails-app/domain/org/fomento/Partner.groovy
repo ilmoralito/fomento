@@ -9,7 +9,7 @@ class Partner {
     String identificationCard
     String department
     BigDecimal salary
-    boolean status
+    Boolean status = true
     Affiliation affiliation
 
 	Date dateCreated
@@ -44,6 +44,7 @@ class Partner {
     static hasMany = [fees:Fee]
 
     static mapping = {
+        status defaultValue: true
         version false
         sort dateCreated: "desc"
     }
