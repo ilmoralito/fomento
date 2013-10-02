@@ -100,4 +100,4 @@ grails.plugins.springsecurity.successHandler.defaultTargetUrl = "/partners"
 org.fomento.departments = ["Molino", "Administracion", "Taller"]
 
 //fees dates
-org.fomento.fees = ["catorcena":14,"fMes":30,"bono":2]
+org.fomento.fees = ["Catorcena":2,"Fin de mes":30,"Bono":24]
