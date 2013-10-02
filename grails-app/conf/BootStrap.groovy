@@ -31,9 +31,10 @@ class BootStrap {
                     UserRole.create user, userRole, true
                 }
 
+                //juanPerez
                 //affiliation
                 def a1 = new Affiliation(
-                    fee:450,
+                    fee:400,
                     typeOfPayment:"Catorcena",
                     factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 250,
@@ -75,6 +76,98 @@ class BootStrap {
 
                 juanPerez.addToFees(fee1)
                 juanPerez.addToFees(fee2)
+
+                //johnDoe
+                //affiliation
+                def a2 = new Affiliation(
+                    fee:300,
+                    typeOfPayment:"Catorcena",
+                    factoryFee: configurationService.loadFactoryFee(),
+                    enrollmentDate:new Date() - 300,
+                    capitalization:5000.00
+                )
+
+                a2.save()
+
+                //partners
+                def johnDoe = new Partner(
+                    fullName:"John Doe",
+                    numberOfEmployee:126,
+                    identificationCard:"291-290180-0001P",
+                    department:"Administracion",
+                    salary:16000,
+                    affiliation:a2
+                )
+
+                if (!johnDoe.save()) {
+                    johnDoe.errors.allErrors.each {
+                        print it
+                    }
+                }
+
+                //fees
+                def fee3 = new Fee(
+                    fee:johnDoe.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:johnDoe.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() - 1
+                )
+
+                def fee4 = new Fee(
+                    fee:johnDoe.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:johnDoe.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() - 1
+                )
+
+                johnDoe.addToFees(fee3)
+                johnDoe.addToFees(fee4)
+
+                //fulano
+                //affiliation
+                def a3 = new Affiliation(
+                    fee:300,
+                    typeOfPayment:"Bono",
+                    factoryFee: configurationService.loadFactoryFee(),
+                    enrollmentDate:new Date() - 300,
+                    capitalization:5800.00
+                )
+
+                a3.save()
+
+                //partners
+                def fulano = new Partner(
+                    fullName:"Fulano",
+                    numberOfEmployee:127,
+                    identificationCard:"291-290171-0001P",
+                    department:"Molino",
+                    salary:16000,
+                    affiliation:a3
+                )
+
+                if (!fulano.save()) {
+                    fulano.errors.allErrors.each {
+                        print it
+                    }
+                }
+
+                //fees
+                def fee5 = new Fee(
+                    fee:fulano.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() - 1
+                )
+
+                def fee6 = new Fee(
+                    fee:fulano.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() - 1
+                )
+
+                fulano.addToFees(fee5)
+                fulano.addToFees(fee6)
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()
