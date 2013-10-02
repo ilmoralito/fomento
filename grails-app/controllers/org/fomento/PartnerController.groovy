@@ -30,7 +30,9 @@ class PartnerController {
 
             //filter by partner status
             if (params?.status) {
-                return [partners:Partner.findAllByStatus((params.status == "Activo") ? true : false)]
+                def status = (params.status == "Activo") ? true : false
+
+                return [partners:Partner.findAllByStatus(status)]
             }
 
             //search by patern domain class properties

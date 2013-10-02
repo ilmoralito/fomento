@@ -16,7 +16,8 @@ class UrlMappings {
 
 		//partners
 		"/partners"(controller:"partner", action:"list")
-		"/partner/$id"(controller:"partner", action:"show")
+		//error here if i uncomment this line i wont be able to access to create partner action and 405 error if i try to update a partner
+		//"/partner/$id"(controller:"partner", action:"show")
 		"/partner/status/$id?"(controller:"partner", action:"changeStatus")
 
 		//users
