@@ -98,3 +98,6 @@ grails.plugins.springsecurity.successHandler.defaultTargetUrl = "/partners"
 
 //triton departments
 org.fomento.departments = ["Molino", "Administracion", "Taller"]
+
+//fees dates
+org.fomento.fees = ["catorcena":14,"fMes":30,"bono":2]
