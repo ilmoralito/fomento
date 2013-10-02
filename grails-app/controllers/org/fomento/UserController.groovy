@@ -2,6 +2,7 @@ package org.fomento
 import grails.plugins.springsecurity.Secured
 import org.springframework.web.context.request.RequestContextHolder as RCH
 
+@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 class UserController{
 	def springSecurityService
 
@@ -44,6 +45,7 @@ class UserController{
     	[userInstance:User.list()]
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def updateGeneralData(){
     	def user = springSecurityService.currentUser
     	user.properties['username','fullName']=params
@@ -55,6 +57,7 @@ class UserController{
     	}
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def updatePassword(changepasswordCommand cmd){
     	def user = springSecurityService.currentUser
         def pass = springSecurityService.encodePassword(params.currentpassword)
@@ -84,6 +87,7 @@ class UserController{
     	 
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def profile(){
     	def user = springSecurityService.currentUser
     	[userInstance:user,activegeneral:"active"]

@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="col-md-4">
-				<div><g:link action="show" id="${us.id}">${us.username}</g:link></td></div>
+				<div><g:link action="edit" id="${us.id}">${us.username}</g:link></td></div>
 				<div>
 					<g:if test="${!us.fullName}">--</g:if>
 					<else>${us.fullName}</else>
