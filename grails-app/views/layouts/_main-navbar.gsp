@@ -1,10 +1,16 @@
 <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
-	  	<div class="navbar-header">
-	  	    <g:link class="navbar-brand" uri="/">Fomento</g:link>
+      	<div class="navbar-header">
+            <button data-target=".bs-navbar-collapse" data-toggle="collapse" type="button" class="navbar-toggle collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <g:link class="navbar-brand" uri="/">Fomento</g:link>
 	  	</div>
-  		<div class="pull-right">
-  	  		<ul class="nav navbar-nav">
+        <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
+  	  		<ul class="nav navbar-nav navbar-right">
                 <g:if test="${session.alert}">
                     <li><g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:session.typeOfPayment]"><span class="glyphicon glyphicon-exclamation-sign"></span></g:link></li>
                 </g:if>
@@ -21,6 +27,5 @@
                 </li>
   	    		<li><g:link controller="logout">Salir</g:link></li>
   	  		</ul>
-  		</div>
-  	</div>
+  		</nav>
 </nav>
