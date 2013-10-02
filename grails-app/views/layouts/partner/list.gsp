@@ -44,7 +44,7 @@
 			<g:form action="list" class="form-inline" role="form">
 				<div class="form-group">
 					<label class="sr-only" for="status">Estado</label>
-					<g:select name="status" from="${['Activo', 'Desactivado']}" value="${params?.status}" class="form-control"/>
+					<g:select name="status" from="${['Activo', 'Desactivado']}" keys="${[true, false]}" value="${params?.status}" class="form-control"/>
 				</div>
 				<g:submitButton name="send" value="Filtrar" class="btn btn-default"/>
 			</g:form>

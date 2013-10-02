@@ -30,7 +30,7 @@ class PartnerController {
 
             //filter by partner status
             if (params?.status) {
-                def status = (params.status == "Activo") ? true : false
+                def status = params.boolean("status")
 
                 return [partners:Partner.findAllByStatus(status)]
             }
