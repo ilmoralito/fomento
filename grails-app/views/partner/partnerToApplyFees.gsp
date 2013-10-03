@@ -21,7 +21,7 @@
 					<g:each in="${partners}" var="partner">
 						<tr>
 							<td style="width:1px;">
-								<g:checkBox name="partners" value="${partner.numberOfEmployee}"/>
+								<g:checkBox name="partners" value="${partner.numberOfEmployee}" checked="false"/>
 							</td>
 							<td><g:link action="show" id="${partner.id}">${partner.fullName}</g:link></td>
 						</tr>
