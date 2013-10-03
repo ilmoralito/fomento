@@ -11,6 +11,20 @@
 	  	</div>
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Catorcena']">Catorcena</g:link>
+                        </li>
+                        <li>
+                            <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Fin de mes']">Fin de mes</g:link>
+                        </li>
+                        <li>
+                            <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Bono']">Bono</g:link>
+                        </li>
+                    </ul>
+                </li>
                 <g:if test="${session.alert}">
                     <li><g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:session.typeOfPayment]"><span class="glyphicon glyphicon-exclamation-sign"></span></g:link></li>
                 </g:if>
