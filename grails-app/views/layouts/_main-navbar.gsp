@@ -12,7 +12,7 @@
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
                 <!--add fees manualy-->
-                <li class="dropdown">
+                <li class="dropdown ${(actionName == 'partnerToApplyFees') ? 'active' : ''}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -31,11 +31,11 @@
                     <li><g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:session.typeOfPayment]"><span class="glyphicon glyphicon-exclamation-sign"></span></g:link></li>
                 </g:if>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
-  	  			    <li class="${(controllerName == 'user' && actionName != 'profile') ? 'active' : ''}">
+  	  			    <li class="${(controllerName == 'user' && actionName != 'profile' ) ? 'active' : ''}">
                         <g:link controller="user" action="list">Administrar</g:link>
                     </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${(controllerName == 'partner') ? 'active' : ''}">
+  	  			<li class="${(controllerName == 'partner' && actionName != 'partnerToApplyFees') ? 'active' : ''}">
                     <g:link controller="partner">Socios</g:link>
                 </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">
