@@ -23,7 +23,8 @@ class UrlMappings {
 			controller = "partner"
 			action = "partnerToApplyFees"
 			constraints {
-				typeOfPayment inList:grailsApplication.config.org.fomento.fees.keySet() as List
+				//typeOfPayment inList:grailsApplication.config.org.fomento.fees.keySet() as List
+				//typeOfPayment inList:["Catorcena", "Fin de mes", "Bono"]
 			}
 		}
 
