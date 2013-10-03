@@ -16,7 +16,8 @@ class PartnerController {
         "delete":["GET","POST"],
         "show":"GET",
         "update":"POST",
-        "changeStatus":["GET","POST"]
+        "changeStatus":["GET","POST"],
+        "partnerToApplyFees":["GET","POST"]
 	]
 
     def list() {
@@ -32,7 +33,7 @@ class PartnerController {
             if (params?.status) {
                 def status = params.boolean("status")
 
-                return [partners:Partner.findAllByStatus(status)]
+                return [partners:Partner.byStatus(status).list()]
             }
 
             //search by patern domain class properties
@@ -151,6 +152,31 @@ class PartnerController {
         }
 
         [partner:partner]
+    }
+
+    def partnerToApplyFees(String typeOfPayment) {
+        if (request.method == "POST") {
+            def partners = params?.partners
+
+            if (partners) {
+                partners.each { n ->
+                    def partner = Partner.findByNumberOfEmployee(n)
+
+                    partner.addToFees(
+                        fee:partner.affiliation.fee,
+                        factoryFee:configurationService.loadFactoryFee(),
+                        total:partner.affiliation.fee + configurationService.loadFactoryFee(),
+                        paymentDate:new Date()
+                    )
+
+                    partner.save()
+                }
+            } else {
+                flash.message = "Debes seleccionar socios para poder continuar"
+            }
+        }
+
+        [partners:Partner.byTypeOfPayment(typeOfPayment).list(params)]
     }
 
     private parseDate(date) {

@@ -28,14 +28,16 @@ class Partner {
             eq "status", status
         }
 
-        byDepartment { department ->
-            eq "department", department
-        }
-
-        fromTo {from, to ->
+        fromTo { from, to ->
             affiliation {
                 ge "enrollmentDate", from.clearTime()
                 le "enrollmentDate", to.clearTime()
+            }
+        }
+
+        byTypeOfPayment { typeOfPayment ->
+            affiliation {
+                eq "typeOfPayment", typeOfPayment
             }
         }
     }
