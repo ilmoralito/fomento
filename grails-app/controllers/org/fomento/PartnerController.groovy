@@ -176,7 +176,7 @@ class PartnerController {
             }
         }
 
-        [partners:Partner.byTypeOfPayment(typeOfPayment).list(params)]
+        [partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
     }
 
     private parseDate(date) {
