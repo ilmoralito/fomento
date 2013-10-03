@@ -11,6 +11,7 @@
 	  	</div>
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
+                <!--add fees manual-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -25,6 +26,7 @@
                         </li>
                     </ul>
                 </li>
+                <!--alert fees by date of month-->
                 <g:if test="${session.alert}">
                     <li><g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:session.typeOfPayment]"><span class="glyphicon glyphicon-exclamation-sign"></span></g:link></li>
                 </g:if>
