@@ -16,7 +16,7 @@ class FeeController {
     		response.sendError 404
     	}
 
-    	[fees:Fee.findAllByPartner(partner), total:feeService.calcTotal(partner.fees)]
+    	[fees:Fee.findAllByPartner(partner), partner:partner, total:feeService.calcTotal(partner.fees)]
     }
 
 }
