@@ -157,7 +157,7 @@ class PartnerController {
 
     def partnerToApplyFees(String typeOfPayment) {
         if (request.method == "POST") {
-            def partners = params?.partners
+            def partners = params.list("partners")
 
             if (partners) {
                 //check if new fees date are not in partner fees paymentDate
