@@ -42,7 +42,6 @@ class Partner {
         }
     }
 
-    List fees
     static hasMany = [fees:Fee]
 
     static mapping = {

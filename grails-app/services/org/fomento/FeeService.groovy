@@ -2,7 +2,7 @@ package org.fomento
 
 class FeeService {
 
-    def calcTotal(List fees, Partner partner) {
+    def calcTotal(fees, Partner partner) {
     	def total = 0
 
     	if (fees) {
