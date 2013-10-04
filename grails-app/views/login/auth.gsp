@@ -8,7 +8,7 @@
 	<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 		<div class="form-group">
 			<label for='username' class="sr-only"><g:message code="springSecurity.login.username.label"/>:</label>
-			<input type='text' class='text_ form-control' name='j_username' id='username' autofocus="true" placeholder="Nombre de usuario o email"/>
+			<input type='text' class='text_ form-control' name='j_username' id='username' autofocus="true" placeholder="Email"/>
 		</div>
 
 		<div class="form-group">

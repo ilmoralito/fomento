@@ -10,8 +10,8 @@
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-6">
-				<h4>Lorem ipsum dolor sit amet.</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, nostrum, cupiditate itaque obcaecati recusandae fugiat numquam facilis voluptatibus aliquam quos veniam accusantium odio qui sed quis vitae quasi corrupti optio.</p>
+				<h3>JUFOLI</h3>
+				<p>Junta de fomento Mina el Limon</p>
 			</div>
 			<div class="col-md-6">
 				<g:layoutBody/>
