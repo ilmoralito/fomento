@@ -9,13 +9,17 @@
 	<g:render template="/layouts/navbar"/>
 
 	<g:if test="${fees}">
-		<table class="table">
+		<div class="row">
+			<div class="col-md-6"></div>
+			<div class="col-md-6"><div class="pull-right"><strong>TOTAL: ${total}</strong></div></div>
+		</div>
+		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Cuota</th>
+					<th>Cuota de socio</th>
 					<th>Cuota de empresa</th>
 					<th>Fecha de cuota</th>
-					<th>Total</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,15 +28,9 @@
 						<td>${fee}</td>
 						<td>${fee.factoryFee}</td>
 						<td>${fee.paymentDate.format("yyyy-MM-dd")}</td>
-						<td style="width:1px;">${fee.total}</td>
+						<td style="width:1px;"></td>
 					</tr>
 				</g:each>
-				<tr>
-					<td><strong>TOTAL</strong></td>
-					<td></td>
-					<td></td>
-					<td>${total}</td>
-				</tr>
 			</tbody>
 		</table>
 	</g:if>

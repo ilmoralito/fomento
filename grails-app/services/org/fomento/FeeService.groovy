@@ -2,7 +2,7 @@ package org.fomento
 
 class FeeService {
 
-    def calcTotal(fees) {
+    def calcTotal(List fees, Partner partner) {
     	def total = 0
 
     	if (fees) {
@@ -11,6 +11,6 @@ class FeeService {
     		}
     	}
 
-    	return total
+    	return total + partner.affiliation.capitalization
     }
 }
