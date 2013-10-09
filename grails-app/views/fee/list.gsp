@@ -14,7 +14,7 @@
 				<strong>TOTAL: ${total}</strong>
 			</div>
 			<div class="col-md-6">
-				<g:link controller="deduction" action="create" class="btn btn-default pull-right">Deducir</g:link>
+				<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right">Deducir</g:link>
 			</div>
 		</div>
 		<table class="table table-hover">

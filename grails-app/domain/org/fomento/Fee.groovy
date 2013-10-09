@@ -1,6 +1,6 @@
 package org.fomento
 
-class Fee {
+class Fee implements Serializable {
 
     BigDecimal fee
     BigDecimal factoryFee

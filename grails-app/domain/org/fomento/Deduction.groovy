@@ -1,6 +1,6 @@
 package org.fomento
 
-class Deduction {
+class Deduction implements Serializable {
 
     def feeService
 

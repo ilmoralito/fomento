@@ -1,6 +1,6 @@
 package org.fomento
 
-class Affiliation {
+class Affiliation implements Serializable {
 
     BigDecimal fee
     String typeOfPayment

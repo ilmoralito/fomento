@@ -1,6 +1,6 @@
 package org.fomento
 
-class Partner {
+class Partner implements Serializable {
 
     static searchable = true
 
