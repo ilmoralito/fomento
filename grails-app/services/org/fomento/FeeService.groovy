@@ -6,8 +6,8 @@ class FeeService {
     	def total = 0
 
     	if (fees) {
-    		fees.each {
-    			total = total + it.total
+    		fees.each { fee ->
+    			total = total + fee.fee
     		}
     	}
 

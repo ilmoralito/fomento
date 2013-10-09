@@ -17,14 +17,7 @@ class FeeController {
     		response.sendError 404
     	}
 
-    	//[fees:Fee.findAllByPartner(partner,[sort:"paymentDate", order:"desc"]), partner:partner, total:feeService.calcTotal(partner.fees, partner)]
-        
-        def query = Fee.where {
-            year("paymentDate") == 2012 && partner == partner
-        }
-        
-
-        [fees:query.list(), partner:partner, total:feeService.calcTotal(partner.fees, partner)]
+    	[fees:Fee.findAllByPartner(partner,[sort:"paymentDate", order:"desc"]), partner:partner, total:feeService.calcTotal(partner.fees, partner)]
     }
 
 }
