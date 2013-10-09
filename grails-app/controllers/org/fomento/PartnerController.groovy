@@ -55,7 +55,7 @@ class PartnerController {
             def ed = (!params?.affiliation?.enrollmentDate) ? new Date() : new Date().parse("yyyy-MM-dd", params?.affiliation?.enrollmentDate)
 
             def affiliation = new Affiliation(
-                fee: params?.affiliation?.fee,
+                fee: params.double("affiliation.fee"),
                 typeOfPayment: params?.affiliation?.typeOfPayment,
                 factoryFee: configurationService.loadFactoryFee(),
                 enrollmentDate: ed,
