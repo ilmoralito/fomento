@@ -10,8 +10,12 @@
 
 	<g:if test="${fees}">
 		<div class="row">
-			<div class="col-md-6"></div>
-			<div class="col-md-6"><div class="pull-right"><strong>TOTAL: ${total}</strong></div></div>
+			<div class="col-md-6">
+				<strong>TOTAL: ${total}</strong>
+			</div>
+			<div class="col-md-6">
+				<g:link controller="deduction" action="create" class="btn btn-default pull-right">Deducir</g:link>
+			</div>
 		</div>
 		<table class="table table-hover">
 			<thead>
