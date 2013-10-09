@@ -7,7 +7,7 @@
 	<g:render template="toolbar"/>
 
 	<g:if test="${partners}">
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>${partners.size()} Socio${partners.size() > 1 ? 's' : ''} </th>
