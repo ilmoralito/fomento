@@ -42,7 +42,7 @@ class Partner {
         }
     }
 
-    static hasMany = [fees:Fee]
+    static hasMany = [fees:Fee, deductions:Deduction]
 
     static mapping = {
         status defaultValue: true
