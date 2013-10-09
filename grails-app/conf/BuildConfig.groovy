@@ -42,6 +42,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         compile "org.cloudfoundry:cloudfoundry-runtime:0.8.4"
         runtime 'mysql:mysql-connector-java:5.1.22'
+        compile "org.grails:grails-webflow:$grailsVersion"
     }
 
     plugins {
@@ -61,5 +62,6 @@ grails.project.dependency.resolution = {
         compile ":twitter-bootstrap:3.0.0"
         compile ':cloud-foundry:1.2.3'
         compile ":searchable:0.6.4"
+        compile ':webflow:2.0.8.1'
     }
 }
