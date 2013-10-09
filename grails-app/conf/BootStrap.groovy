@@ -166,8 +166,16 @@ class BootStrap {
                     paymentDate:new Date() - 30
                 )
 
+                def fee7 = new Fee(
+                    fee:fulano.affiliation.fee,
+                    factoryFee:configurationService.loadFactoryFee(),
+                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
+                    paymentDate:new Date() - 450
+                )
+
                 fulano.addToFees(fee5)
                 fulano.addToFees(fee6)
+                fulano.addToFees(fee7)
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()

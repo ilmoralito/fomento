@@ -16,7 +16,11 @@ class Fee {
     }
 
     static namedQueries = {
+        byYear { int year ->
+            def now = new Date().parse("yyyy", year)
 
+            eq "paymentDate", now
+        }
     }
 
     static belongsTo = [partner:Partner]
