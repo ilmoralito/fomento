@@ -23,7 +23,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
-							<fomento:periods/>
+							<div class="btn-group btn-group-xs">
+								<fomento:periods/>
+							</div>
 						</div>
 					</div>
 				</div>

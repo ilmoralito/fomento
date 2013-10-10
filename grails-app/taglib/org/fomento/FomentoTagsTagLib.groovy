@@ -20,7 +20,7 @@ class FomentoTagsTagLib {
 		def periods = (2013..currentYear).toArray()
 
 		for(period in periods) {
-			out << g.link(controller:'fee', action:'list', params:[id:params?.id, year:period], class:"btn btn-link") {period}
+			out << g.link(controller:'fee', action:'list', params:[id:params?.id, year:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
 		}
 	}
 }
