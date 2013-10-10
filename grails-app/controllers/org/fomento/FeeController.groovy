@@ -17,11 +17,13 @@ class FeeController {
     		response.sendError 404
     	}
 
+        def fees = Fee.byPeriod(y).findAllByPartner(partner,[sort:"paymentDate", order:"desc"])
+
     	[
-            fees:Fee.findAllByPartner(partner,[sort:"paymentDate", order:"desc"]),
+            fees:fees,
             partner:partner,
-            total:feeService.calcTotal(partner),
-            totalFactoryFee:feeService.calcFactoryTotalFeesByPartner(partner)
+            total:feeService.calcTotal(fees, partner),
+            totalFactoryFee:feeService.calcFactoryTotalFeesByPartner(fees)
         ]
     }
 
