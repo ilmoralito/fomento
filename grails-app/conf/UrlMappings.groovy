@@ -32,6 +32,6 @@ class UrlMappings {
 		"/users"(controller:"user", action:"list")
 
 		//fees
-		"/fee/$id"(controller:"fee", action:"list")
+		"/fees/$id/$year?"(controller:"fee", action:"list")
 	}
 }
