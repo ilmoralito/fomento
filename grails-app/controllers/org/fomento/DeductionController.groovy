@@ -12,7 +12,7 @@ class DeductionController {
             action {
                 def partner = Partner.findByNumberOfEmployee(params.int("partner"))
 
-                [partner:partner, total:feeService.calcTotal(partner.fees, partner)]
+                [partner:partner, total:feeService.calcTotal(partner)]
             }
 
             on("success").to "create"

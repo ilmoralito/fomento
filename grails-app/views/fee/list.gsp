@@ -11,7 +11,10 @@
 	<g:if test="${fees}">
 		<div class="row">
 			<div class="col-md-6">
-				<strong>TOTAL: ${total}</strong>
+				<div class="row">
+					<div class="col-md-6"><strong>Total aporte personal: ${total}</strong></div class="col-md-3">
+					<div class="col-md-6"><strong>Total aporte Empresa: ${totalFactoryFee}</strong></div class="col-md-3">
+				</div>
 			</div>
 			<div class="col-md-6">
 				<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right">Deducir</g:link>
