@@ -1,5 +1,7 @@
 package org.fomento
 
+import static java.util.Calendar.*
+
 class Fee implements Serializable {
 
     BigDecimal fee
@@ -16,10 +18,19 @@ class Fee implements Serializable {
     }
 
     static namedQueries = {
-        byYear { int year ->
-            def now = new Date().parse("yyyy", year)
+        byPeriod { int year ->
+            def from = new Date()
+            from[YEAR] = year
+            from[MONTH] = JANUARY
+            from[DATE] = 1
 
-            eq "paymentDate", now
+            def to = new Date()
+            to[YEAR] = year
+            to[MONTH] = DECEMBER
+            to[DATE] = 31
+
+            ge "paymentDate", from.clearTime()
+            le "paymentDate", to.clearTime()
         }
     }
 
