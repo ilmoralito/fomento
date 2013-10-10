@@ -12,14 +12,14 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="row">
-					<div class="col-md-6"><strong>Total aporte personal: ${total}</strong></div class="col-md-3">
-					<div class="col-md-6"><strong>Total aporte Empresa: ${totalFactoryFee}</strong></div class="col-md-3">
+					<div class="col-md-6"><strong>Total aporte personal: ${total}</strong></div>
+					<div class="col-md-6"><strong>Total aporte Empresa: ${totalFactoryFee}</strong></div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-6">
-						<!--<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right">Deducir</g:link>-->
+						<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right btn-xs">Deducir</g:link>
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
