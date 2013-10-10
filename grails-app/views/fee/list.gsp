@@ -17,9 +17,19 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right">Deducir</g:link>
+				<div class="row">
+					<div class="col-md-6">
+						<!--<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right">Deducir</g:link>-->
+					</div>
+					<div class="col-md-6">
+						<div class="pull-right">
+							<fomento:periods/>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+		<br>
 		<table class="table table-hover">
 			<thead>
 				<tr>
