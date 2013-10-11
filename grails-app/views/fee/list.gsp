@@ -19,7 +19,7 @@
 			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-6">
-						<g:link controller="deduction" action="deductions" params="[partner:partner.numberOfEmployee]" class="btn btn-default pull-right btn-xs">Deducir</g:link>
+						<g:link controller="deduction" action="deductions" params="[partner:partner.id, period:period]" class="btn btn-default pull-right btn-xs">Deducir</g:link>
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">

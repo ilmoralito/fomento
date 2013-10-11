@@ -10,9 +10,9 @@ class DeductionController {
     def deductionsFlow = {
         init {
             action {
-                def partner = Partner.findByNumberOfEmployee(params.int("partner"))
+                def partner = Partner.findById(params.int("partner"))
 
-                [partner:partner, total:feeService.calcTotal(partner)]
+                [partner:partner, total:feeService.partnerTotalCapitalization(partner)]
             }
 
             on("success").to "create"

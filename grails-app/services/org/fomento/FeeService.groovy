@@ -25,4 +25,15 @@ class FeeService {
 
     	return total
     }
+
+    def partnerTotalCapitalization(partner) {
+        //all this must past formula validation
+        //sum capitalization + sum all fees by current user - (sum deductions)
+
+        def partnerFees = calcTotal(partner.fees, partner)
+        def factoryFees = calcFactoryTotalFeesByPartner(partner.fees)
+        def total = partnerFees + factoryFees
+
+        total
+    }
 }
