@@ -23,4 +23,10 @@ modules = {
     	resource url:"js/sidebarEffects.js"
     	resource url:"css/component.css"
     }
+
+    deductions {
+        dependsOn "jquery"
+        dependsOn "app"
+        resource url:"js/deductions.js"
+    }
 }

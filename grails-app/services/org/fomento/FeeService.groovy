@@ -1,6 +1,6 @@
 package org.fomento
 
-class FeeService {
+class FeeService implements Serializable {
 
     def calcTotal(fees, Partner partner) {
     	def total = 0
@@ -32,7 +32,13 @@ class FeeService {
 
         def partnerFees = calcTotal(partner.fees, partner)
         def factoryFees = calcFactoryTotalFeesByPartner(partner.fees)
-        def total = partnerFees + factoryFees
+        def totalDeductions = 0
+
+        partner?.deductions?.each { deduction ->
+            totalDeductions = totalDeductions + (deduction.totalBeforeDeduction - deduction.totalAfterDeduction)
+        }
+
+        def total = (partnerFees + factoryFees) - totalDeductions
 
         total
     }

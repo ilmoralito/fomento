@@ -2,16 +2,20 @@ package org.fomento
 
 class Deduction implements Serializable {
 
-    def feeService
-
-    BigDecimal deduction
+    BigDecimal totalBeforeDeduction
+    BigDecimal totalAfterDeduction
+    BigDecimal percentage
+    Integer period
     String reason
 
 	Date dateCreated
 	Date lastUpdated
 
     static constraints = {
-        deduction min:0.0
+        totalBeforeDeduction min:0.0
+        totalAfterDeduction min:0.0
+        percentage min:0.0, max:1.0
+        period blank:false, min:2013
         reason nullable:true, maxSize:50000
     }
 
@@ -26,7 +30,7 @@ class Deduction implements Serializable {
     }
 
     String toString() {
-        deduction
+        period
     }
 
 }

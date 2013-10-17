@@ -13,13 +13,12 @@
 		<div class="row">
 			<div class="col-md-8">
 				<g:layoutBody/>
-				<g:if test="${flash.message}"><br><strong>${flash.message}</strong></g:if>
 			</div>
 			<div class="col-md-4">
 				<h3>Total acumulado</h3>
-				<p><h1>C$ ${total}</h1></p>
+				<p><h1>C$ <span id="total">${total}</span></h1></p>
 				<h3>Total despues de deduccion</h3>
-				<p><h1>C$ 258</h1></p>
+				<p><h1>C$ <span id="total_after_deduction">${total}</span></h1></p>
 			</div>
 		</div>
 	</div>
