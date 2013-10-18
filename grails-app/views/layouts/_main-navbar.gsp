@@ -35,7 +35,7 @@
                         <g:link controller="user" action="list">Administrar</g:link>
                     </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${(controllerName == 'partner' && actionName != 'partnerToApplyFees') ? 'active' : ''}">
+  	  			<li class="${((controllerName == 'partner' || controllerName == 'fee' || controllerName == 'deduction') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
                     <g:link controller="partner">Socios</g:link>
                 </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">
