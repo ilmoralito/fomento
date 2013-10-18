@@ -36,6 +36,7 @@ class DeductionController {
                 }
 
                 flow.partner.refresh()
+                flow.total = feeService.partnerTotalCapitalization(flow.partner)
             }.to "list"
 
             on("cancel").to "done"
@@ -44,7 +45,6 @@ class DeductionController {
         }
 
         list {
-
             on("list").to "list"
             on("create").to "create"
         }
