@@ -36,7 +36,7 @@ class DeductionController {
                 }
 
                 //refresh partner in flow scope
-                flow.partner = Partner.get(flow.partner.id)
+                //flow.partner = Partner.get(flow.partner.id)
                 flow.partner.refresh()
             }.to "list"
 
