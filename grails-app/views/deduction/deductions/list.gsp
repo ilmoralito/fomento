@@ -5,8 +5,7 @@
 	<r:require modules="bootstrap, deductions"/>
 </head>
 <body>
-<g:link event="create" class="pull-right">Crear deduccion</g:link>
-	<h4>Deducciones de ${partner}</h4>
+	<g:render template="/layouts/deduction/toolbar"/>
 	<g:if test="${partner?.deductions}">
 		<table class="table table-hover">
 			<thead>

@@ -5,11 +5,10 @@
 	<r:require modules="bootstrap, deductions"/>
 </head>
 <body>
+	<g:render template="/layouts/deduction/toolbar"/>
 	<g:hasErrors bean="${deduction}">
 		<g:renderErrors bean="${deduction}"/>
 	</g:hasErrors>
-
-	<h2>Aplicar deduccion a ${partner}</h2>
 
 	<g:form>
 		<div class="form-group">
