@@ -5,12 +5,13 @@
 	<r:require modules="bootstrap, deductions"/>
 </head>
 <body>
-	<h2>Deducciones de ${partner}</h2>
-
+<g:link event="create" class="pull-right">Crear deduccion</g:link>
+	<h4>Deducciones de ${partner}</h4>
 	<g:if test="${partner?.deductions}">
 		<table class="table table-hover">
 			<thead>
 				<tr>
+					<th></th>
 					<th></th>
 					<th></th>
 					<th></th>
@@ -23,7 +24,7 @@
 						<td>${deduction.period}</td>
 						<td>${deduction.totalBeforeDeduction}</td>
 						<td>${deduction.totalAfterDeduction}</td>
-						<td>${deduction.percentage}%</td>
+						<td>${deduction.percentage * 100}%</td>
 						<td>${deduction.reason}</td>
 					</tr>
 				</g:each>
