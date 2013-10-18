@@ -1,5 +1,8 @@
 package org.fomento
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
 class DeductionController {
 
 	def feeService

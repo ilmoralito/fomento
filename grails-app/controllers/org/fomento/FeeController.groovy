@@ -1,7 +1,9 @@
 package org.fomento
 
+import grails.plugins.springsecurity.Secured
 import static java.util.Calendar.*
 
+@Secured(['ROLE_ADMIN', 'ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
 class FeeController {
 
     def feeService
