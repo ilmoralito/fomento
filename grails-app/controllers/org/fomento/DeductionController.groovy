@@ -15,7 +15,7 @@ class DeductionController {
                 [partner:partner, period:params?.period, total:feeService.partnerTotalCapitalization(partner)]
             }
 
-            on("success").to "create"
+            on("success").to "list"
             on(Exception).to "done"
         }
 
@@ -37,6 +37,7 @@ class DeductionController {
 
                 //refresh partner in flow scope
                 flow.partner = Partner.get(flow.partner.id)
+                flow.partner.refresh()
             }.to "list"
 
             on("cancel").to "done"
@@ -44,7 +45,7 @@ class DeductionController {
 
         list {
             on("list").to "list"
-            on("create").to "init"
+            on("create").to "create"
         }
 
         done {
