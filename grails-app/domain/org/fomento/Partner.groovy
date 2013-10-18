@@ -48,6 +48,7 @@ class Partner implements Serializable {
         status defaultValue: true
         version false
         sort dateCreated: "desc"
+        deductions sort: 'dateCreated', order: 'desc'
     }
 
     String toString() {
