@@ -8,7 +8,9 @@ class DeductionController {
 	def feeService
 
 	static defaultAction = "deductions"
-	static allowedMethods = []
+	static allowedMethods = [
+        deductions:["GET", "POST"]
+    ]
 
     def deductionsFlow = {
         init {
@@ -42,14 +44,15 @@ class DeductionController {
                 flow.total = feeService.partnerTotalCapitalization(flow.partner)
             }.to "list"
 
-            on("cancel").to "done"
             on("list").to "list"
             on("create").to "create"
+            on("cancel").to "done"
         }
 
         list {
             on("list").to "list"
             on("create").to "create"
+            on("cancel").to "done"
         }
 
         done {

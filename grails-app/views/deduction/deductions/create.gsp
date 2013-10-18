@@ -27,7 +27,6 @@
 			<g:textArea name="reason" value="${deduction?.reason}" class="form-control"/>
 		</div>
 		<g:submitButton name="confirm" value="Confirmar deduccion" class="btn btn-default"/>
-		<g:link action="deductions" event="cancel" class="btn btn-default">Regresar a cuotas de ${partner}</g:link>
 	</g:form>
 </body>
 </html>
