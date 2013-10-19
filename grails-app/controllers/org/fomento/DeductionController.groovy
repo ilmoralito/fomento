@@ -17,7 +17,7 @@ class DeductionController {
             action {
                 def partner = Partner.findById(params.int("partner"))
 
-                [partner:partner, period:params?.period, total:feeService.partnerTotalCapitalization(partner)]
+                [partner:partner, period:params?.period, total:feeService.partnerTotalCapitalization(partner), id:partner.id]
             }
 
             on("success").to "list"

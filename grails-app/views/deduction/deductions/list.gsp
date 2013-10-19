@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang="es">
 <head>
-	<meta name="layout" content="deduction/deductions">
+	<meta name="layout" content="main">
 	<r:require modules="bootstrap, deductions"/>
 </head>
 <body>
-	<g:render template="/layouts/deduction/toolbar"/>
+	<g:render template="/partner/toolbar"/>
+	<g:render template="/layouts/navbar"/>
+
+	<g:render template="/deduction/deductions/toolbar"/>
+
 	<g:if test="${partner?.deductions}">
 		<table class="table table-hover">
 			<thead>
