@@ -47,13 +47,11 @@ class DeductionController {
 
             on("list").to "list"
             on("create").to "create"
-            on("cancel").to "done"
         }
 
         list {
             on("list").to "list"
             on("create").to "create"
-            on("cancel").to "done"
 
             on("delete") {
                 def deduction = Deduction.get(params.id)
@@ -72,12 +70,6 @@ class DeductionController {
         show {
             on("list").to "list"
             on("create").to "create"
-            on("cancel").to "done"
-        }
-
-        done {
-            redirect controller:"fee", action:"list", params:[id:flow.partner.id]
         }
     }
-
 }
