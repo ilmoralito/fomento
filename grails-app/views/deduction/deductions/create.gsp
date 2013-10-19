@@ -17,9 +17,9 @@
 
 			<label for="deduction">Deduccion</label>
 			<div>
-				<input type="range" name="percentage" id="percentage" min="0" max="100" step="10" value="${(deduction?.range) ?: 0}">
+				<input type="range" name="percentage" id="percentage" min="0" max="100" step="10" value="${(deduction?.percentage) ?: 0}">
 				<br>
-				<span name="amount" id="amount">${(deduction?.range) ?: 0}</span>%
+				<span name="amount" id="amount">${(deduction?.percentage) ?: 0}</span>%
 			</div>
 		</div>
 		<div class="form-group">
