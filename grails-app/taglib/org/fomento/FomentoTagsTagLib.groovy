@@ -25,7 +25,9 @@ class FomentoTagsTagLib {
 
 		for(period in periods) {
 			if (ctrl == "deductions") {
-				out << g.link(controller:"deduction", action:"deductions", params:[year:period]) {period}
+				out << g.link(controller:"deduction", action:"deductions", params:[year:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
+			} else if (ctrl == "report") {
+				out << g.link(controller:"report", params:[period:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
 			} else {
 				out << g.link(controller:'fee', action:'list', params:[id:params?.id, year:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
 			}
