@@ -17,11 +17,10 @@ class DeductionController {
             action {
                 def partner = Partner.findById(params.int("partner"))
 
-                [partner:partner, period:params?.period, total:feeService.partnerTotalCapitalization(partner), id:partner.id]
+                [partner:partner, period:params?.period, total:feeService.partnerTotalCapitalization(partner, params.int("period")), id:partner.id]
             }
 
             on("success").to "list"
-            on(Exception).to "done"
         }
 
         create {
@@ -42,7 +41,7 @@ class DeductionController {
                 }
 
                 flow.partner.refresh()
-                flow.total = feeService.partnerTotalCapitalization(flow.partner)
+                flow.total = feeService.partnerTotalCapitalization(flow.partner, flow.period.toInteger())
             }.to "list"
 
             on("list").to "list"
