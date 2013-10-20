@@ -22,7 +22,7 @@ class ReportController {
 	    		tas = tas + feeService.partnerTotalCapitalization(partner, period)
 	    	}
 
-	    	return [partners:partners, tas:tas, up:(params?.up) ?: 10, period:period]
+	    	return [partners:partners, tas:tas, up:(params.double("up")) ?: 10, period:period]
     	}
     }
 
