@@ -28,4 +28,8 @@ class FomentoTagsTagLib {
 			}
 		}
 	}
+
+	def currentYear = { attrs, body ->
+		out << new Date()[YEAR]
+	}
 }
