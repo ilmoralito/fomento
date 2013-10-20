@@ -5,7 +5,6 @@
 	<r:require modules="bootstrap, deductions"/>
 </head>
 <body>
-	${period}
 	<g:render template="/partner/toolbar"/>
 	<g:render template="/layouts/navbar"/>
 
