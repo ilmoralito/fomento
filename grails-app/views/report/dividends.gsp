@@ -5,13 +5,22 @@
 	<r:require modules="bootstrap, app"/>
 </head>
 <body>
-	<form class="form-inline" role="form" method="post">
-		<div class="form-group">
-			<label class="sr-only" for="up">Utilidad del periodo</label>
-			<input type="text" class="form-control" id="up" name="up" placeholder="Utilidad del periodo">
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-inline" role="form" method="post">
+				<div class="form-group">
+					<label class="sr-only" for="up">Utilidad del periodo</label>
+					<input type="text" class="form-control" id="up" name="up" placeholder="Utilidad del periodo">
+				</div>
+				<button type="submit" class="btn btn-default">Enviar</button>
+			</form>
 		</div>
-		<button type="submit" class="btn btn-default">Enviar</button>
-	</form>
+		<div class="col-md-6">
+			<div class="btn-group pull-right">
+				<fomento:periods ctrl="report"/>
+			</div>
+		</div>
+	</div>
 
 	<g:hasErrors bean="${cmd}">
 		<div class="alert">

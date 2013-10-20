@@ -23,7 +23,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="pull-right">
-							<div class="btn-group btn-group-xs">
+							<div class="btn-group">
 								<fomento:periods/>
 							</div>
 						</div>
