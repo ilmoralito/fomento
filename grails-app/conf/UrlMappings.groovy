@@ -33,5 +33,14 @@ class UrlMappings {
 
 		//fees
 		"/fees/$id/$year?"(controller:"fee", action:"list")
+
+		//reports
+		"/report/$period" {
+			controller = "report"
+			action = "dividends"
+			constraints {
+				period blank:false
+			}
+		}
 	}
 }
