@@ -1,7 +1,10 @@
 package org.fomento
 
+import static java.util.Calendar.*
+
 class FeeService implements Serializable {
 
+    //total por socio de sus aportes + capitalizacion inicial
     def calcTotal(fees, Partner partner) {
     	def total = 0
 
@@ -14,6 +17,7 @@ class FeeService implements Serializable {
     	return total + partner.affiliation.capitalization
     }
 
+    //total def aporte de la empresa
     def calcFactoryTotalFeesByPartner(fees) {
     	def total = 0
 
@@ -26,17 +30,16 @@ class FeeService implements Serializable {
     	return total
     }
 
-    def partnerTotalCapitalization(partner) {
+    def partnerTotalCapitalization(partner, Integer period) {
         //all this must past formula validation
         //sum capitalization + sum all fees by current user - (sum deductions)
 
-        def partnerFees = calcTotal(partner.fees, partner)
-        def factoryFees = calcFactoryTotalFeesByPartner(partner.fees)
-        def totalDeductions = 0
+        //get partner fees in period
+        def fees = Fee.byPeriod(period).findAllByPartner(partner)
 
-        partner?.deductions?.each { deduction ->
-            totalDeductions = totalDeductions + (deduction.totalBeforeDeduction - deduction.totalAfterDeduction)
-        }
+        def partnerFees = calcTotal(fees, partner)
+        def factoryFees = calcFactoryTotalFeesByPartner(partner.fees)
+        def totalDeductions = Deduction.last().totalAfterDeduction
 
         def total = (partnerFees + factoryFees) - totalDeductions
 
