@@ -2,11 +2,13 @@ package org.fomento
 
 class ReportController {
 
-	static defaultAction = "actionName"
-	static allowedMethods = []
+	static defaultAction = "dividends"
+	static allowedMethods = [
+		dividends:["GET", "POST"]
+	]
 
-    def actionName() {
-
+    def dividends() {
+    	
     }
 
 }
