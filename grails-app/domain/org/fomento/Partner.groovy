@@ -1,5 +1,7 @@
 package org.fomento
 
+import static java.util.Calendar.*
+
 class Partner implements Serializable {
 
     static searchable = true
@@ -38,6 +40,25 @@ class Partner implements Serializable {
         byTypeOfPayment { typeOfPayment ->
             affiliation {
                 eq "typeOfPayment", typeOfPayment
+            }
+        }
+
+        report { int period ->
+            def from = new Date()
+
+            from[YEAR] = period
+            from[MONTH] = JANUARY
+            from[DATE] = 1
+
+            def to = new Date()
+
+            to[YEAR] = period
+            to[MONTH] = DECEMBER
+            to[DATE] = 31
+
+            fees {
+                ge "paymentDate", from.clearTime()
+                le "paymentDate", to.clearTime()
             }
         }
     }
