@@ -11,7 +11,7 @@
 	  	</div>
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
-            <li><g:link controller="report" action="dividends" params="[period:fomento.currentYear()]">Dividendos</g:link></li>
+            <li class="${(controllerName == 'report') ? 'active' : ''}"><g:link controller="report" action="dividends" params="[period:fomento.currentYear()]">Reporte</g:link></li>
                 <!--add fees manualy-->
                 <li class="dropdown ${(actionName == 'partnerToApplyFees') ? 'active' : ''}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
