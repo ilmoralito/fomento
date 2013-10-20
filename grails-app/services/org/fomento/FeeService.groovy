@@ -39,7 +39,12 @@ class FeeService implements Serializable {
 
         def partnerFees = calcTotal(fees, partner)
         def factoryFees = calcFactoryTotalFeesByPartner(partner.fees)
-        def totalDeductions = Deduction.last().totalAfterDeduction
+
+        def totalDeductions = 0
+
+        if (partner?.deductions) {
+            totalDeductions = Deduction.findByPartner(partner).last().totalAfterDeduction
+        }
 
         def total = (partnerFees + factoryFees) - totalDeductions
 
