@@ -51,6 +51,6 @@ class FomentoTagsTagLib {
 		BigDecimal aps = fomento.aps(partner:partner, period:period).toDouble()
 		def tas = attrs.tas
 
-		out << tas / aps
+		out << aps / tas
 	}
 }
