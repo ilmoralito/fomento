@@ -20,10 +20,10 @@
 						<g:each in="${partners}" var="partner">
 							<tr>
 								<td>${partner}</td>
-								<td><fomento:aps partner="${partner}" period="${period}"/></td>
-								<td><fomento:fps tas="${tas}" partner="${partner}" period="${period}"/></td>
-								<td>${up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()}</td>
-								<td>${(up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()) * 0.1}</td>
+								<td><g:formatNumber number="${fomento.aps(partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${fomento.fps(tas:tas, partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble() - (up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()) * 0.1}" type="number" maxFractionDigits="2"/></td>
 							</tr>
 						</g:each>
 					</tbody>
