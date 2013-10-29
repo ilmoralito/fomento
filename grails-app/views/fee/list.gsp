@@ -1,36 +1,10 @@
 <!doctype html>
 <html lang="es">
 <head>
-	<meta name="layout" content="main">
 	<r:require modules="bootstrap, app"/>
 </head>
 <body>
-	<g:render template="/partner/toolbar"/>
-	<g:render template="/layouts/navbar"/>
-
 	<g:if test="${fees}">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-6"><strong>Total aporte personal: ${total}</strong></div>
-					<div class="col-md-6"><strong>Total aporte Empresa: ${totalFactoryFee}</strong></div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-6">
-						<!---->
-					</div>
-					<div class="col-md-6">
-						<div class="pull-right">
-							<div class="btn-group">
-								<fomento:periods/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<br>
 		<table class="table table-hover">
 			<thead>
