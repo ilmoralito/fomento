@@ -14,9 +14,10 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Periodo</th>
-					<th>Saldo a corte | Porcentaje deducido</span></th>
-					<th>Saldo despues de corte</span></th>
+					<th>Fecha de deduccion</th>
+					<th>Porcentaje deducido</th>
+					<th>Saldo a deduccion</th>
+					<th>Saldo despues de deduccion</span></th>
 					<th></th>
 				</tr>
 			</thead>
@@ -26,14 +27,15 @@
 						<td>
 							<g:if test="${deduction.reason}">
 								<g:link event="show" params="[id:deduction.id]">
-									${deduction.period}-<small>${deduction.dateCreated.format("MM-dd")}</small>
+									${deduction.dateCreated.format("yyyy-MM-dd")}
 								</g:link>
 							</g:if>
 							<g:else>
-								${deduction.period}-<small>${deduction.dateCreated.format("MM-dd")}</small>
+								${deduction.dateCreated.format("yyyy-MM-dd")}
 							</g:else>
 						</td>
-						<td>${deduction.totalBeforeDeduction} <small><strong>${Math.round(deduction.percentage * 100)}%</strong></small></td>
+						<td>${Math.round(deduction.percentage * 100)}%</td>
+						<td>${deduction.totalBeforeDeduction}</td>
 						<td>${deduction.totalAfterDeduction}</td>
 						<td style="width:1px;">
 							<g:link event="delete" params="[id:deduction.id]">
