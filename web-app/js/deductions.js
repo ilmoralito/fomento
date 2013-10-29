@@ -15,6 +15,6 @@ range.on("change", function(){
 		res = value - (value * rang); //
 
 	tAd.val(res);
-	ptad.html(res);
+	ptad.html(res.toFixed(2));
 });
 
