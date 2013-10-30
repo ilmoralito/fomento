@@ -27,10 +27,6 @@
                         </li>
                     </ul>
                 </li>
-                <!--alert fees by date of month-->
-                <g:if test="${session.alert}">
-                    <li><g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:session.typeOfPayment]"><span class="glyphicon glyphicon-exclamation-sign"></span></g:link></li>
-                </g:if>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
   	  			    <li class="${(controllerName == 'user' && actionName != 'profile' ) ? 'active' : ''}">
                         <g:link controller="user" action="list">Administrar</g:link>

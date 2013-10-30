@@ -198,6 +198,14 @@ class PartnerController {
         [partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
     }
 
+    def report(Partner partner, Integer period) {
+        if (request.method == "POST") {
+
+        }
+
+        [partner:partner, period:period]
+    }
+
     private parseDate(date) {
         return (!date) ? new Date() : new Date().parse("yyyy-MM-dd", date)
     }
