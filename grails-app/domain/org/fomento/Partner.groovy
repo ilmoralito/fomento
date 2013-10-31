@@ -63,13 +63,14 @@ class Partner implements Serializable {
         }
     }
 
-    static hasMany = [fees:Fee, deductions:Deduction]
+    static hasMany = [fees:Fee, deductions:Deduction, dividends:Dividend]
 
     static mapping = {
         status defaultValue: true
         version false
         sort dateCreated: "desc"
         deductions sort: 'dateCreated', order: 'desc'
+        dividends sort: 'period', order: 'desc'
     }
 
     String toString() {
