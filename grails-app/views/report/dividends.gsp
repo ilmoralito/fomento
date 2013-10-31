@@ -34,30 +34,42 @@
 			</g:else>
 		</div>
 		<div class="col-md-2">
-			<form role="form" method="post">
+			<form method="post" role="form">
 				<div class="form-group">
 					<label class="sr-only" for="up">Utilidad del periodo</label>
-					<input type="text" class="form-control" id="up" name="up" placeholder="Utilidad del periodo" autofocus="true">
+					<input type="text" class="form-control" id="up" name="up" placeholder="Utilidad del periodo" value="${params?.up}" autofocus="true">
 				</div>
-				<button type="submit" class="btn btn-default">Enviar</button>
 			</form>
-			<br>
-
-			<div class="well well-sm">
-				<div class="btn-group">
-					<fomento:periods ctrl="report"/>
-				</div>
+			<div class="btn-group">
+				<fomento:periods ctrl="report"/>
 			</div>
-
+			<br>
+			<br>
 			<g:if test="${tas}">
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						Resultados
 					</div>
 					<div class="panel-body">
-						<p>TAS:${tas}</p>
-						<p>UP:${up}</p>
-						<p>Periodo: ${period}</p>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>TAS</td>
+									<td>${tas}</td>
+								</tr>
+								<tr>
+									<td>UP</td>
+									<td>${up}</td>
+								</tr>
+								<tr>
+									<td>Perido</td>
+									<td>${period}</td>
+								</tr>
+							</tbody>
+						</table>
+						<g:form action="">
+							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span></button>
+						</g:form>
 					</div>
 				</div>
 			</g:if>
