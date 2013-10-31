@@ -6,7 +6,8 @@ class ReportController {
 
 	static defaultAction = "dividends"
 	static allowedMethods = [
-		dividends:["GET", "POST"]
+		dividends:["GET", "POST"],
+		applyDividends:"POST"
 	]
 
     def dividends(DividendsCommand cmd, Integer period) {
@@ -16,6 +17,7 @@ class ReportController {
     		}
 
     		def tas = 0
+    		//TODO:only actives partners
 	    	def partners = Partner.list()
 
 	    	partners.each { partner ->
@@ -26,6 +28,28 @@ class ReportController {
     	}
     }
 
+    def applyDividends() {
+    	/*
+    	//get all partners with status set to true
+    	def partners = Partner.findAllByStatus(true)
+
+    	//add to each partner in partners Dividens to Pay (DP)
+    	/*
+    	def tmpPartners = []
+        tmpPartners.addAll partners
+
+        tmpPartners.each { partner ->
+            user.removeFromClassrooms(classroom)
+        }
+
+        if (partners) {
+        	partners.each { partner ->
+        		print partner
+        	}
+        }
+        */
+    }
+
 }
 
 class DividendsCommand {
@@ -33,5 +57,17 @@ class DividendsCommand {
 
 	static constraints = {
 		up blank:false, min:1.0
+	}
+}
+
+class ApplyDividendsCommand {
+	BigDecimal tas
+	BigDecimal up
+	Integer period
+
+	static constraints = {
+		tas blank:false, min:1.0
+		up blank:false, min:1.0
+		period blank:false, min:2013
 	}
 }

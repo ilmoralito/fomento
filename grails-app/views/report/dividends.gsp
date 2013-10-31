@@ -34,12 +34,12 @@
 			</g:else>
 		</div>
 		<div class="col-md-2">
-			<form method="post" role="form">
+			<g:form action="dividends">
 				<div class="form-group">
 					<label class="sr-only" for="up">Utilidad del periodo</label>
-					<input type="text" class="form-control" id="up" name="up" placeholder="Utilidad del periodo" value="${params?.up}" autofocus="true">
+					<g:textField name="up" class="form-control" value="${params?.up}" placeholder="Uitilidad del periodo" autofocus="true"/>
 				</div>
-			</form>
+			</g:form>
 			<div class="btn-group">
 				<fomento:periods ctrl="report"/>
 			</div>
@@ -67,8 +67,10 @@
 								</tr>
 							</tbody>
 						</table>
-						<g:form action="">
-							<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span></button>
+						<g:form action="applyDividends">
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-floppy-save"></span>
+							</button>
 						</g:form>
 					</div>
 				</div>
