@@ -34,16 +34,17 @@
 			</g:else>
 		</div>
 		<div class="col-md-2">
-			<g:form action="dividends">
+			<form action="dividends" method="post">
+				<div class="form-group">
+					<label class="sr-only" for="period">Periodo</label>
+					<g:select name="period" from="${fomento.currentYear()}" value="${params?.period}" class="form-control"/>
+				</div>
 				<div class="form-group">
 					<label class="sr-only" for="up">Utilidad del periodo</label>
-					<g:textField name="up" class="form-control" value="${params?.up}" placeholder="Uitilidad del periodo" autofocus="true"/>
+					<g:textField name="up" class="form-control" value="${params?.up}" placeholder="Utilidad del periodo" autofocus="true"/>
 				</div>
-			</g:form>
-			<div class="btn-group">
-				<fomento:periods ctrl="report"/>
-			</div>
-			<br>
+				<button type="submit" class="btn btn-default">Calcular</button>
+			</form>
 			<br>
 			<g:if test="${tas}">
 				<div class="panel panel-info">

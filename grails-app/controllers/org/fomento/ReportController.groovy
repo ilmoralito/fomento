@@ -10,21 +10,20 @@ class ReportController {
 		applyDividends:"POST"
 	]
 
-    def dividends(DividendsCommand cmd, Integer period) {
+    def dividends(DividendsCommand cmd) {
     	if (request.method == "POST") {
     		if (cmd.hasErrors()) {
     			return [cmd:cmd]
     		}
 
     		def tas = 0
-    		//TODO:only actives partners
-	    	def partners = Partner.list()
+	    	def partners = Partner.findAllByStatus(true)
 
 	    	partners.each { partner ->
-	    		tas = tas + feeService.partnerTotalCapitalization(partner, period)
+	    		tas = tas + feeService.partnerTotalCapitalization(partner, cmd.period)
 	    	}
 
-	    	return [partners:partners, tas:tas, up:(params.double("up")) ?: 10, period:period]
+	    	return [partners:partners, tas:tas, up:cmd.up, period:cmd.period]
     	}
     }
 
@@ -54,10 +53,13 @@ class ReportController {
 
 class DividendsCommand {
 	BigDecimal up
+	Integer period
 
 	static constraints = {
 		up blank:false, min:1.0
+		period min:2013
 	}
+
 }
 
 class ApplyDividendsCommand {

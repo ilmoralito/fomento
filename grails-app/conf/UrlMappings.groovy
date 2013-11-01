@@ -35,6 +35,7 @@ class UrlMappings {
 		"/fees/$id/$year?"(controller:"fee", action:"list")
 
 		//reports
+		/*
 		"/report/$period" {
 			controller = "report"
 			action = "dividends"
@@ -42,5 +43,6 @@ class UrlMappings {
 				period blank:false
 			}
 		}
+		*/
 	}
 }

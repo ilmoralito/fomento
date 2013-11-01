@@ -30,7 +30,7 @@ class FeeService implements Serializable {
     	return total
     }
 
-    def partnerTotalCapitalization(partner, Integer period) {
+    def partnerTotalCapitalization(partner, int period) {
         //all this must past formula validation
         //sum capitalization + sum all fees by current user - (sum deductions)
 
