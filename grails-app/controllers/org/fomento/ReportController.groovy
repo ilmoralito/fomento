@@ -27,11 +27,33 @@ class ReportController {
     	}
     }
 
-    def applyDividends() {
-    	/*
+    def applyDividends(ApplyDividendsCommand cmd) {
     	//get all partners with status set to true
-    	def partners = Partner.findAllByStatus(true)
+    	if (cmd.hasErrors()) {
+    		return [cmd:cmd]
+    	}
 
+    	def partners = Partner.findAllByStatus(true)
+    	def dividendsCount =  Dividend.countByPeriod(cmd.period)
+
+		if (!dividendsCount) {
+			partners.each { partner ->
+				//aps Total del aporte personal del Socio en el periodo
+				def aps = feeService.partnerTotalCapitalization(partner, cmd.period)
+				//fps Factor porcentual socio, FPS = TAS/APS
+				def fps = cmd.tas/aps
+				//dd Distribución de  dividendos a pagar al socio, DD = Utilidad del periodo * FPS
+				def dd = cmd.up * fps
+				//dp DD * 0.1
+				def dp = dd * 0.1
+
+				//add dividend to each partner in period
+				partner.addToDividends(new Dividend(dividend:dp, period:cmd.period))
+			}
+		} else {
+			//ask user if want to procede
+			print "no"
+		}
     	//add to each partner in partners Dividens to Pay (DP)
     	/*
     	def tmpPartners = []
@@ -47,6 +69,8 @@ class ReportController {
         	}
         }
         */
+
+        redirect action:"dividends", params:[period:cmd.period]
     }
 
 }

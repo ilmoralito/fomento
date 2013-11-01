@@ -69,6 +69,9 @@
 							</tbody>
 						</table>
 						<g:form action="applyDividends">
+							<g:hiddenField name="tas" value="${tas}"/>
+							<g:hiddenField name="up" value="${up}"/>
+							<g:hiddenField name="period" value="${period}"/>
 							<button type="submit" class="btn btn-default">
 								<span class="glyphicon glyphicon-floppy-save"></span>
 							</button>
