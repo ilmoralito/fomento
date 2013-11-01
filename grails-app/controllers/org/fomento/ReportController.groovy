@@ -3,6 +3,7 @@ package org.fomento
 class ReportController {
 
 	def feeService
+	def dividendService
 
 	static defaultAction = "dividends"
 	static allowedMethods = [
@@ -38,17 +39,10 @@ class ReportController {
 
 		if (!dividendsCount) {
 			partners.each { partner ->
-				//aps Total del aporte personal del Socio en el periodo
-				def aps = feeService.partnerTotalCapitalization(partner, cmd.period)
-				//fps Factor porcentual socio, FPS = TAS/APS
-				def fps = cmd.tas/aps
-				//dd Distribución de  dividendos a pagar al socio, DD = Utilidad del periodo * FPS
-				def dd = cmd.up * fps
-				//dp DD * 0.1
-				def dp = dd * 0.1
+				def dp = dividendService.getPeriodUtility(partner, cmd.tas, cmd.up, cmd.period)
 
 				//add dividend to each partner in period
-				partner.addToDividends(new Dividend(dividend:dp, period:cmd.period))
+				partner.addToDividends(new Dividend(dividend:dp.dp, period:cmd.period))
 			}
 		} else {
 			//ask user if want to procede
