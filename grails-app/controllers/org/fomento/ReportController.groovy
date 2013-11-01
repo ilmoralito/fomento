@@ -8,7 +8,8 @@ class ReportController {
 	static defaultAction = "dividends"
 	static allowedMethods = [
 		dividends:["GET", "POST"],
-		applyDividends:"POST"
+		applyDividends:"POST",
+		overwriteDividends:["GET", "POST"]
 	]
 
     def dividends(DividendsCommand cmd) {
@@ -46,25 +47,36 @@ class ReportController {
 			}
 		} else {
 			//ask user if want to procede
-			print "no"
+			redirect action:"overwriteDividends", params:[tas:cmd.tas, up:cmd.up, period:cmd.period]
+			return false
 		}
-    	//add to each partner in partners Dividens to Pay (DP)
-    	/*
-    	def tmpPartners = []
-        tmpPartners.addAll partners
-
-        tmpPartners.each { partner ->
-            user.removeFromClassrooms(classroom)
-        }
-
-        if (partners) {
-        	partners.each { partner ->
-        		print partner
-        	}
-        }
-        */
 
         redirect action:"dividends", params:[period:cmd.period]
+    }
+
+    //user with admin role
+    def overwriteDividends() {
+    	if (request.method == "POST") {
+    		def partners = Partner.findAllByStatus(true)
+
+    		partners.each { partner ->
+    			def dividend = Dividend.findByPartnerAndPeriod(partner, params.period)
+    			def dp = dividendService.getPeriodUtility(partner, params.double("tas"), params.double("up"), params.int("period"))
+
+    			if (dividend) {
+    				dividend.properties["dividend"] = dp.dp
+
+    				if (!dividend.save()) {
+    					dividend.errors.allErrors.each {
+    						print it
+    					}
+    				}
+    			}
+    		}
+
+    		redirect action:"dividends"
+    		return false
+    	}
     }
 
 }
