@@ -7,6 +7,7 @@
 <body>
 	<g:render template="toolbar"/>
 	<g:if test="${dividends}">
+		<h3>Periodo ${params?.period}</h3>
 		<table class="table table-hover">
 			<thead>
 				<tr>
