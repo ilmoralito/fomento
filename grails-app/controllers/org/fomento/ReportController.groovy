@@ -1,5 +1,8 @@
 package org.fomento
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(["ROLE_ADMIN","ROLE_USER"])
 class ReportController {
 
 	def feeService
@@ -76,7 +79,7 @@ class ReportController {
     }
 
     //update
-    //user with admin role
+    @Secured("ROLE_ADMIN")
     def overwriteDividends() {
     	if (request.method == "POST") {
     		def partners = Partner.findAllByStatus(true)
