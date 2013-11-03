@@ -9,7 +9,8 @@ class ReportController {
 	static allowedMethods = [
 		dividends:["GET", "POST"],
 		applyDividends:"POST",
-		overwriteDividends:["GET", "POST"]
+		overwriteDividends:["GET", "POST"],
+		list:"GET"
 	]
 
     def dividends(DividendsCommand cmd) {
@@ -29,6 +30,14 @@ class ReportController {
     	}
     }
 
+    //list
+    def list() {
+    	def dividends = Dividend.byPeriod().list()
+
+    	[dividends:dividends]
+    }
+
+    //create
     def applyDividends(ApplyDividendsCommand cmd) {
     	//get all partners with status set to true
     	if (cmd.hasErrors()) {
@@ -54,6 +63,7 @@ class ReportController {
         redirect action:"dividends", params:[period:cmd.period]
     }
 
+    //update
     //user with admin role
     def overwriteDividends() {
     	if (request.method == "POST") {

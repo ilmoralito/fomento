@@ -44,6 +44,7 @@
 					<g:textField name="up" class="form-control" value="${params?.up}" placeholder="Utilidad del periodo" autofocus="true"/>
 				</div>
 				<button type="submit" class="btn btn-default">Calcular</button>
+				<g:link action="list" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Listar</g:link>
 			</form>
 			<br>
 			<g:if test="${tas}">

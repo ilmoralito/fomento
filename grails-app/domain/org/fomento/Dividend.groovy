@@ -1,5 +1,7 @@
 package org.fomento
 
+import org.hibernate.transform.AliasToEntityMapResultTransformer
+
 class Dividend {
 
     BigDecimal dividend
@@ -14,7 +16,13 @@ class Dividend {
     }
 
     static namedQueries = {
+        byPeriod {
+            projections {
+                 groupProperty "period", "period"
+            }
 
+            resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
+        }
     }
 
     static belongsTo = [partner:Partner]
