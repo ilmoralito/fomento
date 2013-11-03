@@ -11,8 +11,12 @@
 
 	<div class="container">
 		<div class="row">
-			<g:render template="/partner/toolbar"/>
-			<g:render template="/layouts/navbar"/>
+			<div class="col-md-12">
+				<g:render template="/partner/toolbar"/>
+				<g:render template="/layouts/navbar"/>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-10">
 				<g:layoutBody/>
 				<g:if test="${flash.message}"><br><strong>${flash.message}</strong></g:if>
