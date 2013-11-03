@@ -11,9 +11,9 @@
 	  	</div>
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
-            <!--dividends report-->
+            <!--dividends-->
             <li class="${(controllerName == 'report') ? 'active' : ''}">
-              <g:link controller="report" params="[period:fomento.currentYear()]">Reporte</g:link>
+              <g:link controller="report" params="[period:fomento.currentYear()]">Dividendos</g:link>
             </li>
             <!--add fees manualy-->
             <li class="dropdown ${(actionName == 'partnerToApplyFees') ? 'active' : ''}">
