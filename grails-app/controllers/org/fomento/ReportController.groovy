@@ -10,7 +10,8 @@ class ReportController {
 		dividends:["GET", "POST"],
 		applyDividends:"POST",
 		overwriteDividends:["GET", "POST"],
-		list:"GET"
+		list:"GET",
+		show:"GET"
 	]
 
     def dividends(DividendsCommand cmd) {
@@ -33,6 +34,17 @@ class ReportController {
     //list
     def list() {
     	def dividends = Dividend.byPeriod().list()
+
+    	[dividends:dividends]
+    }
+
+    //show
+    def show(Integer period) {
+    	def dividends = Dividend.findAllByPeriod(period)
+
+    	if (!dividends) {
+    		redirect action:"list"
+    	}
 
     	[dividends:dividends]
     }

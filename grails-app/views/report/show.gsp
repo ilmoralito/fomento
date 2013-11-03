@@ -10,19 +10,15 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th></th>
-					<th></th>
+					<th>Nombre del socio</th>
+					<th>Dividendo del periodo</th>
 				</tr>
 			</thead>
 			<tbody>
 				<g:each in="${dividends}" var="dividend">
 				<tr>
-					<td><g:link action="show" params="[period:dividend.period]">${dividend.period}</g:link></td>
-					<td style="width:1px;">
-						<g:link action="delete" params="[period:dividend.period]">
-							<span class="glyphicon glyphicon-trash"></span>
-						</g:link>
-					</td>
+					<td>${dividend.partner}</td>
+					<td>${dividend.dividend}</td>
 				</tr>
 				</g:each>
 			</tbody>
