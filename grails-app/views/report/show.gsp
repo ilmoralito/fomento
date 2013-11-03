@@ -37,22 +37,7 @@
 					Resultados
 				</div>
 				<div class="panel-body">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td>TAS</td>
-								<td>${tas}</td>
-							</tr>
-							<tr>
-								<td>UP</td>
-								<td>${up}</td>
-							</tr>
-							<tr>
-								<td>Perido</td>
-								<td>${params?.period}</td>
-							</tr>
-						</tbody>
-					</table>
+					<g:render template="panel-body"/>
 				</div>
 			</div>
 		</div>
