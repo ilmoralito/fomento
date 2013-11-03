@@ -49,7 +49,7 @@ class ReportController {
     		redirect action:"list"
     	}
 
-    	[dividends:dividends]
+    	[dividends:dividends, up:dividends.first().periodUP, tas:dividends.first().periodTAS]
     }
 
     //create
@@ -67,7 +67,7 @@ class ReportController {
 				def dp = dividendService.getPeriodUtility(partner, cmd.tas, cmd.up, cmd.period)
 
 				//add dividend to each partner in period
-				partner.addToDividends(new Dividend(dividend:dp.dp, period:cmd.period))
+				partner.addToDividends(new Dividend(dividend:dp.dp, periodUP:cmd.up, periodTAS:cmd.tas, period:cmd.period))
 			}
 		} else {
 			//ask user if want to procede
@@ -89,7 +89,9 @@ class ReportController {
     			def dp = dividendService.getPeriodUtility(partner, params.double("tas"), params.double("up"), params.int("period"))
 
     			if (dividend) {
-    				dividend.properties["dividend"] = dp.dp
+    				dividend.dividend = dp.dp
+                    dividend.periodUP = params.double("up")
+                    dividend.periodTAS = params.double("tas")
 
     				if (!dividend.save()) {
     					dividend.errors.allErrors.each {

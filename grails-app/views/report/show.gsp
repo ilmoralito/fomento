@@ -32,10 +32,27 @@
 		</div>
 		<div class="col-md-2">
 			<br>
-			<div class="panel panel-default">
-				<div class="panel-heading">Detalle</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					Resultados
+				</div>
 				<div class="panel-body">
-					Periodo: ${params?.period}
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>TAS</td>
+								<td>${tas}</td>
+							</tr>
+							<tr>
+								<td>UP</td>
+								<td>${up}</td>
+							</tr>
+							<tr>
+								<td>Perido</td>
+								<td>${params?.period}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

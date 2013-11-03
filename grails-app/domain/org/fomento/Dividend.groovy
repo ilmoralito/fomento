@@ -6,6 +6,8 @@ class Dividend {
 
     BigDecimal dividend
     Integer period
+    BigDecimal periodUP
+    BigDecimal periodTAS
 
 	Date dateCreated
 	Date lastUpdated
