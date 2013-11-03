@@ -72,7 +72,7 @@ class ReportController {
 			return false
 		}
 
-        redirect action:"dividends", params:[period:cmd.period]
+        redirect action:"list"
     }
 
     //update
@@ -96,7 +96,7 @@ class ReportController {
     			}
     		}
 
-    		redirect action:"dividends"
+    		redirect action:"list"
     		return false
     	}
     }

@@ -29,7 +29,7 @@
 		</table>
 	</g:if>
 	<g:else>
-		<h1>Nada que mostrar</h1>
+		<h3>Nada que mostrar</h3>
 	</g:else>
 </body>
 </html>
