@@ -29,7 +29,7 @@ class FomentoTagsTagLib {
 			} else if (ctrl == "report") {
 				out << g.link(controller:"report", params:[period:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
 			} else {
-				out << g.link(controller:'fee', action:'list', params:[id:params?.id, year:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
+				out << g.link(controller:'partner', action:'report', params:[id:params.int("id"), period:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
 			}
 		}
 	}
