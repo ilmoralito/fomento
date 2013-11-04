@@ -8,7 +8,7 @@
   	</li>
 	<li class="${(actionName == 'report') ? 'active' : ''}">
 		<g:link controller="partner" action="report" id="${(params.id) ?: id}">
-			<span class="glyphicon glyphicon-time"></span>
+			Reporte
 		</g:link>
 	</li>
 	<li class="${(actionName == 'changeStatus') ? 'active' : ''}"><g:link controller="partner" action="changeStatus" id="${(params?.id) ?: id}">Estado</g:link></li>
