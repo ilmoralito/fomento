@@ -9,6 +9,7 @@ class PartnerController {
 
     def configurationService
     def searchableService
+    def feeService
 
 	static defaultAction = "list"
 	static allowedMethods = [
@@ -198,12 +199,18 @@ class PartnerController {
         [partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
     }
 
-    def report(Partner partner, Integer period) {
-        if (request.method == "POST") {
+    def report(Integer id, Integer period) {
+        def partner = Partner.get(id)
 
+        if (!partner) {
+            redirect action:"list"
+            return false
         }
 
-        [partner:partner, period:period]
+        //get fees
+        def fees = Fee.byPeriod(period).findAllByPartner(partner,[sort:"paymentDate", order:"desc"])
+
+        [partner:partner, fees:fees, totalPartnerFee:feeService.calcTotal(fees, partner), totalFactoryFee:feeService.calcFactoryTotalFeesByPartner(fees)]
     }
 
     private parseDate(date) {

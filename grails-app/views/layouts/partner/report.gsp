@@ -28,6 +28,39 @@
 						<fomento:periods/>
 					</div>
 				</div>
+
+				<!--Aporte inicial-->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Aporte inicial
+					</div>
+					<div class="panel-body">
+						${partner?.affiliation?.capitalization}
+					</div>
+				</div>
+
+				<!--Totales de cuotas por socio y empresa-->
+				<div class="panel panel-default">
+					<div class="panel-heading">Total coutas</div>
+					<div class="panel-body">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td><span class="glyphicon glyphicon-user"></span></td>
+									<td>${totalPartnerFee}</td>
+								</tr>
+								<tr>
+									<td><span class="glyphicon glyphicon-briefcase"></span></td>
+									<td>${totalPartnerFee}</td>
+								</tr>
+								<tr>
+									<td><span class="glyphicon glyphicon-plus"></span></td>
+									<td>${totalPartnerFee + totalPartnerFee}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
