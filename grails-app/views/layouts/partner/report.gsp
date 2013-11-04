@@ -32,10 +32,21 @@
 				<!--Aporte inicial-->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Aporte inicial
+						Detalle
 					</div>
 					<div class="panel-body">
-						${partner?.affiliation?.capitalization}
+						<table class="table">
+							<tbody>
+								<tr>
+									<td style="width:1px;"><span class="glyphicon glyphicon-pushpin"></span></td>
+									<td>${partner?.affiliation?.capitalization}</td>
+								</tr>
+								<tr>
+									<td><span class="glyphicon glyphicon-time"></span></td>
+									<td>${(dividend) ?: 'NAP'}</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 
@@ -46,7 +57,7 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td><span class="glyphicon glyphicon-user"></span></td>
+									<td style="width:1px;"><span class="glyphicon glyphicon-user"></span></td>
 									<td>${totalPartnerFee}</td>
 								</tr>
 								<tr>

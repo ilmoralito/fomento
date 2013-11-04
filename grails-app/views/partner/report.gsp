@@ -28,5 +28,8 @@
 			</tbody>
 		</table>
 	</g:if>
+
+	<!--DIVIDENDOS-->
+	
 </body>
 </html>
