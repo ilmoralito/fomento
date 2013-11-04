@@ -210,6 +210,9 @@ class PartnerController {
         //get fees
         def fees = Fee.byPeriod(period).findAllByPartner(partner,[sort:"paymentDate", order:"desc"])
 
+        //deductions
+        def capitalizations = Deduction.findAllByPartnerAndPeriod(partner, period)
+
         //dividend
         def dividend = Dividend.findByPartnerAndPeriod(partner, period)
 
@@ -218,6 +221,7 @@ class PartnerController {
             fees:fees,
             totalPartnerFee:feeService.calcTotal(fees, partner),
             totalFactoryFee:feeService.calcFactoryTotalFeesByPartner(fees),
+            capitalizations:capitalizations,
             dividend:dividend.dividend
         ]
     }
