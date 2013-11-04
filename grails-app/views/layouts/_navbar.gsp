@@ -7,7 +7,7 @@
   		</g:link>
   	</li>
 	<li class="${(actionName == 'report') ? 'active' : ''}">
-		<g:link controller="partner" action="report" id="${(params.id) ?: id}">
+		<g:link controller="partner" action="report" params="[id:(params.id) ?: id, period:fomento.currentYear()]">
 			Reporte
 		</g:link>
 	</li>
