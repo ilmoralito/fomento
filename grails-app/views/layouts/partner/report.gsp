@@ -19,10 +19,10 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<g:layoutBody/>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="well well-sm">
 					<div class="btn-group">
 						<fomento:periods/>
@@ -35,14 +35,14 @@
 						Detalle
 					</div>
 					<div class="panel-body">
-						<table class="table">
+						<table class="table table-small">
 							<tbody>
 								<tr>
-									<td style="width:1px;"><span class="glyphicon glyphicon-pushpin"></span></td>
+									<td>Aporte incial</td>
 									<td>${partner?.affiliation?.capitalization}</td>
 								</tr>
 								<tr>
-									<td><span class="glyphicon glyphicon-time"></span></td>
+									<td>Dividendos ${params?.period}</td>
 									<td>${(dividend) ?: 'NAP'}</td>
 								</tr>
 							</tbody>
@@ -53,20 +53,20 @@
 				<!--Totales de cuotas por socio y empresa-->
 				<g:if test="${fees}">
 					<div class="panel panel-default">
-						<div class="panel-heading">Total coutas</div>
+						<div class="panel-heading">Total cuotas</div>
 						<div class="panel-body">
-							<table class="table">
+							<table class="table table-small">
 								<tbody>
 									<tr>
-										<td style="width:1px;"><span class="glyphicon glyphicon-user"></span></td>
+										<td>Aporte socio</td>
 										<td>${totalPartnerFee}</td>
 									</tr>
 									<tr>
-										<td><span class="glyphicon glyphicon-briefcase"></span></td>
+										<td>Aporte empresa</td>
 										<td>${totalPartnerFee}</td>
 									</tr>
 									<tr>
-										<td><span class="glyphicon glyphicon-plus"></span></td>
+										<td>TOTAL</td>
 										<td>${totalPartnerFee + totalPartnerFee}</td>
 									</tr>
 								</tbody>
