@@ -1,20 +1,40 @@
-body { padding-top: 70px; }
-.bordersty{	background: #fff; }
-hr{ margin:0; }
-.clsize{font-size: 25px; color: #222222;}
-.defaultclss{
+body {
+	padding-top: 70px;
+}
+
+.bordersty {
+	background: #fff;
+}
+
+hr {
+	margin:0;
+}
+
+.clsize {
+	font-size: 25px;
+	color: #222222;
+}
+
+.defaultclss {
 	padding-left:5px;
 	margin-top: 2px;
 	border-bottom: 1px dotted #222222;
 }
-.cab{
+
+.cab {
 	text-align: center;
 	color:#222222;
 	margin-bottom: 1px;
 }
-.usnum{
+
+.usnum {
 	background: #10454F;
 	color: #fff;
 	text-align: center;
 	margin-bottom: 2px;
+}
+
+/*partner report layout view*/
+table.table-small {
+	margin-bottom: 0;
 }
