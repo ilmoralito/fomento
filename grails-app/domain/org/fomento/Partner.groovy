@@ -20,7 +20,7 @@ class Partner implements Serializable {
     static constraints = {
         fullName blank:false
         numberOfEmployee blank:false, unique:true, min:1
-        identificationCard blank:false, unique:true
+        identificationCard blank:false, unique:true, matches: "^\\d{3}-?(\\d{6})-?\\d{4}[a-zA-Z]\$"
         department blank:false, maxSize:255
         salary blank:false, min:1000.0
     }
