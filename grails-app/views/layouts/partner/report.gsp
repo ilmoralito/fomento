@@ -51,27 +51,29 @@
 				</div>
 
 				<!--Totales de cuotas por socio y empresa-->
-				<div class="panel panel-default">
-					<div class="panel-heading">Total coutas</div>
-					<div class="panel-body">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td style="width:1px;"><span class="glyphicon glyphicon-user"></span></td>
-									<td>${totalPartnerFee}</td>
-								</tr>
-								<tr>
-									<td><span class="glyphicon glyphicon-briefcase"></span></td>
-									<td>${totalPartnerFee}</td>
-								</tr>
-								<tr>
-									<td><span class="glyphicon glyphicon-plus"></span></td>
-									<td>${totalPartnerFee + totalPartnerFee}</td>
-								</tr>
-							</tbody>
-						</table>
+				<g:if test="${fees}">
+					<div class="panel panel-default">
+						<div class="panel-heading">Total coutas</div>
+						<div class="panel-body">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td style="width:1px;"><span class="glyphicon glyphicon-user"></span></td>
+										<td>${totalPartnerFee}</td>
+									</tr>
+									<tr>
+										<td><span class="glyphicon glyphicon-briefcase"></span></td>
+										<td>${totalPartnerFee}</td>
+									</tr>
+									<tr>
+										<td><span class="glyphicon glyphicon-plus"></span></td>
+										<td>${totalPartnerFee + totalPartnerFee}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
+				</g:if>
 			</div>
 		</div>
 	</div>
