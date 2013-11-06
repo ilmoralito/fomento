@@ -14,7 +14,8 @@ class ReportController {
 		applyDividends:"POST",
 		overwriteDividends:["GET", "POST"],
 		list:"GET",
-		show:"GET"
+		show:"GET",
+        delete:"GET"
 	]
 
     def dividends(DividendsCommand cmd) {
@@ -104,6 +105,20 @@ class ReportController {
     		redirect action:"list"
     		return false
     	}
+    }
+
+    //delete
+    @Secured("ROLE_ADMIN")
+    def delete(Integer period) {
+        def query = Dividend.where {
+            period == period
+        }
+
+        int total = query.deleteAll()
+
+        flash.message = "$total dividendos eliminados"
+
+        redirect action:"list"
     }
 
 }
