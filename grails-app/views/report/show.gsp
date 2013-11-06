@@ -7,7 +7,7 @@
 <body>
 	<g:render template="toolbar"/>
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<g:if test="${dividends}">
 				<table class="table table-hover">
 					<thead>
@@ -30,7 +30,7 @@
 				<h1>Nada que mostrar</h1>
 			</g:else>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<br>
 			<div class="panel panel-info">
 				<div class="panel-heading">
