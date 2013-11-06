@@ -26,12 +26,12 @@ class DividendService {
 		//partner
 		def partnerFPS = partnerAPS / tas
 		def partnerDD = up * partnerFPS
-		def partnerDP = partnerDD - (partnerDD * 0.1)
+		def partnerDP = partnerDD
 
 		//factory
 		def factoryFPS = factoryAPS / tas
 		def factoryDD = up * factoryFPS
-		def factoryDP = factoryDD - (factoryDD * 0.1)
+		def factoryDP = factoryDD
 
 		[partnerDP:partnerDP, factoryDP:factoryDP]
     }
