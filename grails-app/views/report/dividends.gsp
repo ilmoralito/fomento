@@ -13,8 +13,8 @@
 				<table class="table table-hover">
 					<thead>
 						<th>Socio</th>
-						<th>DP Socio</th>
-						<th>DP Empresa</th>
+						<th>Dividendos a pagar Socio</th>
+						<th>Dividendos a pagar Empresa</th>
 					</thead>
 					<tbody>
 						<g:each in="${partners}" var="partner">
