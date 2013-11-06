@@ -24,12 +24,12 @@ class DividendService {
 		def factoryAPS = feeService.totalFeesByPeriod(partner, period, "factoryFee")
 
 		//partner
-		def partnerFPS = tas / partnerAPS
+		def partnerFPS = partnerAPS / tas
 		def partnerDD = up * partnerFPS
 		def partnerDP = partnerDD - (partnerDD * 0.1)
 
 		//factory
-		def factoryFPS = tas / factoryAPS
+		def factoryFPS = factoryAPS / tas
 		def factoryDD = up * factoryFPS
 		def factoryDP = factoryDD - (factoryDD * 0.1)
 
