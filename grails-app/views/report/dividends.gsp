@@ -24,6 +24,11 @@
 								<td><fomento:dp partner="${partner}" tas="${factoryTAS}" up="${up}" period="${period}" flag="factory"/></td>
 							</tr>
 						</g:each>
+						<tr>
+							<td>TOTAL</td>
+							<td>${up}</td>
+							<td>${up}</td>
+						</tr>
 					</tbody>
 				</table>
 			</g:if>
