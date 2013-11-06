@@ -8,34 +8,30 @@
 	<g:render template="toolbar"/>
 	<br>
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<g:if test="${partners}">
 				<table class="table table-hover">
 					<thead>
 						<th>Socio</th>
-						<th>APS</th>
-						<th>FPS</th>
-						<th>DD</th>
-						<th>DP</th>
+						<th>DP Socio</th>
+						<th>DP Empresa</th>
 					</thead>
 					<tbody>
 						<g:each in="${partners}" var="partner">
 							<tr>
 								<td>${partner}</td>
-								<td><g:formatNumber number="${fomento.aps(partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
-								<td><g:formatNumber number="${fomento.fps(tas:tas, partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
-								<td><g:formatNumber number="${up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()}" type="number" maxFractionDigits="2"/></td>
-								<td><g:formatNumber number="${up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble() - (up.toDouble() * fomento.fps(tas:tas, partner:partner, period:period).toDouble()) * 0.1}" type="number" maxFractionDigits="2"/></td>
+								<td><fomento:dp partner="${partner}" tas="${partnerTAS}" up="${up}" period="${period}" flag="partner"/></td>
+								<td><fomento:dp partner="${partner}" tas="${factoryTAS}" up="${up}" period="${period}" flag="factory"/></td>
 							</tr>
 						</g:each>
 					</tbody>
 				</table>
 			</g:if>
 			<g:else>
-				<h3>Nada que mostrar</h3>
+				<h3>...</h3>
 			</g:else>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<form action="dividends" method="post">
 				<div class="form-group">
 					<label class="sr-only" for="period">Periodo</label>
@@ -48,7 +44,7 @@
 				<button type="submit" class="btn btn-default">Calcular</button>
 			</form>
 			<br>
-			<g:if test="${tas}">
+			<g:if test="${partnerTAS && factoryTAS}">
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						Resultados
@@ -56,7 +52,8 @@
 					<div class="panel-body">
 						<g:render template="panel-body"/>
 						<g:form action="applyDividends">
-							<g:hiddenField name="tas" value="${tas}"/>
+							<g:hiddenField name="partnerTAS" value="${partnerTAS}"/>
+							<g:hiddenField name="factoryTAS" value="${factoryTAS}"/>
 							<g:hiddenField name="up" value="${up}"/>
 							<g:hiddenField name="period" value="${period}"/>
 							<button type="submit" class="btn btn-default">

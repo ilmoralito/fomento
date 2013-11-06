@@ -4,16 +4,21 @@ import org.hibernate.transform.AliasToEntityMapResultTransformer
 
 class Dividend {
 
-    BigDecimal dividend
-    Integer period
+    BigDecimal partnerDividend
+    BigDecimal factoryDividend
+    BigDecimal partnerTAS
+    BigDecimal factoryTAS
     BigDecimal periodUP
-    BigDecimal periodTAS
+    Integer period
 
 	Date dateCreated
 	Date lastUpdated
 
     static constraints = {
-        dividend blank:false, min:0.0
+        partnerDividend blank:false, min:0.0
+        factoryDividend blank:false, min:0.0
+        partnerTAS blank:false, min:0.0
+        factoryTAS blank:false, min:0.0
         period blank:false, min:2013
     }
 
@@ -34,7 +39,7 @@ class Dividend {
     }
 
     String toString() {
-        "$period: $dividend"
+        period
     }
 
 }

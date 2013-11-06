@@ -24,14 +24,17 @@ class ReportController {
     			return [cmd:cmd]
     		}
 
-    		def tas = 0
 	    	def partners = Partner.findAllByStatus(true)
 
-	    	partners.each { partner ->
-	    		tas = tas + feeService.partnerTotalCapitalization(partner, cmd.period)
-	    	}
+            def result = dividendService.calcTAS(partners, cmd.period)
 
-	    	return [partners:partners, tas:tas, up:cmd.up, period:cmd.period]
+	    	return [
+                partners:partners,
+                partnerTAS:result.partnerTAS,
+                factoryTAS:result.factoryTAS,
+                up:cmd.up,
+                period:cmd.period
+            ]
     	}
     }
 
@@ -50,7 +53,12 @@ class ReportController {
     		redirect action:"list"
     	}
 
-    	[dividends:dividends, up:dividends.first().periodUP, tas:dividends.first().periodTAS]
+    	[
+            dividends:dividends,
+            up:dividends.first().periodUP,
+            partnerTAS:dividends.first().partnerTAS,
+            factoryTAS:dividends.first().factoryTAS
+        ]
     }
 
     //create
@@ -65,14 +73,24 @@ class ReportController {
 
 		if (!dividendsCount) {
 			partners.each { partner ->
-				def dp = dividendService.getPeriodUtility(partner, cmd.tas, cmd.up, cmd.period)
+				def partnerDP = dividendService.getPeriodUtility(partner, cmd.partnerTAS, cmd.up, cmd.period)
+                def factoryDP = dividendService.getPeriodUtility(partner, cmd.factoryTAS, cmd.up, cmd.period)
 
 				//add dividend to each partner in period
-				partner.addToDividends(new Dividend(dividend:dp.dp, periodUP:cmd.up, periodTAS:cmd.tas, period:cmd.period))
+                def dividend = new Dividend (
+                    partnerDividend:partnerDP.partnerDP,
+                    factoryDividend:factoryDP.factoryDP,
+                    partnerTAS:cmd.partnerTAS,
+                    factoryTAS:cmd.factoryTAS,
+                    periodUP:cmd.up,
+                    period:cmd.period
+                )
+
+				partner.addToDividends(dividend)
 			}
 		} else {
 			//ask user if want to procede
-			redirect action:"overwriteDividends", params:[tas:cmd.tas, up:cmd.up, period:cmd.period]
+			redirect action:"overwriteDividends", params:[partnerTAS:cmd.partnerTAS, factoryTAS:cmd.factoryTAS, up:cmd.up, period:cmd.period]
 			return false
 		}
 
@@ -87,12 +105,15 @@ class ReportController {
 
     		partners.each { partner ->
     			def dividend = Dividend.findByPartnerAndPeriod(partner, params.period)
-    			def dp = dividendService.getPeriodUtility(partner, params.double("tas"), params.double("up"), params.int("period"))
+                def partnerDP = dividendService.getPeriodUtility(partner, params.double("partnerTAS"), params.double("up"), params.int("period"))
+                def factoryDP = dividendService.getPeriodUtility(partner, params.double("factoryTAS"), params.double("up"), params.int("period"))
 
     			if (dividend) {
-    				dividend.dividend = dp.dp
+    				dividend.partnerDividend = partnerDP.partnerDP
+                    dividend.factoryDividend = factoryDP.factoryDP
+                    dividend.partnerTAS = params.double("partnerTAS")
+                    dividend.factoryTAS = params.double("factoryTAS")
                     dividend.periodUP = params.double("up")
-                    dividend.periodTAS = params.double("tas")
 
     				if (!dividend.save()) {
     					dividend.errors.allErrors.each {
@@ -135,12 +156,14 @@ class DividendsCommand {
 }
 
 class ApplyDividendsCommand {
-	BigDecimal tas
+	BigDecimal partnerTAS
+    BigDecimal factoryTAS
 	BigDecimal up
 	Integer period
 
 	static constraints = {
-		tas blank:false, min:1.0
+		partnerTAS blank:false, min:1.0
+        factoryTAS blank:false, min:1.0
 		up blank:false, min:1.0
 		period blank:false, min:2013
 	}

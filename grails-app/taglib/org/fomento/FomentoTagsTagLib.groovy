@@ -5,6 +5,7 @@ import static java.util.Calendar.*
 class FomentoTagsTagLib {
 
 	def feeService
+	def dividendService
 
 	static namespace = "fomento"
 
@@ -38,20 +39,43 @@ class FomentoTagsTagLib {
 		out << new Date()[YEAR]
 	}
 
+	//to delete
+	/*
 	def aps = { attrs, body ->
 		def partner = attrs.partner
 		def period = attrs.period
+		def totalPartnerFeesByPeriod = feeService.totalFeesByPeriod(partner, period, "fee")
+		def totalFactoryFeesByPartnerInPeriod = feeService.totalFeesByPeriod(partner, period, "factoryFee")
+		def aps = (totalPartnerFeesByPeriod + totalFactoryFeesByPartnerInPeriod) + partner.affiliation.capitalization
 
-		out << feeService.partnerTotalCapitalization(partner, period)
+		out << aps
 	}
 
 	def fps = { attrs ->
 		def partner = attrs.partner
 		def period = attrs.period
-		BigDecimal aps = fomento.aps(partner:partner, period:period).toDouble()
+		BigDecimal aps = fomento.aps(partner:partner, period:period, ).toDouble()
 		def tas = attrs.tas
 
-		out << aps / tas
+		out << tas / aps
 	}
+	*/
+
+	def dp = { attrs ->
+		Partner partner = attrs.partner
+		BigDecimal tas = attrs.tas
+		BigDecimal up = attrs.up
+		Integer period = attrs.period
+		String flag = attrs.flag
+
+		def result = dividendService.getPeriodUtility(partner, tas, up, period)
+
+		if (attrs.flag == "partner") {
+			out << result.partnerDP
+		} else {
+			out << result.factoryDP
+		}
+	}
+
 
 }

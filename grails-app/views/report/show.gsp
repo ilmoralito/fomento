@@ -13,14 +13,16 @@
 					<thead>
 						<tr>
 							<th>Nombre del socio</th>
-							<th>Dividendo del periodo</th>
+							<th>Dividendo del periodo Socio</th>
+							<th>Dividendo del periodo Empresa</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${dividends}" var="dividend">
 						<tr>
 							<td>${dividend.partner}</td>
-							<td>${dividend.dividend}</td>
+							<td>${dividend.partnerDividend}</td>
+							<td>${dividend.factoryDividend}</td>
 						</tr>
 						</g:each>
 					</tbody>

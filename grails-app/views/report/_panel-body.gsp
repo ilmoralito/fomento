@@ -1,8 +1,12 @@
 <table class="table">
 	<tbody>
 		<tr>
-			<td>TAS</td>
-			<td>${tas}</td>
+			<td>Socio TAS</td>
+			<td>${partnerTAS}</td>
+		</tr>
+		<tr>
+			<td>Empresa TAS</td>
+			<td>${factoryTAS}</td>
 		</tr>
 		<tr>
 			<td>UP</td>
