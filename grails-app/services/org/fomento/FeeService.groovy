@@ -17,6 +17,21 @@ class FeeService implements Serializable {
     	return total + partner.affiliation.capitalization
     }
 
+    //total fees by partner fee and by factory fee
+    def totalFeesByPeriod(Partner partner, Integer period, String property) {
+        def criteria = Fee.createCriteria()
+        def result = criteria.get {
+            eq "partner", partner
+            eq "period", period
+
+            projections {
+                sum property
+            }
+        }
+
+        result
+    }
+
     //total def aporte de la empresa
     def calcFactoryTotalFeesByPartner(fees) {
     	def total = 0

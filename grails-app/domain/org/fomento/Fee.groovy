@@ -1,22 +1,26 @@
 package org.fomento
 
-import static java.util.Calendar.*
+import static java.util.Calendar.*//??
 
 class Fee implements Serializable {
 
     BigDecimal fee
     BigDecimal factoryFee
-    BigDecimal total
-    Date paymentDate
+    BigDecimal total//??
+    Integer period
+    Date paymentDate//??
 
 	Date dateCreated
 	Date lastUpdated
 
     static constraints = {
         fee min:0.00, blank:false
-        paymentDate blank:false
+        factoryFee min:0.00, blank:false
+        period min:2013, blank:false
+        paymentDate blank:false//??
     }
 
+    //??
     static namedQueries = {
         byPeriod { int year ->
             def from = new Date()

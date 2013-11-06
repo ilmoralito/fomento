@@ -63,11 +63,11 @@
 									</tr>
 									<tr>
 										<td>Aporte empresa</td>
-										<td>${totalPartnerFee}</td>
+										<td>${totalFactoryFee}</td>
 									</tr>
 									<tr>
 										<td>TOTAL</td>
-										<td>${totalPartnerFee + totalPartnerFee}</td>
+										<td>${totalPartnerFee + totalFactoryFee}</td>
 									</tr>
 								</tbody>
 							</table>

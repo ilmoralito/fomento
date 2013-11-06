@@ -219,8 +219,8 @@ class PartnerController {
         [
             partner:partner,
             fees:fees,
-            totalPartnerFee:feeService.calcTotal(fees, partner),
-            totalFactoryFee:feeService.calcFactoryTotalFeesByPartner(fees),
+            totalPartnerFee:feeService.totalFeesByPeriod(partner, period, "fee"),
+            totalFactoryFee:feeService.totalFeesByPeriod(partner, period, "factoryFee"),
             capitalizations:capitalizations,
             dividend:dividend?.dividend
         ]
