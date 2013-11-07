@@ -13,7 +13,7 @@
   	  		<ul class="nav navbar-nav navbar-right">
             <!--dividends-->
             <li class="${(controllerName == 'report') ? 'active' : ''}">
-              <g:link controller="report" params="[period:fomento.currentYear()]">Dividendos</g:link>
+              <g:link controller="report" action="list">Dividendos</g:link>
             </li>
             <!--add fees manualy-->
             <li class="dropdown ${(actionName == 'partnerToApplyFees') ? 'active' : ''}">
