@@ -20,7 +20,9 @@
 					<tbody>
 						<g:each in="${dividends}" var="dividend">
 						<tr>
-							<td>${dividend.partner}</td>
+							<td>
+								<g:link action="" params="[partner:dividend.partner, period:params.period]">${dividend.partner}</g:link>
+							</td>
 							<td>${dividend.partnerDividend}</td>
 							<td>${dividend.factoryDividend}</td>
 						</tr>
