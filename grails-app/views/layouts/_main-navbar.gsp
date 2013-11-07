@@ -12,7 +12,7 @@
         <nav role="navigation" class="navbar-collapse bs-navbar-collapse collapse" style="height: 1px;">
   	  		<ul class="nav navbar-nav navbar-right">
             <!--dividends-->
-            <li class="${(controllerName == 'report') ? 'active' : ''}">
+            <li class="${(controllerName == 'report' || controllerName == 'deduction') ? 'active' : ''}">
               <g:link controller="report" action="list">Dividendos</g:link>
             </li>
             <!--add fees manualy-->
@@ -35,7 +35,7 @@
                         <g:link controller="user" action="list">Administrar</g:link>
                     </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${((controllerName == 'partner' || controllerName == 'fee' || controllerName == 'deduction') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
+  	  			<li class="${((controllerName == 'partner' || controllerName == 'fee') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
                     <g:link controller="partner">Socios</g:link>
                 </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">

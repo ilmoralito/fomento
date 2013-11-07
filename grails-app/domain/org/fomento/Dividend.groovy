@@ -41,9 +41,11 @@ class Dividend {
     }
 
     static belongsTo = [partner:Partner]
+    static hasMany = [deductions:Deduction]
 
     static mapping = {
         version false
+        deductions sort: 'dateCreated', order: 'desc'
     }
 
     String toString() {

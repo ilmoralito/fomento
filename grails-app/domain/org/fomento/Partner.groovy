@@ -63,13 +63,12 @@ class Partner implements Serializable {
         }
     }
 
-    static hasMany = [fees:Fee, deductions:Deduction, dividends:Dividend]
+    static hasMany = [fees:Fee, dividends:Dividend]
 
     static mapping = {
-        status defaultValue: true
         version false
+        status defaultValue: true
         sort dateCreated: "desc"
-        deductions sort: 'dateCreated', order: 'desc'
         dividends sort: 'period', order: 'desc'
     }
 

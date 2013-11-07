@@ -23,7 +23,7 @@ class Deduction implements Serializable {
 
     }
 
-    static belongsTo = [partner:Partner]
+    static belongsTo = [dividend:Dividend]
 
     static mapping = {
         version false
