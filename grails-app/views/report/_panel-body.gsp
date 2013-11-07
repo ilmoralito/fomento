@@ -1,12 +1,24 @@
 <table class="table">
 	<tbody>
 		<tr>
-			<td>Socio TAS</td>
+			<td>TAS</td>
 			<td>${partnerTAS}</td>
 		</tr>
 		<tr>
-			<td>Empresa TAS</td>
+			<td>TAE</td>
 			<td>${factoryTAS}</td>
+		</tr>
+		<tr>
+			<td>TAP</td>
+			<td><fomento:tap tas="${partnerTAS}" tae="${factoryTAS}"/></td>
+		</tr>
+		<tr>
+			<td>DDS</td>
+			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}" flag="partner"/></td>
+		</tr>
+		<tr>
+			<td>DDE</td>
+			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}"/></td>
 		</tr>
 		<tr>
 			<td>UP</td>
