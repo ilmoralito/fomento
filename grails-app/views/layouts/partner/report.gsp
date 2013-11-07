@@ -31,9 +31,7 @@
 
 				<!--Aporte inicial-->
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						Detalle
-					</div>
+					<div class="panel-heading">Detalle periodo ${params.period}</div>
 					<div class="panel-body">
 						<table class="table table-small">
 							<tbody>
@@ -42,8 +40,12 @@
 									<td>${partner?.affiliation?.capitalization}</td>
 								</tr>
 								<tr>
-									<td>Dividendos ${params?.period}</td>
-									<td>${(dividend) ?: 'NAP'}</td>
+									<td>TAS</td>
+									<td>${tas}</td>
+								</tr>
+								<tr>
+									<td>TAE</td>
+									<td>${tae}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -53,7 +55,7 @@
 				<!--Totales de cuotas por socio y empresa-->
 				<g:if test="${fees}">
 					<div class="panel panel-default">
-						<div class="panel-heading">Total cuotas</div>
+						<div class="panel-heading">Cuotas</div>
 						<div class="panel-body">
 							<table class="table table-small">
 								<tbody>

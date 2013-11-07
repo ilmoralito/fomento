@@ -30,34 +30,5 @@
 			</table>
 		</details>
 	</g:if>
-
-	<!--DEDUCTIONS-->
-	<g:if test="${capitalizations}">
-		<details>
-			<summary>
-				Capitalizaciones
-			</summary>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Antes de capitalizacion</th>
-						<th>Despues de capitalizacion</th>
-						<th>Porcentaje de capitalizacion</th>
-						<th>Rason</th>
-					</tr>
-				</thead>
-				<tbody>
-					<g:each in="${capitalizations}" var="capitalization">
-						<tr>
-							<td>${capitalization.totalBeforeDeduction}</td>
-							<td>${capitalization.totalAfterDeduction}</td>
-							<td>${Math.round(capitalization.percentage * 100)}%</td>
-							<td>${(capitalization.reason) ?: ''}</td>
-						</tr>
-					</g:each>
-				</tbody>
-			</table>
-		</details>
-	</g:if>
 </body>
 </html>
