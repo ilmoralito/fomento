@@ -23,8 +23,8 @@
 						<h1><span id="value"></span>%</h1>
 					</div>
 					<div class="form-group">
-						<label for="totalBeforeDecution">Dividendos del periodo</label>
-						<g:textField name="totalBeforeDecution" value="${total}" class="form-control input-lg"/>
+						<label for="totalBeforeDeduction">Dividendos del periodo</label>
+						<g:textField name="totalBeforeDeduction" value="235" class="form-control input-lg"/>
 					</div>
 					<div class="form-group">
 						<label for="totalAfterDeduction">Dividendos despues de deduccion</label>

@@ -1,6 +1,6 @@
 var percentage = $("#percentage"),
 	value = $("#value"),
-	totalBeforeDecution = $("#totalBeforeDecution"),
+	totalBeforeDeduction = $("#totalBeforeDeduction").val(),
 	totalAfterDeduction = $("#totalAfterDeduction");
 
 percentage.on("change", function(){
@@ -8,15 +8,9 @@ percentage.on("change", function(){
 	value.html(this.value)
 
 	//update total after deduction
-	/*
-	var value = parseFloat(pt.html()), //actual partner total
-		rang = parseInt(range.val()) / 100, //calc %
-		res = value - (value * rang); //
+	var per = this.value / 100
+	var result = parseFloat(totalBeforeDeduction) - parseFloat(totalBeforeDeduction) * per
 
-	tAd.val(res);
-	ptad.html(res.toFixed(2));
-	*/
-	
-	
+	totalAfterDeduction.val(result.toFixed(2))
 });
 
