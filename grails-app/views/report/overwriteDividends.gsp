@@ -13,6 +13,11 @@
 	<g:form action="overwriteDividends">
 		<g:hiddenField name="partnerTAS" value="${params?.partnerTAS}"/>
 		<g:hiddenField name="factoryTAS" value="${params?.factoryTAS}"/>
+
+		<g:hiddenField name="tap" value="${params?.tap}"/>
+		<g:hiddenField name="fps" value="${params?.fps}"/>
+		<g:hiddenField name="fpe" value="${params?.fpe}"/>
+
 		<g:hiddenField name="up" value="${params?.up}"/>
 		<g:hiddenField name="period" value="${params?.period}"/>
 

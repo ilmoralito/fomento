@@ -49,9 +49,9 @@ class FomentoTagsTagLib {
 		def result = dividendService.getPeriodUtility(partner, tas, up, period)
 
 		if (attrs.flag == "partner") {
-			out << result.partnerDP
+			out << g.formatNumber(number:result.partnerDP, type:"number", maxFractionDigits:2)
 		} else {
-			out << result.factoryDP
+			out << g.formatNumber(number:result.factoryDP, type:"number", maxFractionDigits:2)
 		}
 	}
 
@@ -78,6 +78,6 @@ class FomentoTagsTagLib {
 			dd = (tae / tap) * 100
 		}
 
-		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2) + "%"
+		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
 	}
 }

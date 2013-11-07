@@ -82,6 +82,9 @@ class ReportController {
                     factoryDividend:factoryDP.factoryDP,
                     partnerTAS:cmd.partnerTAS,
                     factoryTAS:cmd.factoryTAS,
+                    tap:cmd.tap,
+                    fps:cmd.fps,
+                    fpe:cmd.fpe,
                     periodUP:cmd.up,
                     period:cmd.period
                 )
@@ -90,7 +93,7 @@ class ReportController {
 			}
 		} else {
 			//ask user if want to procede
-			redirect action:"overwriteDividends", params:[partnerTAS:cmd.partnerTAS, factoryTAS:cmd.factoryTAS, up:cmd.up, period:cmd.period]
+			redirect action:"overwriteDividends", params:[partnerTAS:cmd.partnerTAS, factoryTAS:cmd.factoryTAS, tap:cmd.tap, fps:cmd.fps, fpe:cmd.fpe, up:cmd.up, period:cmd.period]
 			return false
 		}
 
@@ -113,6 +116,11 @@ class ReportController {
                     dividend.factoryDividend = factoryDP.factoryDP
                     dividend.partnerTAS = params.double("partnerTAS")
                     dividend.factoryTAS = params.double("factoryTAS")
+
+                    dividend.tap = params.double("tap")
+                    dividend.fps = params.double("fps")
+                    dividend.fpe = params.double("fpe")
+
                     dividend.periodUP = params.double("up")
 
     				if (!dividend.save()) {
@@ -158,12 +166,18 @@ class DividendsCommand {
 class ApplyDividendsCommand {
 	BigDecimal partnerTAS
     BigDecimal factoryTAS
+    BigDecimal tap
+    BigDecimal fps
+    BigDecimal fpe
 	BigDecimal up
-	Integer period
+    Integer period
 
 	static constraints = {
 		partnerTAS blank:false, min:1.0
         factoryTAS blank:false, min:1.0
+        tap blank:false, min:1.0
+        fps blank:false, min:1.0
+        fpe blank:false, min:1.0
 		up blank:false, min:1.0
 		period blank:false, min:2013
 	}

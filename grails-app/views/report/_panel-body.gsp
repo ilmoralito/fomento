@@ -13,12 +13,12 @@
 			<td><fomento:tap tas="${partnerTAS}" tae="${factoryTAS}"/></td>
 		</tr>
 		<tr>
-			<td>DDS</td>
-			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}" flag="partner"/></td>
+			<td>FPS</td>
+			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}" flag="partner"/>%</td>
 		</tr>
 		<tr>
-			<td>DDE</td>
-			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}"/></td>
+			<td>FPE</td>
+			<td><fomento:dd tas="${partnerTAS}" tae="${factoryTAS}"/>%</td>
 		</tr>
 		<tr>
 			<td>UP</td>

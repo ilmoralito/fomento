@@ -6,8 +6,13 @@ class Dividend {
 
     BigDecimal partnerDividend
     BigDecimal factoryDividend
+
     BigDecimal partnerTAS
     BigDecimal factoryTAS
+    BigDecimal tap
+    BigDecimal fps
+    BigDecimal fpe
+
     BigDecimal periodUP
     Integer period
 
@@ -19,6 +24,9 @@ class Dividend {
         factoryDividend blank:false, min:0.0
         partnerTAS blank:false, min:0.0
         factoryTAS blank:false, min:0.0
+        tap blank:false, min:0.0
+        fps blank:false, min:0.0
+        fpe blank:false, min:0.0
         period blank:false, min:2013
     }
 
