@@ -39,28 +39,6 @@ class FomentoTagsTagLib {
 		out << new Date()[YEAR]
 	}
 
-	//to delete
-	/*
-	def aps = { attrs, body ->
-		def partner = attrs.partner
-		def period = attrs.period
-		def totalPartnerFeesByPeriod = feeService.totalFeesByPeriod(partner, period, "fee")
-		def totalFactoryFeesByPartnerInPeriod = feeService.totalFeesByPeriod(partner, period, "factoryFee")
-		def aps = (totalPartnerFeesByPeriod + totalFactoryFeesByPartnerInPeriod) + partner.affiliation.capitalization
-
-		out << aps
-	}
-
-	def fps = { attrs ->
-		def partner = attrs.partner
-		def period = attrs.period
-		BigDecimal aps = fomento.aps(partner:partner, period:period, ).toDouble()
-		def tas = attrs.tas
-
-		out << tas / aps
-	}
-	*/
-
 	def dp = { attrs ->
 		Partner partner = attrs.partner
 		BigDecimal tas = attrs.tas
