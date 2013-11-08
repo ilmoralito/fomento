@@ -25,13 +25,12 @@ class ReportController {
     		}
 
 	    	def partners = Partner.findAllByStatus(true)
-
             def result = dividendService.calcTAS(partners, cmd.period)
 
 	    	return [
                 partners:partners,
-                partnerTAS:result.partnerTAS,
-                factoryTAS:result.factoryTAS,
+                tas:result.partnerTAS,
+                tae:result.factoryTAS,
                 up:cmd.up,
                 period:cmd.period
             ]
@@ -56,8 +55,8 @@ class ReportController {
     	[
             dividends:dividends,
             up:dividends.first().periodUP,
-            partnerTAS:dividends.first().partnerTAS,
-            factoryTAS:dividends.first().factoryTAS
+            tas:dividends.first().partnerTAS,
+            tae:dividends.first().factoryTAS
         ]
     }
 
@@ -73,15 +72,15 @@ class ReportController {
 
 		if (!dividendsCount) {
 			partners.each { partner ->
-				def partnerDP = dividendService.getPeriodUtility(partner, cmd.partnerTAS, cmd.up, cmd.period)
-                def factoryDP = dividendService.getPeriodUtility(partner, cmd.factoryTAS, cmd.up, cmd.period)
+				def partnerDP = dividendService.getPeriodUtility(partner, cmd.tas, cmd.up, cmd.period)
+                def factoryDP = dividendService.getPeriodUtility(partner, cmd.tae, cmd.up, cmd.period)
 
 				//add dividend to each partner in period
                 def dividend = new Dividend (
                     partnerDividend:partnerDP.partnerDP,
                     factoryDividend:factoryDP.factoryDP,
-                    partnerTAS:cmd.partnerTAS,
-                    factoryTAS:cmd.factoryTAS,
+                    partnerTAS:cmd.tas,
+                    factoryTAS:cmd.tae,
                     tap:cmd.tap,
                     fps:cmd.fps,
                     fpe:cmd.fpe,
@@ -89,11 +88,11 @@ class ReportController {
                     period:cmd.period
                 )
 
-				partner.addToDividends(dividend)
+    			partner.addToDividends(dividend)
 			}
 		} else {
 			//ask user if want to procede
-			redirect action:"overwriteDividends", params:[partnerTAS:cmd.partnerTAS, factoryTAS:cmd.factoryTAS, tap:cmd.tap, fps:cmd.fps, fpe:cmd.fpe, up:cmd.up, period:cmd.period]
+			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, fps:cmd.fps, fpe:cmd.fpe, up:cmd.up, period:cmd.period]
 			return false
 		}
 
@@ -108,14 +107,14 @@ class ReportController {
 
     		partners.each { partner ->
     			def dividend = Dividend.findByPartnerAndPeriod(partner, params.period)
-                def partnerDP = dividendService.getPeriodUtility(partner, params.double("partnerTAS"), params.double("up"), params.int("period"))
-                def factoryDP = dividendService.getPeriodUtility(partner, params.double("factoryTAS"), params.double("up"), params.int("period"))
+                def partnerDP = dividendService.getPeriodUtility(partner, params.double("tas"), params.double("up"), params.int("period"))
+                def factoryDP = dividendService.getPeriodUtility(partner, params.double("tae"), params.double("up"), params.int("period"))
 
     			if (dividend) {
     				dividend.partnerDividend = partnerDP.partnerDP
                     dividend.factoryDividend = factoryDP.factoryDP
-                    dividend.partnerTAS = params.double("partnerTAS")
-                    dividend.factoryTAS = params.double("factoryTAS")
+                    dividend.partnerTAS = params.double("tas")
+                    dividend.factoryTAS = params.double("tae")
 
                     dividend.tap = params.double("tap")
                     dividend.fps = params.double("fps")
@@ -164,8 +163,8 @@ class DividendsCommand {
 }
 
 class ApplyDividendsCommand {
-	BigDecimal partnerTAS
-    BigDecimal factoryTAS
+	BigDecimal tas
+    BigDecimal tae
     BigDecimal tap
     BigDecimal fps
     BigDecimal fpe
@@ -173,8 +172,8 @@ class ApplyDividendsCommand {
     Integer period
 
 	static constraints = {
-		partnerTAS blank:false, min:1.0
-        factoryTAS blank:false, min:1.0
+		tas blank:false, min:1.0
+        tae blank:false, min:1.0
         tap blank:false, min:1.0
         fps blank:false, min:1.0
         fpe blank:false, min:1.0

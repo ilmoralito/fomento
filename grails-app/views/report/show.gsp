@@ -21,7 +21,7 @@
 						<g:each in="${dividends}" var="dividend">
 						<tr>
 							<td>
-								<g:link controller="deduction" action="list" params="[partner:dividend.partner, period:params.period]">${dividend.partner}</g:link>
+								<g:link controller="deduction" action="list" id="${dividend.id}">${dividend.partner}</g:link>
 							</td>
 							<td>${dividend.partnerDividend}</td>
 							<td>${dividend.factoryDividend}</td>

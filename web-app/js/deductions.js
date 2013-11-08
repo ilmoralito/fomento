@@ -1,7 +1,7 @@
 var percentage = $("#percentage"),
 	value = $("#value"),
 	totalBeforeDeduction = $("#totalBeforeDeduction").val(),
-	totalAfterDeduction = $("#totalAfterDeduction");
+	noCapitalization = $("#noCapitalization");
 
 percentage.on("change", function(){
 	//update range step
@@ -11,6 +11,6 @@ percentage.on("change", function(){
 	var per = this.value / 100
 	var result = parseFloat(totalBeforeDeduction) - parseFloat(totalBeforeDeduction) * per
 
-	totalAfterDeduction.val(result.toFixed(2))
+	noCapitalization.val(result.toFixed(2))
 });
 

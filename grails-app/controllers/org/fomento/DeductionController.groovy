@@ -10,22 +10,19 @@ class DeductionController {
         list:["GET", "POST"]
     ]
 
-    def list(Partner partner, Integer period) {
+    def list(Integer id) {
         if (request.method == "POST") {
+            def deduction = new Deduction(params)
 
+            if (!deduction.save()) {
+                deduction.errors.allErrors.each {
+                    print it
+                }
+            }
         }
 
-        BigDecimal total = 0
+        def dividend = Dividend.get(id)
 
-        /*
-        if (deductions) {
-            //get recent totalAfterDeduction value
-        } else {
-            //get DP for partner in thsi period
-            total = 1560
-        }
-        */
-
-        [partner:partner, period:period, total:total]
+        [dividend:dividend]
     }
 }

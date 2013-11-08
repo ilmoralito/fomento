@@ -20,21 +20,21 @@ class DividendService {
 	}
 
     def getPeriodUtility(Partner partner, BigDecimal tas, BigDecimal up, Integer period) {
-		def partnerAPS = feeService.totalFeesByPeriod(partner, period, "fee")
-		def factoryAPS = feeService.totalFeesByPeriod(partner, period, "factoryFee")
+		def aps = feeService.totalFeesByPeriod(partner, period, "fee")
+		def ape = feeService.totalFeesByPeriod(partner, period, "factoryFee")
 
-		def tap = partnerAPS + factoryAPS
-		def fps = (partnerAPS / tap) * 100
-		def fpe = (factoryAPS / tap) * 100
+		def tap = aps + ape
+		def pds = aps / tap
+		def pde = ape / tap
 
 		//partner
-		//def partnerFPS = partnerAPS / tas
-		def partnerDD = (up * fps) / 100
+		//def partnerFPS = aps / tas
+		def partnerDD = up * pds
 		def partnerDP = partnerDD
 
 		//factory
-		//def factoryFPS = factoryAPS / tas
-		def factoryDD = (up * fpe) / 100
+		//def factoryFPS = ape / tas
+		def factoryDD = up * pde
 		def factoryDP = factoryDD
 
 		[partnerDP:partnerDP, factoryDP:factoryDP]

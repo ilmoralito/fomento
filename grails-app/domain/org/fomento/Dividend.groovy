@@ -19,6 +19,8 @@ class Dividend {
 	Date dateCreated
 	Date lastUpdated
 
+    Deduction deduction
+
     static constraints = {
         partnerDividend blank:false, min:0.0
         factoryDividend blank:false, min:0.0
@@ -28,6 +30,7 @@ class Dividend {
         fps blank:false, min:0.0
         fpe blank:false, min:0.0
         period blank:false, min:2013
+        deduction nullable:true
     }
 
     static namedQueries = {
@@ -41,11 +44,9 @@ class Dividend {
     }
 
     static belongsTo = [partner:Partner]
-    static hasMany = [deductions:Deduction]
 
     static mapping = {
         version false
-        deductions sort: 'dateCreated', order: 'desc'
     }
 
     String toString() {

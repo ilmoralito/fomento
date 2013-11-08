@@ -49,7 +49,7 @@
 				<button type="submit" class="btn btn-default">Calcular</button>
 			</form>
 			<br>
-			<g:if test="${partnerTAS && factoryTAS}">
+			<g:if test="${tas && tae}">
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						Resultados
@@ -57,15 +57,7 @@
 					<div class="panel-body">
 						<g:render template="panel-body"/>
 						<g:form action="applyDividends">
-							<g:hiddenField name="partnerTAS" value="${partnerTAS}"/>
-							<g:hiddenField name="factoryTAS" value="${factoryTAS}"/>
-
-							<g:hiddenField name="tap" value="${fomento.tap(tas:partnerTAS, tae:factoryTAS)}"/>
-							<g:hiddenField name="fps" value="${fomento.dd(tas:partnerTAS, tae:factoryTAS, flag:"partner")}"/>
-							<g:hiddenField name="fpe" value="${fomento.dd(tas:partnerTAS, tae:factoryTAS)}"/>
-
-							<g:hiddenField name="up" value="${up}"/>
-							<g:hiddenField name="period" value="${period}"/>
+							<g:render template="info"/>
 							<button type="submit" class="btn btn-default">
 								<span class="glyphicon glyphicon-floppy-save"></span>
 							</button>
