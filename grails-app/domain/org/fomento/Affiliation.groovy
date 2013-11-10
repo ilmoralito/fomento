@@ -7,6 +7,7 @@ class Affiliation implements Serializable {
     BigDecimal factoryFee
     Date enrollmentDate
     BigDecimal capitalization = 0.00
+    BigDecimal factoryCapital
 
 	Date dateCreated
 	Date lastUpdated
@@ -20,7 +21,8 @@ class Affiliation implements Serializable {
 
             enrollmentDate <= today
         }
-        capitalization min:0.00
+        capitalization blank:false, min:0.00
+        factoryCapital blank:false, min:0.00
     }
 
     static belongsTo = [partner:Partner]

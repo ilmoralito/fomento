@@ -54,5 +54,10 @@
 			<label for="affiliation.capitalization">Capitalizacion inicial</label>
 			<g:textField name="affiliation.capitalization" id="affiliation.capitalization" value="${partner?.affiliation?.capitalization}" class="form-control"/>
 		</div>
+
+		<div class="form-group">
+			<label for="affiliation.factoryCapital">Capitalizacion inicial de empresa</label>
+			<g:textField name="affiliation.factoryCapital" id="affiliation.factoryCapital" value="${partner?.affiliation?.factoryCapital}" class="form-control"/>
+		</div>
 	</div>
 </div>

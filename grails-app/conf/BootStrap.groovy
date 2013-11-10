@@ -38,7 +38,8 @@ class BootStrap {
                     typeOfPayment:"Catorcena",
                     factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 250,
-                    capitalization:2500.00
+                    capitalization:2500.00,
+                    factoryCapital:2500.00
                 )
 
                 a1.save()
@@ -86,7 +87,8 @@ class BootStrap {
                     typeOfPayment:"Catorcena",
                     factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 300,
-                    capitalization:5000.00
+                    capitalization:5000.00,
+                    factoryCapital:5000.00
                 )
 
                 a2.save()
@@ -134,7 +136,8 @@ class BootStrap {
                     typeOfPayment:"Bono",
                     factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 120,
-                    capitalization:5800.00
+                    capitalization:5800.00,
+                    factoryCapital:10000.00
                 )
 
                 a3.save()

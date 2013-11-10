@@ -60,7 +60,8 @@ class PartnerController {
                 typeOfPayment: params?.affiliation?.typeOfPayment,
                 factoryFee: configurationService.loadFactoryFee(),
                 enrollmentDate: ed,
-                capitalization: (params?.affiliation?.capitalization) ?: 0
+                capitalization: params?.affiliation?.capitalization,
+                factoryCapital:params?.affiliation?.factoryCapital
             )
 
             def partner = new Partner(
@@ -126,7 +127,8 @@ class PartnerController {
         partner.affiliation.typeOfPayment = params?.affiliation?.typeOfPayment
         partner.affiliation.factoryFee = configurationService.loadFactoryFee()
         partner.affiliation.enrollmentDate = parseDate(params?.affiliation?.enrollmentDate)
-        partner.affiliation.capitalization = (params.double("affiliation.capitalization")) ?: 0
+        partner.affiliation.capitalization = params.double("affiliation.capitalization")
+        partner.affiliation.factoryCapital = params.double("affiliation.factoryCapital")
 
         if (!partner.save()) {
             render view:"show", model:[partner:partner, id:id]
