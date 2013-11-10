@@ -25,12 +25,15 @@ class ReportController {
     		}
 
 	    	def partners = Partner.findAllByStatus(true)
-            def result = dividendService.calcTAS(partners, cmd.period)
+            def result = dividendService.feePeriodData(partners, cmd.period)
 
 	    	return [
                 partners:partners,
-                tas:result.partnerTAS,
-                tae:result.factoryTAS,
+                tas:result.tas,
+                tae:result.tae,
+                tap:result.tap,
+                pds:result.pds,
+                pde:result.pde,
                 up:cmd.up,
                 period:cmd.period
             ]

@@ -13,20 +13,26 @@
 				<table class="table table-hover">
 					<thead>
 						<th>Socio</th>
+						<th>FPS</th>
 						<th>Dividendos a pagar Socio</th>
+						<th>FPE</th>
 						<th>Dividendos a pagar Empresa</th>
 					</thead>
 					<tbody>
 						<g:each in="${partners}" var="partner">
 							<tr>
 								<td>${partner}</td>
-								<td><fomento:dp partner="${partner}" tas="${partnerTAS}" up="${up}" period="${period}" flag="partner"/></td>
-								<td><fomento:dp partner="${partner}" tas="${factoryTAS}" up="${up}" period="${period}" flag="factory"/></td>
+								<td><fomento:fps partner="${partner}" period="${period}" tap="${tap}"/></td>
+								<td><fomento:dd up="${up}" pd="${pds}" fp="${fps}" fp="${fomento.fps(partner:partner, period:period, tap:tap)}"/></td>
+								<td><fomento:fpe partner="${partner}" period="${period}" tap="${tap}"/></td>
+								<td><fomento:dd up="${up}" pd="${pde}" fp="${fpe}" fp="${fomento.fpe(partner:partner, period:period, tap:tap)}"/></td>
 							</tr>
 						</g:each>
 						<tr>
 							<td>TOTAL</td>
+							<td></td>
 							<td>${up}</td>
+							<td></td>
 							<td>${up}</td>
 						</tr>
 					</tbody>

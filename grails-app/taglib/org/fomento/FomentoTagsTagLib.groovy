@@ -6,6 +6,7 @@ class FomentoTagsTagLib {
 
 	def feeService
 	def dividendService
+	ReportService reportService
 
 	static namespace = "fomento"
 
@@ -39,6 +40,22 @@ class FomentoTagsTagLib {
 		out << new Date()[YEAR]
 	}
 
+	def fps = { attrs ->
+		Partner partner = attrs.partner
+		Integer period = attrs.int("period")
+		BigDecimal fps = reportService.fps(partner, period)
+
+		out << g.formatNumber(number:fps, type:"number", maxFractionDigits:2)
+	}
+
+	def fpe = { attrs ->
+		Partner partner = attrs.partner
+		Integer period = attrs.int("period")
+		BigDecimal fpe = reportService.fpe(partner, period)
+
+		out << g.formatNumber(number:fpe, type:"number", maxFractionDigits:2)
+	}
+
 	def dp = { attrs ->
 		Partner partner = attrs.partner
 		BigDecimal tas = attrs.tas
@@ -64,6 +81,7 @@ class FomentoTagsTagLib {
 		out << g.formatNumber(number:tap, type:"number", maxFractionDigits:2)
 	}
 
+	/*
 	def dd = { attrs ->
 		BigDecimal tas = attrs.double("tas")
 		BigDecimal tae = attrs.double("tae")
@@ -77,6 +95,17 @@ class FomentoTagsTagLib {
 		} else {
 			dd = (tae / tap) * 100
 		}
+
+		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
+	}
+	*/
+
+	def dd = { attrs ->
+		BigDecimal up = attrs.double("up")
+		BigDecimal pd = attrs.double("pd")
+		BigDecimal fp = attrs.double("fp")
+
+		BigDecimal dd = reportService.dd(up, pd, fp)
 
 		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
 	}

@@ -10,15 +10,15 @@
 		</tr>
 		<tr>
 			<td>TAP</td>
-			<td><fomento:tap tas="${tas}" tae="${tae}"/></td>
+			<td>${tap}</td>
 		</tr>
 		<tr>
-			<td>FPS</td>
-			<td><fomento:dd tas="${tas}" tae="${tae}" flag="partner"/>%</td>
+			<td>PDS</td>
+			<td><g:formatNumber number="${pds}" type="number" maxFractionDigits="2"/>%</td>
 		</tr>
 		<tr>
-			<td>FPE</td>
-			<td><fomento:dd tas="${tas}" tae="${tae}"/>%</td>
+			<td>PDE</td>
+			<td><g:formatNumber number="${pde}" type="number" maxFractionDigits="2"/>%</td>
 		</tr>
 		<tr>
 			<td>UP</td>
