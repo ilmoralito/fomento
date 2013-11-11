@@ -7,13 +7,13 @@ class Dividend {
     BigDecimal partnerDividend
     BigDecimal factoryDividend
 
-    BigDecimal partnerTAS
-    BigDecimal factoryTAS
+    BigDecimal tas
+    BigDecimal tae
     BigDecimal tap
-    BigDecimal fps
-    BigDecimal fpe
+    BigDecimal pds
+    BigDecimal pde
 
-    BigDecimal periodUP
+    BigDecimal up
     Integer period
 
 	Date dateCreated
@@ -24,12 +24,13 @@ class Dividend {
     static constraints = {
         partnerDividend blank:false, min:0.0
         factoryDividend blank:false, min:0.0
-        partnerTAS blank:false, min:0.0
-        factoryTAS blank:false, min:0.0
+        tas blank:false, min:0.0
+        tae blank:false, min:0.0
         tap blank:false, min:0.0
-        fps blank:false, min:0.0
-        fpe blank:false, min:0.0
+        pds blank:false, min:0.0
+        pde blank:false, min:0.0
         period blank:false, min:2013
+        up blank:false, min:1.0
         deduction nullable:true
     }
 

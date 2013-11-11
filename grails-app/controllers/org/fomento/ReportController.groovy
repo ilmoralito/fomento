@@ -7,6 +7,7 @@ class ReportController {
 
 	def feeService
 	def dividendService
+    def reportService
 
 	static defaultAction = "dividends"
 	static allowedMethods = [
@@ -40,14 +41,12 @@ class ReportController {
     	}
     }
 
-    //list
     def list() {
     	def dividends = Dividend.byPeriod().list()
 
     	[dividends:dividends]
     }
 
-    //show
     def show(Integer period) {
     	def dividends = Dividend.findAllByPeriod(period)
 
@@ -57,73 +56,89 @@ class ReportController {
 
     	[
             dividends:dividends,
-            up:dividends.first().periodUP,
-            tas:dividends.first().partnerTAS,
-            tae:dividends.first().factoryTAS
+            up:dividends.first().up,
+            tas:dividends.first().tas,
+            tae:dividends.first().tae,
+            tap:dividends.first().tap,
+            pds:dividends.first().pds,
+            pde:dividends.first().pde,
         ]
     }
 
-    //create
     def applyDividends(ApplyDividendsCommand cmd) {
-    	//get all partners with status set to true
     	if (cmd.hasErrors()) {
+            cmd.errors.allErrors.each {
+                print it
+            }
     		return [cmd:cmd]
     	}
 
     	def partners = Partner.findAllByStatus(true)
     	def dividendsCount =  Dividend.countByPeriod(cmd.period)
 
-		if (!dividendsCount) {
+    	if (!dividendsCount) {
 			partners.each { partner ->
-				def partnerDP = dividendService.getPeriodUtility(partner, cmd.tas, cmd.up, cmd.period)
-                def factoryDP = dividendService.getPeriodUtility(partner, cmd.tae, cmd.up, cmd.period)
+                def fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
+                def fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
 
-				//add dividend to each partner in period
+                def partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
+                def factoryDD = reportService.dd(cmd.up, cmd.pds, fpe)
+
                 def dividend = new Dividend (
-                    partnerDividend:partnerDP.partnerDP,
-                    factoryDividend:factoryDP.factoryDP,
-                    partnerTAS:cmd.tas,
-                    factoryTAS:cmd.tae,
+                    partnerDividend:partnerDD,
+                    factoryDividend:factoryDD,
+                    tas:cmd.tas,
+                    tae:cmd.tae,
                     tap:cmd.tap,
-                    fps:cmd.fps,
-                    fpe:cmd.fpe,
-                    periodUP:cmd.up,
-                    period:cmd.period
+                    pds:cmd.pds,
+                    pde:cmd.pde,
+                    up:cmd.up,
+                    period:cmd.period,
+                    partner:partner
                 )
 
-    			partner.addToDividends(dividend)
+                if (!dividend.save()) {
+                    dividend.errors.allErrors.each {
+                        print it
+                    }
+                }
+
+    			//partner.addToDividends(dividend)
 			}
 		} else {
-			//ask user if want to procede
-			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, fps:cmd.fps, fpe:cmd.fpe, up:cmd.up, period:cmd.period]
+			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, pds:cmd.pds, pde:cmd.pde, up:cmd.up, period:cmd.period]
 			return false
 		}
 
         redirect action:"list"
     }
 
-    //update
     @Secured("ROLE_ADMIN")
     def overwriteDividends() {
     	if (request.method == "POST") {
     		def partners = Partner.findAllByStatus(true)
+            def pds = params.double("pds")
+            def pde = params.double("pde")
+            def up = params.double("up")
+            def period = params.int("period")
 
-    		partners.each { partner ->
-    			def dividend = Dividend.findByPartnerAndPeriod(partner, params.period)
-                def partnerDP = dividendService.getPeriodUtility(partner, params.double("tas"), params.double("up"), params.int("period"))
-                def factoryDP = dividendService.getPeriodUtility(partner, params.double("tae"), params.double("up"), params.int("period"))
+            partners.each { partner ->
+                def dividend = Dividend.findByPartnerAndPeriod(partner, period)
+                def fps = reportService.fp(partner, period, "fee", "capitalization")
+                def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
+
+                def partnerDD = reportService.dd(up, pds, fps)
+                def factoryDD = reportService.dd(up, pds, fpe)
 
     			if (dividend) {
-    				dividend.partnerDividend = partnerDP.partnerDP
-                    dividend.factoryDividend = factoryDP.factoryDP
-                    dividend.partnerTAS = params.double("tas")
-                    dividend.factoryTAS = params.double("tae")
-
+    				dividend.partnerDividend = partnerDD
+                    dividend.factoryDividend = factoryDD
+                    dividend.tas = params.double("tas")
+                    dividend.tae = params.double("tae")
                     dividend.tap = params.double("tap")
-                    dividend.fps = params.double("fps")
-                    dividend.fpe = params.double("fpe")
-
-                    dividend.periodUP = params.double("up")
+                    dividend.pds = params.double("pds")
+                    dividend.pde = params.double("pde")
+                    dividend.up = up
 
     				if (!dividend.save()) {
     					dividend.errors.allErrors.each {
@@ -169,8 +184,8 @@ class ApplyDividendsCommand {
 	BigDecimal tas
     BigDecimal tae
     BigDecimal tap
-    BigDecimal fps
-    BigDecimal fpe
+    BigDecimal pds
+    BigDecimal pde
 	BigDecimal up
     Integer period
 
@@ -178,8 +193,8 @@ class ApplyDividendsCommand {
 		tas blank:false, min:1.0
         tae blank:false, min:1.0
         tap blank:false, min:1.0
-        fps blank:false, min:1.0
-        fpe blank:false, min:1.0
+        pds blank:false, min:0.0
+        pde blank:false, min:0.0
 		up blank:false, min:1.0
 		period blank:false, min:2013
 	}

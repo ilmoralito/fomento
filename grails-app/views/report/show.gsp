@@ -12,18 +12,24 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Nombre del socio</th>
-							<th>Dividendo del periodo Socio</th>
-							<th>Dividendo del periodo Empresa</th>
+							<th>Socio</th>
+							<th>FPS</th>
+							<th>Dividendos a pagar Socio</th>
+							<th>FPE</th>
+							<th>Dividendos a pagar Empresa</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${dividends}" var="dividend">
 						<tr>
 							<td>
-								<g:link controller="deduction" action="list" id="${dividend.id}">${dividend.partner}</g:link>
+								<g:link controller="deduction" action="list" id="${dividend.id}">
+									${dividend.partner}
+								</g:link>
 							</td>
+							<td><fomento:fp partner="${dividend.partner}" period="${dividend.period}" fee="fee" capital="capitalization"/></td>
 							<td>${dividend.partnerDividend}</td>
+							<td><fomento:fp partner="${dividend.partner}" period="${dividend.period}" fee="factoryFee" capital="factoryCapital"/></td>
 							<td>${dividend.factoryDividend}</td>
 						</tr>
 						</g:each>

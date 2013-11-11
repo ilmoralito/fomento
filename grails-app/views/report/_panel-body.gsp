@@ -25,7 +25,7 @@
 			<td>${up}</td>
 		</tr>
 		<tr>
-			<td>Perido</td>
+			<td>Periodo</td>
 			<td>${(params.period) ?: period}</td>
 		</tr>
 	</tbody>
