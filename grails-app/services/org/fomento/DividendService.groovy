@@ -5,16 +5,8 @@ class DividendService {
 	def feeService
 
 	def feePeriodData(partners, Integer period) {
-		BigDecimal tas = 0
-		BigDecimal tae = 0
-
-		partners.each { partner ->
-			def totalPartnerFeesByPeriod = feeService.totalFeesByPeriod(partner, period, "fee")
-			def totalFactoryFeesByPeriod = feeService.totalFeesByPeriod(partner, period, "factoryFee")
-
-			tas = tas + totalPartnerFeesByPeriod
-			tae = tae + totalFactoryFeesByPeriod
-		}
+		BigDecimal tas = feeService.ta(period, "fee")
+		BigDecimal tae = feeService.ta(period, "factoryFee")
 
 		BigDecimal tap = tas + tae
 		BigDecimal pds = tas / tap
@@ -42,12 +34,4 @@ class DividendService {
 		[partnerDP:partnerDP, factoryDP:factoryDP]
     }
 
-    /*
-    def dd(BigDecimal up, BigDecimal pd, BigDecimal fp) {
-    	BigDecimal uc = up * pd
-    	BigDecimal dd = uc * fp
-
-    	return up
-    }
-    */
 }

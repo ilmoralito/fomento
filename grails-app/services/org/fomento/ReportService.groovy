@@ -8,7 +8,7 @@ class ReportService {
     def fp(Partner partner, Integer period, String fee, String capital) {
         def result = dividendService.feePeriodData(partner, period)
 
-        BigDecimal tap = result.tap
+        BigDecimal ta = (capital == "capitalization") ? result.tas : result.tae
         BigDecimal ap = feeService.totalFeesByPeriod(partner, period, fee)
         BigDecimal se
 
@@ -25,7 +25,7 @@ class ReportService {
             }
         }
 
-        BigDecimal fp = (ap + se) / (tap + ts)
+        BigDecimal fp = (ap + se) / (ta + ts)
 
         return fp
     }

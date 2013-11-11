@@ -19,4 +19,17 @@ class FeeService implements Serializable {
         result
     }
 
+    def ta(Integer period, String property) {
+        def criteria = Fee.createCriteria()
+        def ta = criteria.get {
+            eq "period", period
+
+            projections {
+                sum property
+            }
+        }
+
+        ta
+    }
+
 }
