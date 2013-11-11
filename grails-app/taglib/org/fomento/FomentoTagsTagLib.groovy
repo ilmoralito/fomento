@@ -81,25 +81,6 @@ class FomentoTagsTagLib {
 		out << g.formatNumber(number:tap, type:"number", maxFractionDigits:2)
 	}
 
-	/*
-	def dd = { attrs ->
-		BigDecimal tas = attrs.double("tas")
-		BigDecimal tae = attrs.double("tae")
-		String flag = attrs.flag
-		BigDecimal dd = 0
-
-		BigDecimal tap = tas + tae
-
-		if (flag) {
-			dd = (tas / tap) * 100
-		} else {
-			dd = (tae / tap) * 100
-		}
-
-		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
-	}
-	*/
-
 	def dd = { attrs ->
 		BigDecimal up = attrs.double("up")
 		BigDecimal pd = attrs.double("pd")
@@ -109,4 +90,5 @@ class FomentoTagsTagLib {
 
 		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
 	}
+
 }
