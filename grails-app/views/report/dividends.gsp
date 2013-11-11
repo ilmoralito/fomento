@@ -22,10 +22,10 @@
 						<g:each in="${partners}" var="partner">
 							<tr>
 								<td>${partner}</td>
-								<td><fomento:fps partner="${partner}" period="${period}" tap="${tap}"/></td>
-								<td><fomento:dd up="${up}" pd="${pds}" fp="${fps}" fp="${fomento.fps(partner:partner, period:period, tap:tap)}"/></td>
-								<td><fomento:fpe partner="${partner}" period="${period}" tap="${tap}"/></td>
-								<td><fomento:dd up="${up}" pd="${pde}" fp="${fpe}" fp="${fomento.fpe(partner:partner, period:period, tap:tap)}"/></td>
+								<td><fomento:fp partner="${partner}" period="${period}" fee="fee" capital="capitalization"/></td>
+								<td><fomento:dd up="${up}" pd="${pds}" fp="${fomento.fp(partner:partner, period:period, fee:'fee', capital:'capitalization')}"/></td>
+								<td><fomento:fp partner="${partner}" period="${period}" fee="factoryFee" capital="factoryCapital"/></td>
+								<td><fomento:dd up="${up}" pd="${pds}" fp="${fomento.fp(partner:partner, period:period, fee:'factoryFee', capital:'factoryCapital')}"/></td>
 							</tr>
 						</g:each>
 						<tr>

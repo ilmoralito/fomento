@@ -40,20 +40,15 @@ class FomentoTagsTagLib {
 		out << new Date()[YEAR]
 	}
 
-	def fps = { attrs ->
+	def fp = { attrs ->
 		Partner partner = attrs.partner
 		Integer period = attrs.int("period")
-		BigDecimal fps = reportService.fps(partner, period)
+		String fee = attrs.fee
+		String capital = attrs.capital
 
-		out << g.formatNumber(number:fps, type:"number", maxFractionDigits:2)
-	}
+		BigDecimal fp = reportService.fp(partner, period, fee, capital)
 
-	def fpe = { attrs ->
-		Partner partner = attrs.partner
-		Integer period = attrs.int("period")
-		BigDecimal fpe = reportService.fpe(partner, period)
-
-		out << g.formatNumber(number:fpe, type:"number", maxFractionDigits:2)
+		out << g.formatNumber(number:fp, type:"number", maxFractionDigits:2)
 	}
 
 	def dp = { attrs ->
@@ -70,15 +65,6 @@ class FomentoTagsTagLib {
 		} else {
 			out << g.formatNumber(number:result.factoryDP, type:"number", maxFractionDigits:2)
 		}
-	}
-
-	def tap = { attrs ->
-		def tas = attrs.double("tas")
-		def tae = attrs.double("tae")
-
-		def tap = tas + tae
-
-		out << g.formatNumber(number:tap, type:"number", maxFractionDigits:2)
 	}
 
 	def dd = { attrs ->

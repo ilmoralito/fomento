@@ -42,11 +42,12 @@ class DividendService {
 		[partnerDP:partnerDP, factoryDP:factoryDP]
     }
 
+    /*
     def dd(BigDecimal up, BigDecimal pd, BigDecimal fp) {
     	BigDecimal uc = up * pd
     	BigDecimal dd = uc * fp
 
-
     	return up
     }
+    */
 }
