@@ -19,7 +19,7 @@ class ReportService {
         }
 
         def criteria = Affiliation.createCriteria()
-        def ts = criteria.get {
+        BigDecimal ts = criteria.get {
             projections {
                 sum capital
             }

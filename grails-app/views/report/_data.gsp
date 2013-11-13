@@ -19,9 +19,9 @@
 			<tr>
 				<td>TOTAL</td>
 				<td></td>
-				<td>${up}</td>
+				<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="2"/></td>
 				<td></td>
-				<td>${up}</td>
+				<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="2"/></td>
 			</tr>
 	</tbody>
 </table>

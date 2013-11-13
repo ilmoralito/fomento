@@ -4,7 +4,6 @@ import static java.util.Calendar.*
 
 class FeeService implements Serializable {
 
-    //total fees by partner fee and by factory fee
     def totalFeesByPeriod(Partner partner, Integer period, String property) {
         def criteria = Fee.createCriteria()
         def result = criteria.get {

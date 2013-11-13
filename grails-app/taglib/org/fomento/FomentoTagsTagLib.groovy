@@ -48,23 +48,7 @@ class FomentoTagsTagLib {
 
 		BigDecimal fp = reportService.fp(partner, period, fee, capital)
 
-		out << g.formatNumber(number:fp, type:"number", maxFractionDigits:2)
-	}
-
-	def dp = { attrs ->
-		Partner partner = attrs.partner
-		BigDecimal tas = attrs.tas
-		BigDecimal up = attrs.up
-		Integer period = attrs.period
-		String flag = attrs.flag
-
-		def result = dividendService.getPeriodUtility(partner, tas, up, period)
-
-		if (attrs.flag == "partner") {
-			out << g.formatNumber(number:result.partnerDP, type:"number", maxFractionDigits:2)
-		} else {
-			out << g.formatNumber(number:result.factoryDP, type:"number", maxFractionDigits:2)
-		}
+		out << g.formatNumber(number:fp, type:"number", maxFractionDigits:"2")
 	}
 
 	def dd = { attrs ->
@@ -74,7 +58,7 @@ class FomentoTagsTagLib {
 
 		BigDecimal dd = reportService.dd(up, pd, fp)
 
-		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:2)
+		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:"2")
 	}
 
 }

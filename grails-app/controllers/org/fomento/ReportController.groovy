@@ -70,6 +70,7 @@ class ReportController {
             cmd.errors.allErrors.each {
                 print it
             }
+
     		return [cmd:cmd]
     	}
 
@@ -78,11 +79,11 @@ class ReportController {
 
     	if (!dividendsCount) {
 			partners.each { partner ->
-                def fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
-                def fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
+                BigDecimal fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
+                BigDecimal fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
 
-                def partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
-                def factoryDD = reportService.dd(cmd.up, cmd.pds, fpe)
+                BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
+                BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
 
                 def dividend = new Dividend (
                     partnerDividend:partnerDD,
@@ -102,8 +103,6 @@ class ReportController {
                         print it
                     }
                 }
-
-    			//partner.addToDividends(dividend)
 			}
 		} else {
 			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, pds:cmd.pds, pde:cmd.pde, up:cmd.up, period:cmd.period]
