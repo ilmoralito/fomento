@@ -8,12 +8,14 @@
 	</thead>
 	<tbody>
 		<g:each in="${partners}" var="partner">
+			<g:set var="fps" value="${fomento.fp(partner:partner, period:period, fee:'fee', capital:'capitalization')}"/>
+			<g:set var="fpe" value="${fomento.fp(partner:partner, period:period, fee:'factoryFee', capital:'factoryCapital')}"/>
 			<tr>
 				<td>${partner}</td>
-				<td><fomento:fp partner="${partner}" period="${period}" fee="fee" capital="capitalization"/></td>
-				<td><fomento:dd up="${up}" pd="${pds}" fp="${fomento.fp(partner:partner, period:period, fee:'fee', capital:'capitalization')}"/></td>
-				<td><fomento:fp partner="${partner}" period="${period}" fee="factoryFee" capital="factoryCapital"/></td>
-				<td><fomento:dd up="${up}" pd="${pde}" fp="${fomento.fp(partner:partner, period:period, fee:'factoryFee', capital:'factoryCapital')}"/></td>
+				<td>${fps}</td>
+				<td><fomento:dd up="${up}" pd="${pds}" fp="${fps}"/></td>
+				<td>${fpe}</td>
+				<td><fomento:dd up="${up}" pd="${pde}" fp="${fpe}"/></td>
 			</tr>
 		</g:each>
 			<tr>

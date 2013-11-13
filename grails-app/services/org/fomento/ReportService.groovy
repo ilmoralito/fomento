@@ -27,12 +27,17 @@ class ReportService {
 
         BigDecimal fp = (ap + se) / (ta + ts)
 
+        print "---------------1"
+        println fp
         return fp
     }
 
     def dd(BigDecimal up, BigDecimal pd, BigDecimal fp) {
         BigDecimal uc = up * pd
         BigDecimal dd = uc * fp
+
+        print "---------------2"
+        println fp
 
         return dd
     }

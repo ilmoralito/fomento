@@ -79,8 +79,8 @@ class ReportController {
 
     	if (!dividendsCount) {
 			partners.each { partner ->
-                BigDecimal fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
-                BigDecimal fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
+                def fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
+                def fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
 
                 BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
                 BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
