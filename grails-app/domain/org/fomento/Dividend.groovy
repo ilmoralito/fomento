@@ -16,10 +16,10 @@ class Dividend {
     BigDecimal up
     Integer period
 
+    Capitalization capitalization
+
 	Date dateCreated
 	Date lastUpdated
-
-    Deduction deduction
 
     static constraints = {
         partnerDividend blank:false, min:0.0
@@ -31,7 +31,7 @@ class Dividend {
         pde blank:false, min:0.0
         period blank:false, min:2013
         up blank:false, min:1.0
-        deduction nullable:true
+        capitalization nullable:true
     }
 
     static namedQueries = {

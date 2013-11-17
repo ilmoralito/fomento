@@ -16,7 +16,8 @@ class ReportController {
 		overwriteDividends:["GET", "POST"],
 		list:"GET",
 		show:"GET",
-        delete:"GET"
+        delete:"GET",
+        capitalize:["GET", "POST"]
 	]
 
     def dividends(DividendsCommand cmd) {
@@ -152,7 +153,6 @@ class ReportController {
     	}
     }
 
-    //delete
     @Secured("ROLE_ADMIN")
     def delete(Integer period) {
         def query = Dividend.where {
@@ -164,6 +164,35 @@ class ReportController {
         flash.message = "$total dividendos eliminados"
 
         redirect action:"list"
+    }
+
+    def capitalize(Integer id) {
+        def dividend = Dividend.get(id)
+
+        if (!dividend) {
+            redirect action:"list"
+        }
+
+        def capitalization
+
+        if (request.method == "POST") {
+            if (params.capitalizationId) {
+                //update
+                capitalization = Capitalization.get(params.capitalizationId)
+                capitalization.percentage = params.int("percentage")
+            } else {
+                //create
+                capitalization = new Capitalization(percentage:params.percentage, dividend:dividend)
+            }
+
+            if (!capitalization.save()) {
+                capitalization.errors.allErrors.each {
+                    print it
+                }
+            }
+        }
+
+        [dividend:dividend]
     }
 
 }

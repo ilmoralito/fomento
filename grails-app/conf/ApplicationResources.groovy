@@ -24,9 +24,9 @@ modules = {
     	resource url:"css/component.css"
     }
 
-    deductions {
+    capitalize {
         dependsOn "jquery"
         dependsOn "app"
-        resource url:"js/deductions.js"
+        resource url:"js/capitalize.js"
     }
 }

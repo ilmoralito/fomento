@@ -23,7 +23,7 @@
 						<g:each in="${dividends}" var="dividend">
 						<tr>
 							<td>
-								<g:link controller="deduction" action="list" id="${dividend.id}">
+								<g:link action="capitalize" id="${dividend.id}">
 									${dividend.partner}
 								</g:link>
 							</td>
