@@ -12,9 +12,9 @@
 			<g:set var="fpe" value="${fomento.fp(partner:partner, period:period, fee:'factoryFee', capital:'factoryCapital')}"/>
 			<tr>
 				<td>${partner}</td>
-				<td>${fps}</td>
+				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="2"/></td>
 				<td><fomento:dd up="${up}" pd="${pds}" fp="${fps}"/></td>
-				<td>${fpe}</td>
+				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="2"/></td>
 				<td><fomento:dd up="${up}" pd="${pde}" fp="${fpe}"/></td>
 			</tr>
 		</g:each>

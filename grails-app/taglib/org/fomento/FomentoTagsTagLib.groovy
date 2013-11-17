@@ -48,7 +48,7 @@ class FomentoTagsTagLib {
 
 		BigDecimal fp = reportService.fp(partner, period, fee, capital)
 
-		out << g.formatNumber(number:fp, type:"number", maxFractionDigits:"2")
+		out << fp
 	}
 
 	def dd = { attrs ->

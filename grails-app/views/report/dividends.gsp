@@ -36,7 +36,6 @@
 						<g:render template="panel-body"/>
 						<g:form action="applyDividends">
 							<g:render template="info"/>
-
 							<button type="submit" class="btn btn-default">
 								<span class="glyphicon glyphicon-floppy-save"></span>
 							</button>
