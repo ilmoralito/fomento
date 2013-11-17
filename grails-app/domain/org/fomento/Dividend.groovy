@@ -27,8 +27,8 @@ class Dividend {
         tas blank:false, min:0.0
         tae blank:false, min:0.0
         tap blank:false, min:0.0
-        pds blank:false, min:0.0
-        pde blank:false, min:0.0
+        pds blank:false, min:0.00, scale:4
+        pde blank:false, min:0.00, scale:4
         period blank:false, min:2013
         up blank:false, min:1.0
         capitalization nullable:true
