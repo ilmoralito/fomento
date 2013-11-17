@@ -14,11 +14,11 @@
 		</tr>
 		<tr>
 			<td>PDS</td>
-			<td><g:formatNumber number="${pds}" type="number" maxFractionDigits="2"/>%</td>
+			<td><g:formatNumber number="${pds * 100}" type="number" maxFractionDigits="2"/>%</td>
 		</tr>
 		<tr>
 			<td>PDE</td>
-			<td><g:formatNumber number="${pde}" type="number" maxFractionDigits="2"/>%</td>
+			<td><g:formatNumber number="${pde * 100}" type="number" maxFractionDigits="2"/>%</td>
 		</tr>
 		<tr>
 			<td>UP</td>
