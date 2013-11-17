@@ -31,9 +31,7 @@
 			<br>
 			<g:if test="${tas && tae}">
 				<div class="panel panel-info">
-					<div class="panel-heading">
-						Resultados
-					</div>
+					<g:render template="panel-heading"/>
 					<div class="panel-body">
 						<g:render template="panel-body"/>
 						<g:form action="applyDividends">

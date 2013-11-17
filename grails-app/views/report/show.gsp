@@ -43,9 +43,7 @@
 		<div class="col-md-3">
 			<br>
 			<div class="panel panel-info">
-				<div class="panel-heading">
-					Resultados
-				</div>
+				<g:render template="panel-heading"/>
 				<div class="panel-body">
 					<g:render template="panel-body"/>
 				</div>
