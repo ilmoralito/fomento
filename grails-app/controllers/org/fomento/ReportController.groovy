@@ -117,18 +117,19 @@ class ReportController {
     def overwriteDividends() {
     	if (request.method == "POST") {
     		def partners = Partner.findAllByStatus(true)
-            def pds = params.double("pds")
-            def pde = params.double("pde")
-            def up = params.double("up")
-            def period = params.int("period")
+            BigDecimal pds = params.double("pds")
+            BigDecimal pde = params.double("pde")
+            BigDecimal up = params.double("up")
+            Integer period = params.int("period")
 
             partners.each { partner ->
                 def dividend = Dividend.findByPartnerAndPeriod(partner, period)
+
                 def fps = reportService.fp(partner, period, "fee", "capitalization")
                 def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
 
-                def partnerDD = reportService.dd(up, pds, fps)
-                def factoryDD = reportService.dd(up, pds, fpe)
+                BigDecimal partnerDD = reportService.dd(up, pds, fps)
+                BigDecimal factoryDD = reportService.dd(up, pde, fpe)
 
     			if (dividend) {
     				dividend.partnerDividend = partnerDD
@@ -136,8 +137,8 @@ class ReportController {
                     dividend.tas = params.double("tas")
                     dividend.tae = params.double("tae")
                     dividend.tap = params.double("tap")
-                    dividend.pds = params.double("pds")
-                    dividend.pde = params.double("pde")
+                    dividend.pds = pds
+                    dividend.pde = pde
                     dividend.up = up
 
     				if (!dividend.save()) {
