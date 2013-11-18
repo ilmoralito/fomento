@@ -10,12 +10,12 @@ class ReportService {
 
         BigDecimal ta = (capital == "capitalization") ? result.tas : result.tae
         BigDecimal ap = feeService.totalFeesByPeriod(partner, period, fee)
-        BigDecimal se
+        BigDecimal ss
 
         if (capital == "capitalization") {
-            se = partner?.affiliation?.capitalization
+            ss = partner?.affiliation?.capitalization
         } else {
-            se = partner?.affiliation?.factoryCapital
+            ss = partner?.affiliation?.factoryCapital
         }
 
         def criteria = Affiliation.createCriteria()
@@ -25,7 +25,7 @@ class ReportService {
             }
         }
 
-        BigDecimal fp = (ap + se) / (ta + ts)
+        BigDecimal fp = (ap + ss) / (ta + ts)
 
         return fp
     }
