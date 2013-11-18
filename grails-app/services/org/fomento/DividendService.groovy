@@ -15,4 +15,22 @@ class DividendService {
 		[tas:tas, tae:tae, tap:tap, pds:pds, pde:pde]
 	}
 
+	def total(Partner partner) {
+		def dividends = Dividend.findAllByPartner(partner)
+		def total = 0
+
+		dividends.each { dividend ->
+			if (dividend?.capitalization?.percentage) {
+				def percentage = dividend.capitalization.percentage / 100
+				def periodDividend = dividend.partnerDividend * percentage
+
+				total = total + periodDividend
+			} else {
+				total = total + dividend.partnerDividend
+			}
+		}
+
+		total
+	}
+
 }

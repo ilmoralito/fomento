@@ -13,7 +13,8 @@ class ReportService {
         BigDecimal ss
 
         if (capital == "capitalization") {
-            ss = partner?.affiliation?.capitalization
+            def sis = partner?.affiliation?.capitalization
+            ss = sis + dividendService.total(partner)
         } else {
             ss = partner?.affiliation?.factoryCapital
         }
