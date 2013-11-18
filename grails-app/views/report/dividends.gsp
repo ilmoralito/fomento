@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-9">
 			<g:if test="${partners}">
-				<g:render template="data"/>
+				<g:render template="data" model="[results:partners]"/>
 			</g:if>
 			<g:else>
 				<h3>...</h3>
