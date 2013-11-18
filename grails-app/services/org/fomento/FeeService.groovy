@@ -15,7 +15,7 @@ class FeeService implements Serializable {
             }
         }
 
-        result
+        return (result) ?: 0
     }
 
     def ta(Integer period, String property) {
