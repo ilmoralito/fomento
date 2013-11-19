@@ -16,17 +16,17 @@
               <g:link controller="report" action="list">Dividendos</g:link>
             </li>
             <!--add fees manualy-->
-            <li class="dropdown ${(actionName == 'partnerToApplyFees') ? 'active' : ''}">
+            <li class="dropdown ${(controllerName == 'fee') ? 'active' : ''}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Catorcena']">Catorcena</g:link>
+                    <g:link controller="fee" action="create" params="[typeOfPayment:'Catorcena']">Catorcena</g:link>
                   </li>
                   <li>
-                      <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Fin de mes']">Fin de mes</g:link>
+                      <g:link controller="fee" action="create" params="[typeOfPayment:'Fin de mes']">Fin de mes</g:link>
                   </li>
                   <li>
-                    <g:link controller="partner" action="partnerToApplyFees" params="[typeOfPayment:'Bono']">Bono</g:link>
+                    <g:link controller="fee" action="create" params="[typeOfPayment:'Bono']">Bono</g:link>
                   </li>
                 </ul>
             </li>
@@ -35,7 +35,7 @@
                         <g:link controller="user" action="list">Administrar</g:link>
                     </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${((controllerName == 'partner' || controllerName == 'fee') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
+  	  			<li class="${((controllerName == 'partner') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
                     <g:link controller="partner">Socios</g:link>
                 </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">

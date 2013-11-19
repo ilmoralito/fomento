@@ -64,16 +64,12 @@ class BootStrap {
                 def fee1 = new Fee(
                     fee:juanPerez.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:juanPerez.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 62,
                     period:2013
                 )
 
                 def fee2 = new Fee(
                     fee:juanPerez.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:juanPerez.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 30,
                     period:2013
                 )
 
@@ -113,16 +109,12 @@ class BootStrap {
                 def fee3 = new Fee(
                     fee:johnDoe.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:johnDoe.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 62,
                     period:2013
                 )
 
                 def fee4 = new Fee(
                     fee:johnDoe.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:johnDoe.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 30,
                     period:2013
                 )
 
@@ -162,24 +154,18 @@ class BootStrap {
                 def fee5 = new Fee(
                     fee:fulano.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 62,
                     period:2013
                 )
 
                 def fee6 = new Fee(
                     fee:fulano.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 30,
                     period:2013
                 )
 
                 def fee7 = new Fee(
                     fee:fulano.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    total:fulano.affiliation.fee + configurationService.loadFactoryFee(),
-                    paymentDate:new Date() - 10,
                     period:2013
                 )
 

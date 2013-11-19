@@ -43,7 +43,7 @@ class ReportController {
     }
 
     def list() {
-    	def dividends = Dividend.byPeriod().list()
+    	def dividends = Dividend.findByPeriod(2013)
 
     	[dividends:dividends]
     }

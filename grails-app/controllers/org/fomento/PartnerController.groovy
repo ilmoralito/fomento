@@ -158,49 +158,6 @@ class PartnerController {
         [partner:partner]
     }
 
-    def partnerToApplyFees(String typeOfPayment) {
-        if (request.method == "POST") {
-            def partners = params.list("partners")
-
-            if (partners) {
-                //check if new fees date are not in partner fees paymentDate
-                //TODO:check later if thsi is posible to do inside Partner domain class in beforeInsert event!
-                def today = new Date()
-                def year = today[YEAR]
-                def month = today[MONTH]
-
-                partners.each { n ->
-                    def partner = Partner.findByNumberOfEmployee(n)
-
-                    //check if current partner do not have a fee in this month and year
-                    //if this condition is false then apply new fee else jump to the next partner in list
-                    def flag = false
-
-                    partner.fees.each {
-                        if (it.paymentDate[YEAR] == year && it.paymentDate[MONTH] == month) {
-                            flag = true
-                        }
-                    }
-
-                    if (!flag) {
-                        partner.addToFees(
-                            fee:partner.affiliation.fee,
-                            factoryFee:configurationService.loadFactoryFee(),
-                            total:partner.affiliation.fee + configurationService.loadFactoryFee(),
-                            paymentDate:new Date()
-                        )
-
-                        partner.save()
-                    }
-                }
-            } else {
-                flash.message = "Debes seleccionar socios para poder continuar"
-            }
-        }
-
-        [partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
-    }
-
     def report(Integer id, Integer period) {
         def partner = Partner.get(id)
 
