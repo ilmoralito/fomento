@@ -22,7 +22,7 @@
 						<tr>
 							<td>${fee}</td>
 							<td>${fee.factoryFee}</td>
-							<td>${fee.paymentDate.format("yyyy-MM-dd")}</td>
+							<td>${fee.dateCreated.format("yyyy-MM-dd")}</td>
 							<td style="width:1px;"></td>
 						</tr>
 					</g:each>
