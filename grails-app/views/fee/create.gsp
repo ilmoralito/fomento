@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, check"/>
 </head>
 <body>
 	<g:if test="${partners}">
@@ -12,7 +12,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th></th>
+						<th><a href="#" id="all"><span class="glyphicon glyphicon-ok"></span></a></th>
 						<th>Socio</th>
 					</tr>
 				</thead>
@@ -20,7 +20,7 @@
 					<g:each in="${partners}" var="partner">
 						<tr>
 							<td style="width:1px;">
-								<g:checkBox name="partners" value="${partner.id}" checked="false"/>
+								<g:checkBox name="partners" class="partners" value="${partner.id}" checked="false"/>
 							</td>
 							<td>${partner}</td>
 						</tr>

@@ -29,4 +29,10 @@ modules = {
         dependsOn "app"
         resource url:"js/capitalize.js"
     }
+
+    check {
+        dependsOn "jquery"
+        dependsOn "app"
+        resource url:"js/check.js"
+    }
 }
