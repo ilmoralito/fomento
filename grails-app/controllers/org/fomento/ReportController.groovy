@@ -43,9 +43,8 @@ class ReportController {
     }
 
     def list() {
-    	def dividends = Dividend.findByPeriod(2013)
-
-    	[dividends:dividends]
+        def dividends = Dividend.executeQuery("select distinct d.period from Dividend d " +"where d.period >= ?",[2013])
+      	[dividends:dividends]
     }
 
     def show(Integer period) {
