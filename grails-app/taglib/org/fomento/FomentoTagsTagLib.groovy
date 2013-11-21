@@ -61,4 +61,24 @@ class FomentoTagsTagLib {
 		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:"2")
 	}
 
+	def feeDetail = { attrs ->
+		Partner partner = attrs.partner
+		Integer period = attrs.int("period")
+		Integer month = attrs.int("month")
+
+		Date from = new Date() - 21
+		Date to = new Date() + 9
+		
+		def query = Fee.where {
+			//partner == partner && period == period && month(dateCreated) == 11
+			partner == partner
+		}
+
+		print query.list()
+
+		//def result = Fee.findAllByPartnerAndPeriodAndDateCreatedGreaterThanAndOrEqualAndDateCreatedLessThanOrEqual(partner, period, from, to)
+
+		out << "27, S:400 E:205.5"
+	}
+
 }

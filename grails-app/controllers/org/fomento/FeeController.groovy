@@ -8,7 +8,8 @@ class FeeController {
 
 	static defaultAction = "create"
 	static allowedMethods = [
-		"create":["GET", "POST"]
+		create:["GET", "POST"],
+		list:["GET", "POST"]
 	]
 
 	def create(String typeOfPayment) {
@@ -38,6 +39,20 @@ class FeeController {
 		}
 
 		[partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
+	}
+
+	def list() {
+		if (request.method == "POST") {
+			def criteria = Fee.createCriteria()
+			def partners = criteria.list {
+				eq "period", params.int("period")
+				projections {
+					distinct "partner"
+				}
+			}
+
+			return [partners:partners]
+		}
 	}
 
 }

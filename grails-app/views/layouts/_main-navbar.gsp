@@ -28,6 +28,10 @@
                   <li>
                     <g:link controller="fee" action="create" params="[typeOfPayment:'Bono']">Bono</g:link>
                   </li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation">
+                    <g:link role="menuitem" tabindex="-1" controller="fee" action="list">Historial</g:link>
+                  </li>
                 </ul>
             </li>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
