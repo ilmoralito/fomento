@@ -64,13 +64,15 @@ class BootStrap {
                 def fee1 = new Fee(
                     fee:juanPerez.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    period:2013
+                    period:2013,
+                    dateCreated:new Date() - 250
                 )
 
                 def fee2 = new Fee(
                     fee:juanPerez.affiliation.fee,
                     factoryFee:configurationService.loadFactoryFee(),
-                    period:2013
+                    period:2013,
+                    dateCreated:new Date() - 150
                 )
 
                 juanPerez.addToFees(fee1)
