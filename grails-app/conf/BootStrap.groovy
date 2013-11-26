@@ -127,6 +127,7 @@ class BootStrap {
                 //affiliation
                 def a3 = new Affiliation(
                     fee:300,
+                    range:null,
                     typeOfPayment:"Bono",
                     factoryFee: configurationService.loadFactoryFee(),
                     enrollmentDate:new Date() - 120,

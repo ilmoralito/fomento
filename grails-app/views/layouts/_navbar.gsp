@@ -10,5 +10,10 @@
 	<li class="${(actionName == 'changeStatus') ? 'active' : ''}">
 		<g:link controller="partner" action="changeStatus" id="${params?.id}">Estado</g:link>
 	</li>
+	<g:if test="${partner?.affiliation?.typeOfPayment == 'Catorcena'}">
+		<li class="${(actionName == 'splitFee') ? 'active' : ''}">
+			<g:link controller="partner" action="splitFee" id="${params?.id}">Dividir cuota</g:link>
+		</li>
+	</g:if>
 </ul>
 <br>

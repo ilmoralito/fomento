@@ -3,6 +3,7 @@ package org.fomento
 class Affiliation implements Serializable {
 
     BigDecimal fee
+    BigDecimal range
     String typeOfPayment
     BigDecimal factoryFee
     Date enrollmentDate
@@ -14,9 +15,10 @@ class Affiliation implements Serializable {
 
     static constraints = {
         fee blank:false, min:1.00
-        typeOfPayment blank:false, inList:["Catorcena", "Fin de mes", "Bono"], maxSize:255
+        range nullable:true, min:1.00, validator: { val, obj -> val < obj.fee }
+        typeOfPayment blank:false, inList: ["Catorcena", "Fin de mes", "Bono"], maxSize:255
         factoryFee blank:false, min:200.00
-        enrollmentDate blank:false, validator: {enrollmentDate ->
+        enrollmentDate blank:false, validator: { enrollmentDate ->
             def today = new Date()
 
             enrollmentDate <= today
