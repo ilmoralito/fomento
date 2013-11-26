@@ -26,7 +26,7 @@
 		     	<g:passwordField class="form-control" name="password"/>
 		     </div>
 		    
-		    <g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdate')}"class="btn btn-default pull-right"/>
+		    <g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdate')}"class="btn btn-default"/>
 		</g:form>
 	</div>
 
