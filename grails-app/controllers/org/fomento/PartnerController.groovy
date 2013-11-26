@@ -13,14 +13,33 @@ class PartnerController {
 
 	static defaultAction = "list"
 	static allowedMethods = [
-		"list":["GET","POST"],
-		"create":["GET","POST"],
-        "delete":["GET","POST"],
-        "show":"GET",
-        "update":"POST",
-        "changeStatus":["GET","POST"],
-        "partnerToApplyFees":["GET","POST"]
+		list:["GET","POST"],
+		create:["GET","POST"],
+        delete:["GET","POST"],
+        show:"GET",
+        update:"POST",
+        changeStatus:["GET","POST"],
+        partnerToApplyFees:["GET","POST"],
+        splitFee:["GET","POST"]
 	]
+
+    def beforeInterceptor = [action: this.&checkTypeOfPayment, only: 'splitFee']
+
+    private checkTypeOfPayment() {
+        def partner = Partner.get(params.int("id"))
+
+        if (!partner) {
+            response.sendError 404
+        } else {
+            def typeOfPayment = partner.affiliation.typeOfPayment
+
+            if (typeOfPayment != "Catorcena") {
+                flash.message = "El tipo de pago ${typeOfPayment} no es divisible"
+                redirect action: "show", params:[id:params.id]
+                return false
+            }
+        }
+    }
 
     def list() {
         if (request.method == "GET") {
@@ -153,6 +172,28 @@ class PartnerController {
             if (!partner.save()) {
                 return [partner:partner]
             }
+        }
+
+        [partner:partner]
+    }
+
+    def splitFee(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        if (request.method == "POST") {
+            partner.affiliation.range = params.double("range")
+
+            if (!partner.affiliation.save()) {
+                partner.refresh()
+                flash.message = "Dato incorrecto, debe ser mayor que 1 y menor que $partner.affiliation.fee"
+            } else {
+                flash.message = (params.range) ? "Cuota dividida" : "Restablecida a una sola cuota"
+            }
+
         }
 
         [partner:partner]

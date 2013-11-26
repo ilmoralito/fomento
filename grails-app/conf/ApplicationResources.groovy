@@ -25,14 +25,13 @@ modules = {
     }
 
     capitalize {
-        dependsOn "jquery"
-        dependsOn "app"
+        dependsOn "jquery, app"
         resource url:"js/capitalize.js"
     }
 
     check {
-        dependsOn "jquery"
-        dependsOn "app"
+        dependsOn "jquery, app"
         resource url:"js/check.js"
     }
+
 }

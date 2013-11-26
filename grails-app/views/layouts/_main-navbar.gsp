@@ -34,17 +34,17 @@
                   </li>
                 </ul>
             </li>
+            <li class="${((controllerName == 'partner') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
+              <g:link controller="partner">Socios</g:link>
+            </li>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
-  	  			    <li class="${(controllerName == 'user' && actionName != 'profile' ) ? 'active' : ''}">
-                        <g:link controller="user" action="list">Administrar</g:link>
-                    </li>
+  	  			  <li class="${(controllerName == 'user' && actionName != 'profile' ) ? 'active' : ''}">
+                <g:link controller="user" action="list">Administrar</g:link>
+              </li>
   	  			</sec:ifAllGranted>
-  	  			<li class="${((controllerName == 'partner') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
-                    <g:link controller="partner">Socios</g:link>
-                </li>
   	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">
-                    <g:link controller="user" action="profile">Perfil</g:link>
-                </li>
+                <g:link controller="user" action="profile">Perfil</g:link>
+            </li>
   	    		<li><g:link controller="logout">Salir</g:link></li>
   	  		</ul>
   		</nav>
