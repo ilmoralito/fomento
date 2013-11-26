@@ -31,7 +31,8 @@
 	</div>
 
 	<div class="col-md-3">
-	   	<h4>Privilegios</h4>
+	   	<h4 style="text-align:center">Privilegios</h4>
+	   	<hr>
 	   	<div class="col-md-12">
 		   	<g:form controller="user"  action="enabledaccount">
 		   		<g:hiddenField name="userRole" value="${userRole}"/>
@@ -47,7 +48,8 @@
 				<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdateaccount')}"class="btn btn-default btn-sm"/>
 			</g:form>
 		</div>
-		
+		<br>
+		<hr>
 		<div class="col-md-12">
 			<g:if test="${userRole=="NO_ROLE"}">
 				<g:form controller="user" action="assignrole">

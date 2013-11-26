@@ -14,7 +14,7 @@
 			<div class="col-md-1 usnum">
 				<h2>${i+1}</h2>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div><strong>email:</strong></div>
 				<div><strong>Nombres y Apellidos:</strong></div>
 				<div><strong>Estado de la cuenta:</strong></div>
