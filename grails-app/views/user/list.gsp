@@ -14,7 +14,7 @@
 			<div class="col-md-1 usnum">
 				<h2>${i+1}</h2>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div><strong>email:</strong></div>
 				<div><strong>Nombres y Apellidos:</strong></div>
 				<div><strong>Estado de la cuenta:</strong></div>
@@ -27,8 +27,12 @@
 					<else>${us.fullName}</else>
 				</div>
 				<div>
-					<g:if test="${us.enabled==true}">Cuenta Habilitada</g:if>
-					<g:else>Cuenta Deshabilitada</g:else>
+					<g:if test="${us.enabled==true}">
+						<span class="label label-success sz">Cuenta Habilitada</span>
+					</g:if>
+					<g:else>
+						<span class="label label-danger sz">Cuenta Deshabilitada</span>
+					</g:else>
 				</div>
 			</div>
 
