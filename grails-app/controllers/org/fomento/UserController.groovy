@@ -16,7 +16,7 @@ class UserController{
     	[userInstance:new User(params)]
     }
 
-    def delete(){
+    def delete1(){
     	def userInstance = User.get(params.id)
     	if (!userInstance) {
             response.sendError 404
@@ -27,6 +27,42 @@ class UserController{
         	redirect(action:"list")
         }else{
         	[userInstance:userInstance]
+        }
+    }
+
+    def delete(){
+        def role, role2, removeR1, removeR2
+        role = Role.get(1)
+        role2 = Role.get(2)
+        
+        def userInstance = User.get(params.id)
+        
+        if (!userInstance) {
+            response.sendError 404
+            return false
+        }
+        
+        if (request.post) {
+            userInstance = User.get(params.id)
+            removeR1 = UserRole.findByUserAndRole(userInstance, role)
+            
+            if(!removeR1){
+                removeR2 = UserRole.findByUserAndRole(userInstance, role2) 
+                if (!removeR2) {
+                    //Seguir y eliminar usuario sin role
+                }else{
+                    removeR2.delete(flush:true)
+                }
+            }else{
+                removeR1.delete(flush:true)
+            }
+
+            userInstance.delete()
+            flash.message="El usuario ha sido borrado"
+            redirect(action:"list")
+
+        }else{
+            [userInstance:userInstance]
         }
     }
 
