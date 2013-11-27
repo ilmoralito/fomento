@@ -9,7 +9,8 @@ class FeeController {
 	static defaultAction = "create"
 	static allowedMethods = [
 		create:["GET", "POST"],
-		list:["GET", "POST"]
+		list:["GET", "POST"],
+		show:"GET"
 	]
 
 	def create(String typeOfPayment) {
@@ -61,6 +62,35 @@ class FeeController {
 
 			return [partners:partners]
 		}
+	}
+
+	def show(Long id) {
+		def fee = Fee.get(id)
+
+		if (!fee) {
+			response.sendError 404
+		}
+
+		[fee:fee]
+	}
+
+	def update(Long id) {
+		def fee = Fee.get(id)
+
+		if (!fee) {
+			response.sendError 404
+		}
+
+		fee.properties["fee", "factoryFee"] = params
+
+		if (!fee.save()) {
+			render view:"show", model:[fee:fee, id:id, partner:params?.partner, period:params?.period]
+			return false
+		}
+
+		flash.message = "Aztualizacion confirmada"
+
+		redirect action:"show", params:[id:id, partner:params?.partner, period:params?.period]
 	}
 
 }
