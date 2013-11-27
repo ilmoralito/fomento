@@ -28,7 +28,7 @@ hr {
 }
 
 .usnum {
-	background: #22C973;
+	background: #222222;
 	color: #fff;
 	text-align: center;
 	margin-bottom: 2px;
@@ -40,11 +40,8 @@ table.table-small {
 	text-align: center;
 }
 
-.disaccount{
-	color: #D2322D;
-}
+.disaccount{color: #D2322D;}
 
-.enableaccount{
-	color:#47A447;
-}
+.enableaccount{color:#47A447;}
 
+.sz{font-size:85%;}

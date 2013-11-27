@@ -55,10 +55,10 @@
 					</g:else>
 
 					<g:if test="${userInstance.enabled==true}">
-						<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdateaccount')}"class="btn btn-danger btn-sm"/>
+						<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-danger btn-sm"/>
 					</g:if>
 					<g:else>
-						<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdateaccount')}"class="btn btn-success btn-sm"/>
+						<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-success btn-sm"/>
 					</g:else>
 				</g:form>
 		</div>
@@ -82,7 +82,7 @@
 								<g:message code="org.fomento.admin"/>
 							</label>
 						</div>
-					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnassignrole')}"class="btn btn-primary btn-sm"/>
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-primary btn-sm"/>
 				</g:form>
 			</g:if>
 			
@@ -94,7 +94,7 @@
 						<g:checkBox name="roleuser"/>
 						<g:message code="org.fomento.roleuser"/>
 					</label>
-					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnchangerole')}"class="btn btn-primary btn-sm"/>
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-primary btn-sm"/>
 				</g:form>
 			</g:if>
 			<g:if test="${userRole=="ROLE_USER"}">
@@ -105,7 +105,7 @@
 						<g:checkBox name="roleadmin"/>
 						<g:message code="org.fomento.roleadmin"/>
 					</label>
-					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnchangerole')}"class="btn btn-primary btn-sm"/>
+					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-primary btn-sm"/>
 				</g:form>
 			</g:if>
 				
