@@ -16,20 +16,28 @@ class FeeController {
 		if (request.method == "POST") {
 			def p = params.list("partners")
 
-			def today = new Date()
-			def period = today[YEAR]
-
 			if (p) {
-				p.each { id ->
+				for(id in p) {
 					def partner = Partner.get(id)
 
-					partner.addToFees(
-						fee:partner.affiliation.fee,
-						factoryFee:partner.affiliation.factoryFee,
-						period:period
-					)
+					if (partner) {
+						def range = partner.affiliation.range
+						def lastFee = Fee.findAllByPartner(partner).last()
 
-					partner.save()
+						if (range == lastFee.fee) {
+							lastFee.properties["fee"] = partner.affiliation.fee
+							lastFee.save()
+							break
+						}
+
+						partner.addToFees(
+							fee:(typeOfPayment == "Catorcena" && partner.affiliation.range) ? partner.affiliation.range : partner.affiliation.fee,
+							factoryFee:partner.affiliation.factoryFee,
+							period:new Date()[YEAR]
+						)
+
+						partner.save()
+					}
 				}
 
 				flash.message = "${p.size()} cuotas aplicadas"
