@@ -25,9 +25,11 @@ class FeeController {
 					if (partner) {
 						def range = partner.affiliation.range
 						def lastFee = Fee.findAllByPartner(partner).last()
+						def date = (!params?.dateCreated) ? new Date() : new Date().parse("yyyy-MM-dd", params?.dateCreated)
 
 						if (range == lastFee.fee) {
-							lastFee.properties["fee"] = partner.affiliation.fee
+							lastFee.fee = partner.affiliation.fee
+							lastFee.lastUpdated = new Date()
 							lastFee.save()
 							break
 						}
@@ -35,7 +37,9 @@ class FeeController {
 						partner.addToFees(
 							fee:(typeOfPayment == "Catorcena" && partner.affiliation.range) ? partner.affiliation.range : partner.affiliation.fee,
 							factoryFee:partner.affiliation.factoryFee,
-							period:new Date()[YEAR]
+							period:new Date()[YEAR],
+							dateCreated:date,
+							lastUpdated:date
 						)
 
 						partner.save()
