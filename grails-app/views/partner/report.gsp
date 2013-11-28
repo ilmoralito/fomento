@@ -4,7 +4,6 @@
 	<r:require modules="bootstrap, app"/>
 </head>
 <body>
-	<!--FEES-->
 	<g:if test="${fees}">
 		<h3>Cuotas del periodo ${params?.period}</h3>
 		<table class="table table-hover">

@@ -10,7 +10,8 @@ class FeeController {
 	static allowedMethods = [
 		create:["GET", "POST"],
 		list:["GET", "POST"],
-		show:"GET"
+		show:"GET",
+		update:["GET", "POST"]
 	]
 
 	def create(String typeOfPayment) {
