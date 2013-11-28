@@ -45,3 +45,7 @@ table.table-small {
 .enableaccount{color:#47A447;}
 
 .sz{font-size:85%;}
+
+ul li{
+	list-style: none;
+}
