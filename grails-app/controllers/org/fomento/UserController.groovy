@@ -16,20 +16,6 @@ class UserController{
     	[userInstance:new User(params)]
     }
 
-    def delete1(){
-    	def userInstance = User.get(params.id)
-    	if (!userInstance) {
-            response.sendError 404
-        }
-        if (request.post) {
-        	userInstance.delete()
-        	flash.message="El usuario ha sido borrado"
-        	redirect(action:"list")
-        }else{
-        	[userInstance:userInstance]
-        }
-    }
-
     def delete(){
         def role, role2, removeR1, removeR2
         role = Role.get(1)
@@ -69,7 +55,6 @@ class UserController{
     def save(){
     	def userInstance = new User(params)
     	if (!userInstance.save(flush:true)) {
-    		flash.message=message("errores men")
     		render(view:"create", model:[userInstance:userInstance])
     		return false
     	}
