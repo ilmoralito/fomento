@@ -16,7 +16,7 @@
               <g:link controller="report" action="list">Dividendos</g:link>
             </li>
             <!--add fees manualy-->
-            <li class="dropdown ${(controllerName == 'fee') ? 'active' : ''}">
+            <li class="dropdown ${(controllerName == 'fee' && actionName != 'show') ? 'active' : ''}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li>
@@ -34,7 +34,7 @@
                   </li>
                 </ul>
             </li>
-            <li class="${((controllerName == 'partner') && actionName != 'partnerToApplyFees') ? 'active' : ''}">
+            <li class="${(controllerName == 'partner' || controllerName == 'fee' && actionName == 'show' && actionName != 'partnerToApplyFees' ) ? 'active' : ''}">
               <g:link controller="partner">Socios</g:link>
             </li>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">

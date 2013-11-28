@@ -19,6 +19,7 @@ class Fee implements Serializable {
 
     static mapping = {
         version false
+        autoTimestamp false
     }
 
     String toString() {
