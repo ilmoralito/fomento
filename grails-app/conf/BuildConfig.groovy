@@ -63,5 +63,6 @@ grails.project.dependency.resolution = {
         compile ':cloud-foundry:1.2.3'
         compile ":searchable:0.6.4"
         compile ':webflow:2.0.8.1'
+        compile ":jquery-ui:1.10.3"
     }
 }
