@@ -42,10 +42,28 @@
                 <g:link controller="user" action="list">Administrar</g:link>
               </li>
   	  			</sec:ifAllGranted>
-  	    		<li class="${((controllerName == 'user' && actionName == 'profile') ? 'active' : '')}">
-                <g:link controller="user" action="profile">Perfil</g:link>
+  	    		<li class="dropdown ${(controllerName == 'fee' && actionName != 'show') ? 'active' : ''}">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-user"></span>
+              <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                   <g:link controller="user" action="profile">
+                     <span class="glyphicon glyphicon-wrench"></span>
+                     Perfil
+                   </g:link>
+                  </li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation">
+                      <g:link controller="logout">
+                        <span class="glyphicon glyphicon-off"></span>
+                        Salir
+                      </g:link>
+                  </li>
+                </ul>
             </li>
-  	    		<li><g:link controller="logout">Salir</g:link></li>
   	  		</ul>
+
+
   		</nav>
 </nav>
