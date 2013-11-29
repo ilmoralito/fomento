@@ -29,9 +29,15 @@ modules = {
         resource url:"js/capitalize.js"
     }
 
-    check {
+    fees {
         dependsOn "jquery, app"
-        resource url:"js/check.js"
+        resource url:"js/fees.js"
+    }
+
+    overrides {
+        'jquery-theme' {
+            resource id:'theme', url:'css/custom-theme/jquery-ui-1.10.3.custom.min.css'
+        }
     }
 
 }
