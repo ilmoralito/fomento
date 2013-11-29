@@ -42,7 +42,7 @@
                 <g:link controller="user" action="list">Administrar</g:link>
               </li>
   	  			</sec:ifAllGranted>
-  	    		<li class="dropdown ${(controllerName == 'fee' && actionName != 'show') ? 'active' : ''}">
+  	    		<li class="dropdown ${(actionName == 'profile') ? 'active' : ''}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="glyphicon glyphicon-user"></span>
               <b class="caret"></b></a>
