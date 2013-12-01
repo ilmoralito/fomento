@@ -9,15 +9,17 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th style="width:1px;"></th>
+					<th width="1"></th>
+					<th width="1"><span class="glyphicon glyphicon-pencil"></span></th>
 					<th>Cuota de socio</th>
 					<th>Cuota de empresa</th>
 					<th>Fecha de cuota</th>
 				</tr>
 			</thead>
 			<tbody>
-				<g:each in="${fees}" var="fee">
+				<g:each in="${fees}" var="fee" status="i">
 					<tr>
+						<td>${i + 1}</td>
 						<td><g:link controller="fee" action="show" params="[id:fee.id, partner:fee.partner.id, period:params?.period]"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
 						<td>${fee}</td>
 						<td>${fee.factoryFee}</td>

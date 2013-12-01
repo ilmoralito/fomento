@@ -14,14 +14,16 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th><a href="#" id="all"><span class="glyphicon glyphicon-ok"></span></a></th>
+								<th width="1">
+									<span id="all" class="glyphicon glyphicon-th-list"></span>
+								</th>
 								<th>Socio</th>
 							</tr>
 						</thead>
 						<tbody>
 							<g:each in="${partners}" var="partner">
 								<tr>
-									<td style="width:1px;">
+									<td>
 										<g:checkBox name="partners" class="partners" value="${partner.id}" checked="false"/>
 									</td>
 									<td>${partner}</td>
@@ -39,7 +41,7 @@
 		</g:form>
 	</g:if>
 	<g:else>
-		<h4>No hay aun socios registrados con el tipo de pago ${params.typeOfPayment} registrado...</h4>
+		<h4>No hay aun socios registrados con el tipo de pago ${params.typeOfPayment}</h4>
 	</g:else>
 </body>
 </html>

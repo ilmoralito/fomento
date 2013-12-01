@@ -22,6 +22,15 @@ class FeeController {
 				for(id in p) {
 					def partner = Partner.get(id)
 
+					//check if current partner has reach 12 fees by period
+					//if this condition is true then abort adding a new fee
+					def period = Calendar.instance.get(Calendar.YEAR)
+					def query = Fee.countByPartnerAndPeriod(partner, period)
+
+					if (query == 12) {
+						break
+					}
+
 					if (partner) {
 						def range = partner.affiliation.range
 						def lastFee = Fee.findAllByPartner(partner).last()
@@ -37,7 +46,7 @@ class FeeController {
 						partner.addToFees(
 							fee:(typeOfPayment == "Catorcena" && partner.affiliation.range) ? partner.affiliation.range : partner.affiliation.fee,
 							factoryFee:partner.affiliation.factoryFee,
-							period:new Date()[YEAR],
+							period:period,
 							dateCreated:date,
 							lastUpdated:date
 						)
