@@ -3,22 +3,19 @@ import grails.util.GrailsUtil
 
 class BootStrap {
 
-    def configurationService
+    def grailsApplication
 
     def init = { servletContext ->
         //roles
         def adminRole = Role.findByAuthority("ROLE_ADMIN") ?: new Role(authority:"ROLE_ADMIN").save()
         def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority:"ROLE_USER").save()
 
-        //configuration setting or getting fee
-        if (!Configuration.list()) {
-            new Configuration(fee:205.21).save()
-            new Configuration(fee:300).save()
-            new Configuration(fee:400).save()
-        }
-
     	switch(GrailsUtil.environment) {
     		case "development":
+                //configuraion
+                def partnersFees = grailsApplication.config.org.fomento.fees
+                def factoryFee = grailsApplication.config.org.fomento.fees.min()
+
                 //users
                 def admin = User.findByUsername("me@gmail.com") ?: new User(username:"me@gmail.com", fullName:"Julian Perez", password:"123", enabled:true).save()
                 def user = User.findByUsername("ich@gmail.com") ?: new User(username:"ich@gmail.com", fullName:"Jose Perez", password:"123", enabled:true).save()
@@ -34,9 +31,9 @@ class BootStrap {
                 //juanPerez
                 //affiliation
                 def a1 = new Affiliation(
-                    fee:400,
+                    fee:partnersFees[0],
                     typeOfPayment:"Catorcena",
-                    factoryFee: configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     enrollmentDate:new Date() - 250,
                     capitalization:2500.00,
                     factoryCapital:2500.00
@@ -63,7 +60,7 @@ class BootStrap {
                 //fees
                 def fee1 = new Fee(
                     fee:juanPerez.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 250,
                     lastUpdated:new Date() - 250
@@ -71,7 +68,7 @@ class BootStrap {
 
                 def fee2 = new Fee(
                     fee:juanPerez.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 150,
                     lastUpdated:new Date() - 150
@@ -83,9 +80,9 @@ class BootStrap {
                 //johnDoe
                 //affiliation
                 def a2 = new Affiliation(
-                    fee:300,
+                    fee:partnersFees[1],
                     typeOfPayment:"Catorcena",
-                    factoryFee: configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     enrollmentDate:new Date() - 300,
                     capitalization:5000.00,
                     factoryCapital:5000.00
@@ -112,7 +109,7 @@ class BootStrap {
                 //fees
                 def fee3 = new Fee(
                     fee:johnDoe.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 200,
                     lastUpdated:new Date() - 200
@@ -120,7 +117,7 @@ class BootStrap {
 
                 def fee4 = new Fee(
                     fee:johnDoe.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 230,
                     lastUpdated:new Date() - 230
@@ -132,10 +129,10 @@ class BootStrap {
                 //fulano
                 //affiliation
                 def a3 = new Affiliation(
-                    fee:300,
+                    fee:partnersFees[2],
                     range:null,
                     typeOfPayment:"Bono",
-                    factoryFee: configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     enrollmentDate:new Date() - 120,
                     capitalization:5800.00,
                     factoryCapital:10000.00
@@ -162,7 +159,7 @@ class BootStrap {
                 //fees
                 def fee5 = new Fee(
                     fee:fulano.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 150,
                     lastUpdated:new Date() - 150
@@ -170,7 +167,7 @@ class BootStrap {
 
                 def fee6 = new Fee(
                     fee:fulano.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 100,
                     lastUpdated:new Date() - 100
@@ -178,7 +175,7 @@ class BootStrap {
 
                 def fee7 = new Fee(
                     fee:fulano.affiliation.fee,
-                    factoryFee:configurationService.loadFactoryFee(),
+                    factoryFee:factoryFee,
                     period:2013,
                     dateCreated:new Date() - 90,
                     lastUpdated:new Date() - 90

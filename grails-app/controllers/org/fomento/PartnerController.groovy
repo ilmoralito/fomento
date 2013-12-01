@@ -7,7 +7,6 @@ import static java.util.Calendar.*
 @Secured(["ROLE_ADMIN","ROLE_USER"])
 class PartnerController {
 
-    def configurationService
     def searchableService
     def feeService
 
@@ -77,7 +76,7 @@ class PartnerController {
             def affiliation = new Affiliation(
                 fee: params.double("affiliation.fee"),
                 typeOfPayment: params?.affiliation?.typeOfPayment,
-                factoryFee: configurationService.loadFactoryFee(),
+                factoryFee: grailsApplication.config.org.fomento.fees.min(),
                 enrollmentDate: ed,
                 capitalization: params?.affiliation?.capitalization,
                 factoryCapital:params?.affiliation?.factoryCapital
@@ -144,7 +143,7 @@ class PartnerController {
         partner.salary = params.double("salary")
         partner.affiliation.fee = params.double("affiliation.fee")
         partner.affiliation.typeOfPayment = params?.affiliation?.typeOfPayment
-        partner.affiliation.factoryFee = configurationService.loadFactoryFee()
+        partner.affiliation.factoryFee = grailsApplication.config.org.fomento.fees.min()
         partner.affiliation.enrollmentDate = parseDate(params?.affiliation?.enrollmentDate)
         partner.affiliation.capitalization = params.double("affiliation.capitalization")
         partner.affiliation.factoryCapital = params.double("affiliation.factoryCapital")

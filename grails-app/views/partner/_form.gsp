@@ -1,6 +1,6 @@
 <g:set var="departments" value="${grailsApplication.config.org.fomento.departments}"/>
 <g:set var="typesOfPayment" value="${(partner?.affiliation?.constraints?.typeOfPayment?.inList) ?: ['Catorcena', 'Fin de mes', 'Bono']}"/>
-<g:set var="fees" value="${org.fomento.Configuration.list().fee}"/>
+<g:set var="fees" value="${grailsApplication.config.org.fomento.fees}"/>
 
 <div class="row">
 	<div class="col-md-6">
