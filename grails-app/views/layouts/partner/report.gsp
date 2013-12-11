@@ -29,50 +29,39 @@
 					</div>
 				</div>
 
-				<!--Aporte inicial-->
 				<div class="panel panel-default">
-					<div class="panel-heading">Detalle periodo ${params.period}</div>
+					<div class="panel-heading">Datos de socio</div>
 					<div class="panel-body">
-						<table class="table table-small">
-							<tbody>
-								<tr>
-									<td>Aporte incial</td>
-									<td>${partner?.affiliation?.capitalization}</td>
-								</tr>
-								<tr>
-									<td>TAS</td>
-									<td>${tas}</td>
-								</tr>
-								<tr>
-									<td>TAE</td>
-									<td>${tae}</td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="row">
+							<div class="col-md-3">Info</div>
+							<div class="col-md-9">Lorem ipsum dolor sit amet</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-3">Info</div>
+							<div class="col-md-9">Lorem ipsum dolor sit amet</div>
+						</div>
 					</div>
 				</div>
 
-				<!--Totales de cuotas por socio y empresa-->
 				<g:if test="${fees}">
 					<div class="panel panel-default">
-						<div class="panel-heading">Cuotas</div>
+						<div class="panel-heading">Datos del periodo</div>
 						<div class="panel-body">
-							<table class="table table-small">
-								<tbody>
-									<tr>
-										<td>Aporte socio</td>
-										<td>${totalPartnerFee}</td>
-									</tr>
-									<tr>
-										<td>Aporte empresa</td>
-										<td>${totalFactoryFee}</td>
-									</tr>
-									<tr>
-										<td>TOTAL</td>
-										<td>${totalPartnerFee + totalFactoryFee}</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="row">
+								<div class="col-md-7">Numero de cuotas</div>
+								<div class="col-md-5">${fees.size()}</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-7">Aporte socio</div>
+								<div class="col-md-5">${totalPartnerFee}</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-7">Aporte empresa</div>
+								<div class="col-md-5">${totalFactoryFee}</div>
+							</div>
 						</div>
 					</div>
 				</g:if>
