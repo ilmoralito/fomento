@@ -21,7 +21,7 @@
 						<g:each in="${partners}" var="partner">
 							<tr>
 								<td>${partner}</td>
-								<td>${partner.fees.find{0}}</td>
+								<td>${partner.fees}</td>
 							</tr>
 						</g:each>
 					</tbody>
