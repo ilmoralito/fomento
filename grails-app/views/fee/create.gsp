@@ -15,7 +15,7 @@
 						<thead>
 							<tr>
 								<th width="1">
-									<g:checkBox name="partners" class="chkall toolchk" checked="false" title="Marcar/Desmarcar" data-placement="top"/>
+									<g:checkBox name="chkall" class="chkall toolchk" checked="false" title="Marcar/Desmarcar" data-placement="top"/>
 								</th>
 								<th><span id="all" class="chkall glyphicon glyphicon-th-list"></span> Socios</th>
 							</tr>
