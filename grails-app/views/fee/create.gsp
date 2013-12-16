@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, jquery-ui, fees"/>
+	<r:require modules="bootstrap, jquery-ui, fees, datepicker"/>
 </head>
 <body>
 	<g:if test="${partners}">
@@ -15,9 +15,9 @@
 						<thead>
 							<tr>
 								<th width="1">
-									<span id="all" class="glyphicon glyphicon-th-list"></span>
+									<g:checkBox name="partners" class="chkall toolchk" checked="false" title="Marcar/Desmarcar" data-placement="top"/>
 								</th>
-								<th>Socio</th>
+								<th><span id="all" class="chkall glyphicon glyphicon-th-list"></span> Socios</th>
 							</tr>
 						</thead>
 						<tbody>

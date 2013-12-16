@@ -111,4 +111,8 @@ class FeeController {
 		redirect action:"show", params:[id:id, partner:params?.partner, period:params?.period]
 	}
 
+	def elist(){
+		[partners:Partner.list()]
+	}
+
 }
