@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, jquery-ui, fees, datepicker"/>
+	<r:require modules="bootstrap, jquery-ui, fees"/>
 </head>
 <body>
 	<g:if test="${partners}">
@@ -34,7 +34,7 @@
 				</div>
 				<div class="col-md-2">
 					<label for="dateCreated" class="sr-only">Fecha de cuota</label>
-					<g:textField name="dateCreated" class="form-control" placeholder="Fecha de cuota"/>
+					<g:textField name="dateCreated" class="form-control"/>
 				</div>
 			</div>
 			<g:submitButton name="send" value="Confirmar" class="btn btn-default"/>
