@@ -97,9 +97,10 @@ class FeeController {
 		if (!fee) {
 			response.sendError 404
 		}
-
-		fee.properties["fee", "factoryFee"] = params
-
+		
+		params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
+		fee.properties["fee", "factoryFee", "dateCreated"] = params
+		
 		if (!fee.save()) {
 			render view:"show", model:[fee:fee, id:id, partner:params?.partner, period:params?.period]
 			return false
