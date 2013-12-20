@@ -4,7 +4,7 @@
 	<meta name="layout" content="main">
 	<meta charset="UTF-8">
 	<title>Editar cuotas</title>
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, app, jquery-ui, fees"/>
 </head>
 <body>
 <g:set var="partner" value="${params?.partner}"/>
@@ -28,6 +28,10 @@
 		<div class="form-group">
 			<label for="factoryFee">Cuota de empresa</label>
 			<g:textField name="factoryFee" value="${fee?.factoryFee}" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label for="dateCreated">Fecha de cuota</label>
+			<g:textField name="dateCreated" class="form-control" value="${fee?.dateCreated}"/>
 		</div>
 		<g:submitButton name="send" value="Confirmar" class="btn btn-default"/>
 		<g:link controller="partner" action="report" params="[id:partner, period:period]" class="btn btn-default">

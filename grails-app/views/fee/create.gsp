@@ -15,9 +15,9 @@
 						<thead>
 							<tr>
 								<th width="1">
-									<span id="all" class="glyphicon glyphicon-th-list"></span>
+									<g:checkBox name="chkall" class="chkall toolchk" checked="false" title="Marcar/Desmarcar" data-placement="top"/>
 								</th>
-								<th>Socio</th>
+								<th><span id="all" class="chkall glyphicon glyphicon-th-list"></span> Socios</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="col-md-2">
 					<label for="dateCreated" class="sr-only">Fecha de cuota</label>
-					<g:textField name="dateCreated" class="form-control" placeholder="Fecha de cuota"/>
+					<g:textField name="dateCreated" class="form-control"/>
 				</div>
 			</div>
 			<g:submitButton name="send" value="Confirmar" class="btn btn-default"/>
