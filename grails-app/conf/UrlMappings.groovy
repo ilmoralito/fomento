@@ -7,12 +7,15 @@ class UrlMappings {
 			}
 		}
 
-		"/fee/elist/$max/$offset" {
+		"/fee/elist/$max/$offset/$flag/$peri/$all?" {
 			controller = 'fee'
 			action = 'elist'
 			constraints {
 				max(matches:/\d+/)
 				offset(matches:/\d+/)
+				flag(matches:/OK/)
+				peri(matches:/\d+/)
+				all(matches:/ALL/)
 			}
 		}
 

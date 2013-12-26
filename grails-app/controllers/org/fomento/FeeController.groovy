@@ -116,7 +116,7 @@ class FeeController {
 			def partnerTotal, max, offset
 			max = params.max
         	offset = params.offset
-			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), max:2, offset:0]
+			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), max:2, offset:0, all:params.all]
 		}
 		
 	}

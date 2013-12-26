@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, app, datepicker"/>
 	
 </head>
 <body>
@@ -88,11 +88,29 @@
 							</tr>
 						</g:each>
 						<tr>
+							<th>APORTE SOCIOS</th>
+							<th colspan="2"><fomento:aporteTotal flag="soc" peri="${peri}"/></th>
+							<th colspan="2">APORTE EMPRESA</th>
+							<th colspan="2"><fomento:aporteTotal flag="em" peri="${peri}"/></th>
+						</tr>
+						<tr>
 							<td colspan="15">
 								<div>
 									<ul class="pagination">
 										<li>
-											<g:paginate conatroller="fee" action="elist" total="${partnerTotal}" params="[max:"${max}", offset:"${offset}", flag:"Ok", peri:"${peri}"]" omitPrev="true" omitNext="true"/>
+											<g:paginate conatroller="fee" action="elist" total="${partnerTotal}" params="[max:"${max}", offset:"${offset}", flag:"OK", peri:"${peri}"]" omitPrev="true" omitNext="true"/>
+										</li>
+										<g:if test="${all=="ALL"}">
+											<li>
+												<g:link controller="fee" action="elist" title="Paginar" class="toolback clsize" data-placement="bottom" class="step" params="[max:"${2}", offset:"${0}", flag:"OK", peri:"${peri}"]"> 
+													<span class="glyphicon glyphicon-zoom-out"></span>
+												</g:link>
+											</li>
+										</g:if>
+										<li>
+											<g:link controller="fee" action="elist" title="Ver Todos" class="toollist clsize" data-placement="bottom" class="step" params="[max:"${partnerTotal}", offset:"${0}", flag:"OK", peri:"${peri}", all:"ALL"]"> 
+												<span class="glyphicon glyphicon-list"></span>
+											</g:link>
 										</li>
 									</ul>
 								</div>

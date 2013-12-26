@@ -189,4 +189,24 @@ class FomentoTagsTagLib {
 		out<< totalCuotas
 	}
 
+	def aporteTotal = { attrs ->
+		String flag = attrs.flag
+		Integer peri = attrs.int("peri")
+
+		def criteria = Fee.createCriteria()
+		def totalAporte = criteria.get{
+			eq("period", peri)
+			projections{
+				if(flag=="soc"){
+					sum("fee")
+				}else{
+					sum("factoryFee")
+				}
+			}
+		}
+
+
+		out<< totalAporte
+	}
+
 }
