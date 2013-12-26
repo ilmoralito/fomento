@@ -15,7 +15,7 @@
 				<div class="form-group">
 					<label for="period" class="sr-only">Periodo</label>
 					<g:select from="${2013..new Date()[Calendar.YEAR]}" name="peri" value="${(params?.period) ?: fomento.currentYear()}" class="form-control"/>
-					<g:hiddenField name="max" value="2"/>
+					<g:hiddenField name="max" value="30"/>
 					<g:hiddenField name="offset" value="0"/>
 				</div>
 					<g:submitButton name="name" value="Mostrar" class="btn btn-default"/>
@@ -98,7 +98,7 @@
 										</li>
 										<g:if test="${all=="ALL"}">
 											<li>
-												<g:link controller="fee" action="elist" title="Paginar" class="toolback step" data-placement="top" params="[max:"${2}", offset:"${0}", flag:"OK", peri:"${peri}"]"> 
+												<g:link controller="fee" action="elist" title="Paginar" class="toolback step" data-placement="top" params="[max:"${30}", offset:"${0}", flag:"OK", peri:"${peri}"]"> 
 													<span class="glyphicon glyphicon-zoom-out"></span>
 												</g:link>
 											</li>
