@@ -6,10 +6,6 @@
 	
 </head>
 <body>
-	<style type="text/css">
-			.table .cabpart{vertical-align:middle; background-color: #F7F4F4;}
-			.table th{text-align: center;}
-	</style>
 	<div class="row">
 		<div class="col-md-7">
 			<h3>Periodo ${params?.period}</h3>
@@ -102,13 +98,13 @@
 										</li>
 										<g:if test="${all=="ALL"}">
 											<li>
-												<g:link controller="fee" action="elist" title="Paginar" class="toolback clsize" data-placement="bottom" class="step" params="[max:"${2}", offset:"${0}", flag:"OK", peri:"${peri}"]"> 
+												<g:link controller="fee" action="elist" title="Paginar" class="toolback step" data-placement="top" params="[max:"${2}", offset:"${0}", flag:"OK", peri:"${peri}"]"> 
 													<span class="glyphicon glyphicon-zoom-out"></span>
 												</g:link>
 											</li>
 										</g:if>
 										<li>
-											<g:link controller="fee" action="elist" title="Ver Todos" class="toollist clsize" data-placement="bottom" class="step" params="[max:"${partnerTotal}", offset:"${0}", flag:"OK", peri:"${peri}", all:"ALL"]"> 
+											<g:link controller="fee" action="elist" title="Ver Todos" class="toollist step" data-placement="top" params="[max:"${partnerTotal}", offset:"${0}", flag:"OK", peri:"${peri}", all:"ALL"]"> 
 												<span class="glyphicon glyphicon-list"></span>
 											</g:link>
 										</li>
