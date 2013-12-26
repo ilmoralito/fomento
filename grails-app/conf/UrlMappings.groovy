@@ -7,6 +7,15 @@ class UrlMappings {
 			}
 		}
 
+		"/fee/elist/$max/$offset" {
+			controller = 'fee'
+			action = 'elist'
+			constraints {
+				max(matches:/\d+/)
+				offset(matches:/\d+/)
+			}
+		}
+
 		//login
 		"/"(controller:"login", action:"auth")
 		"/logout"(controller:"logout", action:"index")
@@ -33,6 +42,7 @@ class UrlMappings {
 
 		//fees
 		"/fees/$id/$year?"(controller:"fee", action:"list")
+		
 
 	}
 }

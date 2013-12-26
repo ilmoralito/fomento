@@ -81,4 +81,112 @@ class FomentoTagsTagLib {
 		out << "27, S:400 E:205.5"
 	}
 
+	def partnerFee = { attrs ->
+		Date fecha1 = new Date()
+		def dialast, diafirst, k
+		
+		Partner parN = attrs.parN
+		String flag = attrs.flag
+		Integer mth = attrs.int("mth")
+		Integer peri = attrs.int("peri")
+
+		
+	   	
+	   	switch(mth) {
+	   		case 0: fecha1.set(month:0) 
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 1:
+	   			fecha1.set(month:1)
+	   			if (fecha1.date==29) {
+	   				dialast = 29-fecha1.date
+	   			}else{
+	   				dialast = 28-fecha1.date
+	   			}
+	   			
+	   			break;
+	   		case 2:
+	   			fecha1.set(month:2)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 3:
+	   			fecha1.set(month:3)
+	   			dialast = 30-fecha1.date
+	   		break;
+	   		case 4:
+	   			fecha1.set(month:4)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 5:
+	   			fecha1.set(month:5)
+	   			dialast = 30-fecha1.date
+	   		break;
+	   		case 6:
+	   			fecha1.set(month:6)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 7:
+	   			fecha1.set(month:7)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 8:
+	   			fecha1.set(month:8)
+	   			dialast = 30-fecha1.date
+	   		break;
+	   		case 9:
+	   			fecha1.set(month:9)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   		case 10:
+	   			fecha1.set(month:10)
+	   			dialast = 30-fecha1.date
+	   		break;
+	   		case 11:
+	   			fecha1.set(month:11)
+	   			dialast = 31-fecha1.date
+	   		break;
+	   	}
+	   		
+
+		
+		fecha1.set(year:peri)
+        diafirst = fecha1.date + 1
+               
+
+		def cuota = Fee.findAllByPartnerAndDateCreatedBetween(parN,fecha1-diafirst,fecha1+dialast)
+		
+		cuota.each{
+			if (flag=="soc") {
+				k = it.fee
+			}else{
+				k = it.factoryFee
+			}
+			
+		}
+
+		out << k
+	}
+
+	def parTotal = { attrs ->
+		Partner parN = attrs.parN
+		String flag = attrs.flag
+		Integer peri = attrs.int("peri")
+
+		def criteria = Fee.createCriteria()
+		def totalCuotas = criteria.get{
+			eq("period", peri)
+			partner{
+				eq("id", parN.id)
+			}
+			projections {
+				if (flag=="soc") {
+					sum ('fee')	
+				}else{
+					sum("factoryFee")
+				}
+            }
+        } 
+		out<< totalCuotas
+	}
+
 }
