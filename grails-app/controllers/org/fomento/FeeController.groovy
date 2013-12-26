@@ -25,9 +25,9 @@ class FeeController {
 					//check if current partner has reach 12 fees by period
 					//if this condition is true then abort adding a new fee
 					def period = Calendar.instance.get(Calendar.YEAR)
-					def query = Fee.countByPartnerAndPeriod(partner, period)
+					def count = Fee.countByPartnerAndPeriod(partner, period)
 
-					if (query == 12) {
+					if (count == 12) {
 						break
 					}
 
@@ -35,14 +35,16 @@ class FeeController {
 						def date = (!params?.dateCreated) ? new Date() : new Date().parse("yyyy-MM-dd", params?.dateCreated)
 
 						if (typeOfPayment == "Catorcena") {
-							def range = partner.affiliation.range
-							def lastFee = Fee.findAllByPartner(partner).last()
+							if (partner?.fees) {
+								def range = partner.affiliation.range
+								def lastFee = Fee.findAllByPartner(partner).last()
 
-							if (range == lastFee.fee) {
-								lastFee.fee = partner.affiliation.fee
-								lastFee.lastUpdated = new Date()
-								lastFee.save()
-								break
+								if (range == lastFee.fee) {
+									lastFee.fee = partner.affiliation.fee
+									lastFee.lastUpdated = new Date()
+									lastFee.save()
+									break
+								}
 							}
 						}
 
@@ -64,7 +66,25 @@ class FeeController {
 			}
 		}
 
-		[partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
+		if (params?.typeOfPayment == "Catorcena" && params?.filter) {
+			def criteria = Partner.createCriteria()
+			def partners = criteria.list() {
+				eq "status", true
+
+				affiliation {
+					eq "typeOfPayment", "Catorcena"
+					if (params?.filter == "divididos") {
+						isNotNull "range"
+					} else {
+						isNull "range"
+					}
+				}
+			}
+
+			return [partners:partners]
+		} else {
+			return [partners:Partner.byTypeOfPayment(typeOfPayment).byStatus(true).list(params)]
+		}
 	}
 
 	def list() {
@@ -97,10 +117,10 @@ class FeeController {
 		if (!fee) {
 			response.sendError 404
 		}
-		
+
 		params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
 		fee.properties["fee", "factoryFee", "dateCreated"] = params
-		
+
 		if (!fee.save()) {
 			render view:"show", model:[fee:fee, id:id, partner:params?.partner, period:params?.period]
 			return false

@@ -57,6 +57,7 @@ class BootStrap {
                     }
                 }
 
+                /*
                 //fees
                 def fee1 = new Fee(
                     fee:juanPerez.affiliation.fee,
@@ -76,6 +77,7 @@ class BootStrap {
 
                 juanPerez.addToFees(fee1)
                 juanPerez.addToFees(fee2)
+                */
 
                 //johnDoe
                 //affiliation
@@ -106,6 +108,7 @@ class BootStrap {
                     }
                 }
 
+                /*
                 //fees
                 def fee3 = new Fee(
                     fee:johnDoe.affiliation.fee,
@@ -125,6 +128,7 @@ class BootStrap {
 
                 johnDoe.addToFees(fee3)
                 johnDoe.addToFees(fee4)
+                */
 
                 //fulano
                 //affiliation
@@ -156,6 +160,7 @@ class BootStrap {
                     }
                 }
 
+                /*
                 //fees
                 def fee5 = new Fee(
                     fee:fulano.affiliation.fee,
@@ -184,6 +189,7 @@ class BootStrap {
                 fulano.addToFees(fee5)
                 fulano.addToFees(fee6)
                 fulano.addToFees(fee7)
+                */
     		break
     		case "production":
     			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()
