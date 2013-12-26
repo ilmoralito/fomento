@@ -68,15 +68,9 @@ class FomentoTagsTagLib {
 
 		Date from = new Date() - 21
 		Date to = new Date() + 9
-		
 		def query = Fee.where {
-			//partner == partner && period == period && month(dateCreated) == 11
 			partner == partner
 		}
-
-		print query.list()
-
-		//def result = Fee.findAllByPartnerAndPeriodAndDateCreatedGreaterThanAndOrEqualAndDateCreatedLessThanOrEqual(partner, period, from, to)
 
 		out << "27, S:400 E:205.5"
 	}

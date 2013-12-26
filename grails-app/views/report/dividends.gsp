@@ -8,7 +8,7 @@
 	<g:render template="toolbar"/>
 	<br>
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-9">
 			<g:if test="${partners}">
 				<g:render template="data" model="[results:partners]"/>
 			</g:if>
@@ -16,7 +16,7 @@
 				<h3>...</h3>
 			</g:else>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<form action="dividends" method="post">
 				<div class="form-group">
 					<label class="sr-only" for="period">Periodo</label>
