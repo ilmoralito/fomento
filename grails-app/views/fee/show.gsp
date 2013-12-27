@@ -20,6 +20,7 @@
 		<g:hiddenField name="id" value="${params?.id}"/>
 		<g:hiddenField name="partner" value="${partner}"/>
 		<g:hiddenField name="period" value="${period}"/>
+		<g:hiddenField name="dateCre" value="${fee?.dateCreated}"/>
 
 		<div class="form-group">
 			<label for="fee">Cuota de socio</label>

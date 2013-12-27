@@ -27,7 +27,7 @@
 			<g:if test="${partners}">
 			
 				
-				<table class="table table-bordered table-striped">
+				<table class="table table-bordered table-striped tablelist">
 					<thead>
 						<tr>
 							<th colspan="2">Socio</th>
