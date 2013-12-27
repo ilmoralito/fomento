@@ -32,7 +32,7 @@
                   </li>
                   <li role="presentation" class="divider"></li>
                   <li role="presentation">
-                    <g:link role="menuitem" tabindex="-1" controller="fee" action="list">Historial</g:link>
+                    <g:link role="menuitem" tabindex="-1" controller="fee" action="elist" params="[max:'2', offset:'0']">Historial</g:link>
                   </li>
                 </ul>
             </li>

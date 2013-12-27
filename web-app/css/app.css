@@ -49,3 +49,8 @@ table.table-small {
 ul li{
 	list-style: none;
 }
+
+.table .cabpart{vertical-align:middle; background-color: #F7F4F4;}
+.table th{text-align: center;}
+
+

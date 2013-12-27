@@ -1,5 +1,5 @@
 package org.fomento
-
+import org.hibernate.transform.AliasToEntityMapResultTransformer
 import grails.plugins.springsecurity.Secured
 import static java.util.Calendar.*
 
@@ -132,7 +132,14 @@ class FeeController {
 	}
 
 	def elist(){
-		[partners:Partner.list()]
+		if (request.method == "POST" || params.flag!=null) {
+			def partnerTotal, max, offset
+			max = params.max
+        	offset = params.offset
+			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), max:2, offset:0, all:params.all]
+		}
+		
 	}
 
 }
+
