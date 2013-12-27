@@ -117,8 +117,13 @@ class FeeController {
 		if (!fee) {
 			response.sendError 404
 		}
-
-		params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
+		if (params.dateCreated.empty) {
+			print "Vacio caballete"
+			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCre)
+		}else{
+			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
+		}
+		
 		fee.properties["fee", "factoryFee", "dateCreated"] = params
 
 		if (!fee.save()) {
