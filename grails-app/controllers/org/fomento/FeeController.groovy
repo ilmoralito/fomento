@@ -118,7 +118,6 @@ class FeeController {
 			response.sendError 404
 		}
 		if (params.dateCreated.empty) {
-			print "Vacio caballete"
 			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCre)
 		}else{
 			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
