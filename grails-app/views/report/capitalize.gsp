@@ -17,7 +17,7 @@
 		<h1 id="range">100</h1>
 
 		<h4>Dividendo del periodo</h4>
-		<h1 id="capital">${dividend.partnerDividend}</h1>
+		<h1 id="capital">${dividend.partnerDividend - (dividend.partnerDividend * 0.1)}</h1>
 
 		<h4>Total a capitalizar</h4>
 		<h1 id="capitalized"></h1>
