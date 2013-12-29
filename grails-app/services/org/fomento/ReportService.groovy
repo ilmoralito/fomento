@@ -39,4 +39,55 @@ class ReportService {
         return dd
     }
 
+    def totalC(Partner partner, String flag){
+        //Calcular el total de cuotas de un socio
+        def cuota = Fee.findAllByPartner(partner)
+        def tcuota
+        if (cuota) {
+            def criteria = Fee.createCriteria()
+            def totalCuotas = criteria.get{
+                eq("partner", partner)
+                projections {
+                    if (flag=="socio") {
+                        sum ('fee') 
+                    }else{
+                        sum("factoryFee")
+                    }
+                }
+            }
+            tcuota = totalCuotas
+        }else{
+            tcuota = 0
+        }
+        return tcuota
+    }
+
+    def tCap(Partner partner){
+        def capital, idDiv, divBruto, divNeto, capTotal = 0
+        String porcentaje
+
+        def div = Dividend.findAllByPartner(partner)
+            if (div) {
+                div.each{
+                    idDiv = it.id
+                    def criteria = Capitalization.createCriteria()
+                    capital = criteria.get{
+                        dividend{
+                            eq "id", idDiv
+                        }
+                    }
+                    if (capital) {
+                        porcentaje = capital.toString() //convertir a string el dato optenido de la consulta
+                        divBruto = it.partnerDividend
+                        divNeto = divBruto-(divBruto * 0.1)
+                        capTotal = capTotal + ((divNeto*porcentaje.toInteger())/100)
+                    }else{
+                        capTotal = capTotal   
+                    }
+                }//end each
+            }else{
+                capTotal = 0
+            }
+        return capTotal
+    }
 }

@@ -26,6 +26,7 @@
 		<h1 id="nocapitalized"></h1>
 
 		<g:submitButton name="send" value="Capitalizar" class="btn btn-default"/>
+		<g:link action="show" params="[period:dividend.period]" class="btn btn-default">Regresar</g:link>
 	</g:form>
 </body>
 </html>
