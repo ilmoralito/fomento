@@ -11,11 +11,11 @@
 		.navbar{display: none;}
 		.btnListaS{display: none;}
 		.well{display: none;}
-		body{font-family: arial; font-size: 13px;}
+		body{font-family: arial; font-size: 12px;}
 		.pan, .toolbar, .cabtr{display: none;}
-		.tablaSaldo{border:1px solid black;padding: 3px; border-spacing: 0;border-collapse: collapse;}
-		.tablaSaldo td{border:1px solid black;padding:5px}
-		.cabecera{display: block;width: 100%;height: 150px; border:1px solid black;background: red;}
+		.tablaSaldo{padding: 3px; border-spacing: 0;border-collapse: collapse; top:150px;}
+		.tablaSaldo td{border: 1px solid black; padding:5px; width: 70px; height: 20px;}
+		.cabecera{display: block;width: 100%;height: 200px;}
 	</style>
 
 	<g:render template="toolbar"/>
@@ -76,16 +76,40 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>2013-12-02</td>
-						<td><g:formatNumber number="${socio}" type="number" maxFractionDigits="2" /></td>
-						<td><g:formatNumber number="${empresa}" type="number" maxFractionDigits="2" /></td>
-						<td>
-							<g:formatNumber number="${capitalizacion}" type="number" maxFractionDigits="2" />
-						</td>
-						<td><g:formatNumber number="${retiro}" type="number" maxFractionDigits="2" /></h4></td>
-						<td>_________</td>
-					</tr>
+					<g:each in= "${[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]}" var= "num" >
+						<tr>
+							<td>
+								<g:if test="${num==position}">
+									2013-12-02
+								</g:if>
+							</td>
+							<td>
+								<g:if test="${num==position}">
+									<g:formatNumber number="${socio}" type="number" maxFractionDigits="2" />
+								</g:if>
+							</td>
+							<td>
+								<g:if test="${num==position}">
+									<g:formatNumber number="${empresa}" type="number" maxFractionDigits="2" />
+								</g:if>
+							</td>
+							<td>
+								<g:if test="${num==position}">
+									<g:formatNumber number="${capitalizacion}" type="number" maxFractionDigits="2" />
+								</g:if>
+							</td>
+							<td>
+								<g:if test="${num==position}">
+									<g:formatNumber number="${retiro}" type="number" maxFractionDigits="2" />
+								</g:if>
+							</td>
+							<td>
+								<g:if test="${num==position}">
+									_________
+								</g:if>
+							</td>	
+						</tr>
+					</g:each>
 				</tbody>
 			</table>
 		</div>

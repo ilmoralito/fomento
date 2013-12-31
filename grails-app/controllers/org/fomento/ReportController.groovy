@@ -230,8 +230,9 @@ class ReportController {
             println "Saldo del Empresa: "+saldoTotalEmpresa
 
             println "Capitalizacion del Periodo: "+periodCapital
+            print params.position
             
-            [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period]
+            [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period, position:params.int("position")]
         }
     }
 }
