@@ -3,11 +3,11 @@
 		<th>Socio</th>
 		<th>FPS</th>
 		<th>DS</th>
-		<th>10%S</th>
+		<th>10% S</th>
 		<th>DNS</th>
 		<th>FPE</th>
 		<th>DE</th>
-		<th>10%E</th>
+		<th>10% E</th>
 		<th>DNE</th>
 	</thead>
 	<tbody>
@@ -29,24 +29,24 @@
 
 			<tr>
 				<td>${partner}</td>
-				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="2"/></td>
-				<td>${dds}</td>
-				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="2"/></td>
-				<td>${dde}</td>
-				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${dds}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${dde}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="3"/></td>
 			</tr>
 		</g:each>
 		<tr>
 			<td>TOTAL</td>
 			<td></td>
-			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="2"/></td>
+			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="3"/></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="2"/></td>
+			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="3"/></td>
 			<td></td>
 			<td></td>
 		</tr>

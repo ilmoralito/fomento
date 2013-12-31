@@ -58,7 +58,7 @@ class FomentoTagsTagLib {
 
 		BigDecimal dd = reportService.dd(up, pd, fp)
 
-		out << g.formatNumber(number:dd, type:"number", maxFractionDigits:"2")
+		out << dd
 	}
 
 	def feeDetail = { attrs ->
@@ -78,16 +78,14 @@ class FomentoTagsTagLib {
 	def partnerFee = { attrs ->
 		Date fecha1 = new Date()
 		def dialast, diafirst, k
-		
+
 		Partner parN = attrs.parN
 		String flag = attrs.flag
 		Integer mth = attrs.int("mth")
 		Integer peri = attrs.int("peri")
 
-		
-	   	
 	   	switch(mth) {
-	   		case 0: fecha1.set(month:0) 
+	   		case 0: fecha1.set(month:0)
 	   			dialast = 31-fecha1.date
 	   		break;
 	   		case 1:
@@ -97,7 +95,6 @@ class FomentoTagsTagLib {
 	   			}else{
 	   				dialast = 28-fecha1.date
 	   			}
-	   			
 	   			break;
 	   		case 2:
 	   			fecha1.set(month:2)
@@ -140,22 +137,17 @@ class FomentoTagsTagLib {
 	   			dialast = 31-fecha1.date
 	   		break;
 	   	}
-	   		
 
-		
 		fecha1.set(year:peri)
         diafirst = fecha1.date + 1
-               
 
 		def cuota = Fee.findAllByPartnerAndDateCreatedBetween(parN,fecha1-diafirst,fecha1+dialast)
-		
 		cuota.each{
 			if (flag=="soc") {
 				k = it.fee
 			}else{
 				k = it.factoryFee
 			}
-			
 		}
 
 		out << k
@@ -172,13 +164,13 @@ class FomentoTagsTagLib {
 			eq("partner", parN)
 			projections {
 				if (flag=="soc") {
-					sum ('fee')	
+					sum ('fee')
 				}else{
 					sum("factoryFee")
 				}
             }
-        } 
-		out<< totalCuotas
+        }
+		out << totalCuotas
 	}
 
 	def aporteTotal = { attrs ->
@@ -197,8 +189,7 @@ class FomentoTagsTagLib {
 			}
 		}
 
-
-		out<< totalAporte
+		out << totalAporte
 	}
 
 	def partnerSaldo = { attrs ->
