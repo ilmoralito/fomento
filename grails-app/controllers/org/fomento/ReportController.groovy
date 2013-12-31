@@ -168,7 +168,6 @@ class ReportController {
 
     def capitalize(Integer id) {
         def dividend = Dividend.get(id)
-
         if (!dividend) {
             redirect action:"list"
         }
@@ -192,9 +191,49 @@ class ReportController {
             }
         }
 
-        [dividend:dividend]
+        [dividend:dividend, id:id]
     }
 
+    def printReport(){
+        def partner = Partner.get(params.id)
+        boolean cap = true
+        def flag = "socio"
+        def cuotasSocio = reportService.totalC(partner, flag)
+        
+        flag = "empresa"
+        def cuotasEmpresa = reportService.totalC(partner, flag)
+        
+        def totalCapitalizaciones = reportService.tCap(partner)
+
+        flag = "capital"
+        def periodCapital = reportService.periodCap(partner, params.int("period"), cap, flag)
+        
+        if (periodCapital==false) {
+            redirect(action:"capitalize", params:[id:params.iddiv])
+            flash.message = "No se ha asignado ninguna capitalización al dividendo del periodo " + params.period +  ", debe hacerlo para imprimir el reporte!!"
+            return false
+        }else{
+            flag = "retiro"
+            def retiro = reportService.periodCap(partner, params.int("period"), cap, flag)
+            
+            flag = "socio"
+            BigDecimal saldoIni = 0
+            def saldoIniSocio = reportService.saldoInicial(partner, flag, saldoIni) 
+            
+            flag = "empresa"
+            def saldoIniEmpresa = reportService.saldoInicial(partner, flag, saldoIni) 
+
+            def saldoTotalSocio = cuotasSocio + totalCapitalizaciones + saldoIniSocio
+            println "Saldo del Socio: "+saldoTotalSocio
+
+            def saldoTotalEmpresa = cuotasEmpresa + saldoIniEmpresa 
+            println "Saldo del Empresa: "+saldoTotalEmpresa
+
+            println "Capitalizacion del Periodo: "+periodCapital
+            
+            [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period]
+        }
+    }
 }
 
 class DividendsCommand {

@@ -212,15 +212,14 @@ class FomentoTagsTagLib {
         	capitalizationTotal = reportService.tCap(partner)
         }
        	//----------------------------------------------
-        String saldoIni
+       	BigDecimal saldoIni = 0
+       	def saldoI = reportService.saldoInicial(partner, flag, saldoIni) 
         BigDecimal total
-        def saldoInicial = Affiliation.findById(partner.id)
+       
         if (flag=="socio") {
-        	saldoIni = saldoInicial.capitalization
-       		total = saldoIni.toBigDecimal() + totalCuotas + capitalizationTotal
+        	total = saldoI + totalCuotas + capitalizationTotal
         }else{
-        	saldoIni = saldoInicial.factoryCapital
-        	total = saldoIni.toBigDecimal() + totalCuotas
+        	total = saldoI + totalCuotas
         }
         
      	out<< g.formatNumber(number:total, type:"number", maxFractionDigits:"2")

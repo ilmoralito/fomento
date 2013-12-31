@@ -38,9 +38,8 @@ class ReportService {
 
         return dd
     }
-
+    // total de cuotas del socio
     def totalC(Partner partner, String flag){
-        //Calcular el total de cuotas de un socio
         def cuota = Fee.findAllByPartner(partner)
         def tcuota
         if (cuota) {
@@ -61,7 +60,7 @@ class ReportService {
         }
         return tcuota
     }
-
+    // Total de capitalizaciones
     def tCap(Partner partner){
         def capital, idDiv, divBruto, divNeto, capTotal = 0
         String porcentaje
@@ -89,5 +88,46 @@ class ReportService {
                 capTotal = 0
             }
         return capTotal
+    }
+
+    //Calcular Saldo Inicial
+    def saldoInicial(Partner partner, String flag, BigDecimal saldoIni){
+        def salIni = Affiliation.findById(partner.id)
+        if (flag == "socio") {
+            saldoIni = salIni.capitalization
+        }else{
+            saldoIni = salIni.factoryCapital
+        }
+        return saldoIni
+    }
+
+    //Capitalizacion del periodo
+    def periodCap(Partner partner, Integer period, boolean cap, String flag){
+        def div = Dividend.findByPartnerAndPeriod(partner, period)
+        
+        def criteria = Capitalization.createCriteria()
+        def capital = criteria.get{
+            dividend{
+                eq "id", div.id
+            }
+        }
+        if (capital) {
+            String porcentaje = capital
+            def capi, retiro
+            def divNeto = (div.partnerDividend - (div.partnerDividend*0.1)) 
+            capi = (divNeto * porcentaje.toInteger())/100
+            retiro = divNeto - capi
+            switch(flag) {
+                  case "capital":
+                      return capi
+                  break
+                  case "retiro":
+                      return retiro
+                  break
+            }  
+        }else{
+            return cap = false 
+        }
+        
     }
 }

@@ -20,7 +20,7 @@
 		tr .numCuotas{padding: 3px;}
 		.panelUp{margin-bottom: 10px;}
 		.cabValor, .valor{display: inline;}
-		.valor{text-align: right;border: 1px solid black;}
+		.valor{text-align: right;}
 		.cabValor, .panel-heading{font-weight:bold;}
 		.panel-heading{text-align: center;}
 		.panel-heading, .panel-body{border:1px solid #ddd; padding: 5px;}

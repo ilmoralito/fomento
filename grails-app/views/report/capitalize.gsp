@@ -27,6 +27,7 @@
 
 		<g:submitButton name="send" value="Capitalizar" class="btn btn-default"/>
 		<g:link action="show" params="[period:dividend.period]" class="btn btn-default">Regresar</g:link>
+		<g:link action="printReport" params="[id:"${dividend.partner.id}", period:"${dividend.period}", iddiv:"${dividend.id}"]" class="btn btn-primary">Reporte</g:link>
 	</g:form>
 </body>
 </html>
