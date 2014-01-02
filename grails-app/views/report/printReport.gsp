@@ -13,8 +13,8 @@
 		.well{display: none;}
 		body{font-family: arial; font-size: 12px;}
 		.pan, .toolbar, .cabtr{display: none;}
-		.tablaSaldo{padding: 3px; border-spacing: 0;border-collapse: collapse; top:150px;}
-		.tablaSaldo td{border: 1px solid black; padding:5px; width: 70px; height: 20px;}
+		.tablaSaldo{margin-left:auto;margin-right: auto; padding: 3px; border-spacing: 0;border-collapse: collapse; top:150px;}
+		.tablaSaldo td{padding:5px; width: 70px; height: 20px;}
 		.cabecera{display: block;width: 100%;height: 200px;}
 	</style>
 
@@ -58,7 +58,7 @@
 
 	<div class="row cabecera">
 		<div class="col-md-6">
-			hola mundo
+			
 		</div>
 	</div>
 

@@ -224,14 +224,9 @@ class ReportController {
             def saldoIniEmpresa = reportService.saldoInicial(partner, flag, saldoIni) 
 
             def saldoTotalSocio = cuotasSocio + totalCapitalizaciones + saldoIniSocio
-            println "Saldo del Socio: "+saldoTotalSocio
-
-            def saldoTotalEmpresa = cuotasEmpresa + saldoIniEmpresa 
-            println "Saldo del Empresa: "+saldoTotalEmpresa
-
-            println "Capitalizacion del Periodo: "+periodCapital
-            print params.position
             
+            def saldoTotalEmpresa = cuotasEmpresa + saldoIniEmpresa 
+                       
             [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period, position:params.int("position")]
         }
     }
