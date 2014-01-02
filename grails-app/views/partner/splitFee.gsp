@@ -7,8 +7,8 @@
 	<g:form action="splitFee" role="form" class="form-inline">
 		<g:hiddenField name="id" value="${params?.id}"/>
 		<div class="form-group">
-    		<label class="sr-only" for="range">Rango</label>
-    		<g:textField name="range" value="${partner?.affiliation?.range}" class="form-control" placeholder="${partner?.affiliation?.fee}"/>
+    		<label class="sr-only" for="portion">Rango</label>
+    		<g:textField name="portion" value="${partner?.affiliation?.portion}" class="form-control" placeholder="${partner?.affiliation?.fee}"/>
   		</div>
   		<button type="submit" class="btn btn-default">Aplicar</button>
 	</g:form>

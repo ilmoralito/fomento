@@ -7,7 +7,7 @@ applications:
   domain: cfapps.io
   path: target/fomento-0.1.war
   services:
-    cleardb-10bb7:
+    cleardb-60018:
       label: cleardb
       provider: cleardb
       version: n/a

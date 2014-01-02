@@ -25,22 +25,13 @@ environments {
     }
     production {
         dataSource {
-            url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
-            dialect = org.hibernate.dialect.MySQLInnoDBDialect
-            driverClassName = 'com.mysql.jdbc.Driver'
-            username = 'user'
-            password = "password"
-
-            properties {
-               maxActive = -1
-               minEvictableIdleTimeMillis=1800000
-               timeBetweenEvictionRunsMillis=1800000
-               numTestsPerEvictionRun=3
-               testOnBorrow=true
-               testWhileIdle=true
-               testOnReturn=true
-               validationQuery="SELECT 1"
-            }
+            pooled = true
+            dbCreate = "update"
+            url = "jdbc:mysql://localhost/db"
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+            username = "root"
+            password = "hotch"
         }
     }
 }

@@ -36,10 +36,10 @@ class FeeController {
 
 						if (typeOfPayment == "Catorcena") {
 							if (partner?.fees) {
-								def range = partner.affiliation.range
+								def portion = partner.affiliation.portion
 								def lastFee = Fee.findAllByPartner(partner).last()
 
-								if (range == lastFee.fee) {
+								if (portion == lastFee.fee) {
 									lastFee.fee = partner.affiliation.fee
 									lastFee.lastUpdated = new Date()
 									lastFee.save()
@@ -49,7 +49,7 @@ class FeeController {
 						}
 
 						partner.addToFees(
-							fee:(typeOfPayment == "Catorcena" && partner.affiliation.range) ? partner.affiliation.range : partner.affiliation.fee,
+							fee:(typeOfPayment == "Catorcena" && partner.affiliation.portion) ? partner.affiliation.portion : partner.affiliation.fee,
 							factoryFee:partner.affiliation.factoryFee,
 							period:period,
 							dateCreated:date,
@@ -74,9 +74,9 @@ class FeeController {
 				affiliation {
 					eq "typeOfPayment", "Catorcena"
 					if (params?.filter == "divididos") {
-						isNotNull "range"
+						isNotNull "portion"
 					} else {
-						isNull "range"
+						isNull "portion"
 					}
 				}
 			}

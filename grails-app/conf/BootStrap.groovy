@@ -134,7 +134,7 @@ class BootStrap {
                 //affiliation
                 def a3 = new Affiliation(
                     fee:partnersFees[2],
-                    range:null,
+                    portion:null,
                     typeOfPayment:"Bono",
                     factoryFee:factoryFee,
                     enrollmentDate:new Date() - 120,
@@ -192,7 +192,7 @@ class BootStrap {
                 */
     		break
     		case "production":
-    			def prodAdmin = User.findByUsername("me") ?: new User(username:"me", enabled:true, password:"123").save()
+    			def prodAdmin = User.findByUsername("me@gmail.com") ?: new User(username:"me@gmail.com", enabled:true, password:"123").save()
 
                 if (!prodAdmin.authorities.contains(adminRole)) {
                     UserRole.create prodAdmin, adminRole, true

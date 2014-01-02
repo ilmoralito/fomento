@@ -184,13 +184,13 @@ class PartnerController {
         }
 
         if (request.method == "POST") {
-            partner.affiliation.range = params.double("range")
+            partner.affiliation.portion = params.double("portion")
 
             if (!partner.affiliation.save()) {
                 partner.refresh()
                 flash.message = "Dato incorrecto, debe ser mayor que 1 y menor que $partner.affiliation.fee"
             } else {
-                flash.message = (params.range) ? "Cuota dividida" : "Restablecida a una sola cuota"
+                flash.message = (params.portion) ? "Cuota dividida" : "Restablecida a una sola cuota"
             }
 
         }

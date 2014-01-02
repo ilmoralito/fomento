@@ -7,9 +7,9 @@
 	<r:layoutResources/>
 </head>
 <body>
-	<g:set var="range" value="${partner?.affiliation?.range}"/>
+	<g:set var="portion" value="${partner?.affiliation?.portion}"/>
 	<g:set var="fee" value="${partner?.affiliation?.fee}"/>
-	<g:set var="second" value="${(range) ? fee - range : 0}"/>
+	<g:set var="second" value="${(portion) ? fee - portion : 0}"/>
 
 	<g:render template="/layouts/main-navbar"/>
 
@@ -22,7 +22,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-9">
-				<g:if test="${range}">
+				<g:if test="${portion}">
 					<p>Para dejar una sola cuota, dejar en blanco la caja de texto y hacer click en el boton aplicar</p>
 				</g:if>
 				<g:layoutBody/>
@@ -34,11 +34,11 @@
 				</g:if>
 			</div>
 			<div class="col-md-3">
-				<g:if test="${partner?.affiliation?.range}">
+				<g:if test="${partner?.affiliation?.portion}">
 					<h4>Cuota selccionada</h4>
 					${partner?.affiliation?.fee}
 					<h4>Primer pago</h4>
-					${range}
+					${portion}
 					<h4>Segundo pago</h4>
 					${second}
 				</g:if>
