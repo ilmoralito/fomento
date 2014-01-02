@@ -101,6 +101,7 @@ class FeeController {
 		}
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def show(Long id) {
 		def fee = Fee.get(id)
 
@@ -111,6 +112,7 @@ class FeeController {
 		[fee:fee]
 	}
 
+	@Secured(['ROLE_ADMIN'])
 	def update(Long id) {
 		def fee = Fee.get(id)
 
@@ -118,7 +120,6 @@ class FeeController {
 			response.sendError 404
 		}
 		if (params.dateCreated.empty) {
-			print "Vacio caballete"
 			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCre)
 		}else{
 			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
@@ -141,7 +142,7 @@ class FeeController {
 			def partnerTotal, max, offset
 			max = params.max
         	offset = params.offset
-			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), max:2, offset:0, all:params.all]
+			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), all:params.all]
 		}
 		
 	}
