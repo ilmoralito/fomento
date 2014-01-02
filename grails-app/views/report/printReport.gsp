@@ -80,7 +80,7 @@
 						<tr>
 							<td>
 								<g:if test="${num==position}">
-									2013-12-02
+									${fecha}
 								</g:if>
 							</td>
 							<td>
