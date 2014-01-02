@@ -199,15 +199,15 @@ class ReportController {
         boolean cap = true
         def flag = "socio"
         def cuotasSocio = reportService.totalC(partner, flag)
-        
+
         flag = "empresa"
         def cuotasEmpresa = reportService.totalC(partner, flag)
-        
+
         def totalCapitalizaciones = reportService.tCap(partner)
 
         flag = "capital"
         def periodCapital = reportService.periodCap(partner, params.int("period"), cap, flag)
-        
+
         if (periodCapital==false) {
             redirect(action:"capitalize", params:[id:params.iddiv])
             flash.message = "No se ha asignado ninguna capitalización al dividendo del periodo " + params.period +  ", debe hacerlo para imprimir el reporte!!"
@@ -215,19 +215,19 @@ class ReportController {
         }else{
             flag = "retiro"
             def retiro = reportService.periodCap(partner, params.int("period"), cap, flag)
-            
+
             flag = "socio"
             BigDecimal saldoIni = 0
-            def saldoIniSocio = reportService.saldoInicial(partner, flag, saldoIni) 
-            
+            def saldoIniSocio = reportService.saldoInicial(partner, flag, saldoIni)
+
             flag = "empresa"
-            def saldoIniEmpresa = reportService.saldoInicial(partner, flag, saldoIni) 
+            def saldoIniEmpresa = reportService.saldoInicial(partner, flag, saldoIni)
 
             def saldoTotalSocio = cuotasSocio + totalCapitalizaciones + saldoIniSocio
-            
-            def saldoTotalEmpresa = cuotasEmpresa + saldoIniEmpresa 
-                       
-            [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period, position:params.int("position")]
+
+            def saldoTotalEmpresa = cuotasEmpresa + saldoIniEmpresa
+            def fecha = new Date().format("yyyy-MM-dd")
+            [socio:saldoTotalSocio, empresa:saldoTotalEmpresa, capitalizacion:periodCapital, retiro:retiro, partner:partner, period:params.period, position:params.int("position"), fecha:fecha]
         }
     }
 }
