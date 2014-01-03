@@ -173,12 +173,12 @@ class UserController{
        def userInstance = User.get(params.id)
        def role, newRole, mess
        if (params.role=="admin") {
-           role = Role.get(1)
+           role = Role.findByAuthority("ROLE_ADMIN")
            newRole = UserRole.create(userInstance, role, true)
            mess = message(code:'org.fomento.assignedAdminRole')
            render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:"ROLE_ADMIN"])
        }else{
-           role = Role.get(2)
+           role = Role.findByAuthority("ROLE_USER")
            newRole = UserRole.create(userInstance, role, true)
            mess = message(code:'org.fomento.assignedUserRole')
            render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:"ROLE_USER"])
@@ -193,8 +193,8 @@ class UserController{
                 def userInstance = User.get(params.id)
                 def role, role2, mess
                if (params.roleadmin=='on') {
-                    role = Role.get(2)
-                    role2 = Role.get(1)
+                    role = Role.findByAuthority("ROLE_USER")
+                    role2 = Role.findByAuthority("ROLE_ADMIN")
                     def removeUser = UserRole.findByUserAndRole(userInstance, role)
                     if (!removeUser) {
                         render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
@@ -205,8 +205,13 @@ class UserController{
                         render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_ADMIN"])
                     }
                }else if(params.roleuser=="on"){
+<<<<<<< HEAD
                     role = Role.get(1)
                     role2 = Role.get(2)
+=======
+                    role = Role.findByAuthority("ROLE_ADMIN")
+                    role2 = Role.findByAuthority("ROLE_USER")
+>>>>>>> userAccount
                     def removeUser = UserRole.findByUserAndRole(userInstance, role)
                     if (!removeUser) {
                         render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
