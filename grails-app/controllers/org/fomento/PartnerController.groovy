@@ -39,7 +39,7 @@ class PartnerController {
             }
         }
     }
-
+    
     def list() {
         if (request.method == "GET") {
     	   return [partners:Partner.list()]
