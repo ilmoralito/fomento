@@ -205,13 +205,8 @@ class UserController{
                         render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_ADMIN"])
                     }
                }else if(params.roleuser=="on"){
-<<<<<<< HEAD
-                    role = Role.get(1)
-                    role2 = Role.get(2)
-=======
                     role = Role.findByAuthority("ROLE_ADMIN")
                     role2 = Role.findByAuthority("ROLE_USER")
->>>>>>> userAccount
                     def removeUser = UserRole.findByUserAndRole(userInstance, role)
                     if (!removeUser) {
                         render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
