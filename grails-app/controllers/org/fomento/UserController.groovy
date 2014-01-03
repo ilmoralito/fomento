@@ -20,20 +20,20 @@ class UserController{
         def role, role2, removeR1, removeR2
         role = Role.get(1)
         role2 = Role.get(2)
-        
+
         def userInstance = User.get(params.id)
-        
+
         if (!userInstance) {
             response.sendError 404
             return false
         }
-        
+
         if (request.post) {
             userInstance = User.get(params.id)
             removeR1 = UserRole.findByUserAndRole(userInstance, role)
-            
+
             if(!removeR1){
-                removeR2 = UserRole.findByUserAndRole(userInstance, role2) 
+                removeR2 = UserRole.findByUserAndRole(userInstance, role2)
                 if (!removeR2) {
                     //Seguir y eliminar usuario sin role
                 }else{
@@ -83,7 +83,7 @@ class UserController{
     	def user = springSecurityService.currentUser
         def pass = springSecurityService.encodePassword(params.currentpassword)
         session.user = user
-        
+
         if (pass!=user.password) {
             def mess = message(code:'org.fomento.errorCurrentPassword')
             render(view:"profile",
@@ -96,16 +96,16 @@ class UserController{
             }
 
             def userInstance = cmd.updatePassword()
-                            
+
             if (userInstance.save(flush:true)) {
                 session.user = userInstance
                 def mess= message(code:'ni.com.cookbook.passwordchanged')
                 render(view:"profile", model:[userInstance:userInstance,activepassword:"active", activegeneral:"", men2:"ok", mess:mess])
             }else{
                 flash.message="Errores"
-            }  
+            }
         }
-    	 
+
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
@@ -126,7 +126,7 @@ class UserController{
                 userRole = "ROLE_USER"
              }
          }else{
-                userRole = "ROLE_ADMIN" 
+                userRole = "ROLE_ADMIN"
          }
         [userInstance:userInstance, userRole:userRole]
     }
@@ -169,7 +169,7 @@ class UserController{
         }
     }
 
-    def assignrole(){ 
+    def assignrole(){
        def userInstance = User.get(params.id)
        def role, newRole, mess
        if (params.role=="admin") {
@@ -183,12 +183,12 @@ class UserController{
            mess = message(code:'org.fomento.assignedUserRole')
            render(view:"edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole:"ROLE_USER"])
         }
-       
+
     }
 
     def changerole(){
         if (!params.id){
-            redirect action:"list"   
+            redirect action:"list"
         }else{
                 def userInstance = User.get(params.id)
                 def role, role2, mess
@@ -197,7 +197,7 @@ class UserController{
                     role2 = Role.get(1)
                     def removeUser = UserRole.findByUserAndRole(userInstance, role)
                     if (!removeUser) {
-                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
                     }else{
                         removeUser.delete(flush:true)
                         def newRole = UserRole.create(userInstance, role2, true)
@@ -207,17 +207,17 @@ class UserController{
                }else if(params.roleuser=="on"){
                     role = Role.get(1)
                     role2 = Role.get(2)
-                    def removeUser = UserRole.findByUserAndRole(userInstance, role)  
+                    def removeUser = UserRole.findByUserAndRole(userInstance, role)
                     if (!removeUser) {
-                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
                     }else{
-                        removeUser.delete(flush:true) 
+                        removeUser.delete(flush:true)
                         def newRole = UserRole.create(userInstance, role2, true)
                         mess=message(code:'org.fomento.menrolchange')
-                        render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_USER"])  
+                        render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_USER"])
                     }
                }else{
-                    render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole]) 
+                    render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
                }
             }
     }
@@ -226,18 +226,18 @@ class UserController{
 
 
 class changepasswordCommand {
-	
+
 	String password
     String confirmpassword
 
     static constraints = {
     	importFrom User
-    	
+
         confirmpassword blank:false, validator: {confirmpass, user ->
             confirmpass == user.password
         }
-    
-    } 
+
+    }
 
     User updatePassword() {
         def session = RCH.requestAttributes.session
