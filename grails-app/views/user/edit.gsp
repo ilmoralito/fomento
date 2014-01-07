@@ -2,23 +2,14 @@
 <html lang="en">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>	
+	<r:require modules="bootstrap, app"/>
 </head>
 <body>
 	<g:render template="tool-bar"/>
-	<div class="row">
-		<div class="col-md-4">
-			<h4 align="center">Actualización de usuarios</h4>
-		</div>
-		<div class="col-md-3">
-			<h4 align="center">Privilegios</h4>
-		</div>
-	</div>
-	
-	<hr>
 	<br>
 	<div class="col-md-4">
-		<g:form controller= "user" action="update">	
+		<legend>Actualizar usuario ${userInstance?.fullName}</legend>
+		<g:form controller= "user" action="update">
 			<g:hiddenField name="id" value="${userInstance.id}"/>
 			<g:hiddenField name="userRole" value="${userRole}"/>
 		   	<div class="form-group">
@@ -33,12 +24,13 @@
 		     	<label for="fullname">Contraseña</label>
 		     	<g:passwordField class="form-control" name="password"/>
 		     </div>
-		    
+
 		    <g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnupdate')}"class="btn btn-default"/>
 		</g:form>
 	</div>
 
 	<div class="col-md-3">
+		<legend>Actualizar roles y cuenta</legend>
 	   	<div class="col-md-12">
 		   	<g:form controller="user"  action="enabledaccount">
 		   		<g:hiddenField name="userRole" value="${userRole}"/>
@@ -63,7 +55,6 @@
 				</g:form>
 		</div>
 		<br>
-		<hr>
 		<div class="col-md-12">
 			<g:if test="${userRole=="NO_ROLE"}">
 				<g:form controller="user" action="assignrole">
@@ -85,7 +76,7 @@
 					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-primary btn-sm"/>
 				</g:form>
 			</g:if>
-			
+
 			<g:if test="${userRole=="ROLE_ADMIN"}">
 				<g:form controller="user" action="changerole">
 					<g:hiddenField name="userRole" value="${userRole}"/>
@@ -108,9 +99,9 @@
 					<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnexecuteaction')}"class="btn btn-primary btn-sm"/>
 				</g:form>
 			</g:if>
-				
-			
-			
+
+
+
 		</div>
 	</div>
 	<div class="col-md-5">

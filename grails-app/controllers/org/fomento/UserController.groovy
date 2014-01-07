@@ -8,19 +8,18 @@ class UserController{
 
 	static defaultAction = "list"
 	static allowedMethods = [
-	"profile":["GET", "POST"],
-	"delete":["GET", "POST"]]
+       list:"GET",
+	   profile:["GET", "POST"],
+	   delete:["GET", "POST"]
+    ]
 
 
     def create(){
     	[userInstance:new User(params)]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete(){
-        def role, role2, removeR1, removeR2
-        role = Role.get(1)
-        role2 = Role.get(2)
-
         def userInstance = User.get(params.id)
 
         if (!userInstance) {
@@ -29,36 +28,28 @@ class UserController{
         }
 
         if (request.post) {
-            userInstance = User.get(params.id)
-            removeR1 = UserRole.findByUserAndRole(userInstance, role)
-
-            if(!removeR1){
-                removeR2 = UserRole.findByUserAndRole(userInstance, role2)
-                if (!removeR2) {
-                    //Seguir y eliminar usuario sin role
-                }else{
-                    removeR2.delete(flush:true)
-                }
-            }else{
-                removeR1.delete(flush:true)
-            }
-
+            UserRole.removeAll userInstance
             userInstance.delete()
+
             flash.message="El usuario ha sido borrado"
             redirect(action:"list")
-
-        }else{
-            [userInstance:userInstance]
+            return
         }
+
+        [userInstance:userInstance]
     }
 
     def save(){
-    	def userInstance = new User(params)
+        def userInstance = new User(username:params?.username, fullName:params?.fullName, password:params?.password)
     	if (!userInstance.save(flush:true)) {
     		render(view:"create", model:[userInstance:userInstance])
     		return false
     	}
 
+        def role = Role.findByAuthority(params?.authority)
+        UserRole.create userInstance, role, true
+
+        flash.message = "Usuario $userInstance.fullName creado correctamente"
     	redirect(action:"list")
     }
 
@@ -189,41 +180,44 @@ class UserController{
     def changerole(){
         if (!params.id){
             redirect action:"list"
-        }else{
-                def userInstance = User.get(params.id)
-                def role, role2, mess
-               if (params.roleadmin=='on') {
-                    role = Role.findByAuthority("ROLE_USER")
-                    role2 = Role.findByAuthority("ROLE_ADMIN")
-                    def removeUser = UserRole.findByUserAndRole(userInstance, role)
-                    if (!removeUser) {
-                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
-                    }else{
-                        removeUser.delete(flush:true)
-                        def newRole = UserRole.create(userInstance, role2, true)
-                        mess=message(code:'org.fomento.menrolchange')
-                        render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_ADMIN"])
-                    }
-               }else if(params.roleuser=="on"){
-                    role = Role.findByAuthority("ROLE_ADMIN")
-                    role2 = Role.findByAuthority("ROLE_USER")
-                    def removeUser = UserRole.findByUserAndRole(userInstance, role)
-                    if (!removeUser) {
-                        render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
-                    }else{
-                        removeUser.delete(flush:true)
-                        def newRole = UserRole.create(userInstance, role2, true)
-                        mess=message(code:'org.fomento.menrolchange')
-                        render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_USER"])
-                    }
-               }else{
+        } else {
+            def userInstance = User.get(params.id)
+            def role, role2, mess
+
+            if (params.roleadmin=='on') {
+                role = Role.findByAuthority("ROLE_USER")
+                role2 = Role.findByAuthority("ROLE_ADMIN")
+
+                def removeUser = UserRole.findByUserAndRole(userInstance, role)
+                if (!removeUser) {
                     render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
-               }
+                }else{
+                    removeUser.delete(flush:true)
+                    def newRole = UserRole.create(userInstance, role2, true)
+                    mess=message(code:'org.fomento.menrolchange')
+                    render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_ADMIN"])
+                }
+            } else if (params.roleuser=="on"){
+                role = Role.findByAuthority("ROLE_ADMIN")
+                role2 = Role.findByAuthority("ROLE_USER")
+
+                def removeUser = UserRole.findByUserAndRole(userInstance, role)
+                if (!removeUser) {
+                    render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
+                } else {
+                    removeUser.delete(flush:true)
+
+                    def newRole = UserRole.create(userInstance, role2, true)
+                    mess=message(code:'org.fomento.menrolchange')
+                    render(view: "edit", model:[userInstance:userInstance, men:"ok", mess:mess, userRole: "ROLE_USER"])
+                }
+            } else {
+                render(view: "edit", model:[userInstance:userInstance, userRole: params.userRole])
             }
+        }
     }
 
 }
-
 
 class changepasswordCommand {
 
@@ -236,7 +230,6 @@ class changepasswordCommand {
         confirmpassword blank:false, validator: {confirmpass, user ->
             confirmpass == user.password
         }
-
     }
 
     User updatePassword() {

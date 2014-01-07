@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>	
+	<r:require modules="bootstrap, app"/>
 </head>
 <body>
 	<g:render template="tool-bar"/>
-	<h4>Crear Usuarios</h4>	
-	<hr>
-	
+	<h4>Crear Usuario</h4>
+
 	<div class="col-md-5">
-		<g:render template="frcreate"/>	
+		<g:render template="frcreate"/>
 	</div>
 	<br>
 	<div class="col-md-6">
