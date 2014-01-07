@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, app"/>	
+	<r:require modules="bootstrap, app"/>
 </head>
 <body>
 	<g:render template="tool-bar"/>
-	<h4>Crear Usuarios</h4>	
-	<hr>
-	
-	<div class="col-md-5">
-		<g:render template="frcreate"/>	
+	<h4>Crear Usuario</h4>
+	<div class="col-md-6">
+		<g:form action="save">
+			<g:render template="form"/>
+			<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnsave')}"class="btn btn-default pull-right"/>
+		</g:form>
 	</div>
 	<br>
 	<div class="col-md-6">
