@@ -7,9 +7,11 @@
 <body>
 	<g:render template="tool-bar"/>
 	<h4>Crear Usuario</h4>
-
-	<div class="col-md-5">
-		<g:render template="frcreate"/>
+	<div class="col-md-6">
+		<g:form action="save">
+			<g:render template="form"/>
+			<g:submitButton name="btnregistration" value="${message(code:'org.fomento.btnsave')}"class="btn btn-default pull-right"/>
+		</g:form>
 	</div>
 	<br>
 	<div class="col-md-6">
