@@ -64,7 +64,7 @@ class Partner implements Serializable {
         }
     }
 
-    static hasMany = [fees:Fee, dividends:Dividend]
+    static hasMany = [fees:Fee, dividends:Dividend, renouncies:Renounce]
 
     static mapping = {
         version false
