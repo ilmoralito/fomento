@@ -165,14 +165,10 @@ class PartnerController {
             response.sendError 404
         }
 
-        if (request.method == "POST") {
-            partner.status = (partner.status) ? false : true
+        //check if selected partner has dividend in actual period
+        //def hasDividendsInCurrentPeriod = Dividend.findByPartnerAndPeriod(partner, new Date()[YEAR])
 
-            if (!partner.save()) {
-                return [partner:partner]
-            }
-        }
-
+        //[partner:partner, hasDividendsInCurrentPeriod:hasDividendsInCurrentPeriod]
         [partner:partner]
     }
 

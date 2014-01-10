@@ -1,5 +1,6 @@
 import org.fomento.*
 import grails.util.GrailsUtil
+import static java.util.Calendar.*
 
 class BootStrap {
 
@@ -57,28 +58,6 @@ class BootStrap {
                     }
                 }
 
-                /*
-                //fees
-                def fee1 = new Fee(
-                    fee:juanPerez.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 250,
-                    lastUpdated:new Date() - 250
-                )
-
-                def fee2 = new Fee(
-                    fee:juanPerez.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 150,
-                    lastUpdated:new Date() - 150
-                )
-
-                juanPerez.addToFees(fee1)
-                juanPerez.addToFees(fee2)
-                */
-
                 //johnDoe
                 //affiliation
                 def a2 = new Affiliation(
@@ -107,28 +86,6 @@ class BootStrap {
                         print it
                     }
                 }
-
-                /*
-                //fees
-                def fee3 = new Fee(
-                    fee:johnDoe.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 200,
-                    lastUpdated:new Date() - 200
-                )
-
-                def fee4 = new Fee(
-                    fee:johnDoe.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 230,
-                    lastUpdated:new Date() - 230
-                )
-
-                johnDoe.addToFees(fee3)
-                johnDoe.addToFees(fee4)
-                */
 
                 //fulano
                 //affiliation
@@ -160,37 +117,30 @@ class BootStrap {
                     }
                 }
 
-                /*
-                //fees
-                def fee5 = new Fee(
-                    fee:fulano.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 150,
-                    lastUpdated:new Date() - 150
-                )
+                //Create fees
+                def partners = Partner.list()
 
-                def fee6 = new Fee(
-                    fee:fulano.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 100,
-                    lastUpdated:new Date() - 100
-                )
+                partners.each { partner ->
+                    for(period in 2011..2013) {
+                        for(month in 0..11) {
+                            def date = new Date()
 
-                def fee7 = new Fee(
-                    fee:fulano.affiliation.fee,
-                    factoryFee:factoryFee,
-                    period:2013,
-                    dateCreated:new Date() - 90,
-                    lastUpdated:new Date() - 90
-                )
+                            date[YEAR] = period
+                            date[MONTH] = month
+                            date[DATE] = 1
 
-                fulano.addToFees(fee5)
-                fulano.addToFees(fee6)
-                fulano.addToFees(fee7)
-                */
-    		break
+                            def fee = new Fee(
+                                fee:partner.affiliation.fee,
+                                factoryFee:factoryFee,
+                                period:period,
+                                dateCreated:date,
+                                lastUpdated:date,
+                                partner:partner
+                            ).save()
+                        }
+                    }
+                }
+            break
     		case "production":
     			def prodAdmin = User.findByUsername("me@gmail.com") ?: new User(username:"me@gmail.com", enabled:true, password:"123").save()
 

@@ -43,7 +43,7 @@ class ReportController {
     }
 
     def list() {
-        def dividends = Dividend.executeQuery("select distinct d.period from Dividend d " +"where d.period >= ?",[2013])
+        def dividends = Dividend.executeQuery("select distinct d.period from Dividend d " +"where d.period >= ?",[2012])
       	[dividends:dividends]
     }
 
@@ -238,7 +238,7 @@ class DividendsCommand {
 
 	static constraints = {
 		up blank:false, min:1.0
-		period min:2013
+		period min:2012
 	}
 
 }
@@ -259,6 +259,6 @@ class ApplyDividendsCommand {
         pds blank:false, min:0.0
         pde blank:false, min:0.0
 		up blank:false, min:1.0
-		period blank:false, min:2013
+		period blank:false, min:2012
 	}
 }

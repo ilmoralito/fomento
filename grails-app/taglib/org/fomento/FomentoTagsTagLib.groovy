@@ -10,14 +10,6 @@ class FomentoTagsTagLib {
 
 	static namespace = "fomento"
 
-	def partnerStatus = { attrs ->
-		if (attrs.status) {
-			out << "Activo"
-		} else {
-			out << "Desabilitado"
-		}
-	}
-
 	def periods = { attrs ->
 		def ctrl = attrs.ctrl
 		def now = new Date()

@@ -12,7 +12,7 @@ class Fee implements Serializable {
     static constraints = {
         fee min:0.00, blank:false
         factoryFee min:0.00, blank:false
-        period min:2013, blank:false
+        period min:2012, blank:false
     }
 
     static belongsTo = [partner:Partner]

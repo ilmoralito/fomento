@@ -5,7 +5,7 @@ class Renounce {
     String identificationCard
     BigDecimal residuePartner = 0.0
     BigDecimal residueFactory
-
+    Date enrollmentDate
 	Date dateCreated
 	Date lastUpdated
 

@@ -8,12 +8,7 @@
 	<g:render template="toolbar"/>
 	<g:render template="/layouts/navbar"/>
 
-	<p>El estado actual del socio <strong>${partner}</strong> es</p>
-	<g:form action="changeStatus">
-		<g:hiddenField name="id" value="${partner.id}"/>
-		<button type="submit" class="btn ${(partner.status) ? 'btn-default' : 'btn-warning'}">
-			<fomento:partnerStatus status="${partner.status}"/>
-		</button>
-	</g:form>
+	<p>Confirmar proceso de renunica del socio: <strong>${partner}</strong>, una ves finalizado este proceso <strong>NO SE PODRAN DESHACER LOS CAMBIOS, DESEA CONTINUAR?</strong></p>
+	<g:link controller="renounce" params="[partnerId:params.id]">Renunciar</g:link>
 </body>
 </html>
