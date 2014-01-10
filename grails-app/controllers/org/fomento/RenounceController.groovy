@@ -3,9 +3,10 @@ package org.fomento
 class RenounceController {
 	def partnerService
 	def feeService
+    def dividendService
 
 	static defaultAction = "renounce"
-	static allowedMethods = [renounce:"GET"]
+	static allowedMethods = [renounce:["GET", "POST"]]
 
     def renounce(Integer partnerId) {
     	def partner = partnerService.getPartner(partnerId)
@@ -18,7 +19,13 @@ class RenounceController {
     	def data = feeService.totalFeesByPartner(partner)
     	def dividendResults = data.dividendResults
 
-    	print dividendResults
+    	if (request.method == "POST") {
+            //Saldo del socio
+            def sPartner = fomento.partnerSaldo(partner:partner, flag:"socio")
+            def sPartners = dividendService.feePeriodData(params.int("period"))
+
+            print sPartners
+        }
 
     }
 

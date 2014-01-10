@@ -149,7 +149,7 @@ class FomentoTagsTagLib {
 		Partner parN = attrs.parN
 		String flag = attrs.flag
 		Integer peri = attrs.int("peri")
-		
+
 		def criteria = Fee.createCriteria()
 		def totalCuotas = criteria.get{
 			eq("period", peri)
@@ -187,7 +187,7 @@ class FomentoTagsTagLib {
 	def partnerSaldo = { attrs ->
 		Partner partner = attrs.partner
 		String flag = attrs.flag
-		
+
 		def totalCuotas = reportService.totalC(partner, flag)
 	    //----------------------------------------------
         def capitalizationTotal
@@ -196,15 +196,15 @@ class FomentoTagsTagLib {
         }
        	//----------------------------------------------
        	BigDecimal saldoIni = 0
-       	def saldoI = reportService.saldoInicial(partner, flag, saldoIni) 
+       	def saldoI = reportService.saldoInicial(partner, flag, saldoIni)
         BigDecimal total
-       
+
         if (flag=="socio") {
         	total = saldoI + totalCuotas + capitalizationTotal
         }else{
         	total = saldoI + totalCuotas
         }
-        
+
      	out<< g.formatNumber(number:total, type:"number", maxFractionDigits:"2")
 	}
 

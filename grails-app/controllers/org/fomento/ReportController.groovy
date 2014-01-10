@@ -27,7 +27,7 @@ class ReportController {
     		}
 
 	    	def partners = Partner.findAllByStatus(true)
-            def result = dividendService.feePeriodData(partners, cmd.period)
+            def result = dividendService.feePeriodData(cmd.period)
 
 	    	return [
                 partners:partners,

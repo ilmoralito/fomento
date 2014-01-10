@@ -23,13 +23,16 @@ class FeeService implements Serializable {
         def criteria = Fee.createCriteria()
         def ta = criteria.get {
             eq "period", period
+            partner {
+                eq "status", true
+            }
 
             projections {
                 sum property
             }
         }
 
-        ta
+        return (ta) ?: 0
     }
 
     def totalFeesByPartner(Partner partner) {
@@ -73,7 +76,7 @@ class FeeService implements Serializable {
                 property "up", "up"
                 property "partnerDividend", "partnerDividend"
                 property "factoryDividend", "factoryDividend"
-                property "capitalization", "capitalization"
+                property "capitalization", "porcentaje"
             }
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
@@ -85,10 +88,10 @@ class FeeService implements Serializable {
         }
 
         dividendResults.each { d ->
-            def var = (d.capitalization) ? d.capitalization.toString().toInteger() : 0
+            def var = (d.porcentaje) ? d.porcentaje.toString().toInteger() : 100
 
-            d.capital = d.partnerDividend * ( var / 100)
-            d.withdraw = d.partnerDividend - d.capital
+            d.capitalization = d.partnerDividend * ( var / 100)
+            d.withdraw = d.partnerDividend - d.capitalization
         }
 
         [results:results, fees:fees, dividendResults:dividendResults]
