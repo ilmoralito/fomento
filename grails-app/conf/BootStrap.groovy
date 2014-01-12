@@ -121,7 +121,7 @@ class BootStrap {
                 def partners = Partner.list()
 
                 partners.each { partner ->
-                    for(period in 2011..2013) {
+                    for(period in 2011..2012) {
                         for(month in 0..11) {
                             def date = new Date()
 

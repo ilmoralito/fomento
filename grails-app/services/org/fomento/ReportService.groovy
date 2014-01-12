@@ -24,8 +24,6 @@ class ReportService {
             ss = partner?.affiliation?.factoryCapital
         }
 
-        tss()
-
         def criteria = Affiliation.createCriteria()
         BigDecimal ts = criteria.get {
             projections {
@@ -185,9 +183,9 @@ class ReportService {
             totalFactoryDividend = totalFactoryDividend + (dividend.factoryDividend - (dividend.factoryDividend * 0.1))
         }
 
-        println "affiliationTotal: $affiliationTotal"
-        println "feeTotal: $feeTotal"
-        println "totalCapitalization: $totalCapitalization"
-        println "totalFactoryDividend: $totalFactoryDividend"
+        def totalPartnerCapital = affiliationTotal.saldoInicialSocio + feeTotal.fee + totalCapitalization
+        def totalFactoryCapital = affiliationTotal.saldoInicialEmpresa + feeTotal.factoryFee + totalFactoryDividend
+
+        [totalPartnerCapital:totalPartnerCapital, totalFactoryCapital:totalFactoryCapital]
     }
 }

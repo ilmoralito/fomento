@@ -15,7 +15,7 @@ class FomentoTagsTagLib {
 		def now = new Date()
 		def currentYear = now[YEAR]
 
-		def periods = (2013..currentYear).toArray()
+		def periods = (2012..currentYear).toArray()
 
 		for(period in periods) {
 			if (ctrl == "deductions") {

@@ -21,6 +21,7 @@ class ReportController {
 	]
 
     def dividends(DividendsCommand cmd) {
+        //print reportService.tss()
     	if (request.method == "POST") {
     		if (cmd.hasErrors()) {
     			return [cmd:cmd]
