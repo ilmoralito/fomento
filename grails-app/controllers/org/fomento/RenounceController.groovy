@@ -20,7 +20,6 @@ class RenounceController {
     	def dividendResults = data.dividendResults
 
     	if (request.method == "POST") {
-            //Saldo del socio
             def sPartner = fomento.partnerSaldo(partner:partner, flag:"socio")
             def sPartners = dividendService.feePeriodData(params.int("period"))
 

@@ -21,7 +21,6 @@ class ReportController {
 	]
 
     def dividends(DividendsCommand cmd) {
-        //print reportService.tss()
     	if (request.method == "POST") {
     		if (cmd.hasErrors()) {
     			return [cmd:cmd]
@@ -67,11 +66,8 @@ class ReportController {
     }
 
     def applyDividends(ApplyDividendsCommand cmd) {
+        println "home again"
     	if (cmd.hasErrors()) {
-            cmd.errors.allErrors.each {
-                print it
-            }
-
     		return [cmd:cmd]
     	}
 
@@ -80,8 +76,8 @@ class ReportController {
 
     	if (!dividendsCount) {
 			partners.each { partner ->
-                def fps = reportService.fp(partner, cmd.period, "fee", "capitalization")
-                def fpe = reportService.fp(partner, cmd.period, "factoryFee", "factoryCapital")
+                def fps = reportService.fp(partner, cmd.period, "socio")
+                def fpe = reportService.fp(partner, cmd.period, "empresa")
 
                 BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
                 BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
@@ -89,6 +85,8 @@ class ReportController {
                 def dividend = new Dividend (
                     partnerDividend:partnerDD,
                     factoryDividend:factoryDD,
+                    fps:fps,
+                    fpe:fpe,
                     tas:cmd.tas,
                     tae:cmd.tae,
                     tap:cmd.tap,
@@ -245,6 +243,8 @@ class DividendsCommand {
 }
 
 class ApplyDividendsCommand {
+    BigDecimal fps
+    BigDecimal fpe
 	BigDecimal tas
     BigDecimal tae
     BigDecimal tap
@@ -254,12 +254,6 @@ class ApplyDividendsCommand {
     Integer period
 
 	static constraints = {
-		tas blank:false, min:1.0
-        tae blank:false, min:1.0
-        tap blank:false, min:1.0
-        pds blank:false, min:0.0
-        pde blank:false, min:0.0
-		up blank:false, min:1.0
-		period blank:false, min:2012
+		importFrom Dividend
 	}
 }

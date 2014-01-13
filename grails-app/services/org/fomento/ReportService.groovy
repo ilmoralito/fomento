@@ -7,31 +7,13 @@ class ReportService {
 	DividendService dividendService
 	FeeService feeService
 
-    def fp(Partner partner, Integer period, String fee, String capital) {
+    def fp(Partner partner, Integer period, String flag) {
         def result = dividendService.feePeriodData(period)
+        def tssResults = tss()
+        def tss = (flag == "socio") ? tssResults.totalPartnerCapital : tssResults.totalFactoryCapital
+        def total = totalResultsByPartnerOrFactory(partner, flag)
 
-        BigDecimal ta = (capital == "capitalization") ? result.tas : result.tae
-        BigDecimal ap
-        BigDecimal ss
-
-        if (partner.status) {
-            ap = feeService.totalFeesByPeriod(partner, period, fee)
-        }
-
-        if (capital == "capitalization") {
-            ss = partner?.affiliation?.capitalization
-        } else {
-            ss = partner?.affiliation?.factoryCapital
-        }
-
-        def criteria = Affiliation.createCriteria()
-        BigDecimal ts = criteria.get {
-            projections {
-                sum capital
-            }
-        }
-
-        BigDecimal fp = (ap + ss) / (ta + ts)
+        BigDecimal fp = total / tss
 
         return fp
     }
@@ -42,6 +24,27 @@ class ReportService {
 
         return dd
     }
+
+    def totalResultsByPartnerOrFactory(Partner partner, String flag) {
+        def totalCuotas = totalC(partner, flag)
+        //----------------------------------------------
+
+        def capitalizationTotal = (flag == "socio") ? tCap(partner) : 0
+
+        //----------------------------------------------
+        BigDecimal saldoIni = 0
+        def saldoI = saldoInicial(partner, flag, saldoIni)
+        BigDecimal total
+
+        if (flag=="socio") {
+            total = saldoI + totalCuotas + capitalizationTotal
+        }else{
+            total = saldoI + totalCuotas
+        }
+
+        total
+    }
+
     // total de cuotas del socio
     def totalC(Partner partner, String flag){
         def cuota = Fee.findAllByPartner(partner)
