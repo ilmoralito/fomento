@@ -66,7 +66,6 @@ class ReportController {
     }
 
     def applyDividends(ApplyDividendsCommand cmd) {
-        println "home again"
     	if (cmd.hasErrors()) {
     		return [cmd:cmd]
     	}
@@ -78,6 +77,9 @@ class ReportController {
 			partners.each { partner ->
                 def fps = reportService.fp(partner, cmd.period, "socio")
                 def fpe = reportService.fp(partner, cmd.period, "empresa")
+
+                println "$partner fps $fps"
+                println "$partner fpe $fpe"
 
                 BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
                 BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)

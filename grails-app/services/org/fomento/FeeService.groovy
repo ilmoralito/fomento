@@ -61,6 +61,7 @@ class FeeService implements Serializable {
                 property "period", "period"
                 property "fee", "fee"
                 count "fee", "count"
+                order("period", "asc")
             }
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
@@ -93,7 +94,6 @@ class FeeService implements Serializable {
             d.capitalization = d.partnerDividend * ( var / 100)
             d.withdraw = d.partnerDividend - d.capitalization
         }
-
-        [results:results, fees:fees, dividendResults:dividendResults]
+        [partnerData1:dividendResults, partnerData2:results, fees:fees]
     }
 }

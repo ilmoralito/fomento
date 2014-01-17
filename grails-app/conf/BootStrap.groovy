@@ -117,6 +117,7 @@ class BootStrap {
                     }
                 }
 
+               
                 //Create fees
                 def partners = Partner.list()
 

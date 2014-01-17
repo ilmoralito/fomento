@@ -9,12 +9,11 @@ class ReportService {
 
     def fp(Partner partner, Integer period, String flag) {
         def result = dividendService.feePeriodData(period)
-        def tssResults = tss()
+        def tssResults = tss(period)
         def tss = (flag == "socio") ? tssResults.totalPartnerCapital : tssResults.totalFactoryCapital
         def total = totalResultsByPartnerOrFactory(partner, flag)
 
         BigDecimal fp = total / tss
-
         return fp
     }
 
@@ -30,7 +29,7 @@ class ReportService {
         //----------------------------------------------
 
         def capitalizationTotal = (flag == "socio") ? tCap(partner) : 0
-
+        def totalDividendFactory = (flag == "empresa") ? tDividendFactory(partner) : 0
         //----------------------------------------------
         BigDecimal saldoIni = 0
         def saldoI = saldoInicial(partner, flag, saldoIni)
@@ -39,7 +38,7 @@ class ReportService {
         if (flag=="socio") {
             total = saldoI + totalCuotas + capitalizationTotal
         }else{
-            total = saldoI + totalCuotas
+            total = saldoI + totalCuotas + totalDividendFactory
         }
 
         total
@@ -70,26 +69,25 @@ class ReportService {
 
     // Total de capitalizaciones
     def tCap(Partner partner){
-        def capital, idDiv, divBruto, divNeto, capTotal = 0
+        def capital, divBruto, divNeto, capTotal = 0
         String porcentaje
 
-        def div = Dividend.findAllByPartner(partner)
+        def dividends = Dividend.findAllByPartner(partner)
 
-        if (div) {
-            div.each{
-                idDiv = it.id
+        if (dividends) {
+            dividends.each { dividendInstance ->
                 def criteria = Capitalization.createCriteria()
 
                 capital = criteria.get{
-                    dividend{
-                        eq "id", idDiv
+                    dividend {
+                        eq "id", dividendInstance.id
                     }
                 }
 
                 capital = (capital) ?: 100
 
                 porcentaje = capital.toString()
-                divBruto = it.partnerDividend
+                divBruto = dividendInstance.partnerDividend
                 divNeto = divBruto-(divBruto * 0.1)
                 capTotal = capTotal + ((divNeto*porcentaje.toInteger())/100)
             }
@@ -98,6 +96,17 @@ class ReportService {
         }
 
         return capTotal
+    }
+
+    def tDividendFactory(Partner partner){
+        def dFactory = Dividend.createCriteria()
+        def dividendFactory = dFactory.get {
+            eq "partner", partner
+            projections{
+                sum("factoryDividend")
+            }
+        }
+        def result = (dividendFactory) ? (dividendFactory - (dividendFactory * 0.1)) : 0
     }
 
     //Calcular Saldo Inicial
@@ -142,7 +151,7 @@ class ReportService {
     }
 
     //Total saldo socios
-    def tss() {
+    def tss(Integer periodToNotInclude) {
         //total affiliation
         def criteria = Affiliation.createCriteria()
         def affiliationTotal = criteria.get {
@@ -174,21 +183,20 @@ class ReportService {
         }
 
         //list all dividends
-        def dividends = Dividend.list()
+        def dividends = Dividend.findAllByPeriodNotEqual(periodToNotInclude)
+
         def totalCapitalization = 0.0
         def totalFactoryDividend = 0.0
 
         dividends.each { dividend ->
             def capitalization = (dividend?.capitalization?.percentage) ? dividend.capitalization.percentage.toString().toInteger()  : 100
-            def dividendNeto = dividend.partnerDividend * 0.1
+            def dividendNeto = dividend.partnerDividend - (dividend.partnerDividend * 0.1)
 
             totalCapitalization = totalCapitalization + (dividendNeto * (capitalization / 100))
             totalFactoryDividend = totalFactoryDividend + (dividend.factoryDividend - (dividend.factoryDividend * 0.1))
         }
-
         def totalPartnerCapital = affiliationTotal.saldoInicialSocio + feeTotal.fee + totalCapitalization
         def totalFactoryCapital = affiliationTotal.saldoInicialEmpresa + feeTotal.factoryFee + totalFactoryDividend
-
         [totalPartnerCapital:totalPartnerCapital, totalFactoryCapital:totalFactoryCapital]
     }
 }

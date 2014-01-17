@@ -8,10 +8,14 @@ class History {
     BigDecimal totalPartnerFee
     BigDecimal partnerDividend
     BigDecimal capitalization
+    BigDecimal withdraw
     BigDecimal capital
 
     BigDecimal totalfactoryFee
     BigDecimal factoryDividend
+
+    BigDecimal up
+    Integer percentage
 
     static constraints = {
         period blank:false
