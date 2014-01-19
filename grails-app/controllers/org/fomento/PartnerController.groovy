@@ -39,7 +39,7 @@ class PartnerController {
             }
         }
     }
-    
+
     def list() {
         if (request.method == "GET") {
     	   return [partners:Partner.list()]
@@ -165,15 +165,15 @@ class PartnerController {
             response.sendError 404
         }
 
-        if (request.method == "POST") {
-            partner.status = (partner.status) ? false : true
+        //check if selected partner has dividend in actual period
+        //check algoritmo
+        def period = new Date()[YEAR]
+        def countFeesInCurrentPeriod = Fee.findAllByPartnerAndPeriod(partner, period)
+        def hasDividendsInCurrentPeriod = Dividend.findByPartnerAndPeriod(partner, period)
 
-            if (!partner.save()) {
-                return [partner:partner]
-            }
-        }
+        def flag = (!hasDividendsInCurrentPeriod && countFeesInCurrentPeriod) ? true : false
 
-        [partner:partner]
+        [partner:partner, flag:flag, period:period]
     }
 
     def splitFee(Integer id) {
