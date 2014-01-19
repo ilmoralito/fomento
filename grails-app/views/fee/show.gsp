@@ -10,7 +10,7 @@
 <g:set var="partner" value="${params?.partner}"/>
 	<g:set var="period" value="${params?.period}"/>
 
-	<h4>Actualizar cuotas de ${org.fomento.Partner.findById(params.int("partner"))} del periodo ${period}</h4>
+	<h4>Actualizar cuotas de ${org.fomento.Partner.findById(params.int("partner")).toString().toUpperCase()} del periodo ${period}</h4>
 
 	<g:hasErrors bean="${fee}">
 		<g:renderErrors bean="${fee}"/>
@@ -32,7 +32,7 @@
 		</div>
 		<div class="form-group">
 			<label for="dateCreated">Fecha de cuota</label>
-			<g:textField name="dateCreated" class="form-control" value="${fee?.dateCreated}"/>
+			<g:textField name="dateCreated" class="form-control" value="${fee?.dateCreated?.format('yyyy-MM-dd')}"/>
 		</div>
 		<g:submitButton name="send" value="Confirmar" class="btn btn-default"/>
 		<g:link controller="partner" action="report" params="[id:partner, period:period]" class="btn btn-default">
