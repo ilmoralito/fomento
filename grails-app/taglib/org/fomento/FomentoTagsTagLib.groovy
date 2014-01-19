@@ -10,25 +10,15 @@ class FomentoTagsTagLib {
 
 	static namespace = "fomento"
 
-	def periods = { attrs ->
-		def ctrl = attrs.ctrl
-		def now = new Date()
-		def currentYear = now[YEAR]
+	def periods = {
+		def currentPeriod = new Date()[YEAR]
 
-		def periods = (2012..currentYear).toArray()
-
-		for(period in periods) {
-			if (ctrl == "deductions") {
-				out << g.link(controller:"deduction", action:"deductions", params:[year:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
-			} else if (ctrl == "report") {
-				out << g.link(controller:"report", params:[period:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
-			} else {
-				out << g.link(controller:'partner', action:'report', params:[id:params.int("id"), period:period], class:"btn ${(period == 2014 && period != 2013) ? 'btn-info' : 'btn-link'}") {period}
-			}
+		for(period in 2012 ..currentPeriod) {
+			out << g.link(controller:'partner', action:'report', params:[id:params?.id, period:period], class:"btn ${(period == params.int('period')) ? 'btn-info' : 'btn-link'}") {period}
 		}
 	}
 
-	def currentYear = { attrs ->
+	def currentYear = {
 		out << new Date()[YEAR]
 	}
 
