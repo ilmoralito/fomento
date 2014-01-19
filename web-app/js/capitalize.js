@@ -4,7 +4,7 @@ var percentage = $("#percentage"),
 	capitalized = $("#capitalized"),
 	nocapitalized = $("#nocapitalized");
 
-percentage.change(function(){
+percentage.on("input change",function(){
 	var per = 100 - this.value
 	range.html(per);
 
