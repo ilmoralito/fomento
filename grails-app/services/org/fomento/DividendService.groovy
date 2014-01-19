@@ -4,7 +4,7 @@ class DividendService {
 
 	def feeService
 
-	def feePeriodData(partners, Integer period) {
+	def feePeriodData(Integer period) {
 		BigDecimal tas = feeService.ta(period, "fee")
 		BigDecimal tae = feeService.ta(period, "factoryFee")
 

@@ -8,12 +8,22 @@
 	<g:render template="toolbar"/>
 	<g:render template="/layouts/navbar"/>
 
-	<p>El estado actual del socio <strong>${partner}</strong> es</p>
-	<g:form action="changeStatus">
-		<g:hiddenField name="id" value="${partner.id}"/>
-		<button type="submit" class="btn ${(partner.status) ? 'btn-default' : 'btn-warning'}">
-			<fomento:partnerStatus status="${partner.status}"/>
-		</button>
-	</g:form>
+	<p>Confirmar proceso de renunica del socio: <strong>${partner}</strong>, una ves finalizado este proceso <strong>NO SE PODRAN DESHACER LOS CAMBIOS, DESEA CONTINUAR?</strong></p>
+
+	<g:if test="${flag}">
+		<g:form controller="renounce" autocomplete="off">
+			<g:hiddenField name="partnerId" value="${params?.id}"/>
+			<g:hiddenField name="period" value="${period}"/>
+
+			<div class="form-group">
+			   	<label for="up">Utilidad de este periodo</label>
+			    <g:textField name="up" class="form-control" required autofocus="true"/>
+			</div>
+			<g:submitButton name="send" value="Calcular" class="btn btn-default pull-right"/>
+		</g:form>
+	</g:if>
+	<g:else>
+		<g:link controller="renounce" params="[partnerId:params?.id]">Renunciar</g:link>
+	</g:else>
 </body>
 </html>

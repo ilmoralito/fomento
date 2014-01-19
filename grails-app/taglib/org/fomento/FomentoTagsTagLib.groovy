@@ -10,20 +10,12 @@ class FomentoTagsTagLib {
 
 	static namespace = "fomento"
 
-	def partnerStatus = { attrs ->
-		if (attrs.status) {
-			out << "Activo"
-		} else {
-			out << "Desabilitado"
-		}
-	}
-
 	def periods = { attrs ->
 		def ctrl = attrs.ctrl
 		def now = new Date()
 		def currentYear = now[YEAR]
 
-		def periods = (2013..currentYear).toArray()
+		def periods = (2012..currentYear).toArray()
 
 		for(period in periods) {
 			if (ctrl == "deductions") {
@@ -43,10 +35,9 @@ class FomentoTagsTagLib {
 	def fp = { attrs ->
 		Partner partner = attrs.partner
 		Integer period = attrs.int("period")
-		String fee = attrs.fee
-		String capital = attrs.capital
+		String flag = attrs.flag
 
-		BigDecimal fp = reportService.fp(partner, period, fee, capital)
+		BigDecimal fp = reportService.fp(partner, period, flag)
 
 		out << fp
 	}
@@ -157,7 +148,7 @@ class FomentoTagsTagLib {
 		Partner parN = attrs.parN
 		String flag = attrs.flag
 		Integer peri = attrs.int("peri")
-		
+
 		def criteria = Fee.createCriteria()
 		def totalCuotas = criteria.get{
 			eq("period", peri)
@@ -195,25 +186,9 @@ class FomentoTagsTagLib {
 	def partnerSaldo = { attrs ->
 		Partner partner = attrs.partner
 		String flag = attrs.flag
-		
-		def totalCuotas = reportService.totalC(partner, flag)
-	    //----------------------------------------------
-        def capitalizationTotal
-        if (flag=="socio") {
-        	capitalizationTotal = reportService.tCap(partner)
-        }
-       	//----------------------------------------------
-       	BigDecimal saldoIni = 0
-       	def saldoI = reportService.saldoInicial(partner, flag, saldoIni) 
-        BigDecimal total
-       
-        if (flag=="socio") {
-        	total = saldoI + totalCuotas + capitalizationTotal
-        }else{
-        	total = saldoI + totalCuotas
-        }
-        
-     	out<< g.formatNumber(number:total, type:"number", maxFractionDigits:"2")
-	}
 
+		def total = reportService.totalResultsByPartnerOrFactory(partner, flag)
+
+     	out << g.formatNumber(number:total, type:"number", maxFractionDigits:"2")
+	}
 }
