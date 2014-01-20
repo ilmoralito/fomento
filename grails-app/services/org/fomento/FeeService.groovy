@@ -96,4 +96,8 @@ class FeeService implements Serializable {
         }
         [partnerData1:dividendResults, partnerData2:results, fees:fees]
     }
+
+    def createHistory(){
+        
+    }
 }
