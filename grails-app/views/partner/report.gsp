@@ -30,12 +30,11 @@
 		<h2 class="CabeceraReporte">Junta de Fomento JUFOLI</h2>
 		<h3 class="CabeceraReporte">Estado de Cuenta</h3>
 		<h4 class="partner">${partner.fullName}</h4>
-		<h3 class="Cuotas">Cuotas del periodo ${params?.period}</h3>
-		
+
 		<table class="table table-hover tablaInforme">
 			<thead>
 				<tr>
-					<th width="1" class="numCuotas"></th>
+					<th width="1" class="numCuotas">#</th>
 					<th width="1" class="editOption"><span class="glyphicon glyphicon-pencil"></span></th>
 					<th>Cuota de socio</th>
 					<th>Cuota de empresa</th>

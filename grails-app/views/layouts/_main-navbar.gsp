@@ -17,7 +17,7 @@
             </li>
             <!--add fees manualy-->
             <li class="dropdown ${(controllerName == 'fee' && actionName != 'show') ? 'active' : ''}">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipo de abono <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuotas <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li role="presentation" class="dropdown-header">Catorcena</li>
                   <li><g:link controller="fee" action="create" params="[typeOfPayment:'Catorcena']">Catorcena</g:link></li>

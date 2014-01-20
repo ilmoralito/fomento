@@ -2,6 +2,15 @@ body {
 	padding-top: 70px;
 }
 
+input[type=range] {
+	width: 100%;
+}
+
+#range {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
 .bordersty {
 	background: #fff;
 }
