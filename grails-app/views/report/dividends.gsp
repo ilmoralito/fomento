@@ -17,10 +17,10 @@
 			</g:else>
 		</div>
 		<div class="col-md-3">
-			<form action="dividends" method="post">
+			<form action="dividends" method="post" autocomplete="off">
 				<div class="form-group">
 					<label class="sr-only" for="period">Periodo</label>
-					<g:select name="period" from="${fomento.currentYear()}" value="${params?.period}" class="form-control"/>
+					<g:select name="period" from="[2012, 2013, 2014]" value="${params?.period}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label class="sr-only" for="up">Utilidad del periodo</label>
