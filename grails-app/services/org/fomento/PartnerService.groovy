@@ -81,9 +81,19 @@ class PartnerService {
     }
 
     def updateDataAfterRenounce(Partner partner){
-    	partner.affiliation.properties["capitalization", "factoryCapital"] = 0
+    	// Partner's Balance to zero
+    	def affiliation = Affiliation.get(partner.affiliation.id)
+    	affiliation.capitalization = 0.0
+    	affiliation.factoryCapital = 0.0
 
+    	// Delete partner's Fee
+    	Fee.executeUpdate("delete Fee f where f.partner =" + partner.id)
+
+    	// Delete partner's Dividend
+    	Dividend.executeUpdate("delete Dividend d where d.partner =" + partner.id)
+
+    	// change partner's status
+    	partner.status = false
     }
-
 
 }
