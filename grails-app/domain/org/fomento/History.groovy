@@ -31,6 +31,7 @@ class History {
     }
 
     static belongsTo = [renounce:Renounce]
+    static hasMany = [feeHistory:FeeHistory]
 
     static mapping = {
         version false

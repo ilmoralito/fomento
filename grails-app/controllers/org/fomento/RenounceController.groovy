@@ -18,8 +18,6 @@ class RenounceController {
         if (request.method == "POST") {
             def sPartner = fomento.partnerSaldo(partner:partner, flag:"socio")
             def sPartners = dividendService.feePeriodData(params.int("period"))
-            print sPartner
-            print sPartners
         }else{
             def data = feeService.totalFeesByPartner(partner)
             [partnerData1:data.partnerData1, partnerData2:data.partnerData2, feesData:data.fees, partner:partner]
@@ -28,7 +26,7 @@ class RenounceController {
 
     def confirmRenounce(){
         def partner = partnerService.getPartner(params.int("partnerId"))
-        print partner
+        def renounce = partnerService.partnerRenounce(partner)
     }
 
 }
