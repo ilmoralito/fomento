@@ -52,7 +52,7 @@ class PartnerService {
 			    percentage: pd.porcentaje.toString().toInteger(),
 			    renounce: renounce
     		)
-    		
+
     		if (!partnerHistory.save()) {
                 partnerHistory.errors.allErrors.each {
                     print it
@@ -73,10 +73,16 @@ class PartnerService {
 	                feeHistory.errors.allErrors.each {
 	                	print it
 	                }
-            	}	
+            	}
 			}
    			i++
     	}
+    	def updateData = updateDataAfterRenounce(partner)
+    }
+
+    def updateDataAfterRenounce(Partner partner){
+    	partner.affiliation.properties["capitalization", "factoryCapital"] = 0
+
     }
 
 
