@@ -17,11 +17,6 @@ class PartnerService {
 
     	//-------Save renoune data-------
     	def renounce = new Renounce(
-<<<<<<< HEAD
-    		fullName: partner.fullName,
-    		identificationCard: partner.identificationCard,
-=======
->>>>>>> renounce
     		residuePartner: partner?.affiliation?.capitalization,
     		residueFactory:  partner?.affiliation?.factoryCapital,
     		enrollmentDate: partner?.affiliation?.enrollmentDate,
@@ -42,11 +37,8 @@ class PartnerService {
     			capital = capital + partnerData2[i].totalPartnerFee + pd.capitalization
     		}
 
-<<<<<<< HEAD
-    		def partnerHistory = new org.fomento.History(
-=======
+
     		def partnerHistory = new History(
->>>>>>> renounce
     			period: pd.period,
     			numberFees: partnerData2[i].numberFees,
     			totalPartnerFee: partnerData2[i].totalPartnerFee,
@@ -60,14 +52,7 @@ class PartnerService {
 			    percentage: pd.porcentaje.toString().toInteger(),
 			    renounce: renounce
     		)
-<<<<<<< HEAD
-    		 	if (!partnerHistory.save()) {
-                    partnerHistory.errors.allErrors.each {
-                        print it
-                    }
-                }
-=======
-
+    		
     		if (!partnerHistory.save()) {
                 partnerHistory.errors.allErrors.each {
                     print it
@@ -90,10 +75,7 @@ class PartnerService {
 	                }
             	}	
 			}
-
-			println "kfakfjkaljklaj" + fHistory
->>>>>>> renounce
-    		i++
+   			i++
     	}
     }
 
