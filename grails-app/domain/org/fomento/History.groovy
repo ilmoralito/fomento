@@ -13,6 +13,7 @@ class History {
 
     BigDecimal totalfactoryFee
     BigDecimal factoryDividend
+    BigDecimal factoryCapital
 
     BigDecimal up
     Integer percentage
@@ -28,6 +29,7 @@ class History {
 
         totalfactoryFee blank:false, min:0.0
         factoryDividend blank:false, min:0.0
+        factoryCapital blank:false, min:0.0
     }
 
     static belongsTo = [renounce:Renounce]

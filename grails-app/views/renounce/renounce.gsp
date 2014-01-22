@@ -14,7 +14,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th colspan="11">Datos del Socio: ${partner}</th>
+							<th colspan="12">Datos del Socio: ${partner}</th>
 						</tr>
 						<tr>
 							<th>Periodo</th>
@@ -22,11 +22,12 @@
 							<th>A.Socio</th>
 							<th>D.Socio</th>
 							<th>Capitalizacion</th>
-							<th>Porcentaje</th>
+							<th>% Cap.</th>
 							<th>Retiro</th>
 							<th>A.Empresa</th>
 							<th>D.Empresa</th>
 							<th>UP</th>
+							<th>F.Capital</th>
 							<th>Capital</th>
 						</tr>
 					</thead>
@@ -34,9 +35,11 @@
 						<g:each in="${partnerData1}" var="pd" status="i">
 							<g:if test="${i==0}">
 								<g:set var="capital" value="${partner?.affiliation?.capitalization + partnerData2[i].totalPartnerFee + pd.capitalization}"/>
+								<g:set var="fCapital" value="${partner?.affiliation?.factoryCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend}"/>
 							</g:if>
 							<g:else>
 								<g:set var="capital" value="${capital + partnerData2[i].totalPartnerFee + pd.capitalization}"/>
+								<g:set var="fCapital" value="${fCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend}"/>
 							</g:else>
 							<tr>
 								<td>${pd.period}</td>
@@ -50,6 +53,7 @@
 								<td><g:formatNumber number="${pd.factoryDividend}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.up}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${capital}" type="number" maxFractionDigits="3"/></td>
+								<td><g:formatNumber number="${fCapital}" type="number" maxFractionDigits="3"/></td>
 							</tr>
 						</g:each>
 					</tbody>
