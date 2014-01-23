@@ -29,12 +29,14 @@ class PartnerService {
             }
         }
     	//--------Save History----------
-    	def i = 0, capital
+    	def i = 0, capital, fCapital
     	partnerData1.each{ pd ->
     		if (i==0) {
     			capital = partner?.affiliation?.capitalization + partnerData2[i].totalPartnerFee + pd.capitalization
+    			fCapital = partner?.affiliation?.factoryCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend
     		}else{
     			capital = capital + partnerData2[i].totalPartnerFee + pd.capitalization
+    			fCapital = fCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend
     		}
 
 
@@ -48,6 +50,7 @@ class PartnerService {
 			    capital: capital,
 			    totalfactoryFee: partnerData2[i].totalFactoryFee,
 			    factoryDividend:pd.factoryDividend,
+			    factoryCapital: fCapital,
 			    up: pd.up,
 			    percentage: pd.porcentaje.toString().toInteger(),
 			    renounce: renounce
