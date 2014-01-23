@@ -117,10 +117,38 @@ class BootStrap {
                     }
                 }
 
-               
+                //camilo
+                //affiliation
+                def a4 = new Affiliation(
+                    fee:partnersFees[2],
+                    portion:null,
+                    typeOfPayment:"Bono",
+                    factoryFee:factoryFee,
+                    enrollmentDate:new Date() - 250,
+                    capitalization:10000.00,
+                    factoryCapital:10000.00
+                )
+
+                a4.save()
+
+                def camilo = new Partner(
+                    fullName:"Camilo",
+                    numberOfEmployee:100,
+                    identificationCard:"281-290171-0001P",
+                    department:"Molino",
+                    salary:10000,
+                    status:false,
+                    affiliation:a4
+                )
+
+                if (!camilo.save()) {
+                    camilo.errors.allErrors.each {
+                        print it
+                    }
+                }
+
                 //Create fees
                 def partners = Partner.list()
-
                 partners.each { partner ->
                     for(period in 2011..2012) {
                         for(month in 0..11) {
