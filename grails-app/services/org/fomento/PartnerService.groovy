@@ -99,4 +99,14 @@ class PartnerService {
     	partner.status = false
     }
 
+    def checkIfPartnerHasFeesOrdividends(Partner partner) {
+        def dontHasFeesOrDividends = true
+
+        if (!partner.fees.size() && !partner.dividends.size()) {
+            dontHasFeesOrDividends = false
+        }
+
+        dontHasFeesOrDividends
+    }
+
 }

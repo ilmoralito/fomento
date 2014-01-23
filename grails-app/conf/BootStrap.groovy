@@ -148,7 +148,7 @@ class BootStrap {
                 }
 
                 //Create fees
-                def partners = Partner.list()
+                def partners = Partner.findAllByFullNameNotEqual(camilo.fullName)
                 partners.each { partner ->
                     for(period in 2011..2012) {
                         for(month in 0..11) {

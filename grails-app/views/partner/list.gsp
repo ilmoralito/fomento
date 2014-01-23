@@ -11,14 +11,24 @@
 			<thead>
 				<tr>
 					<th>${partners.size()} Socio${partners.size() > 1 ? 's' : ''} </th>
-					<th></th>
+					<th width="1"></th>
+					<th width="1"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<g:each in="${partners}" var="partner">
 					<tr>
 						<td><g:link action="show" id="${partner.id}">${partner.fullName}</g:link></td>
-						<td style="width:1px;">
+						<td>
+							<g:if test="${!partner.status}">
+								<sec:ifAllGranted roles="ROLE_ADMIN">
+									<g:link action="enablePartner" id="${partner.id}">
+										<span class="glyphicon glyphicon-repeat"></span>
+									</g:link>
+								</sec:ifAllGranted>
+							</g:if>
+						</td>
+						<td>
 							<sec:ifAllGranted roles="ROLE_ADMIN">
 								<g:link action="delete" id="${partner.id}">
 									<span class="glyphicon glyphicon-trash"></span>

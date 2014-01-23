@@ -9,6 +9,7 @@ class PartnerController {
 
     def searchableService
     def feeService
+    def partnerService
 
 	static defaultAction = "list"
 	static allowedMethods = [
@@ -19,7 +20,8 @@ class PartnerController {
         update:"POST",
         changeStatus:["GET","POST"],
         partnerToApplyFees:["GET","POST"],
-        splitFee:["GET","POST"]
+        splitFee:["GET","POST"],
+        enablePartner:"GET"
 	]
 
     def beforeInterceptor = [action: this.&checkTypeOfPayment, only: 'splitFee']
@@ -42,7 +44,7 @@ class PartnerController {
 
     def list() {
         if (request.method == "GET") {
-    	   return [partners:Partner.list()]
+    	   return [partners:Partner.byStatus(true).list()]
         } else {
             //search by enrollment date property in Affiliation domain class
             if (params?.from && params?.to) {
@@ -165,15 +167,19 @@ class PartnerController {
             response.sendError 404
         }
 
-        //check if selected partner has dividend in actual period
-        //check algoritmo
         def period = new Date()[YEAR]
         def countFeesInCurrentPeriod = Fee.findAllByPartnerAndPeriod(partner, period)
         def hasDividendsInCurrentPeriod = Dividend.findByPartnerAndPeriod(partner, period)
 
+        //set flag variable to true if partner does not have dividends but has fees in current period
         def flag = (!hasDividendsInCurrentPeriod && countFeesInCurrentPeriod) ? true : false
 
-        [partner:partner, flag:flag, period:period]
+        //check if partner do not have dividends and fees
+        //if both conditions are true then is safely to set partner status property to false
+        //with out performe any other action
+        def dontHasFeesOrDividends = partnerService.checkIfPartnerHasFeesOrdividends(partner)
+
+        [partner:partner, flag:flag, dontHasFeesOrDividends:dontHasFeesOrDividends, period:period]
     }
 
     def splitFee(Integer id) {
@@ -220,6 +226,40 @@ class PartnerController {
             tas:dividend?.partnerDividend,
             tae:dividend?.factoryDividend
         ]
+    }
+
+    def enablePartner(Integer id) {
+        def partner = Partner.get(id)
+
+        if (!partner) {
+            response.sendError 404
+        }
+
+        //check if partner has dividends or has fees in any period
+        def hasFeesOrDividends = partnerService.checkIfPartnerHasFeesOrdividends(partner)
+
+        if (!hasFeesOrDividends) {
+            partner.status = !partner.status
+
+            if (!partner.save()) {
+                flash.message = "Ocurrio un error. Porfavor intentalo otravez"
+                redirect action:"list"
+                return
+            }
+        } else {
+            flash.message = "Accion no permitida, $partner tiene Cuotas o dividendos"
+            redirect action:"list"
+            return
+        }
+
+        if (partner.status) {
+            flash.message = "Verifique y actualize los datos de $partner"
+            redirect action:"show", params:[id:id]
+            return
+        } else {
+            redirect action:"list"
+            return
+        }
     }
 
     private parseDate(date) {
