@@ -36,7 +36,7 @@
                   </li>
                 </ul>
             </li>
-            <li class="${(controllerName == 'partner' || controllerName == 'fee' && actionName == 'show' && actionName != 'partnerToApplyFees' ) ? 'active' : ''}">
+            <li class="${(controllerName == 'partner' || controllerName == 'renounce' || controllerName == 'fee' && actionName == 'show' && actionName != 'partnerToApplyFees' ) ? 'active' : ''}">
               <g:link controller="partner">Socios</g:link>
             </li>
   	  			<sec:ifAllGranted roles="ROLE_ADMIN">
@@ -65,7 +65,5 @@
                 </ul>
             </li>
   	  		</ul>
-
-
   		</nav>
 </nav>
