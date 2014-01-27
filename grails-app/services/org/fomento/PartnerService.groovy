@@ -66,7 +66,6 @@ class PartnerService {
 
 			fHistory.each { fh ->
 				def feeHistory = new FeeHistory(
-					period: fh.period,
 					fee: fh.fee,
 					numberFee: fh.count,
 					history: partnerHistory

@@ -6,7 +6,11 @@ class RenounceController {
     def dividendService
 
 	static defaultAction = "renounce"
-	static allowedMethods = [renounce:["GET", "POST"]]
+	static allowedMethods = [
+        renounce:["GET", "POST"],
+        confirmRenounce:"GET",
+        show:"GET"
+    ]
 
     def renounce(Integer partnerId) {
     	def partner = partnerService.getPartner(partnerId)
@@ -27,6 +31,16 @@ class RenounceController {
     def confirmRenounce(){
         def partner = partnerService.getPartner(params.int("partnerId"))
         def renounce = partnerService.partnerRenounce(partner)
+    }
+
+    def show(Integer renounceId) {
+        def renounce = Renounce.get(renounceId)
+
+        if (!renounce) {
+            response.sendError 404
+        }
+
+        [renounce:renounce]
     }
 
 }

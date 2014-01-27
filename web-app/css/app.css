@@ -65,3 +65,13 @@ ul li{
 .CabeceraReporte{display:none;}
 .cabecera{display:none;}
 .combo{width: 20%;}
+
+/*changeStatus view*/
+.renouncies {
+	padding: 10px 0;
+}
+
+.headers {
+	margin: 10px 0;
+	padding: 10px 0;
+}
