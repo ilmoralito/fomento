@@ -154,6 +154,8 @@ class ReportController {
     	}
     }
 
+    def beforeInterceptor = [action: this.&errorRemoving, only: ['delete','overwriteDividends']]
+
     @Secured("ROLE_ADMIN")
     def delete(Integer period) {
         def query = Dividend.where {
