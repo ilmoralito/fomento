@@ -1,32 +1,48 @@
-<table class="table">
-	<tbody>
-		<tr>
-			<td>TAS</td>
-			<td>${tas}</td>
-		</tr>
-		<tr>
-			<td>TAE</td>
-			<td>${tae}</td>
-		</tr>
-		<tr>
-			<td>TAP</td>
-			<td>${tap}</td>
-		</tr>
-		<tr>
-			<td>PDS</td>
-			<td><g:formatNumber number="${pds * 100}" type="number" maxFractionDigits="2"/>%</td>
-		</tr>
-		<tr>
-			<td>PDE</td>
-			<td><g:formatNumber number="${pde * 100}" type="number" maxFractionDigits="2"/>%</td>
-		</tr>
-		<tr>
-			<td>UP</td>
-			<td>${up}</td>
-		</tr>
-		<tr>
-			<td>Periodo</td>
-			<td>${(params.period) ?: period}</td>
-		</tr>
-	</tbody>
-</table>
+<p>
+	<div class="row">
+		<div class="col-md-6">TAS</div>
+		<div class="col-md-6">${tas}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">TAE</div>
+		<div class="col-md-6">${tae}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">TAP</div>
+		<div class="col-md-6">${tap}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">PDS</div>
+		<div class="col-md-6"><g:formatNumber number="${pds * 100}" type="number" maxFractionDigits="2"/>%</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">PDE</div>
+		<div class="col-md-6"><g:formatNumber number="${pde * 100}" type="number" maxFractionDigits="2"/>%</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">UP</div>
+		<div class="col-md-6">${up}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">Periodo</div>
+		<div class="col-md-6">${(params.period) ?: period}</div>
+	</div>
+</p>
