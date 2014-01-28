@@ -7,11 +7,11 @@
 		</tr>
 		<tr>
 			<th>Socio</th>
-			<th>FP</th>
+			<th>FPS</th>
 			<th>Dividendo</th>
 			<th>10%</th>
 			<th>DN</th>
-			<th>FP</th>
+			<th>FPE</th>
 			<th>Dividendo</th>
 			<th>10%</th>
 			<th>DN</th>
@@ -36,24 +36,24 @@
 
 			<tr>
 				<td>${partner}</td>
-				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${dds}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${dde}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="3"/></td>
-				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="3"/></td>
+				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dds}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dde}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="2"/></td>
 			</tr>
 		</g:each>
 		<tr>
 			<td>TOTAL</td>
 			<td></td>
-			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="3"/></td>
+			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="2"/></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="3"/></td>
+			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="2"/></td>
 			<td></td>
 			<td></td>
 		</tr>
