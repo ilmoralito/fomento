@@ -13,7 +13,6 @@ class ReportController {
 	static allowedMethods = [
 		dividends:["GET", "POST"],
 		applyDividends:"POST",
-		overwriteDividends:["GET", "POST"],
 		list:"GET",
 		show:"GET",
         delete:"GET",
@@ -70,85 +69,45 @@ class ReportController {
     		return [cmd:cmd]
     	}
 
+        def dividendsCountInPeriod = Dividend.countByPeriod(cmd.period)
+
+        if (dividendsCountInPeriod) {
+            flash.message = "Ya existen dividendos en este periodo. Accion cancelada. Eliminar dividendo para poder recrearlo"
+            redirect action:"dividends"
+            return false
+        }
+
     	def partners = Partner.findAllByStatus(true)
-    	def dividendsCount =  Dividend.countByPeriod(cmd.period)
+		partners.each { partner ->
+            def fps = reportService.fp(partner, cmd.period, "socio")
+            def fpe = reportService.fp(partner, cmd.period, "empresa")
 
-    	if (!dividendsCount) {
-			partners.each { partner ->
-                def fps = reportService.fp(partner, cmd.period, "socio")
-                def fpe = reportService.fp(partner, cmd.period, "empresa")
+            BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
+            BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
 
-                BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
-                BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
+            def dividend = new Dividend (
+                partnerDividend:partnerDD,
+                factoryDividend:factoryDD,
+                fps:fps,
+                fpe:fpe,
+                tas:cmd.tas,
+                tae:cmd.tae,
+                tap:cmd.tap,
+                pds:cmd.pds,
+                pde:cmd.pde,
+                up:cmd.up,
+                period:cmd.period,
+                partner:partner
+            )
 
-                def dividend = new Dividend (
-                    partnerDividend:partnerDD,
-                    factoryDividend:factoryDD,
-                    fps:fps,
-                    fpe:fpe,
-                    tas:cmd.tas,
-                    tae:cmd.tae,
-                    tap:cmd.tap,
-                    pds:cmd.pds,
-                    pde:cmd.pde,
-                    up:cmd.up,
-                    period:cmd.period,
-                    partner:partner
-                )
-
-                if (!dividend.save()) {
-                    dividend.errors.allErrors.each {
-                        print it
-                    }
+            if (!dividend.save()) {
+                dividend.errors.allErrors.each {
+                    print it
                 }
-			}
-		} else {
-            flash.message = "Ya existe un dividendo generado para este periodo, "
-			redirect action:"dividends"
-			return false
+            }
 		}
 
         redirect action:"list"
-    }
-
-    @Secured("ROLE_ADMIN")
-    def overwriteDividends() {
-    	if (request.method == "POST") {
-    		def partners = Partner.findAllByStatus(true)
-            BigDecimal pds = params.double("pds")
-            BigDecimal pde = params.double("pde")
-            BigDecimal up = params.double("up")
-            Integer period = params.int("period")
-
-            partners.each { partner ->
-                def dividend = Dividend.findByPartnerAndPeriod(partner, period)
-                def fps = reportService.fp(partner, period, "socio")
-                def fpe = reportService.fp(partner, period, "empresa")
-
-                BigDecimal partnerDD = reportService.dd(up, pds, fps)
-                BigDecimal factoryDD = reportService.dd(up, pde, fpe)
-
-    			if (dividend) {
-    				dividend.partnerDividend = partnerDD
-                    dividend.factoryDividend = factoryDD
-                    dividend.tas = params.double("tas")
-                    dividend.tae = params.double("tae")
-                    dividend.tap = params.double("tap")
-                    dividend.pds = pds
-                    dividend.pde = pde
-                    dividend.up = up
-
-    				if (!dividend.save()) {
-    					dividend.errors.allErrors.each {
-    						print it
-    					}
-    				}
-    			}
-    		}
-
-    		redirect action:"list"
-    		return false
-    	}
     }
 
     @Secured("ROLE_ADMIN")
@@ -238,7 +197,6 @@ class DividendsCommand {
 		up blank:false, min:1.0
 		period min:2012
 	}
-
 }
 
 class ApplyDividendsCommand {

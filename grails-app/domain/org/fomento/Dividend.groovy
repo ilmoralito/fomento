@@ -22,7 +22,6 @@ class Dividend {
     Capitalization capitalization
 
 	Date dateCreated
-	Date lastUpdated
 
     static constraints = {
         partnerDividend blank:false, min:0.0, scale:3
