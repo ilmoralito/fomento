@@ -1,14 +1,21 @@
 <table class="table table-hover">
 	<thead>
-		<th>Socio</th>
-		<th>FPS</th>
-		<th>DS</th>
-		<th>10% S</th>
-		<th>DNS</th>
-		<th>FPE</th>
-		<th>DE</th>
-		<th>10% E</th>
-		<th>DNE</th>
+		<tr>
+			<th></th>
+			<th colspan="4">Socio</th>
+			<th colspan="4">Empresa</th>
+		</tr>
+		<tr>
+			<th>Socio</th>
+			<th>FP</th>
+			<th>Dividendo</th>
+			<th>10%</th>
+			<th>DN</th>
+			<th>FP</th>
+			<th>Dividendo</th>
+			<th>10%</th>
+			<th>DN</th>
+		</tr>
 	</thead>
 	<tbody>
 		<g:each in="${results}" var="partner">
