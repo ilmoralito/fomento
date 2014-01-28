@@ -78,9 +78,6 @@ class ReportController {
                 def fps = reportService.fp(partner, cmd.period, "socio")
                 def fpe = reportService.fp(partner, cmd.period, "empresa")
 
-                println "$partner fps $fps"
-                println "$partner fpe $fpe"
-
                 BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
                 BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
 
@@ -106,7 +103,8 @@ class ReportController {
                 }
 			}
 		} else {
-			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, pds:cmd.pds, pde:cmd.pde, up:cmd.up, period:cmd.period]
+            flash.message = "Ya existe un dividendo generado para este periodo, "
+			redirect action:"dividends"
 			return false
 		}
 
@@ -124,9 +122,8 @@ class ReportController {
 
             partners.each { partner ->
                 def dividend = Dividend.findByPartnerAndPeriod(partner, period)
-
-                def fps = reportService.fp(partner, period, "fee", "capitalization")
-                def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
+                def fps = reportService.fp(partner, period, "socio")
+                def fpe = reportService.fp(partner, period, "empresa")
 
                 BigDecimal partnerDD = reportService.dd(up, pds, fps)
                 BigDecimal factoryDD = reportService.dd(up, pde, fpe)
