@@ -13,7 +13,6 @@ class ReportController {
 	static allowedMethods = [
 		dividends:["GET", "POST"],
 		applyDividends:"POST",
-		overwriteDividends:["GET", "POST"],
 		list:"GET",
 		show:"GET",
         delete:"GET",
@@ -70,44 +69,42 @@ class ReportController {
     		return [cmd:cmd]
     	}
 
+        def dividendsCountInPeriod = Dividend.countByPeriod(cmd.period)
+
+        if (dividendsCountInPeriod) {
+            flash.message = "Ya existen dividendos en este periodo. Accion cancelada. Eliminar dividendo para poder recrearlo"
+            redirect action:"dividends"
+            return false
+        }
+
     	def partners = Partner.findAllByStatus(true)
-    	def dividendsCount =  Dividend.countByPeriod(cmd.period)
+		partners.each { partner ->
+            def fps = reportService.fp(partner, cmd.period, "socio")
+            def fpe = reportService.fp(partner, cmd.period, "empresa")
 
-    	if (!dividendsCount) {
-			partners.each { partner ->
-                def fps = reportService.fp(partner, cmd.period, "socio")
-                def fpe = reportService.fp(partner, cmd.period, "empresa")
+            BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
+            BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
 
-                println "$partner fps $fps"
-                println "$partner fpe $fpe"
+            def dividend = new Dividend (
+                partnerDividend:partnerDD,
+                factoryDividend:factoryDD,
+                fps:fps,
+                fpe:fpe,
+                tas:cmd.tas,
+                tae:cmd.tae,
+                tap:cmd.tap,
+                pds:cmd.pds,
+                pde:cmd.pde,
+                up:cmd.up,
+                period:cmd.period,
+                partner:partner
+            )
 
-                BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
-                BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
-
-                def dividend = new Dividend (
-                    partnerDividend:partnerDD,
-                    factoryDividend:factoryDD,
-                    fps:fps,
-                    fpe:fpe,
-                    tas:cmd.tas,
-                    tae:cmd.tae,
-                    tap:cmd.tap,
-                    pds:cmd.pds,
-                    pde:cmd.pde,
-                    up:cmd.up,
-                    period:cmd.period,
-                    partner:partner
-                )
-
-                if (!dividend.save()) {
-                    dividend.errors.allErrors.each {
-                        print it
-                    }
+            if (!dividend.save()) {
+                dividend.errors.allErrors.each {
+                    print it
                 }
-			}
-		} else {
-			redirect action:"overwriteDividends", params:[tas:cmd.tas, tae:cmd.tae, tap:cmd.tap, pds:cmd.pds, pde:cmd.pde, up:cmd.up, period:cmd.period]
-			return false
+            }
 		}
 
         redirect action:"list"
@@ -253,7 +250,6 @@ class DividendsCommand {
 		up blank:false, min:1.0
 		period min:2012
 	}
-
 }
 
 class ApplyDividendsCommand {
