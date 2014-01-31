@@ -9,7 +9,7 @@
 <body>
 	<div class="container main">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-4 col-md-offset-4">
 				<g:layoutBody/>
 			</div>
 		</div>

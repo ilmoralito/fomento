@@ -24,7 +24,7 @@ class FeeController {
 
 					//check if current partner has reach 12 fees by period
 					//if this condition is true then abort adding a new fee
-					def period = Calendar.instance.get(Calendar.YEAR)
+					def period = (params?.dateCreated) ? new Date().parse("yyyy-MM-dd", params.dateCreated)[YEAR] : new Date()[YEAR]
 					def count = Fee.countByPartnerAndPeriod(partner, period)
 
 					if (count == 12) {

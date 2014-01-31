@@ -248,7 +248,7 @@ class DividendsCommand {
 
 	static constraints = {
 		up blank:false, min:1.0
-		period min:2012
+		period min:2010
 	}
 }
 

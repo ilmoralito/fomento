@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta name="layout" content="main">
-	<r:require modules="bootstrap, jquery-ui, fees"/>
+	<r:require modules="bootstrap-css, bootstrap-dropdown, jquery-ui, fees"/>
 </head>
 <body>
 	<g:if test="${partners}">
