@@ -11,7 +11,14 @@
 	<div class="row">
 		<div class="col-md-9">
 			<g:if test="${partners}">
-				<g:render template="data" model="[results:partners]"/>
+				<g:if test="${tap==0}">
+					<div class="alert alert-danger">
+						<strong>NO EXISTEN APORTES DE SOCIOS Y DE EMPRESA PARA CALCULAR DIVIDENDOS EN ESTE PERIODO!!!</strong>
+					</div>
+				</g:if>
+				<g:else>
+					<g:render template="data" model="[results:partners]"/>
+				</g:else>
 			</g:if>
 			<g:else>
 				<h3>...</h3>

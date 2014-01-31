@@ -9,10 +9,14 @@ class DividendService {
 		BigDecimal tae = feeService.ta(period, "factoryFee")
 
 		BigDecimal tap = tas + tae
-		BigDecimal pds = tas / tap
-		BigDecimal pde = tae / tap
 
-		[tas:tas, tae:tae, tap:tap, pds:pds, pde:pde]
+		if (tap==0) {
+			[tas:0, tae:0, tap:0, pds:0, pde:0]
+		}else{
+			BigDecimal pds = tas / tap
+			BigDecimal pde = tae / tap
+			[tas:tas, tae:tae, tap:tap, pds:pds, pde:pde]
+		}
 	}
 
 	def total(Partner partner) {
