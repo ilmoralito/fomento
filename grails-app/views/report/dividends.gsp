@@ -5,6 +5,7 @@
 	<r:require modules="bootstrap-css, bootstrap-dropdown, app"/>
 </head>
 <body>
+	<g:set var="currentPeriod" value="${fomento.currentYear().toInteger()}"/>
 	<g:render template="toolbar"/>
 	<br>
 	<div class="row">
@@ -20,7 +21,7 @@
 			<form action="dividends" method="post" autocomplete="off">
 				<div class="form-group">
 					<label class="sr-only" for="period">Periodo</label>
-					<g:select name="period" from="${2012..2014}" value="${params?.period}" class="form-control"/>
+					<g:select name="period" from="${2010..currentPeriod}" value="${(params?.period) ?: currentPeriod}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label class="sr-only" for="up">Utilidad del periodo</label>

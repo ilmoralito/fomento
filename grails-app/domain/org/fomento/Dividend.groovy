@@ -33,7 +33,7 @@ class Dividend {
         tap blank:false, min:0.0, scale:3
         pds blank:false, min:0.00, scale:3
         pde blank:false, min:0.00, scale:3
-        period blank:false, min:2012
+        period blank:false, min:2010
         up blank:false, min:1.0
         capitalization nullable:true
     }
