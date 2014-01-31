@@ -15,7 +15,7 @@ class ReportController {
 		applyDividends:"POST",
 		list:"GET",
 		show:"GET",
-        delete:"GET",
+        delete:["GET", "POST"],
         capitalize:["GET", "POST"]
 	]
 
@@ -157,23 +157,24 @@ class ReportController {
         Integer period = params.int("period")
         def dividend = Dividend.findByPeriodGreaterThan(period)
         if (dividend) {
-            flash.message = "Error al intentar elinimar o sobre escribir un dividendo, solo puede eliminar o sobre escribir el último dividendo registrado" 
+            flash.message = "Error al intentar elinimar o sobre escribir un dividendo, solo puede eliminar o sobre escribir el último dividendo registrado"
             redirect(action:"list")
             return false
         }
     }
 
     @Secured("ROLE_ADMIN")
-    def delete(Integer period) {
+    def delete() {
         def query = Dividend.where {
-            period == period
+            period == params.int("period")
         }
-
-        int total = query.deleteAll()
-
-        flash.message = "$total dividendos eliminados"
-
-        redirect action:"list"
+        if (request.method == "GET") {
+            return [period:params.period]
+        }else{
+            int total = query.deleteAll()
+            flash.message = "$total dividendos eliminados"
+            redirect action:"list"
+        }
     }
 
     def capitalize(Integer id) {
