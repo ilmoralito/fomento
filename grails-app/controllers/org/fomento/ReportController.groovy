@@ -151,13 +151,13 @@ class ReportController {
     	}
     }
 
-    def beforeInterceptor = [action: this.&errorRemoving, only: ['delete','overwriteDividends']]
+    def beforeInterceptor = [action: this.&errorRemoving, only: 'delete']
 
     def private errorRemoving(){
         Integer period = params.int("period")
         def dividend = Dividend.findByPeriodGreaterThan(period)
         if (dividend) {
-            flash.message = "Error al intentar elinimar o sobre escribir un dividendo, solo puede eliminar o sobre escribir el último dividendo registrado"
+            flash.message = "Error al intentar elinimar el dividendo, solo puede eliminar el último dividendo registrado"
             redirect(action:"list")
             return false
         }
