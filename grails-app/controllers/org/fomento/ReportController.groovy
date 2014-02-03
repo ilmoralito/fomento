@@ -15,7 +15,7 @@ class ReportController {
 		applyDividends:"POST",
 		list:"GET",
 		show:"GET",
-        delete:"GET",
+        delete:["GET", "POST"],
         capitalize:["GET", "POST"]
 	]
 
@@ -111,16 +111,70 @@ class ReportController {
     }
 
     @Secured("ROLE_ADMIN")
-    def delete(Integer period) {
-        def query = Dividend.where {
-            period == period
+    def overwriteDividends() {
+    	if (request.method == "POST") {
+    		def partners = Partner.findAllByStatus(true)
+            BigDecimal pds = params.double("pds")
+            BigDecimal pde = params.double("pde")
+            BigDecimal up = params.double("up")
+            Integer period = params.int("period")
+
+            partners.each { partner ->
+                def dividend = Dividend.findByPartnerAndPeriod(partner, period)
+
+                def fps = reportService.fp(partner, period, "fee", "capitalization")
+                def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
+
+                BigDecimal partnerDD = reportService.dd(up, pds, fps)
+                BigDecimal factoryDD = reportService.dd(up, pde, fpe)
+
+    			if (dividend) {
+    				dividend.partnerDividend = partnerDD
+                    dividend.factoryDividend = factoryDD
+                    dividend.tas = params.double("tas")
+                    dividend.tae = params.double("tae")
+                    dividend.tap = params.double("tap")
+                    dividend.pds = pds
+                    dividend.pde = pde
+                    dividend.up = up
+
+    				if (!dividend.save()) {
+    					dividend.errors.allErrors.each {
+    						print it
+    					}
+    				}
+    			}
+    		}
+
+    		redirect action:"list"
+    		return false
+    	}
+    }
+
+    def beforeInterceptor = [action: this.&errorRemoving, only: 'delete']
+
+    def private errorRemoving(){
+        Integer period = params.int("period")
+        def dividend = Dividend.findByPeriodGreaterThan(period)
+        if (dividend) {
+            flash.message = "Error al intentar elinimar el dividendo, solo puede eliminar el último dividendo registrado"
+            redirect(action:"list")
+            return false
         }
+    }
 
-        int total = query.deleteAll()
-
-        flash.message = "$total dividendos eliminados"
-
-        redirect action:"list"
+    @Secured("ROLE_ADMIN")
+    def delete() {
+        def query = Dividend.where {
+            period == params.int("period")
+        }
+        if (request.method == "GET") {
+            return [period:params.period]
+        }else{
+            int total = query.deleteAll()
+            flash.message = "$total dividendos eliminados"
+            redirect action:"list"
+        }
     }
 
     def capitalize(Integer id) {
