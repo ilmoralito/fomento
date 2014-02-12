@@ -34,7 +34,7 @@ class Dividend {
         pds blank:false, min:0.00, scale:3
         pde blank:false, min:0.00, scale:3
         period blank:false, min:2010
-        up blank:false, min:1.0
+        up blank:false
         capitalization nullable:true
     }
 

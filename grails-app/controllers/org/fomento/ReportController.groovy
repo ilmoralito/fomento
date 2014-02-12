@@ -149,8 +149,17 @@ class ReportController {
     		return false
     	}
     }
+    def beforeInterceptor = [action: this.&errorRemoving, only: 'delete', action:this.&negativeUtility,only:'applyDividends']
 
-    def beforeInterceptor = [action: this.&errorRemoving, only: 'delete']
+    def private negativeUtility(){
+        println "ENTRO"
+        def Float up = params.up.toFloat()
+        if (up < 0) {
+             flash.message = "No pueden guardarse dividendos con valores negativos, revise la utilidad del periodo"
+            redirect(action:"list")
+            return false
+        }
+    }
 
     def private errorRemoving(){
         Integer period = params.int("period")
@@ -247,7 +256,7 @@ class DividendsCommand {
 	Integer period
 
 	static constraints = {
-		up blank:false, min:1.0
+		up blank:false
 		period min:2010
 	}
 }
