@@ -32,10 +32,6 @@
 								<td>${dividend.partnerDividend}</td>
 								<td>${dns}</td>
 								<td><g:formatNumber number="${dividend.fpe}" type="number" maxFractionDigits="2"/></td>
-								<td>${dividend.fps}</td>
-								<td>${dividend.partnerDividend}</td>
-								<td>${dns}</td>
-								<td>${dividend.fpe}</td>
 								<td>${dividend.factoryDividend}</td>
 								<td>${dne}</td>
 							</tr>
