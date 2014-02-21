@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap-css, bootstrap-dropdown, app"/>
 </head>
 <body>
 	<style type="text/css" media="print">
@@ -16,8 +16,6 @@
 		.tablaInforme{margin-left:auto;margin-right: auto; border: 1px solid #ddd; padding: 3px; border-spacing: 0;border-collapse: collapse; margin-bottom: 10px;}
 		.tablaInforme th, .tablaInforme td{text-align:center; border: 1px solid #ddd;}
 		.tablaInforme th{padding:5px;}
-		tr .editOption{border-right:0 hidden;}
-		tr .numCuotas{padding: 3px;}
 		.panelUp{margin-bottom: 10px;}
 		.cabValor, .valor{display: inline;}
 		.valor{text-align: right;}
@@ -34,8 +32,7 @@
 		<table class="table table-hover tablaInforme">
 			<thead>
 				<tr>
-					<th width="1" class="numCuotas">#</th>
-					<th width="1" class="editOption"><span class="glyphicon glyphicon-pencil"></span></th>
+					<th width="1">#</th>
 					<th>Cuota de socio</th>
 					<th>Cuota de empresa</th>
 					<th>Fecha de cuota</th>
@@ -44,8 +41,7 @@
 			<tbody>
 				<g:each in="${fees}" var="fee" status="i">
 					<tr>
-						<td class="numCuotas">${i + 1}</td>
-						<td  class="editOption"><g:link controller="fee" action="show" params="[id:fee.id, partner:fee.partner.id, period:params?.period]"><span class="glyphicon glyphicon-pencil"></span></g:link></td>
+						<td><g:link controller="fee" action="show" id="${fee.id}">${i + 1}</g:link></td>
 						<td>${fee}</td>
 						<td>${fee.factoryFee}</td>
 						<td>${fee.dateCreated.format("yyyy-MM-dd")}</td>

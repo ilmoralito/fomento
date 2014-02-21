@@ -22,11 +22,11 @@ class FeeController {
 				for(id in p) {
 					def partner = Partner.get(id)
 
-					//check if current partner has reach 12 fees by period
-					//if this condition is true then abort adding a new fee
 					def period = (params?.dateCreated) ? new Date().parse("yyyy-MM-dd", params.dateCreated)[YEAR] : new Date()[YEAR]
 					def count = Fee.countByPartnerAndPeriod(partner, period)
 
+					//check if current partner has reach 12 fees by period
+					//if this condition is true then abort adding a new fee
 					if (count == 12) {
 						break
 					}
@@ -119,22 +119,13 @@ class FeeController {
 		if (!fee) {
 			response.sendError 404
 		}
-		if (params.dateCreated.empty) {
-			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCre)
-		}else{
-			params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
-		}
-		
-		fee.properties["fee", "factoryFee", "dateCreated"] = params
 
-		if (!fee.save()) {
-			render view:"show", model:[fee:fee, id:id, partner:params?.partner, period:params?.period]
-			return false
-		}
+		params.dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated)
+		params.period = params.dateCreated[YEAR]
+		fee.properties["fee", "factoryFee", "dateCreated", "period"] = params
 
-		flash.message = "Aztualizacion confirmada"
-
-		redirect action:"show", params:[id:id, partner:params?.partner, period:params?.period]
+		flash.message = (fee.save()) ? "Actualizacion confirmada" : "A ocurrido un error. Porfavor intentalo otravez"
+		redirect action:"show", params:[id:id]
 	}
 
 	def elist(){
@@ -144,7 +135,6 @@ class FeeController {
         	offset = params.offset
 			[partners:Partner.list(max:max, offset:offset, sort:"fullName"),peri:params.peri, partnerTotal:Partner.count(), all:params.all]
 		}
-		
 	}
 
 }
