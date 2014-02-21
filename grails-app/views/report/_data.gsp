@@ -37,23 +37,23 @@
 			<tr>
 				<td>${partner}</td>
 				<td><g:formatNumber number="${fps}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
-				<td><g:formatNumber number="${dds}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dds}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+				<td><g:formatNumber number="${partnerPercentage}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+				<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
 				<td><g:formatNumber number="${fpe}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
-				<td><g:formatNumber number="${dde}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="2"/></td>
-				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="2"/></td>
+				<td><g:formatNumber number="${dde}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+				<td><g:formatNumber number="${factoryPercentage}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+				<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
 			</tr>
 		</g:each>
 		<tr>
 			<td>TOTAL</td>
 			<td></td>
-			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="2"/></td>
+			<td><g:formatNumber number="${pds * up}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="2"/></td>
+			<td><g:formatNumber number="${pde * up}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
 			<td></td>
 			<td></td>
 		</tr>
