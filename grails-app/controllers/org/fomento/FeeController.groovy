@@ -11,7 +11,9 @@ class FeeController {
 		create:["GET", "POST"],
 		list:["GET", "POST"],
 		show:"GET",
-		update:["GET", "POST"]
+		update:["GET", "POST"],
+		deleteFees:["GET", "POST"],
+		confirmDeleteFees:"POST"
 	]
 
 	def create(String typeOfPayment) {
@@ -128,6 +130,74 @@ class FeeController {
 		redirect action:"show", params:[id:id]
 	}
 
+	@Secured(["ROLE_ADMIN"])
+	def confirmDeleteFees() {
+		def dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated).clearTime()
+		def typeOfPayments = params.typeOfPayment.tokenize(",")
+
+		def feeCriteria = Fee.createCriteria()
+		def fees = feeCriteria.list {
+			ge "dateCreated", dateCreated
+      le "dateCreated", dateCreated + 1
+
+      partner {
+				affiliation {
+					or {
+						eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
+						eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
+						eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
+					}
+				}
+			}
+		}
+
+		fees.each { fee ->
+			fee.delete()
+		}
+
+		flash.message = "Cuotas eliminadas"
+		redirect action:"deleteFees"
+	}
+
+	def deleteFees() {
+		def criteria = Fee.createCriteria()
+		def dates = criteria.listDistinct {
+			projections {
+				property "dateCreated"
+			}
+		}
+
+		if (request.method == "POST") {
+			def typeOfPayments = params.list "typeOfPayment"
+
+			if (!typeOfPayments) {
+				redirect action:"deleteFees"
+				return false
+			}
+
+			def dateCreated = new Date().parse "yyyy-MM-dd", params?.dateCreated
+			def feeCriteria = Fee.createCriteria()
+			def fees = feeCriteria.list {
+				ge "dateCreated", dateCreated.clearTime()
+        le "dateCreated", dateCreated.clearTime() + 1
+
+        partner {
+					affiliation {
+						or {
+							eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
+							eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
+							eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
+						}
+					}
+				}
+			}
+
+			return [fees:fees, dates:dates*.format("yyyy-MM-dd").unique().sort()]
+		}
+
+		[dates:dates*.format("yyyy-MM-dd").unique().sort()]
+	}
+
 	def elist(){
 		if (request.method == "POST" || params.flag!=null) {
 			def partnerTotal, max, offset
@@ -138,4 +208,3 @@ class FeeController {
 	}
 
 }
-

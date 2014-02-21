@@ -15,7 +15,6 @@
             <li class="${(controllerName == 'report' || controllerName == 'deduction') ? 'active' : ''}">
               <g:link controller="report" action="list">Dividendos</g:link>
             </li>
-            <!--add fees manualy-->
             <li class="dropdown ${(controllerName == 'fee' && actionName != 'show') ? 'active' : ''}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cuotas <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -30,6 +29,8 @@
                   <li>
                     <g:link controller="fee" action="create" params="[typeOfPayment:'Bono']">Bono</g:link>
                   </li>
+                  <li role="presentation" class="divider"></li>
+                  <li><g:link controller="fee" action="deleteFees">Borrar cuotas</g:link></li>
                   <li role="presentation" class="divider"></li>
                   <li role="presentation">
                     <g:link role="menuitem" tabindex="-1" controller="fee" action="elist" params="[max:'2', offset:'0']">Historial</g:link>
