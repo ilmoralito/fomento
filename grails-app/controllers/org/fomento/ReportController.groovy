@@ -80,7 +80,6 @@ class ReportController {
 		partners.each { partner ->
             def fps = reportService.fp(partner, cmd.period, "socio")
             def fpe = reportService.fp(partner, cmd.period, "empresa")
-
             BigDecimal partnerDD = reportService.dd(cmd.up, cmd.pds, fps)
             BigDecimal factoryDD = reportService.dd(cmd.up, cmd.pde, fpe)
 
@@ -149,10 +148,9 @@ class ReportController {
     		return false
     	}
     }
-    def beforeInterceptor = [action: this.&errorRemoving, only: 'delete', action:this.&negativeUtility,only:'applyDividends']
+    def beforeInterceptor = [action:this.&negativeUtility,only:'applyDividends']
 
     def private negativeUtility(){
-        println "ENTRO"
         def Float up = params.up.toFloat()
         if (up < 0) {
              flash.message = "No pueden guardarse dividendos con valores negativos, revise la utilidad del periodo"
@@ -161,11 +159,11 @@ class ReportController {
         }
     }
 
-    def private errorRemoving(){
-        Integer period = params.int("period")
-        def dividend = Dividend.findByPeriodGreaterThan(period)
+    def private errorRemoving(period){
+        Integer peri = params.int("period")
+        def dividend = Dividend.findByPeriodGreaterThan(peri)
         if (dividend) {
-            flash.message = "Error al intentar elinimar el dividendo, solo puede eliminar el último dividendo registrado"
+            flash.message = "Error al intentar elimimar el dividendo, solo puede eliminar el último dividendo registrado"
             redirect(action:"list")
             return false
         }
@@ -173,6 +171,7 @@ class ReportController {
 
     @Secured("ROLE_ADMIN")
     def delete() {
+        def checkRemove = errorRemoving(params.period)
         def query = Dividend.where {
             period == params.int("period")
         }
