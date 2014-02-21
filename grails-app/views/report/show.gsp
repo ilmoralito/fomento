@@ -28,12 +28,12 @@
 
 							<tr>
 								<td><g:link action="capitalize" id="${dividend.id}">${dividend.partner}</g:link></td>
-								<td><g:formatNumber number="${dividend.fps}" type="number" maxFractionDigits="2"/></td>
-								<td>${dividend.partnerDividend}</td>
-								<td>${dns}</td>
-								<td><g:formatNumber number="${dividend.fpe}" type="number" maxFractionDigits="2"/></td>
-								<td>${dividend.factoryDividend}</td>
-								<td>${dne}</td>
+								<td><g:formatNumber number="${dividend.fps}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+								<td><g:formatNumber number="${dividend.partnerDividend}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${dns}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${dividend.fpe}" type="number" maxFractionDigits="2" roundingMode="UNNECESSARY"/></td>
+								<td><g:formatNumber number="${dividend.factoryDividend}" type="number" maxFractionDigits="2"/></td>
+								<td><g:formatNumber number="${dne}" type="number" maxFractionDigits="2"/></td>
 							</tr>
 						</g:each>
 						<tr>
