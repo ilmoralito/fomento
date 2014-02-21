@@ -11,7 +11,8 @@ class FeeController {
 		create:["GET", "POST"],
 		list:["GET", "POST"],
 		show:"GET",
-		update:["GET", "POST"]
+		update:["GET", "POST"],
+		deleteFees:["GET", "POST"]
 	]
 
 	def create(String typeOfPayment) {
@@ -126,6 +127,22 @@ class FeeController {
 
 		flash.message = (fee.save()) ? "Actualizacion confirmada" : "A ocurrido un error. Porfavor intentalo otravez"
 		redirect action:"show", params:[id:id]
+	}
+
+	@Secured(["ROLE_ADMIN"])
+	def deleteFees() {
+		def criteria = Fee.createCriteria()
+		def dates = criteria.list {
+			projections {
+				distinct "dateCreated"
+			}
+		}
+
+		if (request.method == "GET") {
+
+		}
+
+		[dates:dates*.format("yyyy-MM-dd")]
 	}
 
 	def elist(){
