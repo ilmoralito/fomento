@@ -90,11 +90,13 @@
 	</thead>
 	<tbody>
 		<g:each in="${renounce.histories.feeHistory}" var="fh">
-			<tr>
-				<td>${fh.history.period}</td>
-				<td>${fh.fee}</td>
-				<td>${fh.numberFee}</td>
-			</tr>
+			<g:each in="${fh}" var="f">
+				<tr>
+					<td>${f.history.period}</td>
+					<td>${f.fee}</td>
+					<td>${f.numberFee}</td>
+				</tr>
+			</g:each>
 		</g:each>
 	</tbody>
 </table>

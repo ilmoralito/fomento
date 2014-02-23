@@ -39,6 +39,7 @@ class PartnerService {
     			fCapital = fCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend
     		}
 
+            def porcent = (pd.porcentaje)?pd.porcentaje.toString().toInteger():100
 
     		def partnerHistory = new History(
     			period: pd.period,
@@ -52,7 +53,7 @@ class PartnerService {
 			    factoryDividend:pd.factoryDividend,
 			    factoryCapital: fCapital,
 			    up: pd.up,
-			    percentage: pd.porcentaje.toString().toInteger(),
+			    percentage: porcent,
 			    renounce: renounce
     		)
 

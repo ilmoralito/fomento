@@ -31,6 +31,8 @@ class RenounceController {
     def confirmRenounce(){
         def partner = partnerService.getPartner(params.int("partnerId"))
         def renounce = partnerService.partnerRenounce(partner)
+        def renounceId = partner.renouncies.id
+        redirect(action:"show", params:[renounceId:renounceId])
     }
 
     def show(Integer renounceId) {
