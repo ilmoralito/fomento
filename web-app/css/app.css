@@ -36,6 +36,10 @@ hr {
 	margin-bottom: 1px;
 }
 
+.trenounce th {
+	text-align: center;
+}
+
 .usnum {
 	background: #222222;
 	color: #fff;
@@ -78,4 +82,9 @@ ul li{
 
 .alert-fomento {
 	margin: 10px 0;
+}
+
+.periodData{
+	background-color: white;
+	border-radius: 5px;
 }

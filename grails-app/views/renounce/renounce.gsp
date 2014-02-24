@@ -47,7 +47,13 @@
 								<td><g:formatNumber number="${partnerData2[i].totalPartnerFee}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.partnerDividend}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.capitalization}" type="number" maxFractionDigits="3"/></td>
-								<td>${pd.porcentaje}</td>
+								<td>
+									<g:if test="${pd.porcentaje==null}">
+										100
+									</g:if><else>
+										${pd.porcentaje}
+									</else>
+								</td>
 								<td><g:formatNumber number="${pd.withdraw}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${partnerData2[i].totalFactoryFee}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.factoryDividend}" type="number" maxFractionDigits="3"/></td>
