@@ -25,17 +25,17 @@ class Dividend {
     Date lastUpdated
 
     static constraints = {
-        partnerDividend blank:false, min:0.0, scale:3
-        factoryDividend blank:false, min:0.0, scale:3
-        fps nullable:true, min:0.0, scale:3
-        fpe nullable:true, min:0.0, scale:3
-        tas blank:false, min:0.0, scale:3
-        tae blank:false, min:0.0, scale:3
-        tap blank:false, min:0.0, scale:3
-        pds blank:false, min:0.00, scale:3
-        pde blank:false, min:0.00, scale:3
+        partnerDividend blank:false, min:0.0, scale:12
+        factoryDividend blank:false, min:0.0, scale:12
+        fps nullable:true, min:0.0, scale:12
+        fpe nullable:true, min:0.0, scale:12
+        tas blank:false, min:0.0, scale:12
+        tae blank:false, min:0.0, scale:12
+        tap blank:false, min:0.0, scale:12
+        pds blank:false, min:0.00, scale:12
+        pde blank:false, min:0.00, scale:12
         period blank:false, min:2010
-        up blank:false, min:1.0
+        up blank:false
         capitalization nullable:true
     }
 
