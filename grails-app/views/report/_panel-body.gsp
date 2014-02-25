@@ -1,21 +1,21 @@
 <p>
 	<div class="row">
 		<div class="col-md-6">TAS</div>
-		<div class="col-md-6">${tas}</div>
+		<div class="col-md-6"><g:formatNumber number="${tas}" type="number" maxFractionDigits="2"/></div>
 	</div>
 </p>
 
 <p>
 	<div class="row">
 		<div class="col-md-6">TAE</div>
-		<div class="col-md-6">${tae}</div>
+		<div class="col-md-6"><g:formatNumber number="${tae}" type="number" maxFractionDigits="2"/></div>
 	</div>
 </p>
 
 <p>
 	<div class="row">
 		<div class="col-md-6">TAP</div>
-		<div class="col-md-6">${tap}</div>
+		<div class="col-md-6"><g:formatNumber number="${tap}" type="number" maxFractionDigits="2"/></div>
 	</div>
 </p>
 
