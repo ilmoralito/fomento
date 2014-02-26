@@ -24,7 +24,7 @@ class ReportController {
     			return [cmd:cmd]
     		}
 
-	    	def partners = Partner.findAllByStatus(true)
+	    	def partners = Partner.findAllByStatus(true, [sort:"fullName"])
             def result = dividendService.feePeriodData(cmd.period)
 
 	    	return [
@@ -41,12 +41,18 @@ class ReportController {
     }
 
     def list() {
-        def dividends = Dividend.executeQuery("select distinct d.period from Dividend d " +"where d.period >= ?",[2012])
+        def criteria = Dividend.createCriteria()
+        def dividends = criteria.list {
+            projections {
+                distinct "period"
+            }
+        }
+
       	[dividends:dividends]
     }
 
     def show(Integer period) {
-    	def dividends = Dividend.findAllByPeriod(period)
+    	def dividends = Dividend.findAllByPeriod(period, [sort:"partner.fullName"])
 
     	if (!dividends) {
     		redirect action:"list"

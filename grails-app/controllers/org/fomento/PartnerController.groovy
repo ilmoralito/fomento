@@ -44,18 +44,18 @@ class PartnerController {
 
     def list() {
         if (request.method == "GET") {
-    	   return [partners:Partner.byStatus(true).list()]
+    	   return [partners:Partner.byStatus(true).list(sort:"fullName")]
         } else {
             //search by enrollment date property in Affiliation domain class
             if (params?.from && params?.to) {
-                return [partners:Partner.fromTo(parseDate(params.from), parseDate(params.to)).list()]
+                return [partners:Partner.fromTo(parseDate(params.from), parseDate(params.to)).list(sort:"fullName")]
             }
 
             //filter by partner status
             if (params?.status) {
                 def status = params.boolean("status")
 
-                return [partners:Partner.byStatus(status).list()]
+                return [partners:Partner.byStatus(status).list(sort:"fullName")]
             }
 
             //search by patern domain class properties

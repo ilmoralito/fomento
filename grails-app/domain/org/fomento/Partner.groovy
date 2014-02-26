@@ -69,7 +69,6 @@ class Partner implements Serializable {
     static mapping = {
         version false
         status defaultValue: true
-        sort dateCreated: "desc"
         dividends sort: 'period', order: 'desc'
     }
 
