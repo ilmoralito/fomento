@@ -162,7 +162,8 @@ class FeeController {
 		if (request.method == "POST") {
 			List typeOfPayments = params.list("typeOfPayment")
 
-			if (!typeOfPayments) {
+			if (!typeOfPayments || !params.dateCreated) {
+				flash.message = "Debe especificar una fecha en que se realizaron cuotas y seleccionar uno o unos tipos de pago para poder continuar"
 				redirect action:"deleteFees"
 				return false
 			}
