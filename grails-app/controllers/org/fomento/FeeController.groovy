@@ -150,6 +150,8 @@ class FeeController {
 	def deleteFees() {
 		def criteria = Fee.createCriteria()
 		def results = criteria.list {
+			eq "period", new Date()[YEAR]
+
 			projections {
 				property "dateCreated"
 			}
