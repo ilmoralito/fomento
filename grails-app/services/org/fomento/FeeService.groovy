@@ -5,6 +5,26 @@ import org.hibernate.transform.AliasToEntityMapResultTransformer
 
 class FeeService implements Serializable {
 
+    def listFeesToDelete(Date dateCreated, List typeOfPayments) {
+      def feeCriteria = Fee.createCriteria()
+      def fees = feeCriteria.list {
+        ge "dateCreated", dateCreated
+        le "dateCreated", dateCreated + 1
+
+        partner {
+          affiliation {
+            or {
+              eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
+              eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
+              eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
+            }
+          }
+        }
+      }
+
+      fees
+    }
+
     def totalFeesByPeriod(Partner partner, Integer period, String property) {
         def criteria = Fee.createCriteria()
         def result = criteria.get {
