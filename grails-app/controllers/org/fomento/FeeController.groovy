@@ -6,6 +6,8 @@ import static java.util.Calendar.*
 @Secured(['ROLE_ADMIN', 'ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
 class FeeController {
 
+	def feeService
+
 	static defaultAction = "create"
 	static allowedMethods = [
 		create:["GET", "POST"],
@@ -135,21 +137,7 @@ class FeeController {
 		def dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated).clearTime()
 		def typeOfPayments = params.typeOfPayment.tokenize(",")
 
-		def feeCriteria = Fee.createCriteria()
-		def fees = feeCriteria.list {
-			ge "dateCreated", dateCreated
-      le "dateCreated", dateCreated + 1
-
-      partner {
-				affiliation {
-					or {
-						eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
-						eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
-						eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
-					}
-				}
-			}
-		}
+		def fees = feeService.listFeesToDelete(dateCreated, typeOfPayments)
 
 		fees.each { fee ->
 			fee.delete()
@@ -161,41 +149,29 @@ class FeeController {
 
 	def deleteFees() {
 		def criteria = Fee.createCriteria()
-		def dates = criteria.listDistinct {
+		def results = criteria.list {
 			projections {
 				property "dateCreated"
 			}
 		}
 
+		def dates = results*.format("yyyy-MM-dd").unique().sort()
+
 		if (request.method == "POST") {
-			def typeOfPayments = params.list "typeOfPayment"
+			List typeOfPayments = params.list("typeOfPayment")
 
 			if (!typeOfPayments) {
 				redirect action:"deleteFees"
 				return false
 			}
 
-			def dateCreated = new Date().parse "yyyy-MM-dd", params?.dateCreated
-			def feeCriteria = Fee.createCriteria()
-			def fees = feeCriteria.list {
-				ge "dateCreated", dateCreated.clearTime()
-        le "dateCreated", dateCreated.clearTime() + 1
+			def dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated).clearTime()
+			def fees = feeService.listFeesToDelete(dateCreated, typeOfPayments)
 
-        partner {
-					affiliation {
-						or {
-							eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
-							eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
-							eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
-						}
-					}
-				}
-			}
-
-			return [fees:fees, dates:dates*.format("yyyy-MM-dd").unique().sort()]
+			return [fees:fees, dates:dates]
 		}
 
-		[dates:dates*.format("yyyy-MM-dd").unique().sort()]
+		[dates:dates]
 	}
 
 	def elist(){
