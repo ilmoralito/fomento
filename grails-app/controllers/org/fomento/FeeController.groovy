@@ -18,6 +18,19 @@ class FeeController {
 		confirmDeleteFees:"POST"
 	]
 
+	def beforeInterceptor = [action: this.&checkDividend, only: "confirmDeleteFees"]
+
+	private checkDividend() {
+		def period = new Date().parse("yyyy-MM-dd", params?.dateCreated)[YEAR]
+		def dividends = Dividend.countByPeriod(period)
+
+		if (dividends) {
+			flash.message = "Accion no permitida porque ya existe un Dividendo en este periodo"
+			redirect action:"deleteFees"
+			return false
+		}
+	}
+
 	def create(String typeOfPayment) {
 		if (request.method == "POST") {
 			def p = params.list("partners")
