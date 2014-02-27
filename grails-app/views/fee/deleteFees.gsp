@@ -47,27 +47,32 @@
 		</div>
 		<div class="col-md-3">
 			<h4>Filtros</h4>
-			<g:form action="deleteFees">
-				<div class="form-group">
-					<label>Fecha de cuota</label>
-					<g:select from="${dates}" name="dateCreated" value="${params?.dateCreated}" class="form-control"/>
-				</div>
+			<g:if test="${dates}">
+				<g:form action="deleteFees">
+					<div class="form-group">
+						<label>Fecha de cuota</label>
+						<g:select from="${dates}" name="dateCreated" value="${params?.dateCreated}" class="form-control"/>
+					</div>
 
-				<div class="form-group">
-					<label>Tipo de pago</label>
-					<div class="checkbox">
-						<label><g:checkBox name="typeOfPayment" value="Catorcena" checked="${typeOfPayment.contains('Catorcena')}"/>Catorcena</label>
+					<div class="form-group">
+						<label>Tipo de pago</label>
+						<div class="checkbox">
+							<label><g:checkBox name="typeOfPayment" value="Catorcena" checked="${typeOfPayment.contains('Catorcena')}"/>Catorcena</label>
+						</div>
+						<div class="checkbox">
+							<label><g:checkBox name="typeOfPayment" value="Fin de mes" checked="${typeOfPayment.contains('Fin de mes')}"/>Fin de mes</label>
+						</div>
+						<div class="checkbox">
+							<label><g:checkBox name="typeOfPayment" value="Bono" checked="${typeOfPayment.contains('Bono')}"/>Bono</label>
+						</div>
 					</div>
-					<div class="checkbox">
-						<label><g:checkBox name="typeOfPayment" value="Fin de mes" checked="${typeOfPayment.contains('Fin de mes')}"/>Fin de mes</label>
-					</div>
-					<div class="checkbox">
-						<label><g:checkBox name="typeOfPayment" value="Bono" checked="${typeOfPayment.contains('Bono')}"/>Bono</label>
-					</div>
-				</div>
 
-				<g:submitButton name="confirm" value="Listar cuotas afectadas" class="btn btn-default btn-block"/>
-			</g:form>
+					<g:submitButton name="confirm" value="Listar cuotas afectadas" class="btn btn-default btn-block"/>
+				</g:form>
+			</g:if>
+			<g:else>
+				<p>No hay cuotas en este periodo que listar</p>
+			</g:else>
 		</div>
 	</div>
 </body>
