@@ -155,7 +155,7 @@ class FeeController {
 			}
 		}
 
-		def dates = results*.format("yyyy-MM-dd").unique().sort()
+		def dates = results*.format("yyyy-MM-dd").unique().reverse()
 
 		if (request.method == "POST") {
 			List typeOfPayments = params.list("typeOfPayment")
