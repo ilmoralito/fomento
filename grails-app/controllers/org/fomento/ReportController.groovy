@@ -19,6 +19,8 @@ class ReportController {
         printReport:"GET"
 	]
 
+    def beforeInterceptor = [action:this.&negativeUtility, only:"applyDividends"]
+
     def dividends(DividendsCommand cmd) {
     	if (request.method == "POST") {
     		if (cmd.hasErrors()) {
@@ -121,9 +123,7 @@ class ReportController {
         redirect action:"list"
     }
 
-    def beforeInterceptor = [action:this.&negativeUtility,only:'applyDividends']
-
-    def private negativeUtility(){
+    private negativeUtility(){
         def Float up = params.up.toFloat()
         if (up < 0) {
              flash.message = "No pueden guardarse dividendos con valores negativos, revise la utilidad del periodo"
@@ -132,7 +132,7 @@ class ReportController {
         }
     }
 
-    def private errorRemoving(period){
+    private errorRemoving(period){
         Integer peri = params.int("period")
         def dividend = Dividend.findByPeriodGreaterThan(peri)
         if (dividend) {
