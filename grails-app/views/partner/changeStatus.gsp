@@ -11,28 +11,18 @@
 	<div class="row">
 		<div class="col-md-9">
 			<g:if test="${!dontHasFeesOrDividends}">
-				<g:link action="enablePartner" params="[id:params?.id]" class="btn btn-primary">Desactivar</g:link>
+				<g:if test="${status==false}">
+					<g:link action="enablePartner" params="[id:params?.id]" class="btn btn-success">Activar al Socio</g:link>
+				</g:if>
+				<g:else>
+					<g:link action="enablePartner" params="[id:params?.id]" class="btn btn-primary">Desactivar al Socio</g:link>
+				</g:else>
 			</g:if>
 			<g:else>
 				<div class="alert alert-danger">
 					<p>Al iniciar el tramite de renunica del socio: <strong>${partner}</strong>, recuerde que una ves confirmado este proceso <br><strong>NO SE PODRAN DESHACER LOS CAMBIOS, DESEA CONTINUAR?</strong></p>
-					<g:if test="${flag}">
-						<g:form controller="renounce" autocomplete="off">
-							<g:hiddenField name="partnerId" value="${params?.id}"/>
-							<g:hiddenField name="period" value="${period}"/>
-
-							<div class="form-group">
-							   	<label for="up">Utilidad de este periodo</label>
-							    <g:textField name="up" class="form-control" required autofocus="true"/>
-							</div>
-							<g:submitButton name="send" value="Calcular" class="btn btn-default"/>
-						</g:form>
-
-					</g:if>
-					<g:else>
-						<br>
-						<g:link controller="renounce" params="[partnerId:params?.id]" class="btn btn-danger">Iniciar proceso de renunciar</g:link>
-					</g:else>
+					<br>
+					<g:link controller="renounce" params="[partnerId:params?.id]" class="btn btn-danger">Iniciar proceso de renunciar</g:link>
 				</div> 
 			</g:else>
 		</div>
