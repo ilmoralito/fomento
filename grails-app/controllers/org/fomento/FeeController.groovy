@@ -6,6 +6,8 @@ import static java.util.Calendar.*
 @Secured(['ROLE_ADMIN', 'ROLE_USER', 'IS_AUTHENTICATED_FULLY'])
 class FeeController {
 
+	def feeService
+
 	static defaultAction = "create"
 	static allowedMethods = [
 		create:["GET", "POST"],
@@ -15,6 +17,19 @@ class FeeController {
 		deleteFees:["GET", "POST"],
 		confirmDeleteFees:"POST"
 	]
+
+	def beforeInterceptor = [action: this.&checkDividend, only: "confirmDeleteFees"]
+
+	private checkDividend() {
+		def period = new Date().parse("yyyy-MM-dd", params?.dateCreated)[YEAR]
+		def dividends = Dividend.countByPeriod(period)
+
+		if (dividends) {
+			flash.message = "Accion no permitida porque ya existe un Dividendo en este periodo"
+			redirect action:"deleteFees"
+			return false
+		}
+	}
 
 	def create(String typeOfPayment) {
 		if (request.method == "POST") {
@@ -135,21 +150,7 @@ class FeeController {
 		def dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated).clearTime()
 		def typeOfPayments = params.typeOfPayment.tokenize(",")
 
-		def feeCriteria = Fee.createCriteria()
-		def fees = feeCriteria.list {
-			ge "dateCreated", dateCreated
-      le "dateCreated", dateCreated + 1
-
-      partner {
-				affiliation {
-					or {
-						eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
-						eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
-						eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
-					}
-				}
-			}
-		}
+		def fees = feeService.listFeesToDelete(dateCreated, typeOfPayments)
 
 		fees.each { fee ->
 			fee.delete()
@@ -161,41 +162,32 @@ class FeeController {
 
 	def deleteFees() {
 		def criteria = Fee.createCriteria()
-		def dates = criteria.listDistinct {
+		def results = criteria.list {
+			eq "period", new Date()[YEAR]
+
 			projections {
 				property "dateCreated"
 			}
 		}
 
-		if (request.method == "POST") {
-			def typeOfPayments = params.list "typeOfPayment"
+		def dates = results*.format("yyyy-MM-dd").unique().reverse()
 
-			if (!typeOfPayments) {
+		if (request.method == "POST") {
+			List typeOfPayments = params.list("typeOfPayment")
+
+			if (!typeOfPayments || !params.dateCreated) {
+				flash.message = "Debe especificar una fecha en que se realizaron cuotas y seleccionar uno o unos tipos de pago para poder continuar"
 				redirect action:"deleteFees"
 				return false
 			}
 
-			def dateCreated = new Date().parse "yyyy-MM-dd", params?.dateCreated
-			def feeCriteria = Fee.createCriteria()
-			def fees = feeCriteria.list {
-				ge "dateCreated", dateCreated.clearTime()
-        le "dateCreated", dateCreated.clearTime() + 1
+			def dateCreated = new Date().parse("yyyy-MM-dd", params?.dateCreated).clearTime()
+			def fees = feeService.listFeesToDelete(dateCreated, typeOfPayments)
 
-        partner {
-					affiliation {
-						or {
-							eq "typeOfPayment", typeOfPayments.contains("Catorcena") ? "Catorcena" : ""
-							eq "typeOfPayment", typeOfPayments.contains("Bono") ? "Bono" : ""
-							eq "typeOfPayment", typeOfPayments.contains("Fin de mes") ? "Fin de mes" : ""
-						}
-					}
-				}
-			}
-
-			return [fees:fees, dates:dates*.format("yyyy-MM-dd").unique().sort()]
+			return [fees:fees, dates:dates]
 		}
 
-		[dates:dates*.format("yyyy-MM-dd").unique().sort()]
+		[dates:dates]
 	}
 
 	def elist(){
