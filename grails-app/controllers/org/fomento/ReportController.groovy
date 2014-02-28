@@ -15,7 +15,8 @@ class ReportController {
 		list:"GET",
 		show:"GET",
         delete:["GET", "POST"],
-        capitalize:["GET", "POST"]
+        capitalize:["GET", "POST"],
+        printReport:"GET"
 	]
 
     def dividends(DividendsCommand cmd) {
