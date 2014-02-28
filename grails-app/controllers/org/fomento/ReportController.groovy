@@ -121,46 +121,6 @@ class ReportController {
         redirect action:"list"
     }
 
-    @Secured("ROLE_ADMIN")
-    def overwriteDividends() {
-    	if (request.method == "POST") {
-    		def partners = Partner.findAllByStatus(true)
-            BigDecimal pds = params.double("pds")
-            BigDecimal pde = params.double("pde")
-            BigDecimal up = params.double("up")
-            Integer period = params.int("period")
-
-            partners.each { partner ->
-                def dividend = Dividend.findByPartnerAndPeriod(partner, period)
-
-                def fps = reportService.fp(partner, period, "fee", "capitalization")
-                def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
-
-                BigDecimal partnerDD = reportService.dd(up, pds, fps)
-                BigDecimal factoryDD = reportService.dd(up, pde, fpe)
-
-    			if (dividend) {
-    				dividend.partnerDividend = partnerDD
-                    dividend.factoryDividend = factoryDD
-                    dividend.tas = params.double("tas")
-                    dividend.tae = params.double("tae")
-                    dividend.tap = params.double("tap")
-                    dividend.pds = pds
-                    dividend.pde = pde
-                    dividend.up = up
-
-    				if (!dividend.save()) {
-    					dividend.errors.allErrors.each {
-    						print it
-    					}
-    				}
-    			}
-    		}
-
-    		redirect action:"list"
-    		return false
-    	}
-    }
     def beforeInterceptor = [action:this.&negativeUtility,only:'applyDividends']
 
     def private negativeUtility(){
