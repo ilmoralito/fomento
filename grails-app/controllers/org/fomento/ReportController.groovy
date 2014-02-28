@@ -34,7 +34,9 @@ class ReportController {
                 tap:result.tap,
                 pds:result.pds,
                 pde:result.pde,
-                up:cmd.up,
+                up:cmd.up - (cmd.up * 0.4),
+                ir:cmd.up * 0.3,
+                backup:cmd.up * 0.1,
                 period:cmd.period
             ]
     	}
@@ -61,6 +63,8 @@ class ReportController {
     	[
             dividends:dividends,
             up:dividends.first().up,
+            ir:dividends.first().ir,
+            backup:dividends.first().backup,
             tas:dividends.first().tas,
             tae:dividends.first().tae,
             tap:dividends.first().tap,
@@ -100,6 +104,8 @@ class ReportController {
                 pds:cmd.pds,
                 pde:cmd.pde,
                 up:cmd.up,
+                ir:cmd.ir,
+                backup:cmd.backup,
                 period:cmd.period,
                 partner:partner
             )
@@ -274,7 +280,9 @@ class ApplyDividendsCommand {
     BigDecimal tap
     BigDecimal pds
     BigDecimal pde
-	BigDecimal up
+    BigDecimal up
+    BigDecimal ir
+	BigDecimal backup
     Integer period
 
 	static constraints = {
