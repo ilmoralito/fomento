@@ -104,6 +104,7 @@ class FeeService implements Serializable {
         }
 
         dividendResults.collect { d ->
+            d.partnerDivNeto = d.partnerDividend
             d.partnerDividend = d.partnerDividend - (d.partnerDividend * 0.1)
             d.factoryDividend = d.factoryDividend - (d.factoryDividend * 0.1)
         }

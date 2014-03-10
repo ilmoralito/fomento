@@ -46,6 +46,7 @@ class PartnerService {
     			numberFees: partnerData2[i].numberFees,
     			totalPartnerFee: partnerData2[i].totalPartnerFee,
 			    partnerDividend: pd.partnerDividend,
+                partnerDivNeto: pd.partnerDivNeto,
 			    capitalization: pd.capitalization,
 			    withdraw: pd.withdraw,
 			    capital: capital,

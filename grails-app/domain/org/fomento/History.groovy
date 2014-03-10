@@ -7,6 +7,7 @@ class History {
 
     BigDecimal totalPartnerFee
     BigDecimal partnerDividend
+    BigDecimal partnerDivNeto
     BigDecimal capitalization
     BigDecimal withdraw
     BigDecimal capital
