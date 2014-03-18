@@ -15,8 +15,11 @@ class ReportController {
 		list:"GET",
 		show:"GET",
         delete:["GET", "POST"],
-        capitalize:["GET", "POST"]
+        capitalize:["GET", "POST"],
+        printReport:"GET"
 	]
+
+    def beforeInterceptor = [action:this.&negativeUtility, only:"applyDividends"]
 
     def dividends(DividendsCommand cmd) {
     	if (request.method == "POST") {
@@ -34,7 +37,9 @@ class ReportController {
                 tap:result.tap,
                 pds:result.pds,
                 pde:result.pde,
-                up:cmd.up,
+                up:cmd.up - (cmd.up * 0.4),
+                ir:cmd.up * 0.3,
+                backup:cmd.up * 0.1,
                 period:cmd.period
             ]
     	}
@@ -61,6 +66,8 @@ class ReportController {
     	[
             dividends:dividends,
             up:dividends.first().up,
+            ir:dividends.first().ir,
+            backup:dividends.first().backup,
             tas:dividends.first().tas,
             tae:dividends.first().tae,
             tap:dividends.first().tap,
@@ -100,6 +107,8 @@ class ReportController {
                 pds:cmd.pds,
                 pde:cmd.pde,
                 up:cmd.up,
+                ir:cmd.ir,
+                backup:cmd.backup,
                 period:cmd.period,
                 partner:partner
             )
@@ -114,49 +123,7 @@ class ReportController {
         redirect action:"list"
     }
 
-    @Secured("ROLE_ADMIN")
-    def overwriteDividends() {
-    	if (request.method == "POST") {
-    		def partners = Partner.findAllByStatus(true)
-            BigDecimal pds = params.double("pds")
-            BigDecimal pde = params.double("pde")
-            BigDecimal up = params.double("up")
-            Integer period = params.int("period")
-
-            partners.each { partner ->
-                def dividend = Dividend.findByPartnerAndPeriod(partner, period)
-
-                def fps = reportService.fp(partner, period, "fee", "capitalization")
-                def fpe = reportService.fp(partner, period, "factoryFee", "factoryCapital")
-
-                BigDecimal partnerDD = reportService.dd(up, pds, fps)
-                BigDecimal factoryDD = reportService.dd(up, pde, fpe)
-
-    			if (dividend) {
-    				dividend.partnerDividend = partnerDD
-                    dividend.factoryDividend = factoryDD
-                    dividend.tas = params.double("tas")
-                    dividend.tae = params.double("tae")
-                    dividend.tap = params.double("tap")
-                    dividend.pds = pds
-                    dividend.pde = pde
-                    dividend.up = up
-
-    				if (!dividend.save()) {
-    					dividend.errors.allErrors.each {
-    						print it
-    					}
-    				}
-    			}
-    		}
-
-    		redirect action:"list"
-    		return false
-    	}
-    }
-    def beforeInterceptor = [action:this.&negativeUtility,only:'applyDividends']
-
-    def private negativeUtility(){
+    private negativeUtility(){
         def Float up = params.up.toFloat()
         if (up < 0) {
              flash.message = "No pueden guardarse dividendos con valores negativos, revise la utilidad del periodo"
@@ -165,7 +132,7 @@ class ReportController {
         }
     }
 
-    def private errorRemoving(period){
+    private errorRemoving(period){
         Integer peri = params.int("period")
         def dividend = Dividend.findByPeriodGreaterThan(peri)
         if (dividend) {
@@ -274,7 +241,9 @@ class ApplyDividendsCommand {
     BigDecimal tap
     BigDecimal pds
     BigDecimal pde
-	BigDecimal up
+    BigDecimal up
+    BigDecimal ir
+	BigDecimal backup
     Integer period
 
 	static constraints = {

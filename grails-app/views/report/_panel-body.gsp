@@ -42,6 +42,20 @@
 
 <p>
 	<div class="row">
+		<div class="col-md-6">IR</div>
+		<div class="col-md-6">${ir}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
+		<div class="col-md-6">Reserva</div>
+		<div class="col-md-6">${backup}</div>
+	</div>
+</p>
+
+<p>
+	<div class="row">
 		<div class="col-md-6">Periodo</div>
 		<div class="col-md-6">${(params.period) ?: period}</div>
 	</div>
