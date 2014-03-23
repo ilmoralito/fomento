@@ -27,6 +27,12 @@ class ReportController {
     			return [cmd:cmd]
     		}
 
+            def searchRenounce = dividendService.searchRenouncePeriod(cmd.period)
+
+            if (searchRenounce > 0) {
+                cmd.up = cmd.up - searchRenounce
+            }
+
 	    	def partners = Partner.findAllByStatus(true, [sort:"fullName"])
             def result = dividendService.feePeriodData(cmd.period)
 
@@ -89,7 +95,7 @@ class ReportController {
             return false
         }
 
-    	def partners = Partner.findAllByStatus(true)
+        def partners = Partner.findAllByStatus(true)
 		partners.each { partner ->
             def fps = reportService.fp(partner, cmd.period, "socio")
             def fpe = reportService.fp(partner, cmd.period, "empresa")

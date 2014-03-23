@@ -98,6 +98,8 @@ class FeeService implements Serializable {
                 property "partnerDividend", "partnerDividend"
                 property "factoryDividend", "factoryDividend"
                 property "capitalization", "porcentaje"
+                property "backup", "backup"
+                property "ir", "ir"
             }
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)

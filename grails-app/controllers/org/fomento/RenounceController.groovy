@@ -60,6 +60,13 @@ class RenounceController {
             //Calcular y guardar dividendo proporcional
             BigDecimal up = params.up.toBigDecimal()
             Integer period = params.int("period")
+
+            def searchRenounce = dividendService.searchRenouncePeriod(period)
+
+            if (searchRenounce > 0) {
+                up = up - searchRenounce
+            }
+
             def fps = reportService.fp(partner, period, "socio")
             def fpe = reportService.fp(partner, period, "empresa")
             def periodData = dividendService.feePeriodData(period)
@@ -81,6 +88,10 @@ class RenounceController {
     }
 
     private renounceProcess(period, fps, fpe, pdat, up, Partner partner){
+        BigDecimal irPeriod = up * 0.3
+        BigDecimal backup = up * 0.1
+        up = up - (up * 0.4)
+
         BigDecimal partnerDD = fps.toBigDecimal() * (up.toBigDecimal() * pdat.pds.toBigDecimal())
         BigDecimal factoryDD = fpe.toBigDecimal() * (up.toBigDecimal() * pdat.pde.toBigDecimal())
         println up.toBigDecimal()
@@ -97,6 +108,8 @@ class RenounceController {
                 pds:pdat.pds.toBigDecimal(),
                 pde:pdat.pde.toBigDecimal(),
                 up:up.toBigDecimal(),
+                ir:irPeriod,
+                backup:backup,
                 period:period.toInteger(),
                 partner:partner
             )

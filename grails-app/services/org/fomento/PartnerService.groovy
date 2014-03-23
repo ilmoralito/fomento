@@ -53,6 +53,8 @@ class PartnerService {
 			    totalfactoryFee: partnerData2[i].totalFactoryFee,
 			    factoryDividend:pd.factoryDividend,
 			    factoryCapital: fCapital,
+                backup: pd.backup,
+                ir: pd.ir,
 			    up: pd.up,
 			    percentage: porcent,
 			    renounce: renounce
