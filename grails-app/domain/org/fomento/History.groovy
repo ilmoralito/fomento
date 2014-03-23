@@ -7,6 +7,7 @@ class History {
 
     BigDecimal totalPartnerFee
     BigDecimal partnerDividend
+    BigDecimal partnerDivNeto
     BigDecimal capitalization
     BigDecimal withdraw
     BigDecimal capital
@@ -16,6 +17,8 @@ class History {
     BigDecimal factoryCapital
 
     BigDecimal up
+    BigDecimal ir
+    BigDecimal backup
     Integer percentage
 
     static constraints = {
@@ -30,6 +33,8 @@ class History {
         totalfactoryFee blank:false, min:0.0
         factoryDividend blank:false, min:0.0
         factoryCapital blank:false, min:0.0
+        ir blank:false
+        backup blank:false
     }
 
     static belongsTo = [renounce:Renounce]

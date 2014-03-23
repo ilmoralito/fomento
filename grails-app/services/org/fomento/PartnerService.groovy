@@ -39,20 +39,24 @@ class PartnerService {
     			fCapital = fCapital + partnerData2[i].totalFactoryFee + pd.factoryDividend
     		}
 
+            def porcent = (pd.porcentaje)?pd.porcentaje.toString().toInteger():100
 
     		def partnerHistory = new History(
     			period: pd.period,
     			numberFees: partnerData2[i].numberFees,
     			totalPartnerFee: partnerData2[i].totalPartnerFee,
 			    partnerDividend: pd.partnerDividend,
+                partnerDivNeto: pd.partnerDivNeto,
 			    capitalization: pd.capitalization,
 			    withdraw: pd.withdraw,
 			    capital: capital,
 			    totalfactoryFee: partnerData2[i].totalFactoryFee,
 			    factoryDividend:pd.factoryDividend,
 			    factoryCapital: fCapital,
+                backup: pd.backup,
+                ir: pd.ir,
 			    up: pd.up,
-			    percentage: pd.porcentaje.toString().toInteger(),
+			    percentage: porcent,
 			    renounce: renounce
     		)
 

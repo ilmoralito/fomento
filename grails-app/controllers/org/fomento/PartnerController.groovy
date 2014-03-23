@@ -167,19 +167,19 @@ class PartnerController {
             response.sendError 404
         }
 
-        def period = new Date()[YEAR]
-        def countFeesInCurrentPeriod = Fee.findAllByPartnerAndPeriod(partner, period)
-        def hasDividendsInCurrentPeriod = Dividend.findByPartnerAndPeriod(partner, period)
+        //def period = new Date()[YEAR]
+        //def countFeesInCurrentPeriod = Fee.findAllByPartnerAndPeriod(partner, period)
+        //def hasDividendsInCurrentPeriod = Dividend.findByPartnerAndPeriod(partner, period)
 
         //set flag variable to true if partner does not have dividends but has fees in current period
-        def flag = (!hasDividendsInCurrentPeriod && countFeesInCurrentPeriod) ? true : false
+        //def flag = (!hasDividendsInCurrentPeriod && countFeesInCurrentPeriod) ? true : false
 
         //check if partner do not have dividends and fees
         //if both conditions are true then is safely to set partner status property to false
         //with out performe any other action
         def dontHasFeesOrDividends = partnerService.checkIfPartnerHasFeesOrdividends(partner)
-
-        [partner:partner, flag:flag, dontHasFeesOrDividends:dontHasFeesOrDividends, period:period]
+        def status = partner.status 
+        [partner:partner, dontHasFeesOrDividends:dontHasFeesOrDividends, status:status]
     }
 
     def splitFee(Integer id) {

@@ -37,4 +37,15 @@ class DividendService {
 		total
 	}
 
+	def searchRenouncePeriod(Integer period){
+		def criteria = History.createCriteria()
+            def totalRenounceByPeriod = criteria.get{
+                eq("period", period)
+                projections {
+                    sum ('partnerDivNeto')
+                }
+            }
+            return (totalRenounceByPeriod) ?: 0
+	}
+
 }

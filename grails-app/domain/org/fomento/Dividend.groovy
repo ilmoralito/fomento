@@ -17,6 +17,8 @@ class Dividend {
     BigDecimal pde
 
     BigDecimal up
+    BigDecimal ir
+    BigDecimal backup
     Integer period
 
     Capitalization capitalization
@@ -36,6 +38,8 @@ class Dividend {
         pde blank:false, min:0.00, scale:12
         period blank:false, min:2010
         up blank:false
+        ir blank:false
+        backup blank:false
         capitalization nullable:true
     }
 

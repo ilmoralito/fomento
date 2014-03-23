@@ -47,7 +47,13 @@
 								<td><g:formatNumber number="${partnerData2[i].totalPartnerFee}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.partnerDividend}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.capitalization}" type="number" maxFractionDigits="3"/></td>
-								<td>${pd.porcentaje}</td>
+								<td>
+									<g:if test="${pd.porcentaje==null}">
+										100
+									</g:if><else>
+										${pd.porcentaje}
+									</else>
+								</td>
 								<td><g:formatNumber number="${pd.withdraw}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${partnerData2[i].totalFactoryFee}" type="number" maxFractionDigits="3"/></td>
 								<td><g:formatNumber number="${pd.factoryDividend}" type="number" maxFractionDigits="3"/></td>
@@ -91,7 +97,21 @@
 					Recuerde que cuando de click a "Confirmar Renuncia", los datos del socio, <strong>${partner}</strong>, seran afectados y algunos de los cambios 
 					seran irrebersibles, solo si esta seguro de dar este paso le recomendamos que lo haga, GRACIAS!! 
 					</p><br>
-					<g:link controller="renounce" action="confirmRenounce" class="btn btn-danger btn-large" params="[partnerId:"${partner.id}"]">Confirmar Renuncia</g:link>
+					<g:if test="${flag==true || !dividends}">
+						<g:form controller="renounce" action="confirmRenounce" autocomplete="off">
+							<g:hiddenField name="partnerId" value="${partner.id}"/>
+							<g:hiddenField name="period" value="${period}"/>
+
+							<div class="form-group">
+							   	<label for="up">Utilidad optenida hasta la fecha</label>
+							    <g:textField name="up" class="form-control" required autofocus="true"/>
+							</div>
+							<g:submitButton name="send" value="Confirmar Renuncia" class="btn btn-danger"/>
+						</g:form>
+					</g:if>
+					<g:else>
+						<g:link controller="renounce" action="confirmRenounce" class="btn btn-danger btn-large" params="[partnerId:"${partner.id}"]">Confirmar Renuncia</g:link>
+					</g:else>
 				</div>
 			</div>
 		</div>

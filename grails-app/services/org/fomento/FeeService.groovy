@@ -98,12 +98,15 @@ class FeeService implements Serializable {
                 property "partnerDividend", "partnerDividend"
                 property "factoryDividend", "factoryDividend"
                 property "capitalization", "porcentaje"
+                property "backup", "backup"
+                property "ir", "ir"
             }
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
         }
 
         dividendResults.collect { d ->
+            d.partnerDivNeto = d.partnerDividend
             d.partnerDividend = d.partnerDividend - (d.partnerDividend * 0.1)
             d.factoryDividend = d.factoryDividend - (d.factoryDividend * 0.1)
         }
