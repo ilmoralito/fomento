@@ -29,42 +29,43 @@
 					</div>
 				</div>
 
-				<div class="panel panel-default">
-					<div class="panel-heading">Datos de socio</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-3">Info</div>
-							<div class="col-md-9">Lorem ipsum dolor sit amet</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-md-3">Info</div>
-							<div class="col-md-9">Lorem ipsum dolor sit amet</div>
-						</div>
-					</div>
-				</div>
-
-				<g:if test="${fees}">
-					<div class="panel panel-default">
+					<g:if test="${fees}">
+					<div class="panel panel-default  panelUp">
 						<div class="panel-heading">Datos del periodo</div>
 						<div class="panel-body">
 							<div class="row">
-								<div class="col-md-7">Numero de cuotas</div>
-								<div class="col-md-5">${fees.size()}</div>
+								<div class="col-md-7 cabValor">Numero de cuotas</div>
+								<div class="col-md-5 valor">${fees.size()}</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-md-7">Aporte socio</div>
-								<div class="col-md-5">${totalPartnerFee}</div>
+								<div class="col-md-7 cabValor">Aporte socio</div>
+								<div class="col-md-5 valor">${totalPartnerFee}</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-md-7">Aporte empresa</div>
-								<div class="col-md-5">${totalFactoryFee}</div>
+								<div class="col-md-7 cabValor">Aporte empresa</div>
+								<div class="col-md-5 valor">${totalFactoryFee}</div>
 							</div>
 						</div>
 					</div>
 				</g:if>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Datos de socio</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-7 cabValor">Saldo Socio</div>
+							<div class="col-md-5 valor"><fomento:partnerSaldo partner="${partner}" flag="socio" /></div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-7 cabValor">Saldo Empresa</div>
+							<div class="col-md-5 valor"><fomento:partnerSaldo partner="${partner}" flag="empresa" /></div>
+						</div>
+					</div>
+				</div>
+		
 			</div>
 		</div>
 	</div>

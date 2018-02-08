@@ -3,6 +3,10 @@ modules = {
         resource url:"css/app.css"
     }
 
+    printStyle{
+        resource url:"css/print.css"
+    }
+
     //applied to partner list view
     list {
         resource url:"css/list.css"

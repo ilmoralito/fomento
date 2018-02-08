@@ -52,5 +52,6 @@ ul li{
 
 .table .cabpart{vertical-align:middle; background-color: #F7F4F4;}
 .tablelist th{text-align: center;}
-
+.partner{display: none;}
+.CabeceraReporte{display:none;}
 

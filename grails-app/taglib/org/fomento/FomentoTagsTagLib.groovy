@@ -165,13 +165,11 @@ class FomentoTagsTagLib {
 		Partner parN = attrs.parN
 		String flag = attrs.flag
 		Integer peri = attrs.int("peri")
-
+		
 		def criteria = Fee.createCriteria()
 		def totalCuotas = criteria.get{
 			eq("period", peri)
-			partner{
-				eq("id", parN.id)
-			}
+			eq("partner", parN)
 			projections {
 				if (flag=="soc") {
 					sum ('fee')	
@@ -201,6 +199,62 @@ class FomentoTagsTagLib {
 
 
 		out<< totalAporte
+	}
+
+	def partnerSaldo = { attrs ->
+		Partner partner = attrs.partner
+		String flag = attrs.flag
+		
+		def criteria = Fee.createCriteria()
+		def totalCuotas = criteria.get{
+			eq("partner", partner)
+			projections {
+				if (flag=="socio") {
+					sum ('fee')	
+				}else{
+					sum("factoryFee")
+				}
+            }
+        } 
+        //----------------------------------------------
+        def capitalization, idDiv
+	    def divBruto, divNeto
+	    def capitalizationTotal = 0
+	    String porcentaje
+
+        if (flag =="socio") {
+        	def div = Dividend.findAllByPartner(partner)
+	        div.each{
+		        idDiv = it.id
+		        def criteria2 = Capitalization.createCriteria()
+		        capitalization = criteria2.get{
+			        dividend{
+			        	eq "id", idDiv
+			        }
+	        	}
+	        	if (capitalization) {
+	        		porcentaje = capitalization.toString() //conbertir a string el dato optenido de la consulta
+		        	divBruto = it.partnerDividend
+		        	divNeto = divBruto-(divBruto * 0.1)
+		        	capitalizationTotal = capitalizationTotal + ((divNeto*porcentaje.toInteger())/100)
+	        	}else{
+	        		capitalizationTotal = capitalizationTotal 	
+	        	}
+	        }//end each
+        }//end if
+        //----------------------------------------------
+        String saldoIni
+        BigDecimal total
+        def saldoInicial = Affiliation.findById(partner.id)
+        if (flag=="socio") {
+        	saldoIni = saldoInicial.capitalization
+       		total = saldoIni.toBigDecimal() + totalCuotas + capitalizationTotal
+        }else{
+        	saldoIni = saldoInicial.factoryCapital
+        	total = saldoIni.toBigDecimal() + totalCuotas
+        }
+     
+     	out<< g.formatNumber(number:total, type:"number", maxFractionDigits:"2")
 	}
 
 }
